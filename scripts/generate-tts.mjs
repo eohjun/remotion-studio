@@ -7,11 +7,16 @@
  *   node scripts/generate-tts.mjs --elevenlabs # ElevenLabs 사용
  *   node scripts/generate-tts.mjs --lang en    # 영어 음성 생성
  *   node scripts/generate-tts.mjs --translate --lang en # 번역 후 영어 음성 생성
+ *
+ * 출력:
+ *   - 각 씬별 MP3 파일
+ *   - audio-metadata.json (오디오 길이 정보 포함)
  */
 
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { execSync } from "child_process";
 import dotenv from "dotenv";
 
 // 경로 설정
@@ -70,8 +75,14 @@ const narration = JSON.parse(fs.readFileSync(narrationPath, "utf-8"));
 console.log(`📄 나레이션 파일: ${narrationFile}`);
 console.log(`🌐 대상 언어: ${LANGUAGE_NAMES[targetLang]} (${targetLang})\n`);
 
-// 출력 디렉토리 생성 (언어별 하위 폴더)
-const outputDir = path.join(projectRoot, "public", "audio", targetLang === "ko" ? "" : targetLang);
+// 출력 디렉토리 생성 (--output 옵션 또는 언어별 하위 폴더)
+const outputArgIndex = args.findIndex(arg => arg === "--output" || arg === "-o");
+const customOutputDir = outputArgIndex !== -1 && args[outputArgIndex + 1]
+  ? args[outputArgIndex + 1]
+  : null;
+const outputDir = customOutputDir
+  ? path.join(projectRoot, "public", "audio", customOutputDir)
+  : path.join(projectRoot, "public", "audio", targetLang === "ko" ? "" : targetLang);
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
@@ -213,6 +224,22 @@ async function generateWithElevenLabs(text, outputPath, lang) {
 }
 
 // ============================================
+// 오디오 길이 측정 (ffprobe 사용)
+// ============================================
+function getAudioDuration(filePath) {
+  try {
+    const result = execSync(
+      `ffprobe -i "${filePath}" -show_entries format=duration -v quiet -of csv="p=0"`,
+      { encoding: "utf-8" }
+    );
+    return parseFloat(result.trim());
+  } catch (error) {
+    console.error(`⚠️ 오디오 길이 측정 실패: ${filePath}`);
+    return null;
+  }
+}
+
+// ============================================
 // 메인 실행
 // ============================================
 async function main() {
@@ -230,6 +257,15 @@ async function main() {
 
   // 번역된 텍스트 저장 (나중에 참조용)
   const translatedScenes = [];
+  // 오디오 메타데이터 저장
+  const audioMetadata = {
+    generatedAt: new Date().toISOString(),
+    provider: providerName,
+    language: targetLang,
+    outputDir: outputDir,
+    compositionId: narration.metadata?.compositionId || null,
+    scenes: [],
+  };
 
   for (const scene of narration.scenes) {
     const outputPath = path.join(outputDir, `${scene.id}.mp3`);
@@ -259,9 +295,28 @@ async function main() {
 
     try {
       await generateFn(textToSpeak, outputPath, targetLang);
-      console.log(`✅ [${scene.id}] 완료 → ${outputPath}\n`);
+
+      // 오디오 길이 측정
+      const durationSeconds = getAudioDuration(outputPath);
+      const sceneMetadata = {
+        id: scene.id,
+        file: `${scene.id}.mp3`,
+        durationSeconds: durationSeconds,
+        durationFrames: durationSeconds ? Math.ceil(durationSeconds * 30) : null, // 30fps 기준
+        text: textToSpeak.substring(0, 100) + (textToSpeak.length > 100 ? "..." : ""),
+      };
+      audioMetadata.scenes.push(sceneMetadata);
+
+      console.log(`✅ [${scene.id}] 완료 (${durationSeconds?.toFixed(1)}s) → ${outputPath}\n`);
     } catch (error) {
       console.error(`❌ [${scene.id}] 실패: ${error.message}\n`);
+      audioMetadata.scenes.push({
+        id: scene.id,
+        file: `${scene.id}.mp3`,
+        durationSeconds: null,
+        durationFrames: null,
+        error: error.message,
+      });
     }
   }
 
@@ -285,8 +340,22 @@ async function main() {
     console.log(`📝 번역된 나레이션 저장: ${translatedPath}`);
   }
 
+  // 오디오 메타데이터 저장
+  const metadataPath = path.join(outputDir, "audio-metadata.json");
+  fs.writeFileSync(metadataPath, JSON.stringify(audioMetadata, null, 2));
+  console.log(`\n📊 오디오 메타데이터 저장: ${metadataPath}`);
+
+  // 총 길이 계산
+  const totalSeconds = audioMetadata.scenes
+    .filter(s => s.durationSeconds)
+    .reduce((sum, s) => sum + s.durationSeconds, 0);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = Math.round(totalSeconds % 60);
+  console.log(`⏱️  총 오디오 길이: ${minutes}분 ${seconds}초`);
+
   console.log("\n🎉 모든 음성 생성 완료!");
   console.log(`📁 출력 위치: ${outputDir}`);
+  console.log(`\n💡 Tip: 'node scripts/sync-durations.mjs ${metadataPath}' 로 constants.ts 자동 생성 가능`);
 }
 
 main().catch(console.error);

@@ -94,16 +94,36 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
     }
 
     if (stagger === "character") {
-      const characters = text.split("");
-      return characters.map((char, index) => (
-        <AnimatedElement
-          key={index}
-          animation={animation}
-          delay={delay + index * staggerDuration}
-          style={style}
-        >
-          {char === " " ? "\u00A0" : char}
-        </AnimatedElement>
+      // 단어 단위로 그룹핑하여 단어 중간에서 줄바꿈 방지
+      const lines = text.split("\n");
+      let globalCharIndex = 0;
+
+      return lines.map((line, lineIndex) => (
+        <React.Fragment key={`line-${lineIndex}`}>
+          {lineIndex > 0 && <br />}
+          {line.split(" ").map((word, wordIndex, wordsArray) => (
+            <React.Fragment key={`word-${lineIndex}-${wordIndex}`}>
+              <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                {word.split("").map((char) => {
+                  const currentCharIndex = globalCharIndex++;
+                  return (
+                    <AnimatedElement
+                      key={`char-${currentCharIndex}`}
+                      animation={animation}
+                      delay={delay + currentCharIndex * staggerDuration}
+                      style={style}
+                    >
+                      {char}
+                    </AnimatedElement>
+                  );
+                })}
+              </span>
+              {wordIndex < wordsArray.length - 1 && (
+                <span style={{ display: "inline-block", width: "0.3em" }}> </span>
+              )}
+            </React.Fragment>
+          ))}
+        </React.Fragment>
       ));
     }
 

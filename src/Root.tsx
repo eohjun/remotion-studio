@@ -1,10 +1,8 @@
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
-import { SelfHelpCritique, selfHelpCritiqueSchema } from "./SelfHelpCritique";
-import { TOTAL_DURATION } from "./SelfHelpCritique/constants";
-import { SelfHelpCritiqueV2, selfHelpCritiqueV2Schema } from "./SelfHelpCritiqueV2";
-import { TOTAL_DURATION as TOTAL_DURATION_V2 } from "./SelfHelpCritiqueV2/constants";
+import { SelfHelpCritiqueEN, selfHelpCritiqueENSchema, TOTAL_DURATION } from "./SelfHelpCritiqueEN";
+import { SelfHelpCritiqueFull, selfHelpCritiqueFullSchema, TOTAL_DURATION as TOTAL_DURATION_FULL } from "./SelfHelpCritiqueFull";
 import "./styles/fonts.css";
 
 // Each <Composition> is an entry in the sidebar!
@@ -47,30 +45,30 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
 
-      {/* 자기개발 비판 영상 V1 */}
+      {/* Self-Help Ideology Critique - English Version (1 min) */}
       <Composition
-        id="SelfHelpCritique"
-        component={SelfHelpCritique}
+        id="SelfHelpCritiqueEN"
+        component={SelfHelpCritiqueEN}
         durationInFrames={TOTAL_DURATION}
         fps={30}
         width={1920}
         height={1080}
-        schema={selfHelpCritiqueSchema}
+        schema={selfHelpCritiqueENSchema}
         defaultProps={{
           primaryColor: "#667eea" as const,
           secondaryColor: "#764ba2" as const,
         }}
       />
 
-      {/* 자기개발 비판 영상 V2 - 옵시디언 노트 기반 풍성한 버전 */}
+      {/* Self-Help Ideology Critique - Full Version (6 min) */}
       <Composition
-        id="SelfHelpCritiqueV2"
-        component={SelfHelpCritiqueV2}
-        durationInFrames={TOTAL_DURATION_V2}
+        id="SelfHelpCritiqueFull"
+        component={SelfHelpCritiqueFull}
+        durationInFrames={TOTAL_DURATION_FULL}
         fps={30}
         width={1920}
         height={1080}
-        schema={selfHelpCritiqueV2Schema}
+        schema={selfHelpCritiqueFullSchema}
         defaultProps={{
           primaryColor: "#667eea" as const,
           secondaryColor: "#764ba2" as const,

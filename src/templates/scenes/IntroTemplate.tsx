@@ -95,6 +95,8 @@ export const IntroTemplate: React.FC<IntroTemplateProps> = ({
               fontFamily: FONT_FAMILY.title,
               margin: 0,
               lineHeight: 1.2,
+              wordBreak: "keep-all",
+              overflowWrap: "normal",
             }}
           >
             <AnimatedText

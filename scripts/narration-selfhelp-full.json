@@ -1,0 +1,89 @@
+{
+  "openai": {
+    "model": "tts-1-hd",
+    "voice": "alloy"
+  },
+  "elevenlabs": {
+    "voiceId": "21m00Tcm4TlvDq8ikWAM",
+    "modelId": "eleven_monolingual_v1",
+    "stability": 0.5,
+    "similarityBoost": 0.75
+  },
+  "metadata": {
+    "title": "Why Self-Help Books Might Be Making You Worse",
+    "language": "en",
+    "compositionId": "SelfHelpCritiqueFull"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "text": "Why do so many people who read self-help books end up feeling worse, not better? In this video, we'll uncover the hidden ideology behind the self-improvement industry—and discover what actually works for genuine personal growth.",
+      "duration": 20
+    },
+    {
+      "id": "paradox",
+      "text": "Here's a troubling paradox. The self-help industry generates thirteen billion dollars annually, yet studies show heavy self-help readers often report lower life satisfaction. Each book promises transformation while subtly implying you're not good enough yet. It creates a cycle of inadequacy that fuels more consumption. What if the problem isn't your lack of effort, but the ideology itself?",
+      "duration": 25
+    },
+    {
+      "id": "havingMode",
+      "text": "Philosopher Erich Fromm identified two fundamental ways of existing. The first is the Having Mode. In this mode, life becomes about accumulation—more skills, more credentials, more achievements. You are what you have. Your identity depends on possessions, including knowledge treated as something to own. This mode is driven by anxiety and comparison, and it never feels like enough.",
+      "duration": 25
+    },
+    {
+      "id": "beingMode",
+      "text": "The alternative is Fromm's Being Mode. Here, the focus shifts from having more to becoming more fully alive. It's about deepening your experience, forming authentic connections, and expressing yourself creatively. In the Being Mode, learning becomes transformation rather than accumulation. Growth happens through genuine engagement with life, not consumption of content. True fulfillment comes from within.",
+      "duration": 25
+    },
+    {
+      "id": "neoliberalism",
+      "text": "Self-help didn't emerge in a vacuum. As welfare states shrank and job security vanished, individuals were told to become their own safety nets. Structural problems like inequality, precarious employment, and rising costs became reframed as personal failures requiring individual solutions. When society fails you, you're told the answer is to upgrade yourself.",
+      "duration": 30
+    },
+    {
+      "id": "entrepreneurialSelf",
+      "text": "Sociologist Ulrich Bröckling calls this the entrepreneurial self. You're expected to constantly market yourself, optimize yourself, treat yourself as human capital. Self-help isn't just a choice anymore—it's a survival strategy. You become a brand to manage, a product to improve, an investment to optimize. And when you fail, it's entirely your fault.",
+      "duration": 25
+    },
+    {
+      "id": "toxicPositivity",
+      "text": "In her book Bright-Sided, Barbara Ehrenreich exposes the tyranny of positive thinking. When positivity becomes mandatory, expressing legitimate concerns becomes a sign of failure. She argues the two thousand eight financial crisis was partly caused by collective positive thinking—a refusal to acknowledge obvious risks. Sometimes things are genuinely difficult, and that's okay to acknowledge.",
+      "duration": 30
+    },
+    {
+      "id": "belaboredSelf",
+      "text": "Researcher Micki McGee reveals a cruel irony in her work on what she calls the belabored self. Self-help books promise solutions while simultaneously creating new problems to solve. The endless pursuit of improvement marks your current self as permanently incomplete. The result is exhaustion, not empowerment. You're trapped in a cycle: read a book, feel inadequate, buy the next book.",
+      "duration": 25
+    },
+    {
+      "id": "realWorldExample",
+      "text": "Consider a software developer pressured to learn new frameworks every year, maintain side projects, study languages, and build a personal brand—all while working full-time. When burnout hits, the self-help answer is always the same: try harder, wake earlier, optimize more. But maybe the problem is structural. Industry instability and unrealistic expectations aren't personal failures.",
+      "duration": 25
+    },
+    {
+      "id": "selfEfficacy",
+      "text": "So what actually works? Psychologist Albert Bandura's research on self-efficacy offers an evidence-based alternative. Self-efficacy is your belief in your ability to succeed at specific tasks. Unlike toxic positivity, it's not about blind optimism. It's specific, realistic, and built through actual experience rather than affirmations.",
+      "duration": 30
+    },
+    {
+      "id": "fourSources",
+      "text": "Bandura identified four sources of genuine self-efficacy. First, mastery experiences—direct success builds the strongest belief. Second, vicarious learning—seeing similar others succeed. Third, verbal persuasion—but only trusted feedback, not empty praise. Fourth, managing your emotional and physical states. Notice that none of these involve positive affirmations or visualization alone.",
+      "duration": 30
+    },
+    {
+      "id": "growthMindsetLimits",
+      "text": "Even helpful concepts like growth mindset can become problematic when misapplied. Growth mindset is valuable when combined with real support systems and applied to genuinely learnable skills. But it becomes harmful when used to ignore systemic barriers, when it becomes the sole explanation for outcomes, or when it's used to blame individuals for structural failures.",
+      "duration": 25
+    },
+    {
+      "id": "structuralBalance",
+      "text": "The key is balance. Personal agency matters—skills can be developed, effort counts, mindset affects experience. But structural realities also shape our opportunities. Not all failures are personal. Sometimes we need collective action, not just individual improvement. True wisdom lies in understanding both dimensions.",
+      "duration": 25
+    },
+    {
+      "id": "outro",
+      "text": "Here's what authentic growth looks like. Question self-help ideologies—don't just consume them. Choose being over having as your mode of development. Build real self-efficacy through mastery, not mantras. See structural problems instead of only blaming yourself. And remember: you are already enough. True growth starts with that recognition.",
+      "duration": 25
+    }
+  ]
+}

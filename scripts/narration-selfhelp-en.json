@@ -1,0 +1,59 @@
+{
+  "openai": {
+    "model": "tts-1-hd",
+    "voice": "alloy"
+  },
+  "elevenlabs": {
+    "voiceId": "21m00Tcm4TlvDq8ikWAM",
+    "modelId": "eleven_monolingual_v1",
+    "stability": 0.5,
+    "similarityBoost": 0.75
+  },
+  "metadata": {
+    "title": "The Dark Side of Self-Help",
+    "language": "en",
+    "compositionId": "SelfHelpCritiqueEN"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "text": "The more self-help books you read, the worse you might actually feel. Every year, we set ambitious goals. But by December, most of us are right back where we started. What if the problem isn't you?",
+      "duration": 7
+    },
+    {
+      "id": "twoFaces",
+      "text": "Philosopher Erich Fromm identified two modes of existence. The Having mode treats self-development as accumulation—more skills, more credentials, more achievements. It's driven by anxiety and never feels like enough. The Being mode is different. It focuses on deepening understanding, authentic connection, and growth from within.",
+      "duration": 7
+    },
+    {
+      "id": "neoliberalism",
+      "text": "In neoliberal societies, we're all pushed to become what sociologist Ulrich Bröckling calls the entrepreneurial self. You're expected to brand yourself, optimize yourself, treat yourself as human capital. Self-help isn't just a choice anymore—it's a survival strategy. And when you fail, it's entirely your fault.",
+      "duration": 8
+    },
+    {
+      "id": "toxicPositivity",
+      "text": "Barbara Ehrenreich calls it the tyranny of positive thinking. When positivity becomes mandatory, expressing legitimate concerns becomes a sign of failure. The pressure to stay positive suppresses real emotions and blinds us to structural problems. Sometimes, things really are difficult—and that's okay to acknowledge.",
+      "duration": 7
+    },
+    {
+      "id": "theTrap",
+      "text": "Micki McGee discovered a cruel paradox in her research. Self-help books promise solutions while creating new problems. The endless pursuit of improvement marks your current self as permanently incomplete. The result? Not achievement, but anxiety. Not growth, but burnout.",
+      "duration": 7
+    },
+    {
+      "id": "counterbalance",
+      "text": "But here's what actually works. Psychologist Albert Bandura found that self-efficacy—belief in your ability to succeed at specific tasks—directly predicts performance. Unlike blind optimism, self-efficacy is built through real mastery experiences, learning from others, trusted feedback, and managing your emotional state.",
+      "duration": 7
+    },
+    {
+      "id": "balance",
+      "text": "The key is balance. Personal effort matters—skills can be developed, mindset affects outcomes. But structural realities also shape our opportunities. Not all failures are personal. Sometimes we need collective action, not just individual improvement. Context always matters.",
+      "duration": 7
+    },
+    {
+      "id": "outro",
+      "text": "True growth isn't about consuming more self-help content. It's about questioning these ideologies, building real competence through practice, recognizing structural barriers, and choosing being over having. Real development starts with critical awareness. You are already enough.",
+      "duration": 7
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-01-22T18:11:34.588Z",
+  "provider": "OpenAI",
+  "language": "en",
+  "outputDir": "public/audio/en-full",
+  "compositionId": "SelfHelpCritiqueFull",
+  "scenes": [
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 14.16,
+      "durationFrames": 425
+    },
+    {
+      "id": "paradox",
+      "file": "paradox.mp3",
+      "durationSeconds": 24.6,
+      "durationFrames": 738
+    },
+    {
+      "id": "havingMode",
+      "file": "havingMode.mp3",
+      "durationSeconds": 23.784,
+      "durationFrames": 714
+    },
+    {
+      "id": "beingMode",
+      "file": "beingMode.mp3",
+      "durationSeconds": 25.296,
+      "durationFrames": 759
+    },
+    {
+      "id": "neoliberalism",
+      "file": "neoliberalism.mp3",
+      "durationSeconds": 22.344,
+      "durationFrames": 671
+    },
+    {
+      "id": "entrepreneurialSelf",
+      "file": "entrepreneurialSelf.mp3",
+      "durationSeconds": 21.792,
+      "durationFrames": 654
+    },
+    {
+      "id": "toxicPositivity",
+      "file": "toxicPositivity.mp3",
+      "durationSeconds": 24.624,
+      "durationFrames": 739
+    },
+    {
+      "id": "belaboredSelf",
+      "file": "belaboredSelf.mp3",
+      "durationSeconds": 24.144,
+      "durationFrames": 725
+    },
+    {
+      "id": "realWorldExample",
+      "file": "realWorldExample.mp3",
+      "durationSeconds": 23.928,
+      "durationFrames": 718
+    },
+    {
+      "id": "selfEfficacy",
+      "file": "selfEfficacy.mp3",
+      "durationSeconds": 20.136,
+      "durationFrames": 605
+    },
+    {
+      "id": "fourSources",
+      "file": "fourSources.mp3",
+      "durationSeconds": 24.168,
+      "durationFrames": 726
+    },
+    {
+      "id": "growthMindsetLimits",
+      "file": "growthMindsetLimits.mp3",
+      "durationSeconds": 22.728,
+      "durationFrames": 682
+    },
+    {
+      "id": "structuralBalance",
+      "file": "structuralBalance.mp3",
+      "durationSeconds": 19.728,
+      "durationFrames": 592
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 21.24,
+      "durationFrames": 638
+    }
+  ]
+}
