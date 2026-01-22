@@ -16,6 +16,9 @@
   "dependencies": {
     "@remotion/cli": "^4.0.0",
     "@remotion/zod-types": "^4.0.0",
+    "cheerio": "^1.1.2",
+    "mammoth": "^1.11.0",
+    "pdf-parse": "^2.4.5",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "^4.0.0",
@@ -25,6 +28,8 @@
     "@remotion/eslint-config-flat": "^4.0.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
+    "@types/cheerio": "^0.22.35",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "19.2.7",
     "@types/web": "0.0.166",
     "dotenv": "^17.2.3",

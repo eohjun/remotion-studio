@@ -5,6 +5,8 @@
  *   node scripts/generate-tts.mjs              # OpenAI 사용 (기본값)
  *   node scripts/generate-tts.mjs --openai     # OpenAI 사용
  *   node scripts/generate-tts.mjs --elevenlabs # ElevenLabs 사용
+ *   node scripts/generate-tts.mjs --lang en    # 영어 음성 생성
+ *   node scripts/generate-tts.mjs --translate --lang en # 번역 후 영어 음성 생성
  */
 
 import fs from "fs";
@@ -17,10 +19,40 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, "..");
 dotenv.config({ path: path.join(projectRoot, ".env") });
 
+// 지원 언어
+const SUPPORTED_LANGUAGES = ["ko", "en", "ja", "zh"];
+const LANGUAGE_NAMES = {
+  ko: "한국어",
+  en: "English",
+  ja: "日本語",
+  zh: "中文",
+};
+
+// 언어별 기본 음성 설정
+const VOICE_CONFIGS = {
+  ko: { openai: "nova", elevenlabs: "pNInz6obpgDQGcFmaJgB", model: "eleven_multilingual_v2" },
+  en: { openai: "alloy", elevenlabs: "21m00Tcm4TlvDq8ikWAM", model: "eleven_monolingual_v1" },
+  ja: { openai: "nova", elevenlabs: "pNInz6obpgDQGcFmaJgB", model: "eleven_multilingual_v2" },
+  zh: { openai: "nova", elevenlabs: "pNInz6obpgDQGcFmaJgB", model: "eleven_multilingual_v2" },
+};
+
 // CLI 인자 파싱
 const args = process.argv.slice(2);
 const useElevenLabs = args.includes("--elevenlabs") || args.includes("-e");
 const provider = useElevenLabs ? "elevenlabs" : "openai";
+const doTranslate = args.includes("--translate") || args.includes("-t");
+
+// 언어 설정
+const langArgIndex = args.findIndex(arg => arg === "--lang" || arg === "-l");
+const targetLang = langArgIndex !== -1 && args[langArgIndex + 1]
+  ? args[langArgIndex + 1]
+  : "ko";
+
+if (!SUPPORTED_LANGUAGES.includes(targetLang)) {
+  console.error(`❌ 지원하지 않는 언어: ${targetLang}`);
+  console.error(`   지원 언어: ${SUPPORTED_LANGUAGES.join(", ")}`);
+  process.exit(1);
+}
 
 // 나레이션 파일 경로 (--file 옵션으로 지정 가능)
 const fileArgIndex = args.findIndex(arg => arg === "--file" || arg === "-f");
@@ -35,22 +67,86 @@ if (!fs.existsSync(narrationPath)) {
 }
 
 const narration = JSON.parse(fs.readFileSync(narrationPath, "utf-8"));
-console.log(`📄 나레이션 파일: ${narrationFile}\n`);
+console.log(`📄 나레이션 파일: ${narrationFile}`);
+console.log(`🌐 대상 언어: ${LANGUAGE_NAMES[targetLang]} (${targetLang})\n`);
 
-// 출력 디렉토리 생성
-const outputDir = path.join(projectRoot, "public", "audio");
+// 출력 디렉토리 생성 (언어별 하위 폴더)
+const outputDir = path.join(projectRoot, "public", "audio", targetLang === "ko" ? "" : targetLang);
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
 // ============================================
+// 언어 감지
+// ============================================
+function detectLanguage(text) {
+  const koPattern = /[\uAC00-\uD7AF]/g;
+  const jaPattern = /[\u3040-\u309F\u30A0-\u30FF]/g;
+  const zhPattern = /[\u4E00-\u9FFF]/g;
+
+  const koCount = (text.match(koPattern) || []).length;
+  const jaCount = (text.match(jaPattern) || []).length;
+  const zhCount = (text.match(zhPattern) || []).length;
+
+  if (koCount > 10) return "ko";
+  if (jaCount > 10) return "ja";
+  if (zhCount > 20 && jaCount < 5) return "zh";
+  return "en";
+}
+
+// ============================================
+// 번역 (OpenAI 사용)
+// ============================================
+async function translateText(text, sourceLang, targetLang) {
+  if (sourceLang === targetLang) return text;
+
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error("번역을 위해 OPENAI_API_KEY가 필요합니다.");
+  }
+
+  const sourceName = LANGUAGE_NAMES[sourceLang] || sourceLang;
+  const targetName = LANGUAGE_NAMES[targetLang] || targetLang;
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: `You are a professional translator. Translate the following text from ${sourceName} to ${targetName}. Maintain the original tone and meaning. Only output the translation, nothing else.`,
+        },
+        { role: "user", content: text },
+      ],
+      temperature: 0.3,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`번역 API 오류: ${error}`);
+  }
+
+  const data = await response.json();
+  return data.choices[0]?.message?.content?.trim() || text;
+}
+
+// ============================================
 // OpenAI TTS
 // ============================================
-async function generateWithOpenAI(text, outputPath) {
+async function generateWithOpenAI(text, outputPath, lang) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey || apiKey.includes("여기에")) {
     throw new Error("OPENAI_API_KEY가 .env에 설정되지 않았습니다.");
   }
+
+  const voiceConfig = VOICE_CONFIGS[lang] || VOICE_CONFIGS.en;
+  const voice = narration.openai?.voice || voiceConfig.openai;
 
   const response = await fetch("https://api.openai.com/v1/audio/speech", {
     method: "POST",
@@ -61,7 +157,7 @@ async function generateWithOpenAI(text, outputPath) {
     body: JSON.stringify({
       model: narration.openai?.model || "tts-1-hd",
       input: text,
-      voice: narration.openai?.voice || "nova",
+      voice: voice,
       response_format: "mp3",
     }),
   });
@@ -78,15 +174,15 @@ async function generateWithOpenAI(text, outputPath) {
 // ============================================
 // ElevenLabs TTS
 // ============================================
-async function generateWithElevenLabs(text, outputPath) {
+async function generateWithElevenLabs(text, outputPath, lang) {
   const apiKey = process.env.ELEVENLABS_API_KEY;
   if (!apiKey || apiKey.includes("여기에")) {
     throw new Error("ELEVENLABS_API_KEY가 .env에 설정되지 않았습니다.");
   }
 
-  // ElevenLabs 음성 ID (기본값: Rachel - 한국어 지원 음성)
-  const voiceId = narration.elevenlabs?.voiceId || "21m00Tcm4TlvDq8ikWAM";
-  const modelId = narration.elevenlabs?.modelId || "eleven_multilingual_v2";
+  const voiceConfig = VOICE_CONFIGS[lang] || VOICE_CONFIGS.en;
+  const voiceId = narration.elevenlabs?.voiceId || voiceConfig.elevenlabs;
+  const modelId = narration.elevenlabs?.modelId || voiceConfig.model;
 
   const response = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
@@ -124,25 +220,72 @@ async function main() {
   const generateFn =
     provider === "elevenlabs" ? generateWithElevenLabs : generateWithOpenAI;
 
-  console.log(`🎙️  ${providerName} TTS 음성 생성 시작\n`);
+  console.log(`🎙️  ${providerName} TTS 음성 생성 시작`);
   console.log(`Provider: ${providerName}`);
-  console.log(`씬 개수: ${narration.scenes.length}\n`);
+  console.log(`씬 개수: ${narration.scenes.length}`);
+  if (doTranslate) {
+    console.log(`번역: 활성화 (→ ${LANGUAGE_NAMES[targetLang]})`);
+  }
+  console.log("");
+
+  // 번역된 텍스트 저장 (나중에 참조용)
+  const translatedScenes = [];
 
   for (const scene of narration.scenes) {
     const outputPath = path.join(outputDir, `${scene.id}.mp3`);
+    let textToSpeak = scene.text;
+
+    // 번역 처리
+    if (doTranslate) {
+      const detectedLang = detectLanguage(scene.text);
+      if (detectedLang !== targetLang) {
+        console.log(`🔄 [${scene.id}] 번역 중 (${detectedLang} → ${targetLang})...`);
+        try {
+          textToSpeak = await translateText(scene.text, detectedLang, targetLang);
+          translatedScenes.push({
+            id: scene.id,
+            original: scene.text,
+            translated: textToSpeak,
+          });
+        } catch (error) {
+          console.error(`   번역 실패: ${error.message}`);
+          // 번역 실패 시 원본 사용
+        }
+      }
+    }
 
     console.log(`⏳ [${scene.id}] 생성 중...`);
-    console.log(`   "${scene.text.substring(0, 40)}..."`);
+    console.log(`   "${textToSpeak.substring(0, 50)}..."`);
 
     try {
-      await generateFn(scene.text, outputPath);
+      await generateFn(textToSpeak, outputPath, targetLang);
       console.log(`✅ [${scene.id}] 완료 → ${outputPath}\n`);
     } catch (error) {
       console.error(`❌ [${scene.id}] 실패: ${error.message}\n`);
     }
   }
 
-  console.log("🎉 모든 음성 생성 완료!");
+  // 번역된 내용 저장 (참조용)
+  if (doTranslate && translatedScenes.length > 0) {
+    const translatedPath = path.join(__dirname, `narration_${targetLang}.json`);
+    const translatedNarration = {
+      ...narration,
+      language: targetLang,
+      originalLanguage: detectLanguage(narration.scenes[0]?.text || ""),
+      scenes: narration.scenes.map(scene => {
+        const translated = translatedScenes.find(t => t.id === scene.id);
+        return {
+          ...scene,
+          text: translated ? translated.translated : scene.text,
+          originalText: translated ? translated.original : undefined,
+        };
+      }),
+    };
+    fs.writeFileSync(translatedPath, JSON.stringify(translatedNarration, null, 2));
+    console.log(`📝 번역된 나레이션 저장: ${translatedPath}`);
+  }
+
+  console.log("\n🎉 모든 음성 생성 완료!");
   console.log(`📁 출력 위치: ${outputDir}`);
 }
 
