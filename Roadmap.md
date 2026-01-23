@@ -1,7 +1,7 @@
 # Remotion Studio Roadmap
 
 **Version**: 1.0
-**Last Updated**: 2026-01-23
+**Last Updated**: 2026-01-24
 **Status**: Active Development
 
 ---
@@ -374,6 +374,37 @@ Strategic planning system for purposeful video creation.
 - [x] **video-narrator** - Creates structured narration scripts with storytelling principles
 - [x] **video-planner** - Selects optimal templates, components, effects
 - [x] **video-producer** - Master orchestrator that chains all agents
+
+---
+
+### Phase 18: Template UX Improvements ✅ COMPLETED (2026-01-24)
+**Priority**: High | **Impact**: Visual Quality
+
+Improve readability and visual balance for 1080p video output.
+
+#### Template Size Optimization
+- [x] **DataVisualizationTemplate** - Bar/chart sizes increased (barWidth 80→160, maxBarHeight 300→500)
+- [x] **TimelineTemplate** - Marker/font sizes increased (marker 24→40, line 3→5)
+- [x] **NewsTemplate** - keyPoints font increased (md→xl)
+- [x] **OutroTemplate** - takeaways font increased (md→xl)
+- [x] **ContentTemplate** - items/paragraphs/highlight sizes increased
+- [x] **QuoteTemplate** - attribution/context font increased
+
+#### AnimatedText Word Grouping
+- [x] Intelligent word grouping for proper line breaks
+- [x] Keep names together (e.g., "- Daniel Kokotajlo" stays on one line)
+- [x] Keep parenthetical content together
+- [x] `word-break: keep-all` for Korean text support
+- [x] Flexbox-based layout with `justifyContent: center`
+
+**Files Modified:**
+- `src/shared/templates/animations/AnimatedText.tsx` - Word grouping logic
+- `src/shared/templates/scenes/DataVisualizationTemplate.tsx` - Size increases
+- `src/shared/templates/scenes/TimelineTemplate.tsx` - Size increases
+- `src/shared/templates/scenes/NewsTemplate.tsx` - Size increases
+- `src/shared/templates/scenes/OutroTemplate.tsx` - Size increases
+- `src/shared/templates/scenes/ContentTemplate.tsx` - Size increases, word-break
+- `src/shared/templates/scenes/QuoteTemplate.tsx` - Size increases, word-break
 
 ---
 
