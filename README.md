@@ -1,16 +1,19 @@
 # Remotion Studio
 
-Obsidian 노트 기반 영상 제작을 위한 Remotion 프로젝트입니다.
+AI 에이전트 기반 영상 제작 시스템. 연구 → 나레이션 → 기획 → 제작의 파이프라인을 자동화합니다.
 
 ## Features
 
-- **컴포넌트 라이브러리**: 재사용 가능한 씬 템플릿 및 애니메이션
+- **AI 에이전트 시스템**: 4단계 영상 제작 파이프라인
+  - `video-researcher`: 주제 조사 및 리서치 리포트 생성
+  - `video-narrator`: 나레이션 스크립트 작성
+  - `video-planner`: 시각 전략 및 씬 구성 기획
+  - `video-producer`: Remotion 컴포지션 구현
+- **50+ 컴포넌트 라이브러리**: 재사용 가능한 템플릿, 애니메이션, 이펙트
 - **TTS 통합**: OpenAI / ElevenLabs TTS 자동 생성
 - **오디오 동기화**: 오디오 길이 기반 씬 타이밍 자동 설정
-- **다국어 지원**: 한국어, 영어, 일본어, 중국어
-- **YouTube 최적화**: 메타데이터, 챕터, 썸네일 자동 생성
 
-## Commands
+## Quick Start
 
 ```bash
 # 의존성 설치
@@ -26,91 +29,143 @@ npm run lint
 npx remotion render <CompositionId> out/video.mp4
 ```
 
-## TTS 음성 생성
-
-```bash
-# OpenAI TTS (기본)
-node scripts/generate-tts.mjs -f narration.json
-
-# ElevenLabs TTS
-node scripts/generate-tts.mjs -f narration.json --elevenlabs
-
-# 커스텀 출력 디렉토리
-node scripts/generate-tts.mjs -f narration.json -o en-full
-
-# 영어로 번역 후 생성
-node scripts/generate-tts.mjs -f narration.json --translate --lang en
-```
-
-출력:
-- `public/audio/<dir>/*.mp3` - 씬별 오디오 파일
-- `public/audio/<dir>/audio-metadata.json` - 오디오 길이 메타데이터
-
-## 씬 타이밍 자동 동기화
-
-TTS 생성 후 실제 오디오 길이에 맞춰 constants.ts를 자동 생성합니다.
-
-```bash
-# 미리보기
-node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json --dry-run
-
-# constants.ts 생성
-node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json
-
-# 버퍼 시간 조정 (기본: 1.5초)
-node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json --buffer 2
-```
-
 ## Project Structure
 
 ```
-src/
-├── components/          # 공통 UI 컴포넌트
-├── templates/
-│   ├── animations/      # 애니메이션 프리셋 및 AnimatedText
-│   └── scenes/          # 씬 템플릿 (Intro, Content, Quote, Outro 등)
-├── SelfHelpCritiqueEN/  # 1분 영어 버전
-├── SelfHelpCritiqueFull/ # 6분 풀버전
-└── Root.tsx             # Composition 등록
+remotion-studio/
+├── .claude/agents/           # AI 에이전트 정의
+│   ├── video-researcher.md   # 리서치 에이전트
+│   ├── video-narrator.md     # 나레이션 에이전트
+│   ├── video-planner.md      # 기획 에이전트
+│   └── video-producer.md     # 제작 에이전트
+│
+├── src/
+│   ├── shared/               # 공유 컴포넌트 (삭제 금지)
+│   │   ├── components/       # UI 컴포넌트
+│   │   │   ├── backgrounds/  # AnimatedGradient, ParticleField, FloatingShapes
+│   │   │   ├── effects/      # Vignette, FilmGrain, LightLeak
+│   │   │   ├── charts/       # BarChart, LineChart, PieChart
+│   │   │   ├── metaphors/    # BreathingCircle, FlowingWaves, LayeredMind
+│   │   │   └── layouts/      # Stack, Grid, Split, ComparisonLayout
+│   │   ├── templates/
+│   │   │   ├── scenes/       # Intro, Content, Quote, News, Timeline, DataViz...
+│   │   │   └── animations/   # AnimatedText, TypewriterText, CaptionText...
+│   │   ├── audio/            # AudioLayer, BackgroundMusic, SoundEffect
+│   │   └── transitions/      # 씬 전환 효과
+│   │
+│   ├── videos/               # 영상별 컴포지션 (개별 삭제 가능)
+│   │   ├── OpenAICrisis/
+│   │   ├── SelfHelpCritiqueEN/
+│   │   └── SelfHelpCritiqueFull/
+│   │
+│   ├── demos/                # 컴포넌트 데모
+│   └── Root.tsx              # Composition 등록
+│
+├── projects/                 # 프로젝트별 에셋
+│   ├── OpenAICrisis/
+│   │   ├── narration.json    # TTS 소스 텍스트
+│   │   ├── video-plan.json   # 시각 전략
+│   │   ├── research-report.md
+│   │   └── youtube/          # 썸네일, 설명
+│   └── templates/
+│       └── video-plan.md     # 기획 템플릿
+│
+├── public/videos/            # 오디오 파일
+│   └── {compositionId}/audio/
+│
+├── docs/                     # 문서
+│   ├── component-catalog.md  # 컴포넌트 카탈로그
+│   └── visual-strategy-guide.md
+│
+└── scripts/                  # 유틸리티 스크립트
+    ├── generate-tts.mjs      # TTS 생성
+    ├── cleanup-audio.mjs     # 미사용 오디오 정리
+    └── delete-video.mjs      # 비디오 삭제
+```
 
-scripts/
-├── generate-tts.mjs     # TTS 생성 + 오디오 메타데이터
-├── sync-durations.mjs   # constants.ts 자동 생성
-└── narration-*.json     # 나레이션 스크립트
+## Video Production Pipeline
 
-public/audio/            # 생성된 오디오 파일
-youtube/                 # YouTube 에셋 (메타데이터, 챕터 등)
+### 1. Research (video-researcher)
+```
+주제 입력 → 웹 검색 → 자료 분석 → research-report.md
+```
+
+### 2. Narration (video-narrator)
+```
+research-report.md → 스크립트 작성 → narration.json
+```
+
+### 3. Planning (video-planner)
+```
+narration.json → 시각 전략 수립 → video-plan.json
+```
+
+### 4. Production (video-producer)
+```
+video-plan.json → Remotion 컴포지션 구현 → src/videos/{id}/
+```
+
+## TTS Generation
+
+```bash
+# OpenAI TTS (기본)
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json
+
+# ElevenLabs TTS
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json --elevenlabs
+```
+
+출력: `public/videos/{compositionId}/audio/`
+
+## Scene Templates
+
+| 템플릿 | 용도 |
+|--------|------|
+| IntroTemplate | 영상 시작, 제목 |
+| ContentTemplate | 본문, 리스트, 하이라이트 |
+| QuoteTemplate | 인용문, 출처 |
+| NewsTemplate | 뉴스 스타일, 브레이킹 뉴스 |
+| TimelineTemplate | 타임라인, 연대기 |
+| DataVisualizationTemplate | 차트, 통계 |
+| ComparisonTemplate | 비교 (A vs B) |
+| OutroTemplate | 마무리, CTA |
+
+## Video Management
+
+```bash
+# 비디오 삭제 (미리보기)
+node scripts/delete-video.mjs <compositionId>
+
+# 비디오 삭제 (실행)
+node scripts/delete-video.mjs <compositionId> --confirm
+
+# 미사용 오디오 정리
+node scripts/cleanup-audio.mjs
 ```
 
 ## Compositions
 
-| ID | 설명 | 길이 |
+| ID | 설명 | 언어 |
 |----|------|------|
-| SelfHelpCritiqueEN | Self-Help 비판 (영어, 요약) | ~1분 |
-| SelfHelpCritiqueFull | Self-Help 비판 (영어, 풀버전) | ~6분 |
+| OpenAICrisis | OpenAI 위기 분석 | 한국어 |
+| SelfHelpCritiqueEN | Self-Help 비판 (요약) | 영어 |
+| SelfHelpCritiqueFull | Self-Help 비판 (풀버전) | 영어 |
+| MindfulnessPhenomenology | 마음챙김과 현상학 | 영어 |
 
 ## Environment Variables
 
-`.env` 파일에 API 키를 설정하세요:
+`.env` 파일에 API 키 설정:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
 ELEVENLABS_API_KEY=your_elevenlabs_api_key
 ```
 
-## Workflow
+## Documentation
 
-```
-1. narration.json 작성 (씬별 텍스트)
-       ↓
-2. TTS 생성: node scripts/generate-tts.mjs -f narration.json -o output-dir
-       ↓
-3. 타이밍 동기화: node scripts/sync-durations.mjs public/audio/output-dir/audio-metadata.json
-       ↓
-4. 프리뷰: npm run dev
-       ↓
-5. 렌더링: npx remotion render <CompositionId> out/video.mp4
-```
+- [Component Catalog](docs/component-catalog.md) - 컴포넌트 카탈로그
+- [Visual Strategy Guide](docs/visual-strategy-guide.md) - 시각 전략 가이드
+- [Video Plan Template](projects/templates/video-plan.md) - 기획 템플릿
 
 ## License
 
