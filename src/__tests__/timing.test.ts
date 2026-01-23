@@ -7,7 +7,7 @@ import {
   calculateSceneTimings,
   getTotalDuration,
   TIMING_PRESETS,
-} from "../utils/timing";
+} from "../shared/utils/timing";
 
 describe("Timing Utilities", () => {
   describe("framesToSeconds", () => {

@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-01-23T16:26:08.497Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/OpenAICrisis/audio",
+  "compositionId": "OpenAICrisis",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 17.976,
+      "durationFrames": 540,
+      "text": "170만 달러. 한 연구원이 양심을 지키기 위해 포기한 금액입니다. 가족 전 재산의 85퍼센트였죠. 그리고 그는 혼자가 아니었습니다. AI 안전 연구팀의 절반이 회사를 떠났습니다...."
+    },
+    {
+      "id": "promise",
+      "file": "promise.mp3",
+      "durationSeconds": 16.728,
+      "durationFrames": 502,
+      "text": "오늘은 인류를 위한 AI를 만들겠다던 회사의 충격적인 4가지 사건을 들여다봅니다. CEO 해임 드라마, 안전팀 대탈주, 주식으로 입막음한 NDA 스캔들, 그리고 비영리에서 영리로의..."
+    },
+    {
+      "id": "boardDrama",
+      "file": "boardDrama.mp3",
+      "durationSeconds": 21.192,
+      "durationFrames": 636,
+      "text": "2023년 11월 17일 금요일. OpenAI 이사회는 Sam Altman CEO를 전격 해임합니다. Microsoft는 단 1분 전에 통보받았습니다. 공동창업자 Greg Broc..."
+    },
+    {
+      "id": "boardDramaResolution",
+      "file": "boardDramaResolution.mp3",
+      "durationSeconds": 18.984,
+      "durationFrames": 570,
+      "text": "하지만 놀라운 반전이 일어납니다. 800명 직원 중 700명 이상이 이사회 사퇴와 알트만 복귀를 요구하는 서한에 서명합니다. 해임을 주도했던 Ilya Sutskever조차 서명하며..."
+    },
+    {
+      "id": "safetyExodus",
+      "file": "safetyExodus.mp3",
+      "durationSeconds": 18.6,
+      "durationFrames": 558,
+      "text": "그런데 진짜 문제는 그 이후에 시작됩니다. 2024년, AGI 안전 연구팀의 약 절반이 퇴사합니다. 30명 중 16명만 남았습니다. 공동창업자 Ilya Sutskever도 떠나 S..."
+    },
+    {
+      "id": "safetyQuotes",
+      "file": "safetyQuotes.mp3",
+      "durationSeconds": 19.968,
+      "durationFrames": 600,
+      "text": "슈퍼얼라인먼트팀 공동 리더였던 Jan Leike는 이렇게 말합니다. '안전 문화와 프로세스가 화려한 제품에 뒷자리를 차지하게 됐다.' 설립 1년 만에 슈퍼얼라인먼트팀은 해체됩니다...."
+    },
+    {
+      "id": "ndaScandal",
+      "file": "ndaScandal.mp3",
+      "durationSeconds": 21.144,
+      "durationFrames": 635,
+      "text": "더 충격적인 건 퇴사자들에게 강요된 계약입니다. 평생 동안 전 고용주를 비판하지 않겠다는 서약. 거부하면 기득 주식 전액이 몰수됩니다. Daniel Kokotajlo는 170만 달..."
+    },
+    {
+      "id": "altmanResponse",
+      "file": "altmanResponse.mp3",
+      "durationSeconds": 12.432,
+      "durationFrames": 373,
+      "text": "이 사실이 알려지자 Sam Altman은 '진심으로 부끄럽다'고 말합니다. 하지만 유출된 문서에는 그와 고위 임원들이 직접 서명한 주식 몰수 조항이 포함되어 있었습니다."
+    },
+    {
+      "id": "structureChange",
+      "file": "structureChange.mp3",
+      "durationSeconds": 22.512,
+      "durationFrames": 676,
+      "text": "그리고 마지막 변화. 2015년 '인류 전체를 위한 AI 개발'이라는 사명으로 비영리 연구소로 시작한 OpenAI는, 2019년 이익 상한 자회사를 만들고, 2024년 영리 법인 ..."
+    },
+    {
+      "id": "structureNumbers",
+      "file": "structureNumbers.mp3",
+      "durationSeconds": 16.8,
+      "durationFrames": 504,
+      "text": "새 구조에서 OpenAI 재단은 26퍼센트 지분, 약 1300억 달러를 갖습니다. 나머지 74퍼센트는 Microsoft, 직원, 투자자들의 몫입니다. 비영리로 시작한 회사가 세계에..."
+    },
+    {
+      "id": "resolution",
+      "file": "resolution.mp3",
+      "durationSeconds": 22.128,
+      "durationFrames": 664,
+      "text": "인류를 위한 AI를 만들겠다던 회사가, 정작 인류의 안전을 담당하던 직원들이 떠나고 있습니다. 4일 만에 복귀한 CEO, 절반이 퇴사한 안전팀, 양심을 위해 170만 달러를 포기한..."
+    }
+  ]
+}

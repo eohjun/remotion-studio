@@ -1,9 +1,12 @@
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
-import { SelfHelpCritiqueEN, selfHelpCritiqueENSchema, TOTAL_DURATION } from "./SelfHelpCritiqueEN";
-import { SelfHelpCritiqueFull, selfHelpCritiqueFullSchema, TOTAL_DURATION as TOTAL_DURATION_FULL } from "./SelfHelpCritiqueFull";
-import "./styles/fonts.css";
+import { SelfHelpCritiqueEN, selfHelpCritiqueENSchema, TOTAL_DURATION } from "./videos/SelfHelpCritiqueEN";
+import { SelfHelpCritiqueFull, selfHelpCritiqueFullSchema, TOTAL_DURATION as TOTAL_DURATION_FULL } from "./videos/SelfHelpCritiqueFull";
+import { MindfulnessPhenomenology, mindfulnessPhenomenologySchema, TOTAL_DURATION as TOTAL_DURATION_MINDFULNESS } from "./videos/MindfulnessPhenomenology";
+import { OpenAICrisis, openAICrisisSchema, TOTAL_DURATION as TOTAL_DURATION_OPENAI } from "./videos/OpenAICrisis";
+import { VisualEffectsDemo, visualEffectsDemoSchema, DEMO_DURATION, AnimationDemo, animationDemoSchema, ANIMATION_DEMO_DURATION, TemplateDemo, templateDemoSchema, TEMPLATE_DEMO_DURATION, ComponentLibraryDemo, componentLibraryDemoSchema, COMPONENT_LIBRARY_DEMO_DURATION, AudioDemo, audioDemoSchema, AUDIO_DEMO_DURATION } from "./demos";
+import "./shared/styles/fonts.css";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -69,6 +72,111 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={selfHelpCritiqueFullSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* Mindfulness Phenomenology - Philosophy of Mindfulness (~5 min) */}
+      <Composition
+        id="MindfulnessPhenomenology"
+        component={MindfulnessPhenomenology}
+        durationInFrames={TOTAL_DURATION_MINDFULNESS}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={mindfulnessPhenomenologySchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* OpenAI Crisis - Critical examination of OpenAI's transformation (~3.5 min) */}
+      <Composition
+        id="OpenAICrisis"
+        component={OpenAICrisis}
+        durationInFrames={TOTAL_DURATION_OPENAI}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={openAICrisisSchema}
+        defaultProps={{
+          primaryColor: "#dc3545" as const,
+          secondaryColor: "#1a1a2e" as const,
+        }}
+      />
+
+      {/* Visual Effects Demo - Showcases Phase 11-13 components */}
+      <Composition
+        id="VisualEffectsDemo"
+        component={VisualEffectsDemo}
+        durationInFrames={DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={visualEffectsDemoSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* Animation Demo - Showcases Phase 10 animation system */}
+      <Composition
+        id="AnimationDemo"
+        component={AnimationDemo}
+        durationInFrames={ANIMATION_DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={animationDemoSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* Template Demo - Showcases Phase 11 scene templates */}
+      <Composition
+        id="TemplateDemo"
+        component={TemplateDemo}
+        durationInFrames={TEMPLATE_DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={templateDemoSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* Component Library Demo - Showcases Phase 13 component library */}
+      <Composition
+        id="ComponentLibraryDemo"
+        component={ComponentLibraryDemo}
+        durationInFrames={COMPONENT_LIBRARY_DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={componentLibraryDemoSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+
+      {/* Audio Demo - Showcases Phase 14 audio enhancement system */}
+      <Composition
+        id="AudioDemo"
+        component={AudioDemo}
+        durationInFrames={AUDIO_DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={audioDemoSchema}
         defaultProps={{
           primaryColor: "#667eea" as const,
           secondaryColor: "#764ba2" as const,

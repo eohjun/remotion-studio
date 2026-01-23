@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-01-23T14:47:24.914Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/MindfulnessPhenomenology/audio",
+  "compositionId": "MindfulnessPhenomenology",
+  "scenes": [
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 17.52,
+      "durationFrames": 526,
+      "text": "What if the ancient practice of mindfulness and twentieth-century European philosophy were actually ..."
+    },
+    {
+      "id": "epocheIntro",
+      "file": "epocheIntro.mp3",
+      "durationSeconds": 22.248,
+      "durationFrames": 668,
+      "text": "In nineteen thirteen, German philosopher Edmund Husserl introduced a revolutionary concept called ep..."
+    },
+    {
+      "id": "mindfulnessParallel",
+      "file": "mindfulnessParallel.mp3",
+      "durationSeconds": 25.512,
+      "durationFrames": 766,
+      "text": "Now here's the remarkable connection. Twenty-five hundred years earlier, Buddhist practitioners deve..."
+    },
+    {
+      "id": "naturalAttitude",
+      "file": "naturalAttitude.mp3",
+      "durationSeconds": 19.56,
+      "durationFrames": 587,
+      "text": "In our everyday lives, we operate in what Husserl called the 'natural attitude.' We take the world f..."
+    },
+    {
+      "id": "metacognition",
+      "file": "metacognition.mp3",
+      "durationSeconds": 27.312,
+      "durationFrames": 820,
+      "text": "This brings us to metacognition, literally 'thinking about thinking.' When you notice that your mind..."
+    },
+    {
+      "id": "decentering",
+      "file": "decentering.mp3",
+      "durationSeconds": 20.256,
+      "durationFrames": 608,
+      "text": "This metacognitive shift has a clinical name: decentering. Instead of saying 'I am a failure,' you o..."
+    },
+    {
+      "id": "neurophenomenology",
+      "file": "neurophenomenology.mp3",
+      "durationSeconds": 24.096,
+      "durationFrames": 723,
+      "text": "In nineteen ninety-six, neuroscientist Francisco Varela proposed something bold. What if we could co..."
+    },
+    {
+      "id": "brainChanges",
+      "file": "brainChanges.mp3",
+      "durationSeconds": 23.28,
+      "durationFrames": 699,
+      "text": "The results were striking. Richard Davidson's research showed that long-term meditators displayed un..."
+    },
+    {
+      "id": "vipassanaOrigins",
+      "file": "vipassanaOrigins.mp3",
+      "durationSeconds": 23.496,
+      "durationFrames": 705,
+      "text": "To understand mindfulness fully, we must return to its source: Vipassana, meaning 'to see clearly.' ..."
+    },
+    {
+      "id": "therapeuticPower",
+      "file": "therapeuticPower.mp3",
+      "durationSeconds": 22.584,
+      "durationFrames": 678,
+      "text": "From these ancient roots grew modern therapeutic applications. MBSR, Mindfulness-Based Stress Reduct..."
+    },
+    {
+      "id": "mcmindfulness",
+      "file": "mcmindfulness.mp3",
+      "durationSeconds": 26.712,
+      "durationFrames": 802,
+      "text": "But we must also consider the critique. Scholar Ronald Purser coined 'McMindfulness' to describe how..."
+    },
+    {
+      "id": "embodiedAwareness",
+      "file": "embodiedAwareness.mp3",
+      "durationSeconds": 24.192,
+      "durationFrames": 726,
+      "text": "French philosopher Maurice Merleau-Ponty reminds us that consciousness isn't just in the head. When ..."
+    },
+    {
+      "id": "synthesis",
+      "file": "synthesis.mp3",
+      "durationSeconds": 26.064,
+      "durationFrames": 782,
+      "text": "So what have we learned? Phenomenology and mindfulness converge on a profound truth: by suspending o..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 21.552,
+      "durationFrames": 647,
+      "text": "Next time you sit in meditation, remember: you're participating in a practice that connects ancient ..."
+    }
+  ]
+}

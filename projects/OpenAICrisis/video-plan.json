@@ -1,0 +1,461 @@
+{
+  "compositionId": "OpenAICrisis",
+  "metadata": {
+    "title": "OpenAI의 위기",
+    "subtitle": "인류를 위한 AI, 그 약속은 어디로 갔는가",
+    "language": "ko",
+    "fps": 30,
+    "totalDurationInFrames": 6180,
+    "estimatedDuration": "3:26"
+  },
+  "visualStrategy": {
+    "theme": "dark-critical",
+    "contentType": "critical-data-driven",
+    "emotionalTone": "serious-questioning",
+    "primaryColor": "#dc3545",
+    "secondaryColor": "#1a1a2e",
+    "accentColor": "#ff6b6b",
+    "warningColor": "#ffc107",
+    "textColor": "#ffffff",
+    "background": {
+      "type": "AnimatedGradient",
+      "props": {
+        "colors": ["#1a1a2e", "#16213e", "#0d1117"],
+        "mode": "pulse",
+        "speed": 0.3
+      }
+    },
+    "effects": [
+      {
+        "type": "Vignette",
+        "props": {
+          "intensity": 0.6,
+          "color": "#000000"
+        }
+      },
+      {
+        "type": "FilmGrain",
+        "props": {
+          "amount": 0.03,
+          "animated": true
+        }
+      }
+    ],
+    "defaultTransition": "dissolve"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 0,
+      "durationInFrames": 420,
+      "transition": {
+        "in": "fade",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "",
+        "chartType": "metric",
+        "data": [
+          {
+            "label": "포기한 금액",
+            "value": 1700000,
+            "prefix": "$",
+            "suffix": "",
+            "color": "#dc3545",
+            "highlight": true
+          },
+          {
+            "label": "가족 재산의",
+            "value": 85,
+            "suffix": "%",
+            "color": "#ff6b6b"
+          },
+          {
+            "label": "안전팀 퇴사율",
+            "value": 50,
+            "suffix": "%",
+            "color": "#ffc107"
+          }
+        ],
+        "highlight": "170만 달러",
+        "animationStyle": "countUp",
+        "showSource": false
+      },
+      "visualNotes": "Big number reveal with dramatic countUp. Start with $1.7M prominently displayed, then reveal context. Red color scheme for urgency.",
+      "narrationText": "170만 달러. 한 연구원이 양심을 지키기 위해 포기한 금액입니다..."
+    },
+    {
+      "id": "promise",
+      "template": "ContentTemplate",
+      "startFrame": 420,
+      "durationInFrames": 390,
+      "transition": {
+        "in": "dissolve",
+        "out": "wipe",
+        "duration": 15
+      },
+      "props": {
+        "title": "오늘의 주제",
+        "icon": "warning",
+        "bullets": [
+          "CEO 해임 드라마",
+          "안전팀 대탈주",
+          "NDA 스캔들",
+          "비영리에서 영리로"
+        ],
+        "bulletStyle": "numbered",
+        "bulletColor": "#dc3545",
+        "animationStyle": "staggered",
+        "staggerDelay": 20
+      },
+      "visualNotes": "Four bullet points appearing sequentially. Each point should feel like a teaser/preview. Dark background with red accent.",
+      "narrationText": "오늘은 인류를 위한 AI를 만들겠다던 회사의 충격적인 4가지 사건을 들여다봅니다..."
+    },
+    {
+      "id": "boardDrama",
+      "template": "NewsTemplate",
+      "startFrame": 810,
+      "durationInFrames": 510,
+      "transition": {
+        "in": "wipe",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "newsStyle": "breaking",
+        "banner": "BREAKING NEWS",
+        "headline": "OpenAI CEO Sam Altman 전격 해임",
+        "subheadline": "2023년 11월 17일 금요일",
+        "keyPoints": [
+          "Microsoft 단 1분 전 통보",
+          "Greg Brockman 당일 밤 퇴출",
+          "Helen Toner: '이사회에 일관되게 거짓말'"
+        ],
+        "timestamp": "2023.11.17",
+        "showTicker": true,
+        "tickerText": "BREAKING: OpenAI Board fires CEO Sam Altman | Microsoft notified 1 minute before announcement"
+      },
+      "background": {
+        "type": "solid",
+        "color": "#0d1117"
+      },
+      "visualNotes": "Breaking news style with urgent red accents. Ticker at bottom. Timeline feel with date prominent.",
+      "narrationText": "2023년 11월 17일 금요일. OpenAI 이사회는 Sam Altman CEO를 전격 해임합니다..."
+    },
+    {
+      "id": "boardDramaResolution",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 1320,
+      "durationInFrames": 450,
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "직원들의 반응",
+        "chartType": "progress",
+        "data": [
+          {
+            "label": "서명한 직원",
+            "value": 700,
+            "maxValue": 800,
+            "color": "#28a745",
+            "highlight": true
+          }
+        ],
+        "highlight": "700/800명",
+        "annotation": "87.5%가 CEO 복귀 요구",
+        "additionalMetrics": [
+          {
+            "label": "복귀 소요 시간",
+            "value": "4일",
+            "color": "#ffc107"
+          }
+        ],
+        "source": "OpenAI Employee Letter, November 2023"
+      },
+      "visualNotes": "Progress bar showing 700/800 dramatically filling up. Include Ilya Sutskever's reversal as a key moment. Green for positive resolution.",
+      "narrationText": "하지만 놀라운 반전이 일어납니다. 800명 직원 중 700명 이상이..."
+    },
+    {
+      "id": "safetyExodus",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 1770,
+      "durationInFrames": 420,
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "AGI 안전 연구팀 현황",
+        "subtitle": "2024년",
+        "chartType": "bar",
+        "data": [
+          {
+            "label": "잔류",
+            "value": 16,
+            "color": "#28a745"
+          },
+          {
+            "label": "퇴사",
+            "value": 14,
+            "color": "#dc3545",
+            "highlight": true
+          }
+        ],
+        "totalLabel": "총 30명 중",
+        "highlight": "절반 퇴사",
+        "annotation": "Ilya Sutskever → Safe Superintelligence 창업",
+        "source": "2024 Reports"
+      },
+      "visualNotes": "Split bar or pie showing 16 remaining vs 14 departed. Red for departed. Ilya's departure highlighted separately.",
+      "narrationText": "그런데 진짜 문제는 그 이후에 시작됩니다. 2024년, AGI 안전 연구팀의 약 절반이 퇴사합니다..."
+    },
+    {
+      "id": "safetyQuotes",
+      "template": "QuoteTemplate",
+      "startFrame": 2190,
+      "durationInFrames": 510,
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 20
+      },
+      "props": {
+        "quote": "안전 문화와 프로세스가 화려한 제품에 뒷자리를 차지하게 됐다",
+        "author": "Jan Leike",
+        "source": "슈퍼얼라인먼트팀 공동 리더",
+        "quoteStyle": "dramatic",
+        "accentColor": "#dc3545",
+        "additionalInfo": [
+          "슈퍼얼라인먼트팀: 설립 1년 만에 해체",
+          "AGI 준비팀: 5개월 뒤 해체"
+        ]
+      },
+      "effects": {
+        "vignette": {
+          "intensity": 0.7
+        }
+      },
+      "visualNotes": "Centered dramatic quote with heavy vignette. Red accent on key phrase. Timeline of team dissolutions below.",
+      "narrationText": "슈퍼얼라인먼트팀 공동 리더였던 Jan Leike는 이렇게 말합니다..."
+    },
+    {
+      "id": "ndaScandal",
+      "template": "ContentTemplate",
+      "startFrame": 2700,
+      "durationInFrames": 540,
+      "transition": {
+        "in": "wipe",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "퇴사자 NDA 조건",
+        "icon": "document",
+        "layout": "highlight-box",
+        "bullets": [
+          "평생 전 고용주 비판 금지 서약",
+          "거부 시 기득 주식 전액 몰수",
+          "Daniel Kokotajlo: $1.7M 포기"
+        ],
+        "bulletStyle": "warning",
+        "highlight": {
+          "text": "AGI 시점에 OpenAI가 책임감 있게 행동할 것이라는 신뢰를 잃었다",
+          "author": "Daniel Kokotajlo",
+          "style": "quote-box"
+        },
+        "accentColor": "#dc3545"
+      },
+      "visualNotes": "Contract/document visual style. Warning colors. Highlight the $1.7M sacrifice and Kokotajlo's quote prominently.",
+      "narrationText": "더 충격적인 건 퇴사자들에게 강요된 계약입니다..."
+    },
+    {
+      "id": "altmanResponse",
+      "template": "QuoteTemplate",
+      "startFrame": 3240,
+      "durationInFrames": 360,
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "quote": "진심으로 부끄럽다",
+        "author": "Sam Altman",
+        "source": "CEO, OpenAI",
+        "quoteStyle": "centered",
+        "contrast": {
+          "text": "하지만 유출된 문서에는 그와 고위 임원들이 직접 서명한 주식 몰수 조항이 포함",
+          "style": "reveal",
+          "delay": 90
+        },
+        "accentColor": "#ffc107"
+      },
+      "visualNotes": "Two-part reveal: first the apology quote, then the contradicting fact. Yellow/warning color for the contrast.",
+      "narrationText": "이 사실이 알려지자 Sam Altman은 '진심으로 부끄럽다'고 말합니다..."
+    },
+    {
+      "id": "structureChange",
+      "template": "TimelineTemplate",
+      "startFrame": 3600,
+      "durationInFrames": 540,
+      "transition": {
+        "in": "slideLeft",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "OpenAI 구조 변화",
+        "orientation": "horizontal",
+        "events": [
+          {
+            "year": "2015",
+            "title": "비영리 연구소 설립",
+            "description": "인류 전체를 위한 AI 개발",
+            "icon": "nonprofit",
+            "color": "#28a745"
+          },
+          {
+            "year": "2019",
+            "title": "이익 상한 자회사",
+            "description": "Capped-profit 구조 도입",
+            "icon": "hybrid",
+            "color": "#ffc107"
+          },
+          {
+            "year": "2024",
+            "title": "영리 법인 개편 발표",
+            "description": "For-profit 전환 계획",
+            "icon": "corporate",
+            "color": "#e67e22"
+          },
+          {
+            "year": "2025",
+            "title": "공익법인 전환",
+            "description": "기업가치 $500B",
+            "icon": "money",
+            "color": "#dc3545",
+            "highlight": true
+          }
+        ],
+        "progressAnimation": true,
+        "highlightCurrent": "2025"
+      },
+      "visualNotes": "Horizontal timeline showing mission drift. Color progression from green (nonprofit) to red (corporate). $500B highlighted.",
+      "narrationText": "그리고 마지막 변화. 2015년 '인류 전체를 위한 AI 개발'이라는 사명으로..."
+    },
+    {
+      "id": "structureNumbers",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 4140,
+      "durationInFrames": 420,
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 15
+      },
+      "props": {
+        "title": "새로운 지분 구조",
+        "chartType": "pie",
+        "data": [
+          {
+            "label": "OpenAI 재단",
+            "value": 26,
+            "color": "#28a745",
+            "description": "~$130B"
+          },
+          {
+            "label": "Microsoft, 직원, 투자자",
+            "value": 74,
+            "color": "#667eea",
+            "highlight": true,
+            "description": "~$370B"
+          }
+        ],
+        "centerText": {
+          "main": "$500B",
+          "sub": "기업가치"
+        },
+        "annotation": "비영리로 시작 → 세계 최고 가치 스타트업",
+        "source": "2025 Restructuring Plan"
+      },
+      "visualNotes": "Animated pie chart with clear 26/74 split. Dollar amounts shown. Irony of nonprofit becoming $500B company highlighted.",
+      "narrationText": "새 구조에서 OpenAI 재단은 26퍼센트 지분, 약 1300억 달러를 갖습니다..."
+    },
+    {
+      "id": "resolution",
+      "template": "OutroTemplate",
+      "startFrame": 4560,
+      "durationInFrames": 620,
+      "transition": {
+        "in": "dissolve",
+        "out": "fade",
+        "duration": 30
+      },
+      "props": {
+        "title": "질문",
+        "layout": "centered",
+        "mainQuestion": "성장통인가, 사명의 배신인가?",
+        "summaryPoints": [
+          "4일 만에 복귀한 CEO",
+          "절반이 퇴사한 안전팀",
+          "170만 달러를 포기한 연구원"
+        ],
+        "closingText": "그 답은 앞으로의 OpenAI가 보여줄 겁니다",
+        "style": "reflective",
+        "cta": null,
+        "accentColor": "#dc3545"
+      },
+      "effects": {
+        "vignette": {
+          "intensity": 0.7
+        },
+        "filmGrain": {
+          "amount": 0.04
+        }
+      },
+      "visualNotes": "Contemplative ending. Central question prominently displayed. Summary points as reminder. No CTA - let the question linger.",
+      "narrationText": "인류를 위한 AI를 만들겠다던 회사가, 정작 인류의 안전을 담당하던 직원들이 떠나고 있습니다..."
+    }
+  ],
+  "audioConfig": {
+    "narration": {
+      "basePath": "videos/OpenAICrisis/audio",
+      "format": "mp3",
+      "syncMethod": "scene-based"
+    },
+    "backgroundMusic": {
+      "preset": "cinematic",
+      "volume": 0.15,
+      "duckOnNarration": true,
+      "duckLevel": 0.05
+    },
+    "soundEffects": [
+      {
+        "id": "breaking-news",
+        "scene": "boardDrama",
+        "type": "transition",
+        "offset": 0
+      },
+      {
+        "id": "dramatic-reveal",
+        "scene": "altmanResponse",
+        "type": "emphasis",
+        "offset": 90
+      }
+    ]
+  },
+  "exportConfig": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "codec": "h264",
+    "crf": 18,
+    "outputPath": "projects/OpenAICrisis/output"
+  }
+}

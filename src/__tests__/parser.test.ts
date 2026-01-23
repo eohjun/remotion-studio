@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseNote, getSectionContent, extractKeyPoints } from "../obsidian/parser";
+import { parseNote, getSectionContent, extractKeyPoints } from "../shared/obsidian/parser";
 
 describe("Obsidian Parser", () => {
   const sampleNote = `---

@@ -16,6 +16,40 @@ npx remotion upgrade # Upgrade Remotion to latest version
 
 This is a Remotion project for creating programmatic videos using React components.
 
+### Project Structure
+
+```
+src/
+├── shared/              # 🔒 Shared code (NEVER delete)
+│   ├── components/      # Reusable UI components
+│   ├── templates/       # Scene templates (animations, presets)
+│   ├── audio/           # Audio system components
+│   ├── transitions/     # Transition effects
+│   ├── styles/          # Global styles, fonts
+│   └── config/          # Configuration
+├── videos/              # 🎬 Per-video compositions (can delete individually)
+│   ├── SelfHelpCritiqueEN/
+│   └── SelfHelpCritiqueFull/
+├── demos/               # Demo compositions
+├── HelloWorld/          # Example composition
+├── Root.tsx             # Main composition registry
+└── index.ts             # Entry point
+
+public/videos/           # 🔊 Audio files per composition
+├── SelfHelpCritiqueEN/
+│   └── audio/           # MP3 files for this video
+└── SelfHelpCritiqueFull/
+    └── audio/           # MP3 files for this video
+
+projects/                # 📁 Project assets per composition
+├── SelfHelpCritiqueEN/
+│   ├── narration.json   # TTS source text
+│   ├── youtube/         # Thumbnails, descriptions
+│   └── output/          # Rendered videos
+└── SelfHelpCritiqueFull/
+    └── ...
+```
+
 ### Entry Points
 - `src/index.ts` - Application entry, registers `RemotionRoot` with Remotion
 - `src/Root.tsx` - Defines all `<Composition>` entries (each appears in Studio sidebar)
@@ -71,8 +105,77 @@ type: permanent
 ### Audio/TTS Generation
 - API keys are stored in `.env` file (copy from `.env.example`)
 - Generate narration audio:
-  - `node scripts/generate-tts.mjs` - OpenAI 사용 (기본값)
-  - `node scripts/generate-tts.mjs --elevenlabs` - ElevenLabs 사용
-- Audio files are saved to `public/audio/`
-- Use `<Audio src={staticFile("audio/filename.mp3")} />` in compositions
-- TTS 설정은 `scripts/narration.json`에서 조정 가능
+  - `node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json` - OpenAI 사용
+  - Add `--elevenlabs` flag for ElevenLabs
+- **Audio file structure**: `public/videos/{compositionId}/audio/`
+  - 각 컴포지션별로 폴더 분리
+  - narration.json의 `metadata.compositionId`로 자동 결정
+- Use `<Audio src={staticFile("videos/{compositionId}/audio/filename.mp3")} />` in compositions
+- TTS 설정은 `projects/{compositionId}/narration.json`에서 조정 가능
+- **Audio cleanup**: `node scripts/cleanup-audio.mjs` - 미사용 오디오 파일 감지/삭제
+
+### Video Management Scripts
+
+```bash
+# Delete a video composition (dry run - preview only)
+node scripts/delete-video.mjs <compositionId>
+
+# Delete a video composition (actually delete)
+node scripts/delete-video.mjs <compositionId> --confirm
+
+# Example
+node scripts/delete-video.mjs SelfHelpCritiqueEN --confirm
+```
+
+**What gets deleted**:
+- `src/videos/{compositionId}/` - Source code
+- `public/videos/{compositionId}/` - Audio files
+- `projects/{compositionId}/` - Narration, youtube assets, output
+
+**What's PROTECTED** (never deleted):
+- `src/shared/`, `src/demos/`, `src/Root.tsx`
+- `scripts/`, `node_modules/`, `.git/`
+
+**After deletion**: Manually remove import and `<Composition>` entry from `src/Root.tsx`
+
+## Video Production Agent System
+
+This project includes a 4-agent pipeline for automated video production.
+
+### Agents (`.claude/agents/`)
+
+| Agent | Purpose | Trigger |
+|-------|---------|---------|
+| **video-researcher** | Analyzes source, conducts web research, enriches content | "Research this topic for a video" |
+| **video-narrator** | Creates structured narration scripts with storytelling principles | "Write narration from this research" |
+| **video-planner** | Selects optimal templates, components, effects | "Plan visuals for this narration" |
+| **video-producer** | Master orchestrator that chains all agents | "Create a video from this source" |
+
+### Quick Start
+
+```bash
+# Create video from any source (delegates to all agents):
+"Create a video from note 202601150123"
+"Create a video about the psychology of habit formation"
+"Create a video from this article: https://..."
+```
+
+### Pipeline Flow
+
+```
+Source → video-researcher → research-report.md
+                ↓
+       video-narrator → narration.json
+                ↓
+       video-planner → video-plan.json
+                ↓
+       video-producer → Remotion composition
+                ↓
+       generate-tts.mjs → Audio files
+```
+
+### Reference Documents
+
+- `docs/component-catalog.md` - Component reference (50+ components)
+- `docs/visual-strategy-guide.md` - Topic-to-visual mapping
+- `projects/templates/video-plan.md` - Manual planning template

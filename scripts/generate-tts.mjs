@@ -75,14 +75,30 @@ const narration = JSON.parse(fs.readFileSync(narrationPath, "utf-8"));
 console.log(`📄 나레이션 파일: ${narrationFile}`);
 console.log(`🌐 대상 언어: ${LANGUAGE_NAMES[targetLang]} (${targetLang})\n`);
 
-// 출력 디렉토리 생성 (--output 옵션 또는 언어별 하위 폴더)
+// 출력 디렉토리 결정 (우선순위: --output > metadata.compositionId > 언어별 폴더)
 const outputArgIndex = args.findIndex(arg => arg === "--output" || arg === "-o");
 const customOutputDir = outputArgIndex !== -1 && args[outputArgIndex + 1]
   ? args[outputArgIndex + 1]
   : null;
-const outputDir = customOutputDir
-  ? path.join(projectRoot, "public", "audio", customOutputDir)
-  : path.join(projectRoot, "public", "audio", targetLang === "ko" ? "" : targetLang);
+
+// compositionId 기반 출력 (권장)
+const compositionId = narration.metadata?.compositionId;
+
+let outputDir;
+if (customOutputDir) {
+  // 명시적 --output 옵션 사용
+  outputDir = path.join(projectRoot, "public", "videos", customOutputDir, "audio");
+} else if (compositionId) {
+  // metadata.compositionId 사용 (권장)
+  outputDir = path.join(projectRoot, "public", "videos", compositionId, "audio");
+  console.log(`📁 compositionId 기반 출력: public/videos/${compositionId}/audio/`);
+} else {
+  // 폴백: compositionId 필수
+  console.error(`❌ metadata.compositionId가 없습니다.`);
+  console.error(`   narration.json에 "metadata": { "compositionId": "YourVideoName" } 추가 필요`);
+  process.exit(1);
+}
+
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }

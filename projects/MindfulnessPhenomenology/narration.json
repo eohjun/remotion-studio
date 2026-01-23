@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "compositionId": "MindfulnessPhenomenology",
+    "title": "The Philosophy of Mindfulness",
+    "subtitle": "From Husserl to Your Brain",
+    "language": "en",
+    "sourceNote": "202512242010 마음챙김의 현상학적 구조",
+    "duration": "5 minutes",
+    "fps": 30
+  },
+  "openai": {
+    "model": "tts-1-hd",
+    "voice": "onyx"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "text": "What if the ancient practice of mindfulness and twentieth-century European philosophy were actually asking the same question? What if they both discovered the same startling truth about how our minds work? Today, we're going to explore a fascinating connection that most people never see."
+    },
+    {
+      "id": "epocheIntro",
+      "text": "In nineteen thirteen, German philosopher Edmund Husserl introduced a revolutionary concept called epoché, or 'bracketing.' He asked: what happens when we suspend all our judgments about the world and simply observe our experience as it is? This wasn't about doubting reality. It was about seeing clearly, without the filters of assumption and expectation."
+    },
+    {
+      "id": "mindfulnessParallel",
+      "text": "Now here's the remarkable connection. Twenty-five hundred years earlier, Buddhist practitioners developed mindfulness, or 'sati,' with an almost identical approach. Jon Kabat-Zinn defined it as 'paying attention, on purpose, to the present moment, non-judgmentally.' Notice the parallel? Both traditions discovered that stepping back from our automatic reactions reveals something profound about consciousness itself."
+    },
+    {
+      "id": "naturalAttitude",
+      "text": "In our everyday lives, we operate in what Husserl called the 'natural attitude.' We take the world for granted. We react automatically. We confuse our thoughts with reality. But both phenomenology and mindfulness offer an escape from this mental autopilot. They teach us to become observers of our own experience."
+    },
+    {
+      "id": "metacognition",
+      "text": "This brings us to metacognition, literally 'thinking about thinking.' When you notice that your mind has wandered during meditation and gently return your attention to your breath, that's metacognition in action. You've become aware of your own mental process. Psychologist John Flavell showed this ability isn't fixed. It can be trained. And here's the key insight: knowing what you don't know is often more valuable than what you know."
+    },
+    {
+      "id": "decentering",
+      "text": "This metacognitive shift has a clinical name: decentering. Instead of saying 'I am a failure,' you observe 'I'm having the thought that I am a failure.' This subtle change breaks the spell. The thought loses its power when you see it as a mental event rather than absolute truth. This is phenomenology in therapeutic action."
+    },
+    {
+      "id": "neurophenomenology",
+      "text": "In nineteen ninety-six, neuroscientist Francisco Varela proposed something bold. What if we could combine first-person phenomenological reports with third-person brain measurements? He called this neurophenomenology. Trained meditators could precisely describe their inner states while researchers measured their brain activity. The subjective and objective began to inform each other."
+    },
+    {
+      "id": "brainChanges",
+      "text": "The results were striking. Richard Davidson's research showed that long-term meditators displayed unusual gamma wave synchronization, particularly during compassion meditation. Sara Lazar found structural brain changes, including increased gray matter in areas related to attention and emotional regulation. The ancient practice was literally reshaping the modern brain."
+    },
+    {
+      "id": "vipassanaOrigins",
+      "text": "To understand mindfulness fully, we must return to its source: Vipassana, meaning 'to see clearly.' This isn't about emptying the mind or achieving bliss. It's systematic observation of body and mind through the four foundations: physical sensations, feelings, mental states, and mental objects. The goal? Direct insight into impermanence, suffering, and the constructed nature of self."
+    },
+    {
+      "id": "therapeuticPower",
+      "text": "From these ancient roots grew modern therapeutic applications. MBSR, Mindfulness-Based Stress Reduction, helps chronic pain patients. MBCT, Mindfulness-Based Cognitive Therapy, prevents depression relapse as effectively as medication. The mechanism? Breaking the loop between negative thoughts and emotional reactions. Creating space between stimulus and response."
+    },
+    {
+      "id": "mcmindfulness",
+      "text": "But we must also consider the critique. Scholar Ronald Purser coined 'McMindfulness' to describe how corporations have stripped mindfulness of its ethical context. When companies teach employees to meditate while maintaining exploitative conditions, mindfulness becomes a tool for acceptance rather than transformation. The Buddhist tradition always linked inner awareness with ethical action. Can we reclaim that connection?"
+    },
+    {
+      "id": "embodiedAwareness",
+      "text": "French philosopher Maurice Merleau-Ponty reminds us that consciousness isn't just in the head. When you practice body scan meditation, feeling the weight of your body, the rhythm of your breath, you're not just observing. You're discovering that mind and body were never separate. Awareness is embodied. This is perhaps the deepest insight: we don't have bodies, we are bodies that think."
+    },
+    {
+      "id": "synthesis",
+      "text": "So what have we learned? Phenomenology and mindfulness converge on a profound truth: by suspending our automatic judgments and simply observing, we discover the constructed nature of our experience. This isn't escapism. It's the deepest engagement with reality. The question isn't whether to practice mindfulness, but how to do so with integrity, keeping both personal transformation and ethical responsibility in view."
+    },
+    {
+      "id": "outro",
+      "text": "Next time you sit in meditation, remember: you're participating in a practice that connects ancient Buddhist wisdom with modern philosophy and neuroscience. You're not just relaxing. You're conducting a first-person investigation into the nature of mind itself. And that investigation has been changing lives for two and a half thousand years."
+    }
+  ]
+}

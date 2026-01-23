@@ -4,8 +4,8 @@ import {
   parseConfig,
   validateSceneOrder,
   fullValidation,
-} from "../config/validate";
-import type { CompositionConfig } from "../config/schema";
+} from "../shared/config/validate";
+import type { CompositionConfig } from "../shared/config/schema";
 
 describe("Config Validation", () => {
   const validConfig: CompositionConfig = {
