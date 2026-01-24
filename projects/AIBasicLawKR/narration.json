@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "compositionId": "AIBasicLawKR",
+    "title": "대한민국 AI 기본법, 3분 완벽 정리",
+    "description": "2026년 시행되는 AI 기본법의 핵심 내용을 알기 쉽게 설명합니다",
+    "targetDuration": "3:00",
+    "language": "ko",
+    "voice": "nova",
+    "tone": "informative",
+    "contentType": "data-driven"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "인트로",
+      "text": "2024년 12월, 대한민국 국회가 역사적인 법안 하나를 통과시켰습니다. EU에 이어 세계에서 두 번째, 아시아에서는 최초로 포괄적인 AI 규제법을 만든 겁니다.",
+      "duration": 15,
+      "notes": "국회의사당 이미지 + 타이틀 오버레이",
+      "keyPoints": ["세계 두 번째", "아시아 최초"]
+    },
+    {
+      "id": "hook",
+      "type": "hook",
+      "title": "왜 알아야 할까",
+      "text": "AI 기본법. 이 법이 왜 중요할까요? 2026년 1월부터 AI를 만들거나 사용하는 모든 기업이 새로운 의무를 지게 됩니다. 당신의 회사도 예외가 아닐 수 있습니다.",
+      "duration": 14,
+      "notes": "긴박감 있는 톤, 시청자 관심 유도",
+      "keyPoints": ["2026년 시행", "기업 의무"]
+    },
+    {
+      "id": "two_pillars",
+      "type": "content",
+      "title": "두 개의 축",
+      "text": "이 법은 크게 두 가지 목표를 가지고 있습니다. 첫째, 산업 진흥. AI 연구개발 지원, 인프라 확충, 인력 양성을 국가가 책임집니다. 둘째, 신뢰 확보. 위험한 AI는 규제하고, 투명성을 높이겠다는 겁니다.",
+      "duration": 22,
+      "notes": "Split screen - 진흥 vs 규제 시각화",
+      "keyPoints": ["산업 진흥", "신뢰 확보", "R&D 지원", "규제"]
+    },
+    {
+      "id": "high_impact_ai",
+      "type": "content",
+      "title": "고영향 AI란",
+      "text": "여기서 핵심 개념이 등장합니다. 바로 '고영향 AI'. 사람의 생명, 안전, 기본권에 중대한 영향을 미치는 AI를 말합니다. 의료기기, 채용 심사, 대출 결정 같은 분야가 해당됩니다.",
+      "duration": 20,
+      "notes": "아이콘 애니메이션 - 의료/채용/대출",
+      "keyPoints": ["고영향 AI 정의", "적용 분야"]
+    },
+    {
+      "id": "high_impact_obligation",
+      "type": "content",
+      "title": "고영향 AI 의무",
+      "text": "고영향 AI를 운영하는 기업은 반드시 사전에 위험을 평가하고, 이용자에게 AI 사용 사실을 알려야 합니다. 안전 조치를 마련하고, 기본권 영향평가도 수행해야 하죠.",
+      "duration": 18,
+      "notes": "체크리스트 애니메이션",
+      "keyPoints": ["사전 평가", "이용자 고지", "안전 조치"]
+    },
+    {
+      "id": "watermark",
+      "type": "content",
+      "title": "생성형 AI 워터마크",
+      "text": "챗GPT나 미드저니 같은 생성형 AI도 규제 대상입니다. AI가 만든 이미지, 영상, 텍스트에는 워터마크를 넣어야 합니다. 딥페이크 범죄를 막기 위한 조치입니다.",
+      "duration": 18,
+      "notes": "워터마크 적용 예시 시각화",
+      "keyPoints": ["생성형 AI", "워터마크 의무", "딥페이크 방지"]
+    },
+    {
+      "id": "committee",
+      "type": "content",
+      "title": "국가AI위원회",
+      "text": "이 모든 것을 총괄하는 기구가 새로 만들어집니다. 대통령 직속 국가인공지능위원회. 정부 장관과 민간 전문가 50여 명이 참여해 국가 AI 정책의 컨트롤타워 역할을 합니다.",
+      "duration": 17,
+      "notes": "조직도 시각화",
+      "keyPoints": ["대통령 직속", "50명 구성", "컨트롤타워"]
+    },
+    {
+      "id": "eu_comparison",
+      "type": "comparison",
+      "title": "EU와 비교",
+      "text": "EU AI법과 비교하면 어떨까요? 한국은 과태료가 최대 3천만원인 반면, EU는 매출의 7%까지 부과할 수 있습니다. 한국이 훨씬 기업 친화적이죠. 대신 한국은 1년 이상 계도 기간을 두기로 했습니다.",
+      "duration": 20,
+      "notes": "비교 차트 - 한국 vs EU",
+      "keyPoints": ["과태료 차이", "기업 친화적", "계도 기간"]
+    },
+    {
+      "id": "concerns",
+      "type": "content",
+      "title": "업계 우려",
+      "text": "하지만 우려도 있습니다. 스타트업 98%가 아직 준비가 안 됐다고 합니다. 규제 기준이 불명확하다는 지적도 나옵니다. 정부는 적극적으로 지원하겠다고 약속했지만, 지켜봐야 할 부분입니다.",
+      "duration": 18,
+      "notes": "통계 시각화 + 인용",
+      "keyPoints": ["98% 미준비", "기준 불명확", "정부 지원 약속"]
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "title": "마무리",
+      "text": "2026년 1월 22일, AI 기본법이 시행됩니다. AI 시대의 새로운 게임 규칙이 시작되는 겁니다. 준비하는 자만이 기회를 잡을 수 있습니다.",
+      "duration": 15,
+      "notes": "D-day 카운트다운 + CTA",
+      "keyPoints": ["시행일", "새 게임 규칙", "준비의 중요성"]
+    }
+  ],
+  "totalDuration": 177,
+  "wordCount": 520,
+  "sceneCount": 10
+}

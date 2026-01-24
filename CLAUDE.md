@@ -140,16 +140,37 @@ node scripts/delete-video.mjs SelfHelpCritiqueEN --confirm
 
 ## Video Production Agent System
 
-This project includes a 4-agent pipeline for automated video production.
+This project includes a multi-agent pipeline for automated video production.
+
+### ⚠️ Custom Agent 호출 방법 (중요)
+
+`.claude/agents/` 디렉토리의 커스텀 에이전트는 **Task tool로 호출할 수 없습니다**.
+
+**올바른 호출 방식:**
+```
+"video-researcher 에이전트를 사용해서 이 주제를 조사해줘"
+"Use the video-narrator agent to write narration from this research"
+"video-planner 에이전트로 시각 계획을 세워줘"
+```
+
+**잘못된 호출 (실패함):**
+```
+Task tool의 subagent_type에 "video-researcher" 지정 → Agent type not found 에러
+```
+
+Task tool은 built-in 타입만 지원합니다 (Bash, Explore, Plan, general-purpose 등).
+커스텀 에이전트는 명시적 요청이나 자동 위임으로 동작합니다.
 
 ### Agents (`.claude/agents/`)
 
 | Agent | Purpose | Trigger |
 |-------|---------|---------|
+| **video-ingestor** | PDF, DOCX, URL을 Markdown으로 변환 | "Ingest this PDF for video" |
 | **video-researcher** | Analyzes source, conducts web research, enriches content | "Research this topic for a video" |
 | **video-narrator** | Creates structured narration scripts with storytelling principles | "Write narration from this research" |
 | **video-planner** | Selects optimal templates, components, effects | "Plan visuals for this narration" |
 | **video-producer** | Master orchestrator that chains all agents | "Create a video from this source" |
+| **video-publisher** | Metadata 생성 및 YouTube 업로드 | "Publish this video" |
 
 ### Quick Start
 
@@ -163,15 +184,25 @@ This project includes a 4-agent pipeline for automated video production.
 ### Pipeline Flow
 
 ```
-Source → video-researcher → research-report.md
-                ↓
-       video-narrator → narration.json
-                ↓
-       video-planner → video-plan.json
-                ↓
-       video-producer → Remotion composition
-                ↓
-       generate-tts.mjs → Audio files
+Source (PDF/DOCX/URL/Topic)
+        ↓
+video-ingestor → source.md (optional, for non-text sources)
+        ↓
+video-researcher → research-report.md
+        ↓
+video-narrator → narration.json
+        ↓
+video-planner → video-plan.json
+        ↓
+video-producer → Remotion composition
+        ↓
+User Review (승인 필요)
+        ↓
+generate-tts.mjs → Audio files
+        ↓
+npx remotion render → video.mp4
+        ↓
+video-publisher → YouTube upload (optional)
 ```
 
 ### Reference Documents

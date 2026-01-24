@@ -5,6 +5,7 @@ import { SelfHelpCritiqueEN, selfHelpCritiqueENSchema, TOTAL_DURATION } from "./
 import { SelfHelpCritiqueFull, selfHelpCritiqueFullSchema, TOTAL_DURATION as TOTAL_DURATION_FULL } from "./videos/SelfHelpCritiqueFull";
 import { MindfulnessPhenomenology, mindfulnessPhenomenologySchema, TOTAL_DURATION as TOTAL_DURATION_MINDFULNESS } from "./videos/MindfulnessPhenomenology";
 import { OpenAICrisis, openAICrisisSchema, TOTAL_DURATION as TOTAL_DURATION_OPENAI } from "./videos/OpenAICrisis";
+import { AIBasicLawKR, aiBasicLawKRSchema, TOTAL_DURATION as TOTAL_DURATION_AILAW } from "./videos/AIBasicLawKR";
 import { VisualEffectsDemo, visualEffectsDemoSchema, DEMO_DURATION, AnimationDemo, animationDemoSchema, ANIMATION_DEMO_DURATION, TemplateDemo, templateDemoSchema, TEMPLATE_DEMO_DURATION, ComponentLibraryDemo, componentLibraryDemoSchema, COMPONENT_LIBRARY_DEMO_DURATION, AudioDemo, audioDemoSchema, AUDIO_DEMO_DURATION } from "./demos";
 import "./shared/styles/fonts.css";
 
@@ -104,6 +105,21 @@ export const RemotionRoot: React.FC = () => {
         schema={openAICrisisSchema}
         defaultProps={{
           primaryColor: "#dc3545" as const,
+          secondaryColor: "#1a1a2e" as const,
+        }}
+      />
+
+      {/* AI Basic Law Korea - 대한민국 AI 기본법 완벽 정리 (~3 min) */}
+      <Composition
+        id="AIBasicLawKR"
+        component={AIBasicLawKR}
+        durationInFrames={TOTAL_DURATION_AILAW}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={aiBasicLawKRSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
           secondaryColor: "#1a1a2e" as const,
         }}
       />

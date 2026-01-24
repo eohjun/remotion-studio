@@ -61,7 +61,7 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
           maxWidth: 700,
           backgroundColor: card.backgroundColor || cardBackground(card.color),
           borderRadius: RADIUS.xl,
-          padding: SPACING.md,
+          padding: SPACING.lg,
           border: `3px solid ${card.color}`,
         }}
       >
@@ -76,7 +76,7 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
         )}
         <h3
           style={{
-            fontSize: FONT_SIZES.lg,
+            fontSize: FONT_SIZES["2xl"],
             fontWeight: 700,
             color: card.color,
             fontFamily: FONT_FAMILY.title,
@@ -94,7 +94,7 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
         </h3>
         <ul
           style={{
-            fontSize: FONT_SIZES.sm + 2,
+            fontSize: FONT_SIZES.lg,
             color: COLORS.white,
             fontFamily: FONT_FAMILY.body,
             lineHeight: 1.8,

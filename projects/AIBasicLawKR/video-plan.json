@@ -1,0 +1,245 @@
+{
+  "metadata": {
+    "compositionId": "AIBasicLawKR",
+    "title": "대한민국 AI 기본법, 3분 완벽 정리",
+    "totalDuration": 177,
+    "fps": 30,
+    "resolution": { "width": 1920, "height": 1080 },
+    "contentType": "data-driven",
+    "visualStrategy": "News + Data Pattern"
+  },
+  "globalSettings": {
+    "background": {
+      "component": "AnimatedGradient",
+      "props": {
+        "colors": ["#1a1a2e", "#16213e", "#0f3460"],
+        "mode": "shift"
+      }
+    },
+    "effects": {
+      "vignette": { "intensity": 0.4 }
+    },
+    "defaultTransition": {
+      "type": "fade",
+      "duration": 15
+    },
+    "typography": {
+      "titleFont": "Pretendard",
+      "bodyFont": "Pretendard"
+    }
+  },
+  "audio": {
+    "musicPreset": "ambient",
+    "duckingPreset": "standard",
+    "narrationPath": "public/videos/AIBasicLawKR/audio/"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "template": "NewsTemplate",
+      "startFrame": 0,
+      "durationInFrames": 450,
+      "props": {
+        "newsStyle": "breaking",
+        "banner": "AI 규제",
+        "headline": "대한민국 AI 기본법",
+        "subheadline": "세계 두 번째, 아시아 최초",
+        "timestamp": "2024.12.26 국회 통과"
+      },
+      "transition": {
+        "in": null,
+        "out": { "type": "wipeLeft", "duration": 15 }
+      },
+      "audioFile": "intro.mp3"
+    },
+    {
+      "id": "hook",
+      "template": "ContentTemplate",
+      "startFrame": 450,
+      "durationInFrames": 420,
+      "props": {
+        "title": "왜 알아야 할까?",
+        "content": "2026년 1월부터 AI를 만들거나 사용하는 모든 기업이 새로운 의무를 지게 됩니다.",
+        "icon": "AlertCircle"
+      },
+      "background": {
+        "component": "ParticleField",
+        "props": { "particleCount": 30, "color": "#667eea" }
+      },
+      "transition": {
+        "in": { "type": "wipeLeft", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "hook.mp3"
+    },
+    {
+      "id": "two_pillars",
+      "template": "ComparisonTemplate",
+      "startFrame": 870,
+      "durationInFrames": 660,
+      "props": {
+        "title": "AI 기본법의 두 축",
+        "leftCard": {
+          "title": "산업 진흥",
+          "color": "#28a745",
+          "items": ["R&D 지원", "인프라 확충", "인력 양성"]
+        },
+        "rightCard": {
+          "title": "신뢰 확보",
+          "color": "#dc3545",
+          "items": ["고영향 AI 규제", "투명성 의무", "안전 연구소"]
+        },
+        "vsText": "&"
+      },
+      "transition": {
+        "in": { "type": "slideLeft", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "two_pillars.mp3"
+    },
+    {
+      "id": "high_impact_ai",
+      "template": "ContentTemplate",
+      "startFrame": 1530,
+      "durationInFrames": 600,
+      "props": {
+        "title": "고영향 AI란?",
+        "content": "사람의 생명, 안전, 기본권에 중대한 영향을 미치는 AI",
+        "bullets": ["의료기기", "채용 심사", "대출 결정", "학생 평가"]
+      },
+      "background": "inherit",
+      "transition": {
+        "in": { "type": "slideUp", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "high_impact_ai.mp3"
+    },
+    {
+      "id": "high_impact_obligation",
+      "template": "ContentTemplate",
+      "startFrame": 2130,
+      "durationInFrames": 540,
+      "props": {
+        "title": "고영향 AI 의무사항",
+        "bullets": ["사전 위험 평가", "이용자 고지", "안전 조치 마련", "기본권 영향평가"]
+      },
+      "transition": {
+        "in": { "type": "fade", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "high_impact_obligation.mp3"
+    },
+    {
+      "id": "watermark",
+      "template": "ContentTemplate",
+      "startFrame": 2670,
+      "durationInFrames": 540,
+      "props": {
+        "title": "생성형 AI 워터마크",
+        "content": "AI가 만든 이미지, 영상, 텍스트에 워터마크 필수",
+        "bullets": ["가시적 워터마크", "비가시적 메타데이터", "딥페이크 방지"]
+      },
+      "background": {
+        "component": "FloatingShapes",
+        "props": { "shapes": ["hexagon"], "count": 5, "colors": ["#667eea20"] }
+      },
+      "transition": {
+        "in": { "type": "wipeLeft", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "watermark.mp3"
+    },
+    {
+      "id": "committee",
+      "template": "ContentTemplate",
+      "startFrame": 3210,
+      "durationInFrames": 510,
+      "props": {
+        "title": "국가인공지능위원회",
+        "content": "대통령 직속 국가 AI 정책 컨트롤타워",
+        "bullets": ["정부 장관 + 민간 전문가", "약 50명 구성", "8개 분과위원회"]
+      },
+      "transition": {
+        "in": { "type": "slideLeft", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "committee.mp3"
+    },
+    {
+      "id": "eu_comparison",
+      "template": "ComparisonTemplate",
+      "startFrame": 3720,
+      "durationInFrames": 600,
+      "props": {
+        "title": "한국 vs EU",
+        "leftCard": {
+          "title": "한국",
+          "color": "#667eea",
+          "items": ["과태료 최대 3천만원", "1년 계도기간", "기업 친화적"]
+        },
+        "rightCard": {
+          "title": "EU",
+          "color": "#e74c3c",
+          "items": ["매출 7%까지", "즉시 적용", "규제 중심"]
+        },
+        "vsText": "VS"
+      },
+      "transition": {
+        "in": { "type": "wipeLeft", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "eu_comparison.mp3"
+    },
+    {
+      "id": "concerns",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 4320,
+      "durationInFrames": 540,
+      "props": {
+        "title": "업계 준비 현황",
+        "chartType": "bar",
+        "data": [
+          { "label": "준비 완료", "value": 2, "color": "#28a745" },
+          { "label": "준비 중", "value": 0, "color": "#ffc107" },
+          { "label": "미준비", "value": 98, "color": "#dc3545" }
+        ],
+        "source": "스타트업얼라이언스 조사"
+      },
+      "transition": {
+        "in": { "type": "slideUp", "duration": 15 },
+        "out": { "type": "fade", "duration": 15 }
+      },
+      "audioFile": "concerns.mp3"
+    },
+    {
+      "id": "outro",
+      "template": "OutroTemplate",
+      "startFrame": 4860,
+      "durationInFrames": 450,
+      "props": {
+        "title": "2026년 1월 22일",
+        "subtitle": "AI 시대의 새로운 게임 규칙",
+        "cta": "준비하는 자만이 기회를 잡습니다"
+      },
+      "background": {
+        "component": "AnimatedGradient",
+        "props": {
+          "colors": ["#667eea", "#764ba2"],
+          "mode": "pulse"
+        }
+      },
+      "transition": {
+        "in": { "type": "zoomIn", "duration": 20 },
+        "out": null
+      },
+      "audioFile": "outro.mp3"
+    }
+  ],
+  "compositionConfig": {
+    "id": "AIBasicLawKR",
+    "fps": 30,
+    "durationInFrames": 5310,
+    "width": 1920,
+    "height": 1080
+  }
+}
