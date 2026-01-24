@@ -2,7 +2,7 @@
 
 **Remotion Studio Component Library Reference**
 **Last Updated**: 2026-01-24
-**Total Components**: 55+
+**Total Components**: 60+
 
 ---
 
@@ -13,8 +13,10 @@
 | Scene Templates | 14 | `@shared/templates/scenes` |
 | Backgrounds | 3 | `@shared/components/backgrounds` |
 | Effects | 5 | `@shared/components/effects` |
-| Text Animations | 4 | `@shared/templates/animations` |
+| Text Animations | 5 | `@shared/templates/animations` |
+| Audio Visualization | 1 | `@shared/components/waveforms` |
 | Diagrams | 1 | `@shared/components/diagrams` |
+| Cards | 5 | `@shared/components/cards` |
 | Charts | 3 | `@shared/components/charts` |
 | Progress | 4 | `@shared/components/progress` |
 | Layouts | 4 | `@shared/components/layouts` |
@@ -618,6 +620,104 @@ interface DialogueEntry {
 ```
 
 **Best For**: Tech content, error states, edgy aesthetic
+
+---
+
+### PoppingText
+**Purpose**: Staggered character pop animation
+
+**Import**: `@shared/templates/animations`
+
+**Props**:
+```typescript
+{
+  text: string;
+  colors?: string[];           // Colors to cycle through characters
+  fontSize?: number | string;
+  fontWeight?: number | string;
+  delayPerChar?: number;       // Frame delay between characters (default: 4)
+  startFrame?: number;         // When to start animation
+  textAlign?: 'left' | 'center' | 'right';
+}
+```
+
+**Helper Function**:
+```typescript
+calculatePoppingDuration(textLength, delayPerChar?, settleDuration?)
+```
+
+**Best For**: Dynamic titles, energetic intros, Shorts content, key phrases
+
+---
+
+## Audio Visualization
+
+### BarWaveform
+**Purpose**: Audio-synced vertical bar visualization
+
+**Import**: `@shared/components/waveforms`
+
+**Props**:
+```typescript
+{
+  audioData?: AudioData | null;  // From getAudioData()
+  numberOfSamples?: number;      // Number of bars (default: 32)
+  barColor?: string;
+  barWidth?: number;             // Pixels (default: 4)
+  barGap?: number;               // Pixels (default: 2)
+  waveAmplitude?: number;        // Max bar height (default: 100)
+  waveSpeed?: number;            // Fallback animation speed
+  width?: number | string;
+  height?: number | string;
+  growUpwardsOnly?: boolean;     // Bars grow up from bottom
+}
+```
+
+**Usage**:
+```tsx
+import { getAudioData } from "@remotion/media-utils";
+import { BarWaveform } from "@shared/components/waveforms";
+
+// In component:
+const audioData = await getAudioData(audioSrc);
+<BarWaveform audioData={audioData} barColor="#667eea" />
+```
+
+**Best For**: Narration visualization, music videos, podcast intros
+
+---
+
+## Card Components
+
+### CardFlip
+**Purpose**: 3D card flip animation
+
+**Import**: `@shared/components/cards`
+
+**Props**:
+```typescript
+{
+  frontContent: React.ReactNode;
+  backContent: React.ReactNode;
+  frontBackground?: string;
+  backBackground?: string;
+  frontTextColor?: string;
+  backTextColor?: string;
+  width?: number | string;
+  height?: number | string;
+  borderRadius?: number | string;
+  fontSize?: number | string;
+  flipAtFrame?: number;          // When to start flip
+  durationInFrames?: number;     // Flip duration (default: 60)
+  flipDirection?: 'horizontal' | 'vertical';
+  // Spring physics
+  damping?: number;
+  mass?: number;
+  stiffness?: number;
+}
+```
+
+**Best For**: Before/after reveals, myth vs reality, comparisons, quiz answers
 
 ---
 

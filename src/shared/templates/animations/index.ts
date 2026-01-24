@@ -187,3 +187,7 @@ export type {
   AnimatedStrokedTextProps,
   SubtitleTextProps,
 } from "./StrokedText";
+
+// Popping text animation
+export { PoppingText, calculatePoppingDuration } from "./PoppingText";
+export type { PoppingTextProps } from "./PoppingText";

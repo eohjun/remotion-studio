@@ -10,3 +10,6 @@ export type { QuoteCardProps } from "./QuoteCard";
 
 export { ChecklistDisplay } from "./ChecklistDisplay";
 export type { ChecklistDisplayProps, ChecklistItem } from "./ChecklistDisplay";
+
+export { CardFlip } from "./CardFlip";
+export type { CardFlipProps } from "./CardFlip";
