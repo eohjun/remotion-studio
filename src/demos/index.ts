@@ -29,3 +29,9 @@ export {
   audioDemoSchema,
   AUDIO_DEMO_DURATION,
 } from "./AudioDemo";
+
+export {
+  NewFeaturesDemo,
+  newFeaturesDemoSchema,
+  NEW_FEATURES_DEMO_DURATION,
+} from "./NewFeaturesDemo";

@@ -1,0 +1,135 @@
+{
+  "generatedAt": "2026-01-24T05:02:32.796Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/ProcrastinationPsychology/audio",
+  "compositionId": "ProcrastinationPsychology",
+  "scenes": [
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 2.112,
+      "durationFrames": 64,
+      "text": "프로크래스티네이션의 심리학"
+    },
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 14.4,
+      "durationFrames": 432,
+      "text": "지금 이 순간, 당신의 뇌 안에서 전쟁이 벌어지고 있습니다. 한쪽은 당장 유튜브를 보고 싶어하고, 다른 쪽은 일을 끝내야 한다고 외칩니다. 이것은 게으름이 아닙니다. 뇌의 구조적 ..."
+    },
+    {
+      "id": "statistics",
+      "file": "statistics.mp3",
+      "durationSeconds": 20.232,
+      "durationFrames": 607,
+      "text": "대학생의 75퍼센트가 스스로를 미루는 사람이라고 인정합니다. 직장인의 88퍼센트는 매일 최소 한 시간을 미루기에 소비합니다. 더 놀라운 사실은, 1970년대에는 단 5퍼센트였던 만..."
+    },
+    {
+      "id": "brain_systems",
+      "file": "brain_systems.mp3",
+      "durationSeconds": 19.152,
+      "durationFrames": 575,
+      "text": "이 전쟁의 주인공은 두 시스템입니다. 첫 번째, 변연계. 뇌의 오래된 부분으로, 본능적이고 강력합니다. 즐거움을 추구하고 고통을 회피하죠. 두 번째, 전전두엽 피질. 뇌의 새롭고 ..."
+    },
+    {
+      "id": "conflict_mechanism",
+      "file": "conflict_mechanism.mp3",
+      "durationSeconds": 17.616,
+      "durationFrames": 529,
+      "text": "불쾌한 과제가 주어지면, 변연계가 즉각 반응합니다. 편도체는 두려움과 불안을 처리하며, 압도적인 감정을 만들어냅니다. 그리고 유혹합니다. 소셜미디어, 넷플릭스, 즉각적인 안도감으로..."
+    },
+    {
+      "id": "fmri_evidence",
+      "file": "fmri_evidence.mp3",
+      "durationSeconds": 21.312,
+      "durationFrames": 640,
+      "text": "이것은 그저 이론이 아닙니다. 에프 엠 알 아이 스캔 연구가 증명합니다. 미루는 사람들은, 변연계와 관련된 뇌 영역이 과도하게 활성화되고, 전전두엽 피질은 덜 활성화됩니다. 프로크..."
+    },
+    {
+      "id": "steel_equation_intro",
+      "file": "steel_equation_intro.mp3",
+      "durationSeconds": 18.792,
+      "durationFrames": 564,
+      "text": "캘거리 대학교의 피어스 스틸 교수는, 이 현상을 수식으로 정리했습니다. 동기는, 기대감 곱하기 가치를, 충동성 곱하기 지연으로 나눈 값입니다. 간단히 말해, 과제의 가치가 낮을수록..."
+    },
+    {
+      "id": "equation_insight",
+      "file": "equation_insight.mp3",
+      "durationSeconds": 18.24,
+      "durationFrames": 548,
+      "text": "이 공식은 중요한 진실을 알려줍니다. 프로크래스티네이션은 비합리적이지 않습니다. 마감이 멀 때는, 지연 값이 크기 때문에, 동기가 자연스럽게 낮은 것입니다. 그래서 우리는 마감이 ..."
+    },
+    {
+      "id": "procrastinator_types",
+      "file": "procrastinator_types.mp3",
+      "durationSeconds": 19.992,
+      "durationFrames": 600,
+      "text": "심리학자들은 미루는 사람을 세 유형으로 분류합니다. 첫째, 감정 회피자. 불안과 지루함을 피하려고 미룹니다. 가장 흔한 유형이죠. 둘째, 완벽주의자. 실패가 두려워 시작조차 못합니..."
+    },
+    {
+      "id": "health_impact",
+      "file": "health_impact.mp3",
+      "durationSeconds": 26.784,
+      "durationFrames": 804,
+      "text": "프로크래스티네이션은 단순한 습관이 아닙니다. 스웨덴의 대규모 연구는, 미루기가 우울, 불안, 스트레스 수준 상승과 연관됨을 밝혔습니다. 수면의 질이 떨어지고, 신체 활동이 감소하며..."
+    },
+    {
+      "id": "strategy_intro",
+      "file": "strategy_intro.mp3",
+      "durationSeconds": 5.928,
+      "durationFrames": 178,
+      "text": "그렇다면, 우리는 어떻게 이 전쟁에서 이길 수 있을까요? 과학은 답을 제시합니다."
+    },
+    {
+      "id": "five_second_rule",
+      "file": "five_second_rule.mp3",
+      "durationSeconds": 13.728,
+      "durationFrames": 412,
+      "text": "첫 번째 전략, 5초 규칙. 불쾌한 과제가 주어지면, 5초 안에 즉각 행동하세요. 5, 4, 3, 2, 1, 시작. 변연계가 활성화되기 전에, 전전두엽 피질이 통제권을 잡도록 하는..."
+    },
+    {
+      "id": "task_decomposition",
+      "file": "task_decomposition.mp3",
+      "durationSeconds": 15.168,
+      "durationFrames": 456,
+      "text": "두 번째, 과제를 작은 조각으로 나누기. 큰 과제는 변연계를 압도합니다. 하지만 작은 단위로 쪼개면, 공식의 기대감은 올라가고, 지연은 줄어듭니다. 동기가 자연스럽게 상승하죠. 첫..."
+    },
+    {
+      "id": "specific_deadlines",
+      "file": "specific_deadlines.mp3",
+      "durationSeconds": 18.216,
+      "durationFrames": 547,
+      "text": "세 번째, 구체적인 마감 시간 설정. 모호한 목표는 지연 값을 무한대처럼 느끼게 합니다. 하지만 명확한 마감은, 지연을 구체화하여 동기를 끌어올립니다. 그리고 타인에게 공개하세요...."
+    },
+    {
+      "id": "habit_formation",
+      "file": "habit_formation.mp3",
+      "durationSeconds": 18.912,
+      "durationFrames": 568,
+      "text": "네 번째, 66일 습관 법칙. 런던 대학교 연구에 따르면, 새로운 습관이 자동화되는 데 평균 66일이 걸립니다. 핵심은, 한 번에 하나씩만 시도하는 것입니다. 의지력은 제한적 자원..."
+    },
+    {
+      "id": "neuroscience_tools",
+      "file": "neuroscience_tools.mp3",
+      "durationSeconds": 28.176,
+      "durationFrames": 846,
+      "text": "마지막으로, 다섯 가지 신경과학 기반 도구입니다. 2분 규칙, 2분 안에 할 수 있으면 즉시 하세요. 환경 설계, 주의 산만 요소를 물리적으로 제거하세요. 시각화, 완료된 과제의 ..."
+    },
+    {
+      "id": "conclusion",
+      "file": "conclusion.mp3",
+      "durationSeconds": 22.176,
+      "durationFrames": 666,
+      "text": "프로크래스티네이션은 당신의 잘못이 아닙니다. 그것은 뇌의 진화적 유산입니다. 하지만 이제 당신은 알게 되었습니다. 변연계와 전전두엽 피질의 전쟁을, 동기 공식의 비밀을, 그리고 과..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 6.792,
+      "durationFrames": 204,
+      "text": "프로크래스티네이션의 심리학. 당신의 뇌 안에서 벌어지는 전쟁을 이해하고, 과학으로 승리하세요."
+    }
+  ]
+}

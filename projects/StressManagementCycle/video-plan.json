@@ -1,0 +1,416 @@
+{
+  "metadata": {
+    "compositionId": "StressManagementCycle",
+    "title": "스트레스 사이클: 당신이 지친 진짜 이유",
+    "fps": 60,
+    "width": 1920,
+    "height": 1080,
+    "totalDuration": 145,
+    "totalFrames": 8700,
+    "contentType": "data-driven",
+    "visualStrategy": "Data Story Pattern + Academic Pattern"
+  },
+  "colorPalette": {
+    "primary": "#667eea",
+    "secondary": "#764ba2",
+    "accent": "#00c2ff",
+    "danger": "#dc3545",
+    "success": "#28a745",
+    "dark": "#1a1a2e"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "sceneIndex": 0,
+      "title": "충격적인 통계",
+      "startFrame": 0,
+      "endFrame": 720,
+      "duration": 12,
+      "template": "DataVisualizationTemplate",
+      "content": {
+        "headline": "충분히 쉬어도 피곤한 이유",
+        "statistic": {
+          "value": 5,
+          "unit": "배",
+          "label": "심혈관 질환 사망률 증가"
+        },
+        "subtitle": "만성 스트레스가 당신의 건강을 위협합니다"
+      },
+      "components": [
+        {
+          "type": "CountUp",
+          "props": {
+            "from": 1,
+            "to": 5,
+            "suffix": "배",
+            "fontSize": "4xl"
+          }
+        },
+        {
+          "type": "HighlightText",
+          "props": {
+            "text": "심혈관 질환 사망률",
+            "highlightColor": "#dc3545"
+          }
+        }
+      ],
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a1a2e", "#2d1f3d", "#3d1a1a"]
+      },
+      "transition": {
+        "in": "fade",
+        "out": "dissolve",
+        "duration": 20
+      },
+      "audio": "hook.mp3"
+    },
+    {
+      "id": "problem",
+      "sceneIndex": 1,
+      "title": "진짜 문제는 무엇인가",
+      "startFrame": 720,
+      "endFrame": 1560,
+      "duration": 14,
+      "template": "QuoteTemplate",
+      "content": {
+        "quote": "스트레스 유발 요인을 제거하더라도, 몸 안에 떠도는 스트레스는 여전히 처리해야 한다.",
+        "author": "에밀리 나고스키 박사",
+        "source": "건강심리학자"
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a1a2e", "#16213e", "#1a1a2e"],
+        "effect": "lightLeak"
+      },
+      "transition": {
+        "in": "dissolve",
+        "out": "dissolve",
+        "duration": 25
+      },
+      "audio": "problem.mp3"
+    },
+    {
+      "id": "cycle_explained",
+      "sceneIndex": 2,
+      "title": "스트레스 사이클 설명",
+      "startFrame": 1560,
+      "endFrame": 2640,
+      "duration": 18,
+      "template": "ContentTemplate",
+      "content": {
+        "headline": "스트레스 사이클",
+        "subtitle": "HPA 축의 생리학적 반응"
+      },
+      "components": [
+        {
+          "type": "CycleDiagram",
+          "testingTarget": true,
+          "props": {
+            "centerLabel": "HPA 축",
+            "size": "large",
+            "color": "#00c2ff",
+            "animated": true,
+            "animationSpeed": 0.5,
+            "fontSize": "md",
+            "language": "ko",
+            "steps": [
+              {
+                "text": "위협\n감지",
+                "icon": "👁️",
+                "color": "#ffffff"
+              },
+              {
+                "text": "시상하부\n호르몬 분비",
+                "icon": "🧠",
+                "color": "#ffffff"
+              },
+              {
+                "text": "뇌하수체\n신호 증폭",
+                "icon": "⚡",
+                "color": "#ffffff"
+              },
+              {
+                "text": "부신 코르티솔\n10-12배 분비",
+                "icon": "💥",
+                "color": "#ffc107"
+              },
+              {
+                "text": "심장/혈압\n혈당 상승",
+                "icon": "❤️",
+                "color": "#dc3545"
+              }
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "FloatingShapes",
+        "shape": "hexagon",
+        "color": "#667eea",
+        "opacity": 0.1
+      },
+      "transition": {
+        "in": "dissolve",
+        "out": "wipe",
+        "duration": 25
+      },
+      "audio": "cycle_explained.mp3",
+      "notes": "KEY TESTING SCENE: CycleDiagram overflow fixes, Korean text handling"
+    },
+    {
+      "id": "incomplete_cycle",
+      "sceneIndex": 3,
+      "title": "미완료된 사이클",
+      "startFrame": 2640,
+      "endFrame": 3720,
+      "duration": 18,
+      "template": "ComparisonTemplate",
+      "content": {
+        "title": "스트레스 완료의 차이",
+        "left": {
+          "label": "원시시대",
+          "icon": "🦁",
+          "items": [
+            "사자 발견",
+            "도망",
+            "안전한 곳 도착",
+            "✅ 사이클 완료"
+          ],
+          "color": "#28a745"
+        },
+        "right": {
+          "label": "현대",
+          "icon": "💼",
+          "items": [
+            "업무 압박",
+            "재정 문제",
+            "관계 갈등",
+            "❌ 끝없는 스트레스"
+          ],
+          "color": "#dc3545"
+        }
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a3a1a", "#1a1a2e", "#3a1a1a"]
+      },
+      "transition": {
+        "in": "wipe",
+        "out": "dissolve",
+        "duration": 25
+      },
+      "audio": "incomplete_cycle.mp3"
+    },
+    {
+      "id": "mindset",
+      "sceneIndex": 4,
+      "title": "인식의 힘",
+      "startFrame": 3720,
+      "endFrame": 5040,
+      "duration": 22,
+      "template": "DataVisualizationTemplate",
+      "content": {
+        "headline": "인식이 현실을 만든다",
+        "study": {
+          "participants": "30,000명",
+          "duration": "8년 추적"
+        },
+        "comparison": {
+          "negative": {
+            "label": "스트레스가 해롭다고 믿음",
+            "value": -43,
+            "unit": "%",
+            "description": "기대수명 단축"
+          },
+          "positive": {
+            "label": "스트레스가 해롭지 않다고 믿음",
+            "value": 0,
+            "unit": "%",
+            "description": "낮은 스트레스 집단과 동일"
+          }
+        }
+      },
+      "components": [
+        {
+          "type": "BarChart",
+          "props": {
+            "data": [
+              { "label": "해롭다고 믿음", "value": -43, "color": "#dc3545" },
+              { "label": "해롭지 않다고 믿음", "value": 0, "color": "#28a745" }
+            ],
+            "unit": "% 기대수명"
+          }
+        }
+      ],
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a1a2e", "#16213e"]
+      },
+      "transition": {
+        "in": "dissolve",
+        "out": "slide",
+        "duration": 25
+      },
+      "audio": "mindset.mp3"
+    },
+    {
+      "id": "solution_physical",
+      "sceneIndex": 5,
+      "title": "과학적 해결책 1: 신체 활동",
+      "startFrame": 5040,
+      "endFrame": 6240,
+      "duration": 20,
+      "template": "ContentTemplate",
+      "content": {
+        "headline": "해결책 1: 신체 활동",
+        "subtitle": "가장 효과적인 스트레스 완료 방법",
+        "keyPoints": [
+          "185명 대학생 연구: 주 2회 운동으로 스트레스 감소",
+          "코르티솔 정상화 시간 단축",
+          "엔도르핀 생성 → 피로를 만족감으로"
+        ],
+        "callout": {
+          "icon": "🏃",
+          "text": "하루 30분, 주 3회"
+        }
+      },
+      "components": [
+        {
+          "type": "ProgressBar",
+          "props": {
+            "label": "스트레스 감소 효과",
+            "progress": 0.75,
+            "color": "#28a745"
+          }
+        }
+      ],
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a1a2e", "#1a3a2e"]
+      },
+      "transition": {
+        "in": "slide",
+        "out": "slide",
+        "duration": 20
+      },
+      "audio": "solution_physical.mp3"
+    },
+    {
+      "id": "solution_breathing",
+      "sceneIndex": 6,
+      "title": "과학적 해결책 2: 호흡법",
+      "startFrame": 6240,
+      "endFrame": 7440,
+      "duration": 20,
+      "template": "TableListTemplate",
+      "content": {
+        "headline": "해결책 2: 호흡법",
+        "subtitle": "즉각적 효과를 원한다면",
+        "mode": "list",
+        "items": [
+          {
+            "title": "박스 호흡 (Box Breathing)",
+            "description": "4초 들숨 → 4초 멈춤 → 4초 날숨 → 4초 멈춤",
+            "note": "미 해군 네이비실 사용",
+            "icon": "📦"
+          },
+          {
+            "title": "4-7-8 호흡법",
+            "description": "4초 들숨 → 7초 멈춤 → 8초 날숨",
+            "note": "산화 스트레스 최대 40% 감소",
+            "icon": "🌬️"
+          }
+        ]
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a1a2e", "#1a2a3e"]
+      },
+      "transition": {
+        "in": "slide",
+        "out": "dissolve",
+        "duration": 20
+      },
+      "audio": "solution_breathing.mp3"
+    },
+    {
+      "id": "conclusion",
+      "sceneIndex": 7,
+      "title": "핵심 메시지",
+      "startFrame": 7440,
+      "endFrame": 8400,
+      "duration": 16,
+      "template": "ContentTemplate",
+      "content": {
+        "headline": "스트레스 사이클을 완료하세요",
+        "quote": "스트레스를 느끼는 것은 문제가 아닙니다.\n스트레스 사이클을 완료하지 못하는 것이 문제입니다.",
+        "actionItems": [
+          { "icon": "🚶", "text": "매일 30분 걷기" },
+          { "icon": "🧘", "text": "5분 호흡 연습" },
+          { "icon": "😴", "text": "충분한 수면" }
+        ]
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a2a3e", "#1a3a2e"]
+      },
+      "transition": {
+        "in": "dissolve",
+        "out": "fade",
+        "duration": 25
+      },
+      "audio": "conclusion.mp3"
+    },
+    {
+      "id": "outro",
+      "sceneIndex": 8,
+      "title": "마무리",
+      "startFrame": 8400,
+      "endFrame": 8700,
+      "duration": 5,
+      "template": "OutroTemplate",
+      "content": {
+        "text": "오늘부터 시작하세요",
+        "subtext": "당신의 몸은 이미 답을 알고 있습니다"
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "colors": ["#1a3a2e", "#1a1a2e"]
+      },
+      "transition": {
+        "in": "fade",
+        "out": "fade",
+        "duration": 30
+      },
+      "audio": "outro.mp3"
+    }
+  ],
+  "testingFocus": {
+    "CycleDiagram": {
+      "scene": "cycle_explained",
+      "tests": [
+        "Korean text with wordBreak: keep-all",
+        "Explicit line breaks with \\n",
+        "Overflow handling for long Korean phrases",
+        "5-step cycle with large size",
+        "Animated rotation",
+        "Center label display"
+      ]
+    },
+    "AnimatedText": {
+      "scenes": ["all"],
+      "tests": [
+        "Korean word boundary preservation",
+        "language prop auto-detection"
+      ]
+    },
+    "SafeAreaContainer": {
+      "scenes": ["all"],
+      "tests": [
+        "Layout consistency",
+        "Proper padding"
+      ]
+    }
+  }
+}

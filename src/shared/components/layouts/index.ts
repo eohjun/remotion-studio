@@ -14,3 +14,6 @@ export type { GridProps } from "./Grid";
 
 export { Split } from "./Split";
 export type { SplitProps } from "./Split";
+
+export { SafeAreaContainer } from "./SafeAreaContainer";
+export type { SafeAreaContainerProps } from "./SafeAreaContainer";

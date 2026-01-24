@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "compositionId": "TwoMinuteRule",
+    "title": "The 2-Minute Rule",
+    "format": "shorts",
+    "language": "en",
+    "fps": 60,
+    "totalDuration": 30
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "Hook",
+      "text": "You're not lazy. Your brain just hates starting.",
+      "duration": 3,
+      "visual": "Bold text with brain icon, quick zoom"
+    },
+    {
+      "id": "problem",
+      "title": "The Problem",
+      "text": "The hardest part of any task isn't doing it. It's starting. Your brain sees the whole mountain and freezes.",
+      "duration": 7,
+      "visual": "Mountain visualization, overwhelm feeling"
+    },
+    {
+      "id": "solution",
+      "title": "The 2-Minute Rule",
+      "text": "Here's the fix: The Two Minute Rule. If something takes less than two minutes, do it now. If it's bigger, just commit to two minutes.",
+      "duration": 12,
+      "visual": "Timer icon, rule text appearing"
+    },
+    {
+      "id": "takeaway",
+      "title": "Takeaway",
+      "text": "Two minutes is all it takes to beat resistance. Start small. Start now.",
+      "duration": 8,
+      "visual": "Motivational close, subscribe prompt"
+    }
+  ],
+  "ttsConfig": {
+    "voice": "nova",
+    "speed": 1.05,
+    "model": "tts-1-hd"
+  },
+  "sources": [
+    "David Allen - Getting Things Done",
+    "James Clear - Atomic Habits"
+  ]
+}

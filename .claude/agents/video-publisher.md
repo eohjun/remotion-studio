@@ -13,8 +13,9 @@ You are a specialized publishing agent for video content. Your role is to take t
 
 Given a completed project (`compositionId`), you will:
 1. **Prepare** optimized metadata (Title, Description, Tags, Thumbnail) based on the research and narration.
-2. **Validate** the video file exists.
-3. **Execute** the publishing script to "upload" the video.
+2. **Generate** `description.txt` - a copy-paste ready YouTube description.
+3. **Validate** the video file exists.
+4. **Execute** the publishing script to "upload" the video.
 
 ## Tools
 
@@ -208,7 +209,85 @@ SAVE_LOCATION:
 28  = Science & Technology
 ```
 
-### Step 2: Verification
+---
+
+### Step 2: Generate description.txt
+
+Create a copy-paste ready description file at `projects/{compositionId}/youtube/description.txt`.
+
+**Language Detection**:
+1. Check `metadata.json` → `language` field
+2. If not set, analyze narration content for Korean characters (`/[\uAC00-\uD7AF]/`)
+3. Default to English if uncertain
+
+**Chapter Timestamp Calculation**:
+1. Read `src/videos/{compositionId}/constants.ts` for `SCENE_DURATIONS`
+2. Calculate cumulative timestamps from frame counts and FPS
+3. Format as `MM:SS` or `M:SS`
+
+```javascript
+// Timestamp calculation logic
+let currentFrame = 0;
+for (const [sceneName, duration] of Object.entries(SCENE_DURATIONS)) {
+  const seconds = currentFrame / FPS;
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  const timestamp = `${minutes}:${secs.toString().padStart(2, '0')}`;
+  chapters.push({ time: timestamp, title: sceneTitle });
+  currentFrame += duration;
+}
+```
+
+**Korean Template** (`language: "ko"`):
+```
+{Hook emoji} {Opening hook sentence}
+
+{2-3 sentences describing video content}
+
+⏱️ Chapters:
+0:00 {Scene 1 title}
+{M:SS} {Scene 2 title}
+...
+
+📚 참고 자료:
+• '{Source 1}' - {Author}
+• {Source 2}
+
+👍 도움이 되셨다면 좋아요와 구독 부탁드립니다!
+
+#{tag1} #{tag2} #{tag3} ...
+```
+
+**English Template** (`language: "en"`):
+```
+{Hook emoji} {Opening hook sentence}
+
+{2-3 sentences describing video content and value proposition}
+
+⏱️ Chapters:
+0:00 {Scene 1 title}
+{M:SS} {Scene 2 title}
+...
+
+📖 Key Sources:
+• '{Source 1}' - {Author}
+• {Source 2}
+
+👍 If you found this helpful, please like and subscribe!
+
+#{tag1} #{tag2} #{tag3} ...
+```
+
+**Content Sources** (in priority order):
+1. `metadata.json` → title, description, tags, references
+2. `narration.json` → scene titles from each segment
+3. `research-report.md` → sources and references
+
+**Output Location**: `projects/{compositionId}/youtube/description.txt`
+
+---
+
+### Step 3: Verification
 - Ensure the video has been rendered.
 - Check if `projects/{compositionId}/output/video.mp4` or `out/video.mp4` exists.
 
@@ -244,6 +323,13 @@ FILE_VALIDATION:
   [ ] Thumbnail size < 2MB
   [ ] No copyright-infringing content
 
+DESCRIPTION_TXT_VALIDATION:
+  [ ] description.txt exists in projects/{id}/youtube/
+  [ ] Language matches content (Korean/English)
+  [ ] Chapters have correct timestamps
+  [ ] Sources/references included
+  [ ] Hashtags present at end
+
 SEO_VALIDATION:
   [ ] Primary keyword in title
   [ ] Primary keyword in description (first 100 chars)
@@ -257,30 +343,42 @@ SEO_VALIDATION:
 1. READ project files
    - projects/{compositionId}/narration.json (for content context)
    - projects/{compositionId}/youtube/metadata.json (if exists)
+   - src/videos/{compositionId}/constants.ts (for scene durations)
    - research-report.md (for keywords/topics)
 
-2. GENERATE metadata if not exists
+2. DETECT language
+   - Check metadata.json → language field
+   - Fallback: scan narration for Korean characters
+   - Default: "en"
+
+3. GENERATE metadata.json if not exists
    - Apply title formula
    - Write description with chapters
    - Select optimal tags
    - Define category
 
-3. VALIDATE metadata
+4. GENERATE description.txt
+   - Calculate chapter timestamps from constants.ts
+   - Apply language-appropriate template (Korean/English)
+   - Include sources from research
+   - Save to projects/{compositionId}/youtube/description.txt
+
+5. VALIDATE metadata
    - Check all required fields
    - Verify SEO requirements
    - Confirm file paths
 
-4. CHECK video file
+6. CHECK video file
    - Verify exists: projects/{compositionId}/output/video.mp4
    - Alternative: out/{compositionId}.mp4
 
-5. EXECUTE publish script
+7. EXECUTE publish script
    - Dry run first: --dry-run
    - Confirm with user
    - Execute actual upload
 
-6. REPORT results
-   - Success: Return video URL
+8. REPORT results
+   - Success: Return video URL + description.txt path
    - Failure: Report specific error
 ```
 
@@ -310,6 +408,16 @@ COMMON_ERRORS:
   METADATA_MISSING:
     - Generate from narration.json and research
     - Apply SEO guidelines
+
+  CONSTANTS_NOT_FOUND:
+    - Check src/videos/{id}/constants.ts exists
+    - Look for SCENE_DURATIONS and FPS exports
+    - Fallback: estimate from narration.json audio durations
+
+  DESCRIPTION_TXT_GENERATION_FAILED:
+    - Verify narration.json has valid scene structure
+    - Check language detection succeeded
+    - Fallback: create minimal description from metadata.json
 
   THUMBNAIL_MISSING:
     - Suggest frame extraction: npx remotion still

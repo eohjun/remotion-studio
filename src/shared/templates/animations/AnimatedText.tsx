@@ -6,6 +6,7 @@ import {
   getAnimatedStyle,
   DEFAULT_SPRING,
 } from "./presets";
+import { containsKorean, getTextStyleForContent } from "../../utils/text";
 
 export type StaggerMode = "none" | "word" | "character";
 
@@ -17,6 +18,8 @@ export interface AnimatedTextProps {
   delay?: number; // initial delay in frames
   style?: React.CSSProperties;
   className?: string;
+  /** Language for text styling: "ko" for Korean, "en" for English, "auto" for detection */
+  language?: "ko" | "en" | "auto";
 }
 
 interface AnimatedElementProps {
@@ -65,17 +68,33 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   delay = 0,
   style = {},
   className,
+  language = "auto",
 }) => {
   const renderContent = () => {
+    // Get text style based on language
+    const textStyle = getTextStyleForContent(text, language);
+    const mergedStyle = { ...textStyle, ...style };
+
     if (stagger === "none") {
       return (
-        <AnimatedElement animation={animation} delay={delay} style={style}>
+        <AnimatedElement animation={animation} delay={delay} style={mergedStyle}>
           {text}
         </AnimatedElement>
       );
     }
 
     if (stagger === "word") {
+      // For Korean text without spaces, treat the entire text as one unit
+      const isKorean =
+        language === "ko" || (language === "auto" && containsKorean(text));
+      if (isKorean && !text.includes(" ")) {
+        return (
+          <AnimatedElement animation={animation} delay={delay} style={mergedStyle}>
+            {text}
+          </AnimatedElement>
+        );
+      }
+
       // Group words that should stay together:
       // - Words after "-" or "—" until next punctuation or end
       // - Words inside parentheses
@@ -138,6 +157,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
             flexWrap: "wrap",
             justifyContent: "center",
             gap: "0.3em",
+            ...textStyle,
           }}
         >
           {groups.map((group, groupIndex) => (
@@ -154,7 +174,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
                     key={wordIndex}
                     animation={animation}
                     delay={delay + globalIndex * staggerDuration}
-                    style={style}
+                    style={mergedStyle}
                   >
                     {word}
                   </AnimatedElement>
@@ -176,7 +196,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
           {lineIndex > 0 && <br />}
           {line.split(" ").map((word, wordIndex, wordsArray) => (
             <React.Fragment key={`word-${lineIndex}-${wordIndex}`}>
-              <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+              <span style={{ display: "inline-block", whiteSpace: "nowrap", ...textStyle }}>
                 {word.split("").map((char) => {
                   const currentCharIndex = globalCharIndex++;
                   return (
@@ -184,7 +204,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
                       key={`char-${currentCharIndex}`}
                       animation={animation}
                       delay={delay + currentCharIndex * staggerDuration}
-                      style={style}
+                      style={mergedStyle}
                     >
                       {char}
                     </AnimatedElement>

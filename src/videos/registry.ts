@@ -76,6 +76,20 @@ import {
   TOTAL_DURATION as TOTAL_DURATION_PROCRASTINATION,
 } from "./ProcrastinationPsychology";
 
+import {
+  PositiveThinkingTrap,
+  positiveThinkingTrapSchema,
+  TOTAL_DURATION as TOTAL_DURATION_POSITIVE,
+  FPS as FPS_POSITIVE,
+} from "./PositiveThinkingTrap";
+
+import {
+  StressManagementCycle,
+  stressManagementCycleSchema,
+  TOTAL_DURATION as TOTAL_DURATION_STRESS,
+  FPS as FPS_STRESS,
+} from "./StressManagementCycle";
+
 /**
  * Video Registry - Add new videos here
  *
@@ -130,6 +144,28 @@ export const VIDEO_REGISTRY: VideoConfig[] = [
     defaultProps: {
       primaryColor: "#1a1a2e",
       secondaryColor: "#e94560",
+    },
+  },
+  {
+    id: "PositiveThinkingTrap",
+    component: PositiveThinkingTrap,
+    schema: positiveThinkingTrapSchema,
+    durationInFrames: TOTAL_DURATION_POSITIVE,
+    fps: FPS_POSITIVE, // 60fps for smoother animations
+    defaultProps: {
+      primaryColor: "#667eea",
+      secondaryColor: "#764ba2",
+    },
+  },
+  {
+    id: "StressManagementCycle",
+    component: StressManagementCycle,
+    schema: stressManagementCycleSchema,
+    durationInFrames: TOTAL_DURATION_STRESS,
+    fps: FPS_STRESS, // 60fps for smoother animations
+    defaultProps: {
+      primaryColor: "#667eea",
+      secondaryColor: "#764ba2",
     },
   },
 ];

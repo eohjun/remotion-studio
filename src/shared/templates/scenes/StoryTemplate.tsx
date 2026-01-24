@@ -20,6 +20,9 @@ import { SceneTransition } from "../../components/SceneTransition";
 import { AnimatedText, fadeInUp } from "../animations";
 import type { BaseSceneProps, StoryPanel } from "./types";
 
+/** Font size options for panel text */
+export type PanelFontSize = "md" | "lg" | "xl" | "2xl";
+
 export interface StoryTemplateProps extends BaseSceneProps {
   /** Story panels */
   panels: StoryPanel[];
@@ -39,6 +42,8 @@ export interface StoryTemplateProps extends BaseSceneProps {
   };
   /** Background color */
   backgroundColor?: string;
+  /** Font size for panel text (default: based on layout) */
+  panelFontSize?: PanelFontSize;
 }
 
 // Mood color mapping
@@ -71,7 +76,8 @@ const SinglePanel: React.FC<{
   panel: StoryPanel;
   frame: number;
   fps: number;
-}> = ({ panel, frame, fps }) => {
+  fontSize?: PanelFontSize;
+}> = ({ panel, frame, fps, fontSize = "xl" }) => {
   const progress = spring({ frame, fps, config: SPRING_CONFIGS.gentle });
   const moodStyle = getMoodStyle(panel.mood || "neutral");
 
@@ -127,7 +133,7 @@ const SinglePanel: React.FC<{
         {typeof panel.content === "string" ? (
           <div
             style={{
-              fontSize: FONT_SIZES.xl,
+              fontSize: FONT_SIZES[fontSize],
               color: COLORS.white,
               fontFamily: FONT_FAMILY.body,
               textAlign: "center",
@@ -156,7 +162,8 @@ const SplitPanel: React.FC<{
   panels: StoryPanel[];
   frame: number;
   fps: number;
-}> = ({ panels, frame, fps }) => {
+  fontSize?: PanelFontSize;
+}> = ({ panels, frame, fps, fontSize = "lg" }) => {
   const leftProgress = spring({ frame, fps, config: SPRING_CONFIGS.snappy });
   const rightProgress = spring({
     frame: frame - 15,
@@ -218,7 +225,7 @@ const SplitPanel: React.FC<{
           {typeof panels[0]?.content === "string" ? (
             <div
               style={{
-                fontSize: FONT_SIZES.lg,
+                fontSize: FONT_SIZES[fontSize],
                 color: COLORS.white,
                 fontFamily: FONT_FAMILY.body,
                 textAlign: "center",
@@ -300,7 +307,7 @@ const SplitPanel: React.FC<{
           {typeof panels[1]?.content === "string" ? (
             <div
               style={{
-                fontSize: FONT_SIZES.lg,
+                fontSize: FONT_SIZES[fontSize],
                 color: COLORS.white,
                 fontFamily: FONT_FAMILY.body,
                 textAlign: "center",
@@ -329,7 +336,8 @@ const SequencePanel: React.FC<{
   panels: StoryPanel[];
   frame: number;
   fps: number;
-}> = ({ panels, frame, fps }) => {
+  fontSize?: PanelFontSize;
+}> = ({ panels, frame, fps, fontSize = "md" }) => {
   const cols = panels.length <= 2 ? panels.length : panels.length <= 4 ? 2 : 3;
   const rows = Math.ceil(panels.length / cols);
 
@@ -409,7 +417,7 @@ const SequencePanel: React.FC<{
               {typeof panel.content === "string" ? (
                 <div
                   style={{
-                    fontSize: FONT_SIZES.md - 4,
+                    fontSize: FONT_SIZES[fontSize],
                     color: COLORS.white,
                     fontFamily: FONT_FAMILY.body,
                     textAlign: "center",
@@ -597,6 +605,7 @@ export const StoryTemplate: React.FC<StoryTemplateProps> = ({
   durationInFrames,
   useTransition = true,
   style,
+  panelFontSize,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -605,15 +614,15 @@ export const StoryTemplate: React.FC<StoryTemplateProps> = ({
     <AbsoluteFill style={{ backgroundColor, ...style }}>
       {/* Panels */}
       {layout === "single" && panels[0] && (
-        <SinglePanel panel={panels[0]} frame={frame} fps={fps} />
+        <SinglePanel panel={panels[0]} frame={frame} fps={fps} fontSize={panelFontSize} />
       )}
 
       {layout === "split" && panels.length >= 2 && (
-        <SplitPanel panels={panels} frame={frame} fps={fps} />
+        <SplitPanel panels={panels} frame={frame} fps={fps} fontSize={panelFontSize} />
       )}
 
       {layout === "sequence" && panels.length > 0 && (
-        <SequencePanel panels={panels} frame={frame} fps={fps} />
+        <SequencePanel panels={panels} frame={frame} fps={fps} fontSize={panelFontSize} />
       )}
 
       {/* Character */}

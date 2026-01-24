@@ -4,6 +4,16 @@ import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { VIDEO_REGISTRY } from "./videos/registry";
 import { Thumbnail, thumbnailSchema } from "./Thumbnail";
 import {
+  TwoMinuteRule,
+  TwoMinuteRuleSchema,
+} from "./videos/TwoMinuteRule";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_2MIN,
+  FPS as FPS_2MIN,
+  WIDTH as WIDTH_2MIN,
+  HEIGHT as HEIGHT_2MIN,
+} from "./videos/TwoMinuteRule/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -19,6 +29,9 @@ import {
   AudioDemo,
   audioDemoSchema,
   AUDIO_DEMO_DURATION,
+  NewFeaturesDemo,
+  newFeaturesDemoSchema,
+  NEW_FEATURES_DEMO_DURATION,
 } from "./demos";
 import "./shared/styles/fonts.css";
 
@@ -71,6 +84,18 @@ export const RemotionRoot: React.FC = () => {
           defaultProps={video.defaultProps}
         />
       ))}
+
+      {/* YouTube Shorts compositions */}
+      <Composition
+        id="TwoMinuteRule"
+        component={TwoMinuteRule}
+        durationInFrames={TOTAL_DURATION_2MIN}
+        fps={FPS_2MIN}
+        width={WIDTH_2MIN}
+        height={HEIGHT_2MIN}
+        schema={TwoMinuteRuleSchema}
+        defaultProps={{}}
+      />
 
       {/* Demo compositions */}
       <Composition
@@ -133,6 +158,19 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={audioDemoSchema}
+        defaultProps={{
+          primaryColor: "#667eea" as const,
+          secondaryColor: "#764ba2" as const,
+        }}
+      />
+      <Composition
+        id="NewFeaturesDemo"
+        component={NewFeaturesDemo}
+        durationInFrames={NEW_FEATURES_DEMO_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={newFeaturesDemoSchema}
         defaultProps={{
           primaryColor: "#667eea" as const,
           secondaryColor: "#764ba2" as const,

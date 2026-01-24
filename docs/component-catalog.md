@@ -14,6 +14,7 @@
 | Backgrounds | 3 | `@shared/components/backgrounds` |
 | Effects | 5 | `@shared/components/effects` |
 | Text Animations | 4 | `@shared/templates/animations` |
+| Diagrams | 1 | `@shared/components/diagrams` |
 | Charts | 3 | `@shared/components/charts` |
 | Progress | 4 | `@shared/components/progress` |
 | Layouts | 4 | `@shared/components/layouts` |
@@ -270,9 +271,16 @@
   layout?: 'single' | 'split' | 'sequence';
   character?: { name: string; avatar: string };
   narrator?: { text: string; style: 'quote' | 'caption' };
+  panelFontSize?: 'md' | 'lg' | 'xl' | '2xl';  // Control panel text size
   durationInFrames: number;
 }
 ```
+
+**Font Size Guidelines**:
+- `md`: Sequence layout (many small panels)
+- `lg`: Default for split layout
+- `xl`: Single panel with longer text
+- `2xl`: Short impactful statements
 
 **When to Use**:
 - Case studies
@@ -610,6 +618,62 @@ interface DialogueEntry {
 ```
 
 **Best For**: Tech content, error states, edgy aesthetic
+
+---
+
+## Diagrams
+
+### CycleDiagram
+**Purpose**: Circular cycle/loop visualization (e.g., vicious cycles, feedback loops)
+
+**Import**: `@shared/components/diagrams`
+
+**Props**:
+```typescript
+{
+  steps: CycleStep[];           // Cycle steps (2-8 recommended)
+  centerLabel?: string;         // Center label text
+  size?: 'small' | 'medium' | 'large' | 'auto';  // auto adjusts by step count
+  color?: string;               // Ring color
+  animated?: boolean;           // Enable rotation animation
+  animationSpeed?: number;      // Animation speed (default: 1)
+  fontSize?: 'sm' | 'md' | 'lg' | 'xl';
+  language?: 'ko' | 'en' | 'auto';  // Text styling (auto-detects Korean)
+}
+
+interface CycleStep {
+  text: string;    // Supports \n for line breaks
+  icon?: string;
+  color?: string;
+}
+```
+
+**Features**:
+- Auto-detects Korean text and applies `wordBreak: keep-all`
+- Supports explicit line breaks with `\n` in text
+- Auto-sizing based on step count
+- Animated dashed ring rotation
+
+**When to Use**:
+- Vicious cycles, feedback loops
+- Process flows that loop back
+- Cause-and-effect cycles
+
+**Example**:
+```tsx
+<CycleDiagram
+  steps={[
+    { text: "스트레스", icon: "😫" },
+    { text: "미루기", icon: "📱" },
+    { text: "불안 증가", icon: "😰" },
+    { text: "더 큰\n스트레스", icon: "💥" },
+  ]}
+  centerLabel="악순환"
+  color="#e94560"
+  size="large"
+  language="ko"
+/>
+```
 
 ---
 
@@ -1051,6 +1115,7 @@ import { COLORS, GRADIENTS, FONT_SIZES, SPACING, SPRING_CONFIGS } from "@shared/
   highlightColor?: string;
   staggerDelay?: number;        // Animation delay between items
   source?: string;
+  compact?: boolean | 'auto';   // Compact mode for many items (auto: 5+ items)
   durationInFrames: number;
 }
 
@@ -1070,6 +1135,11 @@ interface ListItem {
   color?: string;
 }
 ```
+
+**Compact Mode**:
+- `true`: Always use compact spacing
+- `false`: Always use normal spacing
+- `'auto'` (default): Compact when 5+ items
 
 **Display Modes**:
 - `table`: Grid with headers, ideal for structured data

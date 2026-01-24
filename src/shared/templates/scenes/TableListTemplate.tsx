@@ -74,6 +74,8 @@ export interface TableListTemplateProps extends BaseSceneProps {
   source?: string;
   /** Background color */
   backgroundColor?: string;
+  /** Compact mode - reduces spacing for more items (default: auto based on item count) */
+  compact?: boolean | "auto";
 }
 
 // Sub-component: Table Display
@@ -233,15 +235,25 @@ const ListDisplay: React.FC<{
   staggerDelay: number;
   frame: number;
   fps: number;
-}> = ({ items, showNumbers, highlightColor, staggerDelay, frame, fps }) => {
+  compact: boolean;
+}> = ({ items, showNumbers, highlightColor, staggerDelay, frame, fps, compact }) => {
   const baseDelay = 40;
+
+  // Compact mode sizing
+  const gap = compact ? SPACING.xs : SPACING.md;
+  const padding = compact ? SPACING.sm : SPACING.md;
+  const numberSize = compact ? 36 : 50;
+  const numberFontSize = compact ? FONT_SIZES.md : FONT_SIZES.lg;
+  const textFontSize = compact ? FONT_SIZES.lg : FONT_SIZES.xl;
+  const subtextFontSize = compact ? FONT_SIZES.sm : FONT_SIZES.md;
+  const iconFontSize = compact ? FONT_SIZES.xl : FONT_SIZES["2xl"];
 
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: SPACING.md,
+        gap,
         width: "100%",
         maxWidth: 1400,
       }}
@@ -261,8 +273,8 @@ const ListDisplay: React.FC<{
             style={{
               display: "flex",
               alignItems: "center",
-              gap: SPACING.md,
-              padding: SPACING.md,
+              gap: compact ? SPACING.sm : SPACING.md,
+              padding,
               backgroundColor: isHighlighted
                 ? `${itemColor}20`
                 : "rgba(255,255,255,0.05)",
@@ -276,14 +288,14 @@ const ListDisplay: React.FC<{
             {showNumbers && (
               <div
                 style={{
-                  width: 50,
-                  height: 50,
+                  width: numberSize,
+                  height: numberSize,
                   borderRadius: "50%",
                   backgroundColor: isHighlighted ? itemColor : "rgba(255,255,255,0.1)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: FONT_SIZES.lg,
+                  fontSize: numberFontSize,
                   fontWeight: 700,
                   color: isHighlighted ? COLORS.white : COLORS.light,
                   fontFamily: FONT_FAMILY.title,
@@ -296,7 +308,7 @@ const ListDisplay: React.FC<{
             {!showNumbers && item.icon && (
               <div
                 style={{
-                  fontSize: FONT_SIZES["2xl"],
+                  fontSize: iconFontSize,
                   flexShrink: 0,
                 }}
               >
@@ -308,7 +320,7 @@ const ListDisplay: React.FC<{
             <div style={{ flex: 1 }}>
               <div
                 style={{
-                  fontSize: FONT_SIZES.xl,
+                  fontSize: textFontSize,
                   fontWeight: 600,
                   color: isHighlighted ? COLORS.white : COLORS.light,
                   fontFamily: FONT_FAMILY.body,
@@ -319,10 +331,10 @@ const ListDisplay: React.FC<{
               {item.subtext && (
                 <div
                   style={{
-                    fontSize: FONT_SIZES.md,
+                    fontSize: subtextFontSize,
                     color: "rgba(255,255,255,0.6)",
                     fontFamily: FONT_FAMILY.body,
-                    marginTop: 4,
+                    marginTop: compact ? 2 : 4,
                   }}
                 >
                   {item.subtext}
@@ -362,15 +374,24 @@ const GridDisplay: React.FC<{
   staggerDelay: number;
   frame: number;
   fps: number;
-}> = ({ items, gridColumns, showNumbers, highlightColor, staggerDelay, frame, fps }) => {
+  compact: boolean;
+}> = ({ items, gridColumns, showNumbers, highlightColor, staggerDelay, frame, fps, compact }) => {
   const baseDelay = 40;
+
+  // Compact mode sizing
+  const gridGap = compact ? SPACING.sm : SPACING.lg;
+  const cellPadding = compact ? SPACING.md : SPACING.lg;
+  const numberSize = compact ? 44 : 60;
+  const iconFontSize = compact ? FONT_SIZES["2xl"] : FONT_SIZES["3xl"];
+  const textFontSize = compact ? FONT_SIZES.lg : FONT_SIZES.xl;
+  const subtextFontSize = compact ? FONT_SIZES.sm : FONT_SIZES.md;
 
   return (
     <div
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
-        gap: SPACING.lg,
+        gap: gridGap,
         width: "100%",
         maxWidth: 1600,
       }}
@@ -388,7 +409,7 @@ const GridDisplay: React.FC<{
           <div
             key={index}
             style={{
-              padding: SPACING.lg,
+              padding: cellPadding,
               backgroundColor: isHighlighted
                 ? `${itemColor}15`
                 : "rgba(255,255,255,0.05)",
@@ -401,24 +422,24 @@ const GridDisplay: React.FC<{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: SPACING.sm,
+              gap: compact ? SPACING.xs : SPACING.sm,
               textAlign: "center",
             }}
           >
             {/* Icon or Number */}
             {item.icon ? (
-              <div style={{ fontSize: FONT_SIZES["3xl"] }}>{item.icon}</div>
+              <div style={{ fontSize: iconFontSize }}>{item.icon}</div>
             ) : showNumbers ? (
               <div
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: numberSize,
+                  height: numberSize,
                   borderRadius: "50%",
                   backgroundColor: isHighlighted ? itemColor : "rgba(255,255,255,0.1)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: FONT_SIZES.xl,
+                  fontSize: compact ? FONT_SIZES.lg : FONT_SIZES.xl,
                   fontWeight: 700,
                   color: COLORS.white,
                   fontFamily: FONT_FAMILY.title,
@@ -431,7 +452,7 @@ const GridDisplay: React.FC<{
             {/* Text */}
             <div
               style={{
-                fontSize: FONT_SIZES.xl,
+                fontSize: textFontSize,
                 fontWeight: 600,
                 color: isHighlighted ? COLORS.white : COLORS.light,
                 fontFamily: FONT_FAMILY.body,
@@ -444,7 +465,7 @@ const GridDisplay: React.FC<{
             {item.subtext && (
               <div
                 style={{
-                  fontSize: FONT_SIZES.md,
+                  fontSize: subtextFontSize,
                   color: "rgba(255,255,255,0.6)",
                   fontFamily: FONT_FAMILY.body,
                 }}
@@ -457,14 +478,14 @@ const GridDisplay: React.FC<{
             {item.badge && (
               <div
                 style={{
-                  padding: "6px 12px",
+                  padding: compact ? "4px 10px" : "6px 12px",
                   backgroundColor: isHighlighted ? itemColor : "rgba(255,255,255,0.1)",
                   borderRadius: 16,
                   fontSize: FONT_SIZES.sm,
                   fontWeight: 600,
                   color: COLORS.white,
                   fontFamily: FONT_FAMILY.body,
-                  marginTop: SPACING.xs,
+                  marginTop: compact ? 0 : SPACING.xs,
                 }}
               >
                 {item.badge}
@@ -495,9 +516,14 @@ export const TableListTemplate: React.FC<TableListTemplateProps> = ({
   durationInFrames,
   useTransition = true,
   style,
+  compact: compactProp = "auto",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  // Calculate compact mode: auto enables compact when 5+ items
+  const itemCount = displayMode === "table" ? rows.length : items.length;
+  const isCompact = compactProp === "auto" ? itemCount >= 5 : compactProp;
 
   const titleProgress = spring({ frame, fps, config: SPRING_CONFIGS.snappy });
   const sourceProgress = spring({
@@ -586,6 +612,7 @@ export const TableListTemplate: React.FC<TableListTemplateProps> = ({
             staggerDelay={staggerDelay}
             frame={frame}
             fps={fps}
+            compact={isCompact}
           />
         )}
         {displayMode === "grid" && (
@@ -597,6 +624,7 @@ export const TableListTemplate: React.FC<TableListTemplateProps> = ({
             staggerDelay={staggerDelay}
             frame={frame}
             fps={fps}
+            compact={isCompact}
           />
         )}
       </div>

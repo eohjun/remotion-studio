@@ -1,0 +1,166 @@
+{
+  "openai": {
+    "model": "tts-1-hd",
+    "voice": "alloy"
+  },
+  "elevenlabs": {
+    "voiceId": "21m00Tcm4TlvDq8ikWAM",
+    "modelId": "eleven_monolingual_v1",
+    "stability": 0.5,
+    "similarityBoost": 0.75
+  },
+  "metadata": {
+    "title": "프로크래스티네이션의 심리학 - 당신의 뇌 안에서 벌어지는 전쟁",
+    "description": "미루기는 게으름이 아니라 뇌의 구조적 갈등이다. 변연계와 전전두엽 피질의 전투를 이해하고, 과학적 전략으로 프로크래스티네이션을 극복하는 방법.",
+    "language": "ko",
+    "compositionId": "ProcrastinationPsychology",
+    "targetDuration": 270,
+    "tone": "serious",
+    "contentType": "data-driven"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "text": "프로크래스티네이션의 심리학",
+      "duration": 3,
+      "visualHint": "Title card with brain visual",
+      "keyPoints": ["title"]
+    },
+    {
+      "id": "hook",
+      "text": "지금 이 순간, 당신의 뇌 안에서 전쟁이 벌어지고 있습니다. 한쪽은 당장 유튜브를 보고 싶어하고, 다른 쪽은 일을 끝내야 한다고 외칩니다. 이것은 게으름이 아닙니다. 뇌의 구조적 갈등입니다.",
+      "duration": 20,
+      "visualHint": "Split brain visualization - limbic system vs prefrontal cortex battle",
+      "keyPoints": ["brain war", "not laziness", "structural conflict"]
+    },
+    {
+      "id": "statistics",
+      "text": "대학생의 75퍼센트가 스스로를 미루는 사람이라고 인정합니다. 직장인의 88퍼센트는 매일 최소 한 시간을 미루기에 소비합니다. 더 놀라운 사실은, 1970년대에는 단 5퍼센트였던 만성적 미루기가, 지금은 성인의 20퍼센트로 급증했다는 것입니다.",
+      "duration": 23,
+      "visualHint": "Animated statistics with count-up numbers, timeline showing 5% to 20% increase",
+      "keyPoints": ["75% students", "88% workers", "5% to 20% increase"]
+    },
+    {
+      "id": "brain_systems",
+      "text": "이 전쟁의 주인공은 두 시스템입니다. 첫 번째, 변연계. 뇌의 오래된 부분으로, 본능적이고 강력합니다. 즐거움을 추구하고 고통을 회피하죠. 두 번째, 전전두엽 피질. 뇌의 새롭고 덜 발달된 부분으로, 합리적 판단과 장기 계획을 담당합니다. 상대적으로 약하죠.",
+      "duration": 30,
+      "visualHint": "Split screen: Red limbic system (powerful, primitive) vs Blue prefrontal cortex (rational, weaker)",
+      "keyPoints": ["limbic system - pleasure/pain", "prefrontal cortex - planning", "unequal power"]
+    },
+    {
+      "id": "conflict_mechanism",
+      "text": "불쾌한 과제가 주어지면, 변연계가 즉각 반응합니다. 편도체는 두려움과 불안을 처리하며, 압도적인 감정을 만들어냅니다. 그리고 유혹합니다. 소셜미디어, 넷플릭스, 즉각적인 안도감으로요. 전전두엽 피질은 저항하지만, 자주 패배합니다.",
+      "duration": 25,
+      "visualHint": "Animation showing task → limbic system activation → dopamine seeking behavior, prefrontal cortex being overpowered",
+      "keyPoints": ["amygdala reaction", "immediate relief seeking", "prefrontal cortex loses"]
+    },
+    {
+      "id": "fmri_evidence",
+      "text": "이것은 그저 이론이 아닙니다. 에프 엠 알 아이 스캔 연구가 증명합니다. 미루는 사람들은, 변연계와 관련된 뇌 영역이 과도하게 활성화되고, 전전두엽 피질은 덜 활성화됩니다. 프로크래스티네이션은 인지 통제의 실패입니다. 오래된 자동 시스템이, 합리적 의사결정을 압도하는 것이죠.",
+      "duration": 28,
+      "visualHint": "fMRI brain scans showing activation patterns, heat maps of procrastinators vs non-procrastinators",
+      "keyPoints": ["fMRI evidence", "limbic overactivation", "cognitive control failure"]
+    },
+    {
+      "id": "steel_equation_intro",
+      "text": "캘거리 대학교의 피어스 스틸 교수는, 이 현상을 수식으로 정리했습니다. 동기는, 기대감 곱하기 가치를, 충동성 곱하기 지연으로 나눈 값입니다. 간단히 말해, 과제의 가치가 낮을수록, 결과까지의 시간이 길수록, 충동성이 높을수록, 우리는 더 미룹니다.",
+      "duration": 30,
+      "visualHint": "Animated equation: Motivation = (Expectancy × Value) / (Impulsiveness × Delay) with dynamic values",
+      "keyPoints": ["Piers Steel", "TMT equation", "4 variables"]
+    },
+    {
+      "id": "equation_insight",
+      "text": "이 공식은 중요한 진실을 알려줍니다. 프로크래스티네이션은 비합리적이지 않습니다. 마감이 멀 때는, 지연 값이 크기 때문에, 동기가 자연스럽게 낮은 것입니다. 그래서 우리는 마감이 코앞에 와야, 비로소 움직이기 시작합니다. 이것은 뇌의 수학입니다.",
+      "duration": 26,
+      "visualHint": "Graph showing motivation curve over time, steep rise near deadline",
+      "keyPoints": ["not irrational", "natural low motivation", "deadline effect"]
+    },
+    {
+      "id": "procrastinator_types",
+      "text": "심리학자들은 미루는 사람을 세 유형으로 분류합니다. 첫째, 감정 회피자. 불안과 지루함을 피하려고 미룹니다. 가장 흔한 유형이죠. 둘째, 완벽주의자. 실패가 두려워 시작조차 못합니다. 셋째, 아드레날린 중독자. 막판 스트레스를 즐기며 모든 것을 마지막까지 남깁니다.",
+      "duration": 28,
+      "visualHint": "Three character types illustrated with visual metaphors",
+      "keyPoints": ["emotion avoider", "perfectionist", "adrenaline junkie"]
+    },
+    {
+      "id": "health_impact",
+      "text": "프로크래스티네이션은 단순한 습관이 아닙니다. 스웨덴의 대규모 연구는, 미루기가 우울, 불안, 스트레스 수준 상승과 연관됨을 밝혔습니다. 수면의 질이 떨어지고, 신체 활동이 감소하며, 외로움이 증가합니다. 더 심각한 것은, 이것이 악순환을 만든다는 것입니다. 스트레스가 프로크래스티네이션을 유발하고, 프로크래스티네이션이 다시 스트레스를 만듭니다.",
+      "duration": 35,
+      "visualHint": "Circular diagram showing vicious cycle: procrastination → stress → depression/anxiety → more procrastination",
+      "keyPoints": ["depression/anxiety link", "sleep quality", "vicious cycle"]
+    },
+    {
+      "id": "strategy_intro",
+      "text": "그렇다면, 우리는 어떻게 이 전쟁에서 이길 수 있을까요? 과학은 답을 제시합니다.",
+      "duration": 8,
+      "visualHint": "Transition to solution section with hopeful tone",
+      "keyPoints": ["transition to solutions"]
+    },
+    {
+      "id": "five_second_rule",
+      "text": "첫 번째 전략, 5초 규칙. 불쾌한 과제가 주어지면, 5초 안에 즉각 행동하세요. 5, 4, 3, 2, 1, 시작. 변연계가 활성화되기 전에, 전전두엽 피질이 통제권을 잡도록 하는 것입니다.",
+      "duration": 20,
+      "visualHint": "Countdown timer 5-4-3-2-1 with brain activation visualization",
+      "keyPoints": ["5-second rule", "act before limbic activation"]
+    },
+    {
+      "id": "task_decomposition",
+      "text": "두 번째, 과제를 작은 조각으로 나누기. 큰 과제는 변연계를 압도합니다. 하지만 작은 단위로 쪼개면, 공식의 기대감은 올라가고, 지연은 줄어듭니다. 동기가 자연스럽게 상승하죠. 첫 걸음에만 집중하세요.",
+      "duration": 23,
+      "visualHint": "Large overwhelming task breaking into small manageable pieces, equation showing motivation increase",
+      "keyPoints": ["task decomposition", "expectancy up, delay down", "first step focus"]
+    },
+    {
+      "id": "specific_deadlines",
+      "text": "세 번째, 구체적인 마감 시간 설정. 모호한 목표는 지연 값을 무한대처럼 느끼게 합니다. 하지만 명확한 마감은, 지연을 구체화하여 동기를 끌어올립니다. 그리고 타인에게 공개하세요. 일관성을 유지하려는 사회적 압력이, 강력한 동력이 됩니다.",
+      "duration": 25,
+      "visualHint": "Vague goal vs specific deadline comparison, public commitment effect visualization",
+      "keyPoints": ["specific deadlines", "reduce delay value", "public commitment"]
+    },
+    {
+      "id": "habit_formation",
+      "text": "네 번째, 66일 습관 법칙. 런던 대학교 연구에 따르면, 새로운 습관이 자동화되는 데 평균 66일이 걸립니다. 핵심은, 한 번에 하나씩만 시도하는 것입니다. 의지력은 제한적 자원이니까요. 너무 많은 것을 한 번에 바꾸려는 것이, 가장 큰 실수입니다.",
+      "duration": 28,
+      "visualHint": "66-day calendar with progressive habit formation, willpower depletion visualization",
+      "keyPoints": ["66 days average", "one habit at a time", "limited willpower"]
+    },
+    {
+      "id": "neuroscience_tools",
+      "text": "마지막으로, 다섯 가지 신경과학 기반 도구입니다. 2분 규칙, 2분 안에 할 수 있으면 즉시 하세요. 환경 설계, 주의 산만 요소를 물리적으로 제거하세요. 시각화, 완료된 과제의 긍정적 결과를 상상하여 전전두엽 피질을 활성화하세요. 보상 시스템, 작은 마일스톤마다 즉각적 보상을 설정하세요. 마인드풀니스, 감정을 인식하는 훈련으로 변연계 반응을 의식적으로 조절하세요.",
+      "duration": 42,
+      "visualHint": "Five tools presented as checklist with visual metaphors for each",
+      "keyPoints": ["2-minute rule", "environment design", "visualization", "reward system", "mindfulness"]
+    },
+    {
+      "id": "conclusion",
+      "text": "프로크래스티네이션은 당신의 잘못이 아닙니다. 그것은 뇌의 진화적 유산입니다. 하지만 이제 당신은 알게 되었습니다. 변연계와 전전두엽 피질의 전쟁을, 동기 공식의 비밀을, 그리고 과학적으로 검증된 전략들을. 이 지식으로, 당신은 전쟁에서 이길 수 있습니다. 5초 안에 시작하세요. 지금 바로.",
+      "duration": 32,
+      "visualHint": "Brain visualization showing prefrontal cortex winning the battle, empowering message",
+      "keyPoints": ["not your fault", "evolutionary legacy", "you have the knowledge", "call to action"]
+    },
+    {
+      "id": "outro",
+      "text": "프로크래스티네이션의 심리학. 당신의 뇌 안에서 벌어지는 전쟁을 이해하고, 과학으로 승리하세요.",
+      "duration": 10,
+      "visualHint": "Closing card with brain visual and title",
+      "keyPoints": ["closing message"]
+    }
+  ],
+  "totalDuration": 270,
+  "wordCount": 1247,
+  "sceneCount": 18,
+  "narrativeStructure": {
+    "hook": "scenes 1-2: 뇌 안의 전쟁 - 즉각적 호기심 유발",
+    "promise": "scene 3: 통계로 현실감 - 이것은 보편적 문제",
+    "journey": "scenes 4-11: 뇌과학 → 공식 → 유형 → 건강 영향 - 점진적 이해 구축",
+    "resolution": "scenes 12-17: 과학적 전략 제시 - 실행 가능한 솔루션",
+    "closing": "scene 18: 임파워먼트와 즉각 행동 촉구"
+  },
+  "toneGuidance": {
+    "overall": "serious but hopeful",
+    "hook": "dramatic, attention-grabbing",
+    "science": "authoritative, clear",
+    "strategies": "practical, encouraging",
+    "conclusion": "empowering, motivational"
+  }
+}

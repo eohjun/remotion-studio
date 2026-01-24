@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-01-24T09:14:50.897Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/TwoMinuteRule/audio",
+  "compositionId": "TwoMinuteRule",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 2.88,
+      "durationFrames": 87,
+      "text": "You're not lazy. Your brain just hates starting."
+    },
+    {
+      "id": "problem",
+      "file": "problem.mp3",
+      "durationSeconds": 6.552,
+      "durationFrames": 197,
+      "text": "The hardest part of any task isn't doing it. It's starting. Your brain sees the whole mountain and f..."
+    },
+    {
+      "id": "solution",
+      "file": "solution.mp3",
+      "durationSeconds": 7.656,
+      "durationFrames": 230,
+      "text": "Here's the fix: The Two Minute Rule. If something takes less than two minutes, do it now. If it's bi..."
+    },
+    {
+      "id": "takeaway",
+      "file": "takeaway.mp3",
+      "durationSeconds": 4.32,
+      "durationFrames": 130,
+      "text": "Two minutes is all it takes to beat resistance. Start small. Start now."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "The 2-Minute Rule: Stop Procrastinating NOW",
+  "description": "You're not lazy. Your brain just hates starting. The 2-Minute Rule is a simple trick to beat procrastination instantly.",
+  "tags": [
+    "2 minute rule",
+    "procrastination",
+    "productivity",
+    "getting things done",
+    "GTD",
+    "James Clear",
+    "Atomic Habits",
+    "David Allen",
+    "motivation",
+    "habits",
+    "self improvement",
+    "productivity tips",
+    "stop procrastinating",
+    "shorts"
+  ],
+  "category": "Education",
+  "language": "en",
+  "visibility": "public",
+  "madeForKids": false,
+  "format": "shorts",
+  "thumbnail": {
+    "suggested": {
+      "title": "2 MIN",
+      "subtitle": "RULE",
+      "primaryColor": "#ff6b6b",
+      "secondaryColor": "#4ecdc4",
+      "icon": "⏱️",
+      "style": "bold"
+    }
+  },
+  "seo": {
+    "primaryKeyword": "2 minute rule",
+    "secondaryKeywords": ["procrastination", "productivity", "getting things done"],
+    "searchOptimizedTitle": "The 2-Minute Rule | Stop Procrastinating | Productivity Hack"
+  },
+  "sources": [
+    "David Allen - Getting Things Done",
+    "James Clear - Atomic Habits"
+  ],
+  "generatedAt": "2026-01-24",
+  "duration": "0:26",
+  "compositionId": "TwoMinuteRule"
+}

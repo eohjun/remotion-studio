@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-01-24T08:05:53.830Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/StressManagementCycle/audio",
+  "compositionId": "StressManagementCycle",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 13.296,
+      "durationFrames": 399,
+      "text": "충분히 쉬었는데도 피곤하신가요? 휴가를 다녀와도 여전히 지치셨다면, 당신의 잘못이 아닙니다. 연구에 따르면 높은 스트레스 수치가 심혈관 질환 사망률을 5배 이상 증가시킵니다."
+    },
+    {
+      "id": "problem",
+      "file": "problem.mp3",
+      "durationSeconds": 15.504,
+      "durationFrames": 466,
+      "text": "문제는 스트레스 자체가 아닙니다. 건강심리학자 에밀리 나고스키 박사는 이렇게 말합니다. 스트레스 유발 요인을 제거하더라도, 몸 안에 떠도는 스트레스는 여전히 처리해야 한다. 바로 ..."
+    },
+    {
+      "id": "cycle_explained",
+      "file": "cycle_explained.mp3",
+      "durationSeconds": 18.744,
+      "durationFrames": 563,
+      "text": "스트레스는 생리학적 사이클입니다. 위협을 감지하면, 시상하부가 호르몬을 분비하고, 뇌하수체가 신호를 증폭하며, 부신에서 코르티솔이 쏟아집니다. 평소보다 10배에서 12배 많은 양이..."
+    },
+    {
+      "id": "incomplete_cycle",
+      "file": "incomplete_cycle.mp3",
+      "durationSeconds": 19.056,
+      "durationFrames": 572,
+      "text": "원시시대라면 사자에게서 도망쳐 안전한 곳에 도착하면서 사이클이 완료됩니다. 하지만 현대인의 스트레스는 끝이 없습니다. 업무 압박, 재정 문제, 관계 갈등. 생리적 반응은 활성화되지..."
+    },
+    {
+      "id": "mindset",
+      "file": "mindset.mp3",
+      "durationSeconds": 22.128,
+      "durationFrames": 664,
+      "text": "여기 놀라운 연구가 있습니다. 3만 명을 8년간 추적한 결과, 높은 스트레스를 받으면서 스트레스가 해롭다고 믿은 사람들은 기대수명이 43% 더 짧았습니다. 하지만 스트레스가 해롭지..."
+    },
+    {
+      "id": "solution_physical",
+      "file": "solution_physical.mp3",
+      "durationSeconds": 22.704,
+      "durationFrames": 682,
+      "text": "그렇다면 어떻게 사이클을 완료할까요? 가장 효과적인 방법은 신체 활동입니다. 185명의 대학생을 대상으로 한 연구에서 주 2회 유산소 운동만으로도 스트레스가 크게 감소했습니다. 운..."
+    },
+    {
+      "id": "solution_breathing",
+      "file": "solution_breathing.mp3",
+      "durationSeconds": 21.336,
+      "durationFrames": 641,
+      "text": "즉각적 효과를 원한다면 호흡법입니다. 박스 호흡은 4초 들숨, 4초 멈춤, 4초 날숨, 4초 멈춤을 반복합니다. 미 해군 네이비실이 극도의 불안 상황에서 사용하는 기법이죠. 4-7..."
+    },
+    {
+      "id": "conclusion",
+      "file": "conclusion.mp3",
+      "durationSeconds": 16.776,
+      "durationFrames": 504,
+      "text": "기억하세요. 스트레스를 느끼는 것은 문제가 아닙니다. 스트레스 사이클을 완료하지 못하는 것이 문제입니다. 매일 30분 걷기, 5분 호흡 연습, 충분한 수면. 이 작은 습관들이 사이..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 4.536,
+      "durationFrames": 137,
+      "text": "오늘부터 시작하세요. 당신의 몸은 이미 답을 알고 있습니다."
+    }
+  ]
+}

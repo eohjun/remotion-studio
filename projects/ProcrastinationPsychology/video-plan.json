@@ -1,0 +1,757 @@
+{
+  "metadata": {
+    "compositionId": "ProcrastinationPsychology",
+    "title": "프로크래스티네이션의 심리학",
+    "language": "ko",
+    "fps": 30,
+    "totalDuration": 270,
+    "totalFrames": 8100,
+    "aspectRatio": "16:9",
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    },
+    "contentType": "hybrid-philosophical-data",
+    "visualStrategy": "Academic + Data Story Pattern",
+    "colorScheme": {
+      "primary": "#1a1a2e",
+      "secondary": "#16213e",
+      "accent": "#e94560",
+      "limbic": "#e94560",
+      "prefrontal": "#4a90d9",
+      "success": "#22c55e"
+    }
+  },
+  "globalSettings": {
+    "background": {
+      "type": "AnimatedGradient",
+      "mode": "pulse",
+      "colors": ["#1a1a2e", "#16213e"],
+      "speed": 0.3
+    },
+    "effects": {
+      "vignette": 0.3,
+      "filmGrain": 0.02,
+      "lightLeak": false
+    },
+    "audio": {
+      "musicPreset": "ambient",
+      "duckingPreset": "standard"
+    }
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "title": "Title Card",
+      "template": "IntroTemplate",
+      "decisionPath": "Scene type: intro → IntroTemplate (only option)",
+      "startFrame": 0,
+      "durationFrames": 90,
+      "duration": 3,
+      "content": {
+        "title": "프로크래스티네이션의 심리학",
+        "subtitle": "당신의 뇌 안에서 벌어지는 전쟁"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#16213e"]
+        }
+      },
+      "audio": {
+        "narrationFile": "intro.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "hook",
+      "title": "Brain War",
+      "template": "ComparisonTemplate",
+      "decisionPath": "Visual: split brain visualization → Comparison needed → ComparisonTemplate",
+      "startFrame": 90,
+      "durationFrames": 600,
+      "duration": 20,
+      "content": {
+        "left": {
+          "title": "변연계",
+          "subtitle": "즐거움 추구, 고통 회피",
+          "color": "#e94560"
+        },
+        "right": {
+          "title": "전전두엽 피질",
+          "subtitle": "장기 계획, 합리적 판단",
+          "color": "#4a90d9"
+        },
+        "centerText": "VS"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "cycle",
+          "colors": ["#e94560", "#1a1a2e", "#4a90d9"],
+          "speed": 0.5
+        },
+        "effects": {
+          "vignette": 0.4
+        }
+      },
+      "audio": {
+        "narrationFile": "hook.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "statistics",
+      "title": "Statistics",
+      "template": "DataVisualizationTemplate",
+      "decisionPath": "Content: statistics → Data-driven → DataVisualizationTemplate + BarChart",
+      "startFrame": 690,
+      "durationFrames": 690,
+      "duration": 23,
+      "content": {
+        "title": "프로크래스티네이션 현황",
+        "metrics": [
+          {
+            "label": "대학생",
+            "value": 75,
+            "suffix": "%",
+            "description": "스스로를 미루는 사람으로 인식"
+          },
+          {
+            "label": "직장인",
+            "value": 88,
+            "suffix": "%",
+            "description": "매일 최소 1시간 미루기"
+          },
+          {
+            "label": "만성적 미루기 증가",
+            "valueFrom": 5,
+            "valueTo": 20,
+            "suffix": "%",
+            "description": "1970년대 → 현재"
+          }
+        ]
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "FloatingShapes",
+          "shape": "circle",
+          "count": 15,
+          "speed": 0.5
+        },
+        "components": ["CountUp", "BarChart"]
+      },
+      "audio": {
+        "narrationFile": "statistics.mp3"
+      },
+      "transition": {
+        "type": "wipe",
+        "direction": "left",
+        "duration": 20
+      }
+    },
+    {
+      "id": "brain_systems",
+      "title": "Two Brain Systems",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: educational explanation → ContentTemplate with bullets",
+      "startFrame": 1380,
+      "durationFrames": 900,
+      "duration": 30,
+      "content": {
+        "title": "두 뇌 시스템의 전쟁",
+        "bullets": [
+          "변연계: 본능적, 강력함 - 즐거움 추구, 고통 회피",
+          "전전두엽 피질: 새롭고 약함 - 합리적 판단, 장기 계획"
+        ]
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "layout": "split",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "cycle",
+          "colors": ["#e94560", "#16213e", "#4a90d9"],
+          "speed": 0.3
+        },
+        "effects": {
+          "vignette": 0.35
+        }
+      },
+      "audio": {
+        "narrationFile": "brain_systems.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "conflict_mechanism",
+      "title": "Conflict Mechanism",
+      "template": "StoryTemplate",
+      "decisionPath": "Content: sequential narrative/process → StoryTemplate with sequence layout",
+      "startFrame": 2280,
+      "durationFrames": 750,
+      "duration": 25,
+      "content": {
+        "title": "변연계의 승리 과정",
+        "panels": [
+          {
+            "step": 1,
+            "text": "불쾌한 과제 발생",
+            "icon": "📋"
+          },
+          {
+            "step": 2,
+            "text": "변연계 즉각 반응",
+            "icon": "⚡"
+          },
+          {
+            "step": 3,
+            "text": "편도체가 불안 생성",
+            "icon": "😰"
+          },
+          {
+            "step": 4,
+            "text": "즉각적 안도감 추구",
+            "icon": "📱"
+          },
+          {
+            "step": 5,
+            "text": "전전두엽 피질 패배",
+            "icon": "😔"
+          }
+        ]
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "layout": "sequence",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#e94560"]
+        }
+      },
+      "audio": {
+        "narrationFile": "conflict_mechanism.mp3"
+      },
+      "transition": {
+        "type": "slide",
+        "direction": "left",
+        "duration": 15
+      }
+    },
+    {
+      "id": "fmri_evidence",
+      "title": "fMRI Evidence",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: scientific evidence → Technical → ContentTemplate",
+      "startFrame": 3030,
+      "durationFrames": 840,
+      "duration": 28,
+      "content": {
+        "title": "fMRI 스캔 연구 결과",
+        "mainText": "미루는 사람들의 뇌에서 변연계 영역 과활성화, 전전두엽 피질 저활성화 확인",
+        "highlight": "프로크래스티네이션 = 인지 통제의 실패"
+      },
+      "props": {
+        "textAnimation": "typewriter",
+        "background": {
+          "type": "FloatingShapes",
+          "shape": "hexagon",
+          "count": 12,
+          "speed": 0.3
+        },
+        "components": ["HighlightText"],
+        "effects": {
+          "vignette": 0.4
+        }
+      },
+      "audio": {
+        "narrationFile": "fmri_evidence.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "steel_equation_intro",
+      "title": "Steel's Equation",
+      "template": "DataVisualizationTemplate",
+      "decisionPath": "Content: mathematical formula → DataVisualizationTemplate with metric mode",
+      "startFrame": 3870,
+      "durationFrames": 900,
+      "duration": 30,
+      "content": {
+        "title": "피어스 스틸의 동기 공식",
+        "equation": {
+          "formula": "동기 = (기대감 × 가치) / (충동성 × 지연)",
+          "variables": [
+            {"name": "기대감(E)", "description": "결과 발생 확률"},
+            {"name": "가치(V)", "description": "보상의 가치"},
+            {"name": "충동성(I)", "description": "지연 민감도"},
+            {"name": "지연(D)", "description": "보상까지의 시간"}
+          ]
+        }
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "mode": "metric",
+        "background": {
+          "type": "FloatingShapes",
+          "shape": "circle",
+          "count": 10,
+          "speed": 0.4
+        },
+        "components": ["CountUp"]
+      },
+      "audio": {
+        "narrationFile": "steel_equation_intro.mp3"
+      },
+      "transition": {
+        "type": "wipe",
+        "duration": 15
+      }
+    },
+    {
+      "id": "equation_insight",
+      "title": "Equation Insight",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: insight/graph → ContentTemplate with LineChart",
+      "startFrame": 4770,
+      "durationFrames": 780,
+      "duration": 26,
+      "content": {
+        "title": "마감 효과",
+        "mainText": "마감이 멀 때는 동기가 낮고, 마감이 임박해야 동기가 급상승",
+        "insight": "이것은 비합리적이 아니라, 뇌의 수학이다"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#1a1a2e"]
+        },
+        "components": ["LineChart"],
+        "chartData": {
+          "type": "motivation-curve",
+          "xAxis": "시간 (마감까지)",
+          "yAxis": "동기 수준"
+        }
+      },
+      "audio": {
+        "narrationFile": "equation_insight.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "procrastinator_types",
+      "title": "Procrastinator Types",
+      "template": "TableListTemplate",
+      "decisionPath": "Content: 3 distinct categories → TableListTemplate grid mode",
+      "startFrame": 5550,
+      "durationFrames": 840,
+      "duration": 28,
+      "content": {
+        "title": "미루는 사람의 3가지 유형",
+        "items": [
+          {
+            "title": "감정 회피자",
+            "icon": "😰",
+            "description": "불안과 지루함을 피하려고 미룸"
+          },
+          {
+            "title": "완벽주의자",
+            "icon": "🎯",
+            "description": "실패가 두려워 시작조차 못함"
+          },
+          {
+            "title": "아드레날린 중독자",
+            "icon": "⚡",
+            "description": "막판 스트레스를 즐기며 미룸"
+          }
+        ]
+      },
+      "props": {
+        "mode": "grid",
+        "columns": 3,
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#16213e"]
+        }
+      },
+      "audio": {
+        "narrationFile": "procrastinator_types.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "health_impact",
+      "title": "Health Impact",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: health warnings → Serious tone → ContentTemplate",
+      "startFrame": 6390,
+      "durationFrames": 1050,
+      "duration": 35,
+      "content": {
+        "title": "건강에 미치는 영향",
+        "bullets": [
+          "우울, 불안, 스트레스 수준 상승",
+          "수면의 질 저하",
+          "신체 활동 감소",
+          "외로움 증가"
+        ],
+        "warning": "악순환: 스트레스 → 프로크래스티네이션 → 더 많은 스트레스"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#e94560"]
+        },
+        "effects": {
+          "vignette": 0.6
+        }
+      },
+      "audio": {
+        "narrationFile": "health_impact.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "strategy_intro",
+      "title": "Strategy Intro",
+      "template": "QuoteTemplate",
+      "decisionPath": "Content: transition/turning point → QuoteTemplate",
+      "startFrame": 7440,
+      "durationFrames": 240,
+      "duration": 8,
+      "content": {
+        "quote": "어떻게 이 전쟁에서 이길 수 있을까?",
+        "attribution": "과학은 답을 제시합니다"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "cycle",
+          "colors": ["#e94560", "#16213e", "#4a90d9"]
+        },
+        "effects": {
+          "lightLeak": true,
+          "vignette": 0.3
+        }
+      },
+      "audio": {
+        "narrationFile": "strategy_intro.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 20
+      }
+    },
+    {
+      "id": "five_second_rule",
+      "title": "5-Second Rule",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: strategy with countdown → ContentTemplate + CountUp",
+      "startFrame": 7680,
+      "durationFrames": 600,
+      "duration": 20,
+      "content": {
+        "title": "전략 1: 5초 규칙",
+        "mainText": "불쾌한 과제가 주어지면 5초 안에 즉각 행동",
+        "countdown": [5, 4, 3, 2, 1],
+        "insight": "변연계 활성화 전에 전전두엽 피질이 통제권 획득"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#4a90d9"]
+        },
+        "components": ["CountUp"],
+        "effects": {
+          "lightLeak": true
+        }
+      },
+      "audio": {
+        "narrationFile": "five_second_rule.mp3"
+      },
+      "transition": {
+        "type": "slide",
+        "direction": "left",
+        "duration": 15
+      }
+    },
+    {
+      "id": "task_decomposition",
+      "title": "Task Decomposition",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: strategy → ContentTemplate + ProgressBar",
+      "startFrame": 8280,
+      "durationFrames": 690,
+      "duration": 23,
+      "content": {
+        "title": "전략 2: 과제 분해",
+        "mainText": "큰 과제를 작은 조각으로 나누기",
+        "bullets": [
+          "기대감(E) ↑ 상승",
+          "지연(D) ↓ 감소",
+          "동기 자연 상승"
+        ],
+        "callToAction": "첫 걸음에만 집중하세요"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#4a90d9"]
+        },
+        "components": ["ProgressBar"]
+      },
+      "audio": {
+        "narrationFile": "task_decomposition.mp3"
+      },
+      "transition": {
+        "type": "slide",
+        "direction": "left",
+        "duration": 15
+      }
+    },
+    {
+      "id": "specific_deadlines",
+      "title": "Specific Deadlines",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: strategy → ContentTemplate + HighlightText",
+      "startFrame": 8970,
+      "durationFrames": 750,
+      "duration": 25,
+      "content": {
+        "title": "전략 3: 구체적 마감 설정",
+        "mainText": "모호한 목표 → 지연 값 무한대",
+        "highlight": "명확한 마감 → 동기 상승",
+        "bonus": "공개 약속 효과: 타인에게 공개하여 사회적 압력 활용"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#4a90d9"]
+        },
+        "components": ["HighlightText"]
+      },
+      "audio": {
+        "narrationFile": "specific_deadlines.mp3"
+      },
+      "transition": {
+        "type": "slide",
+        "direction": "left",
+        "duration": 15
+      }
+    },
+    {
+      "id": "habit_formation",
+      "title": "66-Day Habit Rule",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: strategy with number → ContentTemplate + CountUp + ProgressCircle",
+      "startFrame": 9720,
+      "durationFrames": 840,
+      "duration": 28,
+      "content": {
+        "title": "전략 4: 66일 습관 법칙",
+        "metric": {
+          "value": 66,
+          "suffix": "일",
+          "description": "습관 자동화까지 평균 소요 시간"
+        },
+        "insight": "한 번에 하나씩만 시도 - 의지력은 제한적 자원"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#4a90d9"]
+        },
+        "components": ["CountUp", "ProgressCircle"]
+      },
+      "audio": {
+        "narrationFile": "habit_formation.mp3"
+      },
+      "transition": {
+        "type": "slide",
+        "direction": "left",
+        "duration": 15
+      }
+    },
+    {
+      "id": "neuroscience_tools",
+      "title": "5 Neuroscience Tools",
+      "template": "TableListTemplate",
+      "decisionPath": "Content: 5 items list → TableListTemplate list mode",
+      "startFrame": 10560,
+      "durationFrames": 1260,
+      "duration": 42,
+      "content": {
+        "title": "전략 5: 신경과학 기반 5가지 도구",
+        "items": [
+          {
+            "title": "2분 규칙",
+            "description": "2분 안에 할 수 있으면 즉시 실행"
+          },
+          {
+            "title": "환경 설계",
+            "description": "주의 산만 요소 물리적 제거"
+          },
+          {
+            "title": "시각화",
+            "description": "완료된 과제의 긍정적 결과 상상"
+          },
+          {
+            "title": "보상 시스템",
+            "description": "작은 마일스톤마다 즉각적 보상"
+          },
+          {
+            "title": "마인드풀니스",
+            "description": "감정 인식으로 변연계 반응 조절"
+          }
+        ]
+      },
+      "props": {
+        "mode": "list",
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#16213e", "#4a90d9"]
+        }
+      },
+      "audio": {
+        "narrationFile": "neuroscience_tools.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 15
+      }
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "template": "ContentTemplate",
+      "decisionPath": "Content: empowerment → ContentTemplate",
+      "startFrame": 11820,
+      "durationFrames": 960,
+      "duration": 32,
+      "content": {
+        "title": "당신은 이길 수 있습니다",
+        "mainText": "프로크래스티네이션은 당신의 잘못이 아닙니다. 그것은 뇌의 진화적 유산입니다.",
+        "knowledge": [
+          "변연계와 전전두엽 피질의 전쟁",
+          "동기 공식의 비밀",
+          "과학적으로 검증된 전략들"
+        ],
+        "callToAction": "5초 안에 시작하세요. 지금 바로."
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#4a90d9", "#22c55e"]
+        },
+        "effects": {
+          "lightLeak": true,
+          "vignette": 0.3
+        },
+        "components": ["HighlightText"]
+      },
+      "audio": {
+        "narrationFile": "conclusion.mp3"
+      },
+      "transition": {
+        "type": "dissolve",
+        "duration": 20
+      }
+    },
+    {
+      "id": "outro",
+      "title": "Outro",
+      "template": "OutroTemplate",
+      "decisionPath": "Scene type: outro → OutroTemplate (only option)",
+      "startFrame": 12780,
+      "durationFrames": 300,
+      "duration": 10,
+      "content": {
+        "title": "프로크래스티네이션의 심리학",
+        "subtitle": "뇌의 전쟁을 이해하고, 과학으로 승리하세요"
+      },
+      "props": {
+        "textAnimation": "fadeInUp",
+        "background": {
+          "type": "AnimatedGradient",
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#16213e"]
+        }
+      },
+      "audio": {
+        "narrationFile": "outro.mp3"
+      },
+      "transition": {
+        "type": "fade",
+        "duration": 30
+      }
+    }
+  ],
+  "templateSelectionSummary": {
+    "IntroTemplate": 1,
+    "OutroTemplate": 1,
+    "ComparisonTemplate": 1,
+    "DataVisualizationTemplate": 2,
+    "ContentTemplate": 9,
+    "StoryTemplate": 1,
+    "QuoteTemplate": 1,
+    "TableListTemplate": 2
+  },
+  "componentsUsed": [
+    "CountUp",
+    "BarChart",
+    "LineChart",
+    "ProgressBar",
+    "ProgressCircle",
+    "HighlightText"
+  ],
+  "frameVerification": {
+    "calculatedTotal": 8100,
+    "expectedTotal": 8100,
+    "verified": true
+  }
+}

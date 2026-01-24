@@ -57,6 +57,49 @@ export const SPACING = {
   "2xl": 100,
 } as const;
 
+// Layout constants for 1920x1080 video
+export const LAYOUT = {
+  /** Video dimensions */
+  width: 1920,
+  height: 1080,
+
+  /** Safe area padding (content should stay within) */
+  safeArea: {
+    horizontal: 80, // SPACING.xl
+    vertical: 60, // SPACING.lg
+  },
+
+  /** Maximum content dimensions */
+  maxContentWidth: 1760, // 1920 - 80*2
+  maxContentHeight: 960, // 1080 - 60*2
+
+  /** Usable content area (after safe padding) */
+  contentArea: {
+    width: 1760,
+    height: 960,
+  },
+
+  /** Two-column layout helpers */
+  twoColumn: {
+    /** 50/50 split */
+    equal: { left: "50%", right: "50%" },
+    /** 55/45 split (text/visual) */
+    textVisual: { left: "55%", right: "45%" },
+    /** 60/40 split (primary/secondary) */
+    primarySecondary: { left: "60%", right: "40%" },
+  },
+
+  /** Maximum heights for common components */
+  maxHeights: {
+    /** Cycle diagram (with overflow allowance) */
+    cycleDiagram: 500,
+    /** Comparison cards */
+    comparisonCards: 550,
+    /** Content section */
+    contentSection: 700,
+  },
+} as const;
+
 // Border radius scale
 export const RADIUS = {
   sm: 12,
@@ -71,6 +114,20 @@ export const SPRING_CONFIGS = {
   normal: { damping: 80, mass: 0.5, stiffness: 200 },
   gentle: { damping: 100, mass: 0.8, stiffness: 150 },
   bouncy: { damping: 60, mass: 0.4, stiffness: 300 },
+} as const;
+
+// Text styles for different languages
+export const TEXT_STYLES = {
+  /** Korean text - prevents character-level line breaks */
+  korean: {
+    wordBreak: "keep-all" as const,
+    overflowWrap: "break-word" as const,
+    lineHeight: 1.4,
+  },
+  /** Default text style */
+  default: {
+    lineHeight: 1.5,
+  },
 } as const;
 
 // Common card background helpers
