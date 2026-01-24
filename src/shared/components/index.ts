@@ -1,8 +1,12 @@
 // Main components barrel export
 
-// Utilities
-export { SceneTransition } from "./SceneTransition";
-export type { SceneTransitionProps } from "./SceneTransition";
+// Scene utilities
+export { SceneTransition, SceneSequence, SceneWithTransition } from "./SceneTransition";
+export type {
+  SceneTransitionProps,
+  SceneSequenceProps,
+  SceneWithTransitionProps,
+} from "./SceneTransition";
 
 // Constants
 export * from "./constants";
@@ -30,3 +34,10 @@ export * from "./icons";
 
 // Visualizers
 export * from "./visualizers";
+
+// 3D Components (Three.js)
+// Note: Import from './three' directly for tree-shaking
+export * from "./three";
+
+// Audio Visualization Components
+export * from "./audio";

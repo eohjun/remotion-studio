@@ -179,3 +179,11 @@ export type {
   CodeAnimation,
   CodeTheme,
 } from "./CodeBlock";
+
+// Stroked text for improved readability
+export { StrokedText, AnimatedStrokedText, SubtitleText } from "./StrokedText";
+export type {
+  StrokedTextProps,
+  AnimatedStrokedTextProps,
+  SubtitleTextProps,
+} from "./StrokedText";
