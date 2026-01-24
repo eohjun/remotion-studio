@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AbsoluteFill,
   Audio,
@@ -9,12 +9,40 @@ import {
   useVideoConfig,
   interpolate,
   Easing,
+  delayRender,
+  continueRender,
+  cancelRender,
 } from "remotion";
+import { getAudioData } from "@remotion/media-utils";
 import { z } from "zod";
 import { SCENES, THEME, SHORTS_LAYOUT, TOTAL_DURATION } from "./constants";
 import { AnimatedText } from "../../shared/templates/animations/AnimatedText";
 import { fadeInUp, scaleIn } from "../../shared/templates/animations/presets";
 import { FONT_FAMILY } from "../../shared/components/constants";
+import { BarWaveform } from "../../shared/components/waveforms";
+
+// Type for audio data
+type AudioDataType = Awaited<ReturnType<typeof getAudioData>>;
+
+// Hook to load audio data with proper delay/continue render handling
+const useAudioData = (src: string) => {
+  const [audioData, setAudioData] = useState<AudioDataType | null>(null);
+  const [handle] = useState(() => delayRender());
+
+  useEffect(() => {
+    getAudioData(src)
+      .then((data) => {
+        setAudioData(data);
+        continueRender(handle);
+      })
+      .catch((err) => {
+        console.error("Failed to load audio data:", err);
+        cancelRender(err);
+      });
+  }, [src, handle]);
+
+  return audioData;
+};
 
 // Schema for props
 export const TwoMinuteRuleSchema = z.object({});
@@ -74,6 +102,40 @@ const FloatingParticles: React.FC<{
   });
 
   return <AbsoluteFill style={{ overflow: "hidden" }}>{particles}</AbsoluteFill>;
+};
+
+// Audio waveform visualization at bottom
+const WaveformDisplay: React.FC<{
+  color?: string;
+  audioData?: AudioDataType | null;
+}> = ({ color = THEME.primaryColor, audioData }) => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: 40,
+        left: 0,
+        right: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-end",
+      }}
+    >
+      <BarWaveform
+        audioData={audioData}
+        numberOfSamples={48}
+        barColor={color}
+        barWidth={6}
+        barGap={4}
+        waveAmplitude={60}
+        waveSpeed={0.08}
+        width={800}
+        height={80}
+        growUpwardsOnly
+        style={{ opacity: 0.8 }}
+      />
+    </div>
+  );
 };
 
 // Progress bar at bottom
@@ -149,6 +211,14 @@ const PulsingGlow: React.FC<{
   );
 };
 
+// Audio file paths
+const AUDIO_FILES = {
+  hook: staticFile("videos/TwoMinuteRule/audio/hook.mp3"),
+  problem: staticFile("videos/TwoMinuteRule/audio/problem.mp3"),
+  solution: staticFile("videos/TwoMinuteRule/audio/solution.mp3"),
+  takeaway: staticFile("videos/TwoMinuteRule/audio/takeaway.mp3"),
+};
+
 // ============================================
 // SCENE COMPONENTS
 // ============================================
@@ -157,6 +227,7 @@ const PulsingGlow: React.FC<{
 const HookScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const audioData = useAudioData(AUDIO_FILES.hook);
 
   const scale = spring({
     frame,
@@ -251,6 +322,7 @@ const HookScene: React.FC = () => {
         </AbsoluteFill>
       </SceneTransition>
 
+      <WaveformDisplay color={THEME.primaryColor} audioData={audioData} />
       <ProgressBar />
     </AbsoluteFill>
   );
@@ -260,6 +332,7 @@ const HookScene: React.FC = () => {
 const ProblemScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const audioData = useAudioData(AUDIO_FILES.problem);
 
   // Mountain grows and looms over
   const mountainScale = interpolate(
@@ -375,6 +448,7 @@ const ProblemScene: React.FC = () => {
         </AbsoluteFill>
       </SceneTransition>
 
+      <WaveformDisplay color={THEME.secondaryColor} audioData={audioData} />
       <ProgressBar />
     </AbsoluteFill>
   );
@@ -384,6 +458,7 @@ const ProblemScene: React.FC = () => {
 const SolutionScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const audioData = useAudioData(AUDIO_FILES.solution);
 
   const badgeScale = spring({
     frame: frame - 5,
@@ -560,6 +635,7 @@ const SolutionScene: React.FC = () => {
         </AbsoluteFill>
       </SceneTransition>
 
+      <WaveformDisplay color={THEME.accentColor} audioData={audioData} />
       <ProgressBar />
     </AbsoluteFill>
   );
@@ -569,6 +645,7 @@ const SolutionScene: React.FC = () => {
 const TakeawayScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const audioData = useAudioData(AUDIO_FILES.takeaway);
 
   const checkScale = spring({
     frame: frame - 10,
@@ -734,6 +811,7 @@ const TakeawayScene: React.FC = () => {
         </AbsoluteFill>
       </SceneTransition>
 
+      <WaveformDisplay color="#28a745" audioData={audioData} />
       <ProgressBar />
     </AbsoluteFill>
   );
