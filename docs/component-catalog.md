@@ -2,7 +2,7 @@
 
 **Remotion Studio Component Library Reference**
 **Last Updated**: 2026-01-24
-**Total Components**: 50+
+**Total Components**: 55+
 
 ---
 
@@ -10,7 +10,7 @@
 
 | Category | Components | Import From |
 |----------|-----------|-------------|
-| Scene Templates | 13 | `@shared/templates/scenes` |
+| Scene Templates | 14 | `@shared/templates/scenes` |
 | Backgrounds | 3 | `@shared/components/backgrounds` |
 | Effects | 5 | `@shared/components/effects` |
 | Text Animations | 4 | `@shared/templates/animations` |
@@ -20,6 +20,7 @@
 | Audio | 3+ | `@shared/audio` |
 | Icons | 2 | `@shared/components/icons` |
 | Transitions | 10+ | `@shared/transitions` |
+| Hooks | 2 | `@shared/hooks` |
 
 ---
 
@@ -1027,6 +1028,141 @@ import { TransitionComposition, TRANSITION_PRESETS } from "@shared/transitions";
 // Design System
 import { COLORS, GRADIENTS, FONT_SIZES, SPACING, SPRING_CONFIGS } from "@shared/components/constants";
 ```
+
+---
+
+---
+
+## Phase 19: New Components
+
+### TableListTemplate
+**Purpose**: Data tables, lists, and grid displays
+
+**Props**:
+```typescript
+{
+  title: string;
+  displayMode: 'table' | 'list' | 'grid';
+  headers?: string[];           // For table mode
+  rows?: TableRow[];            // For table mode
+  items?: ListItem[];           // For list/grid modes
+  gridColumns?: number;         // For grid mode (default: 2)
+  showNumbers?: boolean;
+  highlightColor?: string;
+  staggerDelay?: number;        // Animation delay between items
+  source?: string;
+  durationInFrames: number;
+}
+
+interface TableRow {
+  cells: string[];
+  highlight?: boolean;
+  icon?: string;
+  color?: string;
+}
+
+interface ListItem {
+  text: string;
+  subtext?: string;
+  icon?: string;
+  badge?: string;
+  highlight?: boolean;
+  color?: string;
+}
+```
+
+**Display Modes**:
+- `table`: Grid with headers, ideal for structured data
+- `list`: Vertical items with icons/badges, ideal for features/steps
+- `grid`: Card grid layout, ideal for categories/options
+
+**When to Use**:
+- Feature lists
+- Comparison tables
+- Step-by-step processes
+- Category displays
+- Data summaries
+
+**Combinations**:
+- `FloatingShapes` background for professional look
+- `slide` or `fade` transitions
+- Use `highlight` for key items
+
+---
+
+## Responsive Utilities
+
+### useResponsive Hook
+**Purpose**: Multi-aspect-ratio support (16:9, 9:16 Shorts, 1:1, 4:3)
+
+**Import**:
+```typescript
+import { useResponsive, RESOLUTION_PRESETS } from "@shared/hooks";
+```
+
+**Returns**:
+```typescript
+{
+  aspectRatio: '16:9' | '9:16' | '1:1' | '4:3';
+  isPortrait: boolean;      // true for Shorts/vertical
+  isLandscape: boolean;     // true for standard video
+  isSquare: boolean;
+  width: number;
+  height: number;
+  scale: (value: number) => number;         // Scale based on resolution
+  scaleFont: (baseSize: number) => number;  // Font scaling with portrait boost
+  scaleSpacing: (baseSpacing: number) => number;
+  layoutDirection: 'row' | 'column';        // Auto layout direction
+  optimalColumns: (baseColumns: number) => number;  // Grid column adjustment
+  padding: { horizontal: number; vertical: number; };
+  textScale: { title: number; body: number; small: number; };
+}
+```
+
+**Usage**:
+```tsx
+const { isPortrait, scale, scaleFont, layoutDirection } = useResponsive();
+
+return (
+  <div style={{
+    flexDirection: layoutDirection,
+    fontSize: scaleFont(48),
+    padding: scale(40),
+  }}>
+    {isPortrait ? <PortraitLayout /> : <LandscapeLayout />}
+  </div>
+);
+```
+
+**Resolution Presets**:
+```typescript
+RESOLUTION_PRESETS = {
+  '16:9': { width: 1920, height: 1080 },  // Standard YouTube
+  '9:16': { width: 1080, height: 1920 },  // Shorts/TikTok/Reels
+  '1:1':  { width: 1080, height: 1080 },  // Square
+  '4:3':  { width: 1440, height: 1080 },  // Legacy
+}
+```
+
+---
+
+## Performance Optimizations
+
+### ParticleField (Enhanced)
+**New Performance Options**:
+```typescript
+{
+  // Existing props...
+  maxParticles?: number;         // Default: 50, Max: 200
+  viewportCulling?: boolean;     // Default: true (skip off-screen particles)
+  useGPUAcceleration?: boolean;  // Default: true (use transform3d)
+}
+```
+
+**Performance Tips**:
+- Keep `particleCount` under 50 for smooth 30fps
+- Enable `viewportCulling` for particles that leave the screen
+- `useGPUAcceleration` uses CSS transforms for GPU compositing
 
 ---
 

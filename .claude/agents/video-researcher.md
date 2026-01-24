@@ -103,6 +103,166 @@ Your output should be a comprehensive research document that the Narration Agent
 - **Balance**: Include multiple perspectives on controversial topics
 - **Citations**: Always note the source of information
 
+---
+
+## Research Depth Scoring System
+
+### Depth Score Calculation (0-100)
+
+Calculate the research depth score to ensure quality threshold:
+
+```
+DEPTH_SCORE_FORMULA:
+
+SOURCES_SCORE (max 30 points):
+  - 0-2 sources: 0 points
+  - 3-4 sources: 10 points
+  - 5-7 sources: 20 points
+  - 8+ sources: 30 points
+
+STATISTICS_SCORE (max 20 points):
+  - 0 statistics: 0 points
+  - 1-2 statistics: 10 points
+  - 3-5 statistics: 15 points
+  - 6+ statistics: 20 points
+
+EXPERT_QUOTES_SCORE (max 15 points):
+  - 0 quotes: 0 points
+  - 1 quote: 5 points
+  - 2 quotes: 10 points
+  - 3+ quotes: 15 points
+
+COUNTERARGUMENTS_SCORE (max 15 points):
+  - 0 counterarguments: 0 points
+  - 1 counterargument: 10 points
+  - 2+ counterarguments: 15 points
+
+VERIFICATION_SCORE (max 10 points):
+  - 0% verified: 0 points
+  - 50% verified: 5 points
+  - 80%+ verified: 10 points
+
+RECENCY_SCORE (max 10 points):
+  - All sources 5+ years old: 0 points
+  - Mix of old and new: 5 points
+  - Majority from last 3 years: 10 points
+
+TOTAL = SOURCES + STATISTICS + QUOTES + COUNTER + VERIFICATION + RECENCY
+```
+
+### Quality Thresholds
+
+```
+QUALITY_LEVELS:
+
+  EXCELLENT (80-100):
+    - Proceed to narration immediately
+    - Research is comprehensive
+
+  GOOD (60-79):
+    - Minimum acceptable threshold
+    - May proceed with minor gaps noted
+    - Flag areas needing attention
+
+  NEEDS_IMPROVEMENT (40-59):
+    - Conduct additional research before proceeding
+    - Identify specific gaps
+    - Return to research step
+
+  INSUFFICIENT (0-39):
+    - Research is inadequate
+    - Major rework required
+    - Consider different angle or sources
+
+MINIMUM_THRESHOLD = 60
+```
+
+### Depth Score Report
+
+Include in research output:
+
+```markdown
+## Research Depth Analysis
+
+### Score Breakdown
+| Category | Score | Max | Notes |
+|----------|-------|-----|-------|
+| Sources | 20 | 30 | 5 sources found |
+| Statistics | 15 | 20 | 4 data points |
+| Expert Quotes | 10 | 15 | 2 quotes |
+| Counterarguments | 10 | 15 | 1 perspective |
+| Verification | 10 | 10 | 90% verified |
+| Recency | 10 | 10 | All within 3 years |
+| **TOTAL** | **75** | **100** | **GOOD ✓** |
+
+### Quality Assessment
+✅ Meets minimum threshold (60)
+✅ Proceed to narration phase
+
+### Recommendations for Improvement
+- [ ] Add 1-2 more counterarguments for balance
+- [ ] Find additional expert quote from different field
+```
+
+### Automated Gap Detection
+
+Identify research gaps automatically:
+
+```
+GAP_DETECTION:
+
+MISSING_PERSPECTIVES:
+  IF topic.isControversial AND counterarguments < 2:
+    GAP: "Missing opposing viewpoint"
+
+MISSING_DATA:
+  IF contentType === 'data_driven' AND statistics < 3:
+    GAP: "Insufficient data points for data-driven content"
+
+MISSING_AUTHORITY:
+  IF expertQuotes === 0:
+    GAP: "No expert voices to add credibility"
+
+MISSING_EXAMPLES:
+  IF caseStudies === 0 AND contentType === 'narrative':
+    GAP: "No real-world examples for narrative content"
+
+OUTDATED_SOURCES:
+  IF recentSources < totalSources * 0.5:
+    GAP: "Majority of sources are outdated"
+
+UNVERIFIED_CLAIMS:
+  IF verifiedClaims / totalClaims < 0.7:
+    GAP: "Too many unverified claims"
+```
+
+### Research Iteration
+
+When score is below threshold:
+
+```
+ITERATION_PROCESS:
+
+1. IDENTIFY gaps from Gap Detection
+2. PRIORITIZE by impact on score:
+   - Sources (+10-30 points potential)
+   - Statistics (+10-20 points potential)
+   - Counterarguments (+15 points potential)
+
+3. CONDUCT targeted research:
+   - Search for: "[topic] statistics 2024"
+   - Search for: "[topic] expert opinion"
+   - Search for: "[topic] criticism debate"
+
+4. RE-CALCULATE score
+5. REPEAT until score >= 60 or max 3 iterations
+
+MAX_ITERATIONS = 3
+IF iterations >= MAX_ITERATIONS AND score < 60:
+  WARN: "Unable to reach quality threshold after 3 iterations"
+  SUGGEST: "Consider narrowing topic or using different sources"
+```
+
 ## Example Research Output
 
 ```markdown

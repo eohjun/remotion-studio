@@ -39,15 +39,27 @@ function generateParticles(
 }
 
 /**
- * Single particle component
+ * Optimized particle component with GPU acceleration and viewport culling
  */
-const Particle: React.FC<{
+const OptimizedParticle: React.FC<{
   particle: ParticleData;
   frame: number;
   direction: "up" | "down" | "random";
   opacity: number;
   height: number;
-}> = ({ particle, frame, direction, opacity, height }) => {
+  width: number;
+  viewportCulling: boolean;
+  useGPUAcceleration: boolean;
+}> = ({
+  particle,
+  frame,
+  direction,
+  opacity,
+  height,
+  width,
+  viewportCulling,
+  useGPUAcceleration,
+}) => {
   // Calculate position based on time and direction
   const adjustedFrame = frame + particle.delay;
   const cycleLength = height / particle.speed;
@@ -63,41 +75,70 @@ const Particle: React.FC<{
     case "random":
     default:
       // Gentle floating motion
-      yOffset = Math.sin(adjustedFrame / cycleLength * Math.PI * 2) * 50;
+      yOffset = Math.sin((adjustedFrame / cycleLength) * Math.PI * 2) * 50;
       break;
   }
 
   // Subtle horizontal drift
   const xOffset = Math.sin((adjustedFrame + particle.id * 100) * 0.02) * 20;
 
-  // Calculate position
-  let y = particle.y + (yOffset / height) * 100;
-  if (direction === "up") {
-    y = ((y % 100) + 100) % 100;
-  } else if (direction === "down") {
-    y = ((y % 100) + 100) % 100;
+  // Calculate position as percentages
+  let yPercent = particle.y + (yOffset / height) * 100;
+  if (direction === "up" || direction === "down") {
+    yPercent = ((yPercent % 100) + 100) % 100;
+  }
+  const xPercent = particle.x + (xOffset / width) * 100;
+
+  // Viewport culling: skip rendering if particle is off-screen
+  // Allow 10% margin for particles partially visible
+  if (viewportCulling) {
+    const margin = 10;
+    if (
+      xPercent < -margin ||
+      xPercent > 100 + margin ||
+      yPercent < -margin ||
+      yPercent > 100 + margin
+    ) {
+      return null;
+    }
   }
 
-  const x = particle.x + (xOffset / 1920) * 100;
+  // Convert percentage to pixel position for GPU-accelerated transform
+  const xPixel = (xPercent / 100) * width;
+  const yPixel = (yPercent / 100) * height;
 
-  // Render based on particle type
-  const baseStyle: React.CSSProperties = {
-    position: "absolute",
-    left: `${x}%`,
-    top: `${y}%`,
+  // GPU-accelerated styles using transform instead of top/left
+  const gpuStyle: React.CSSProperties = useGPUAcceleration
+    ? {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        transform: `translate3d(${xPixel}px, ${yPixel}px, 0)`,
+        willChange: "transform",
+      }
+    : {
+        position: "absolute",
+        left: `${xPercent}%`,
+        top: `${yPercent}%`,
+      };
+
+  // Common particle styles
+  const particleStyle: React.CSSProperties = {
+    ...gpuStyle,
     width: particle.size,
     height: particle.size,
     opacity: opacity,
     pointerEvents: "none",
+    background: particle.color,
   };
 
+  // Render based on particle type
   switch (particle.type) {
     case "blur":
       return (
         <div
           style={{
-            ...baseStyle,
-            background: particle.color,
+            ...particleStyle,
             borderRadius: "50%",
             filter: `blur(${particle.size / 2}px)`,
           }}
@@ -107,8 +148,7 @@ const Particle: React.FC<{
       return (
         <div
           style={{
-            ...baseStyle,
-            background: particle.color,
+            ...particleStyle,
             borderRadius: 2,
           }}
         />
@@ -118,8 +158,7 @@ const Particle: React.FC<{
       return (
         <div
           style={{
-            ...baseStyle,
-            background: particle.color,
+            ...particleStyle,
             borderRadius: "50%",
           }}
         />
@@ -128,15 +167,31 @@ const Particle: React.FC<{
 };
 
 /**
+ * Performance configuration for ParticleField
+ */
+interface PerformanceConfig {
+  /** Maximum particle count (default: 50, max: 200) */
+  maxParticles?: number;
+  /** Enable viewport culling - hide particles outside visible area (default: true) */
+  viewportCulling?: boolean;
+  /** Use GPU-accelerated transforms (default: true) */
+  useGPUAcceleration?: boolean;
+}
+
+/**
  * ParticleField - Floating particle background effect
  *
  * Creates a field of animated particles with configurable appearance
  * and movement patterns. Uses seeded randomization for consistent
  * results across renders.
  *
- * Performance note: Recommended max 30 particles for 30fps
+ * Performance optimizations:
+ * - GPU-accelerated CSS transforms
+ * - Viewport culling for off-screen particles
+ * - Configurable particle limits (default 50, max 200)
+ * - Memoized particle generation
  */
-export const ParticleField: React.FC<ParticleFieldProps> = ({
+export const ParticleField: React.FC<ParticleFieldProps & PerformanceConfig> = ({
   particleCount = 20,
   particleType = "circle",
   colors = ["rgba(255, 255, 255, 0.6)", "rgba(255, 255, 255, 0.3)"],
@@ -147,36 +202,56 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
   direction = "random",
   children,
   style = {},
+  // Performance options
+  maxParticles = 50,
+  viewportCulling = true,
+  useGPUAcceleration = true,
 }) => {
   const frame = useCurrentFrame();
-  const { height } = useVideoConfig();
+  const { height, width } = useVideoConfig();
+
+  // Clamp particle count between 1 and maxParticles (capped at 200)
+  const effectiveMax = Math.min(maxParticles, 200);
+  const effectiveCount = Math.min(particleCount, effectiveMax);
 
   // Generate particles once with memoization
   const particles = useMemo(
     () =>
       generateParticles(
-        Math.min(particleCount, 30), // Cap at 30 for performance
+        effectiveCount,
         colors,
         sizeRange,
         speedRange,
         particleType,
         seed
       ),
-    [particleCount, colors, sizeRange, speedRange, particleType, seed]
+    [effectiveCount, colors, sizeRange, speedRange, particleType, seed]
   );
+
+  // GPU acceleration style for particle container
+  const gpuStyle: React.CSSProperties = useGPUAcceleration
+    ? {
+        willChange: "transform",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+      }
+    : {};
 
   return (
     <AbsoluteFill style={{ overflow: "hidden", ...style }}>
-      {/* Particle layer */}
-      <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {/* Particle layer with GPU acceleration */}
+      <AbsoluteFill style={{ pointerEvents: "none", ...gpuStyle }}>
         {particles.map((particle) => (
-          <Particle
+          <OptimizedParticle
             key={particle.id}
             particle={particle}
             frame={frame}
             direction={direction}
             opacity={opacity}
             height={height}
+            width={width}
+            viewportCulling={viewportCulling}
+            useGPUAcceleration={useGPUAcceleration}
           />
         ))}
       </AbsoluteFill>

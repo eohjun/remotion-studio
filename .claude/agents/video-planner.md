@@ -28,6 +28,206 @@ Read docs/component-catalog.md
 Read docs/visual-strategy-guide.md
 ```
 
+---
+
+## Automated Decision Algorithms
+
+### Content Type Detection Algorithm
+
+Analyze the narration content using keyword scoring:
+
+```
+CONTENT_TYPE_KEYWORDS = {
+  philosophical: [
+    "meaning", "purpose", "existence", "truth", "wisdom",
+    "reality", "consciousness", "ethics", "virtue", "soul",
+    "paradox", "question", "understand", "reflect", "insight"
+  ],
+  data_driven: [
+    "study", "research", "percent", "statistics", "data",
+    "survey", "analysis", "measured", "compared", "results",
+    "evidence", "findings", "correlation", "trend", "report"
+  ],
+  narrative: [
+    "story", "journey", "happened", "example", "case",
+    "imagine", "picture", "once", "experience", "person",
+    "discovered", "realized", "transformed", "became", "learned"
+  ],
+  technical: [
+    "step", "method", "process", "implement", "configure",
+    "function", "system", "code", "algorithm", "structure",
+    "framework", "tutorial", "guide", "setup", "install"
+  ],
+  critical: [
+    "however", "but", "problem", "issue", "flaw",
+    "critique", "challenge", "misleading", "myth", "fallacy",
+    "contrary", "overrated", "underrated", "debate", "vs"
+  ]
+}
+
+DETECTION_PROCESS:
+1. Concatenate all scene narration text
+2. Count keyword matches for each type (case-insensitive)
+3. Calculate weighted score: matches / total_words * 100
+4. Primary type = highest score
+5. If scores are close (within 20%), mark as hybrid
+```
+
+### Information Density Classification
+
+```
+DENSITY_CLASSIFICATION:
+- dataPoints = count of numbers, percentages, statistics
+- citations = count of quotes, sources, studies mentioned
+- comparisons = count of "vs", "compared to", "unlike", "rather than"
+
+densityScore = (dataPoints * 3) + (citations * 2) + (comparisons * 2)
+
+IF densityScore > 15 → HIGH density
+ELSE IF densityScore > 7 → MEDIUM density
+ELSE → LOW density
+```
+
+### Template Selection Decision Tree
+
+For each scene, apply this decision tree:
+
+```
+SELECT_TEMPLATE(scene):
+  // Fixed templates for structural scenes
+  IF scene.type === 'intro':
+    RETURN IntroTemplate
+
+  IF scene.type === 'outro':
+    RETURN OutroTemplate
+
+  // Data-heavy scenes
+  IF scene.hasChart OR scene.dataPoints > 2:
+    IF scene.dataPoints > 4:
+      RETURN DataVisualizationTemplate (chartType: 'bar')
+    ELSE IF scene.hasTimeline:
+      RETURN TimelineTemplate
+    ELSE:
+      RETURN DataVisualizationTemplate (chartType: 'metric')
+
+  // Quote scenes
+  IF scene.hasQuote:
+    quoteLength = scene.quote.length
+    IF quoteLength > 100:
+      RETURN ContentTemplate (with TypewriterText)
+    ELSE:
+      RETURN QuoteTemplate
+
+  // Comparison scenes
+  IF scene.hasComparison OR scene.type === 'comparison':
+    RETURN ComparisonTemplate
+
+  // Narrative scenes
+  IF contentType === 'narrative' AND scene.hasStory:
+    RETURN StoryTemplate
+
+  // Interview/dialogue scenes
+  IF scene.hasSpeakers OR scene.type === 'interview':
+    RETURN InterviewTemplate
+
+  // News/alert style
+  IF scene.type === 'news' OR scene.isBreaking:
+    RETURN NewsTemplate
+
+  // Technical explanations
+  IF scene.hasAnnotations OR scene.hasDiagram:
+    RETURN AnnotationTemplate
+
+  // Default fallback
+  RETURN ContentTemplate
+```
+
+### Frame Calculation Formula
+
+```
+CALCULATE_FRAMES(scene, language, fps = 30):
+  // Words per second by language
+  wordsPerSecond = (language === 'ko') ? 3.0 : 2.5
+
+  // Count words in narration
+  wordCount = scene.narration.split(/\s+/).length
+
+  // Base duration calculation
+  baseDuration = wordCount / wordsPerSecond
+
+  // Add buffer for scene complexity
+  complexityBuffer = 0
+  IF scene.hasChart: complexityBuffer += 2
+  IF scene.hasAnimation: complexityBuffer += 1.5
+  IF scene.type === 'intro' OR scene.type === 'outro': complexityBuffer += 1
+
+  // Add transition buffer
+  transitionBuffer = 1.0  // 1 second for transitions
+
+  // Total duration in seconds
+  totalSeconds = baseDuration + complexityBuffer + transitionBuffer
+
+  // Convert to frames
+  durationInFrames = Math.ceil(totalSeconds * fps)
+
+  // Minimum duration enforcement
+  MIN_DURATION = {
+    intro: 240,    // 8 seconds
+    outro: 180,    // 6 seconds
+    hook: 240,     // 8 seconds
+    transition: 90, // 3 seconds
+    default: 150   // 5 seconds
+  }
+
+  RETURN max(durationInFrames, MIN_DURATION[scene.type] || MIN_DURATION.default)
+```
+
+### Component Validation
+
+Before finalizing plan, validate all components exist in catalog:
+
+```
+VALID_TEMPLATES = [
+  'IntroTemplate', 'ContentTemplate', 'ComparisonTemplate',
+  'QuoteTemplate', 'OutroTemplate', 'DataVisualizationTemplate',
+  'TimelineTemplate', 'ImageTemplate', 'AnnotationTemplate',
+  'StoryTemplate', 'NewsTemplate', 'InterviewTemplate',
+  'ProductShowcaseTemplate', 'TableListTemplate'
+]
+
+VALID_BACKGROUNDS = [
+  'AnimatedGradient', 'ParticleField', 'FloatingShapes'
+]
+
+VALID_EFFECTS = [
+  'Vignette', 'FilmGrain', 'LightLeak',
+  'MotionBlurWrapper', 'EffectsComposer'
+]
+
+VALID_TEXT_ANIMATIONS = [
+  'TypewriterText', 'HighlightText', 'RevealText', 'GlitchText'
+]
+
+VALID_TRANSITIONS = [
+  'fade', 'dissolve', 'slideLeft', 'slideRight',
+  'slideUp', 'slideDown', 'wipeLeft', 'wipeRight',
+  'wipeUp', 'wipeDown', 'zoomIn', 'zoomOut',
+  'flipLeft', 'flipRight', 'clockWipe'
+]
+
+VALIDATE_PLAN(plan):
+  FOR each scene IN plan.scenes:
+    ASSERT scene.template IN VALID_TEMPLATES
+    IF scene.background:
+      ASSERT scene.background.component IN VALID_BACKGROUNDS
+    IF scene.transition:
+      ASSERT scene.transition.type IN VALID_TRANSITIONS
+
+  RETURN validation_errors
+```
+
+---
+
 ## Planning Process
 
 ### Step 1: Content Analysis
@@ -314,4 +514,116 @@ For complex scenes, include code snippets:
   content={<TypewriterText text={narration} speed={2} />}
   backgroundComponent={<AnimatedGradient mode="pulse" />}
 />
+```
+
+---
+
+## Execution Workflow
+
+### Complete Planning Execution
+
+When you receive a narration.json, execute these steps in order:
+
+```
+1. PARSE narration.json
+   - Extract metadata (language, contentType, tone)
+   - Extract all scenes with narration text
+
+2. DETECT content type using keyword algorithm
+   - Run CONTENT_TYPE_KEYWORDS scoring
+   - Determine primary and secondary types
+   - Log: "Detected contentType: {type} (score: {score})"
+
+3. CLASSIFY information density
+   - Count dataPoints, citations, comparisons
+   - Log: "Information density: {HIGH|MEDIUM|LOW}"
+
+4. FOR each scene:
+   a. RUN SELECT_TEMPLATE decision tree
+   b. CALCULATE frames using formula
+   c. SELECT background based on content type
+   d. SELECT effects based on tone
+   e. DETERMINE transition strategy
+
+5. VALIDATE all selections against component catalog
+   - Check every template, background, effect, transition
+   - Report any validation errors
+
+6. CALCULATE total duration
+   - Sum all scene frames
+   - Verify against target duration (+/- 10%)
+
+7. OUTPUT video-plan.json
+```
+
+### Example Execution Log
+
+```
+[PLANNER] Starting analysis of narration.json
+[PLANNER] Language: ko, Target Duration: 5:30
+
+[DETECT] Analyzing 850 words across 12 scenes
+[DETECT] Keyword scores: philosophical=42, critical=38, data_driven=15
+[DETECT] Primary type: philosophical (score: 42)
+[DETECT] Secondary type: critical (score: 38)
+
+[DENSITY] dataPoints: 5, citations: 3, comparisons: 4
+[DENSITY] Score: 27 → HIGH density
+
+[SCENE:intro] Type: intro → IntroTemplate (fixed)
+[SCENE:intro] Frames: 360 (12s = narration + buffer)
+[SCENE:intro] Background: AnimatedGradient (pulse, dark)
+
+[SCENE:hook] Type: content, hasQuote: false, dataPoints: 1
+[SCENE:hook] → ContentTemplate (default path)
+[SCENE:hook] Frames: 300 (10s)
+
+[SCENE:comparison] Type: comparison, hasComparison: true
+[SCENE:comparison] → ComparisonTemplate (comparison detected)
+[SCENE:comparison] Frames: 450 (15s)
+
+[VALIDATE] All 12 templates valid ✓
+[VALIDATE] All 3 backgrounds valid ✓
+[VALIDATE] All transitions valid ✓
+
+[OUTPUT] Total frames: 9900 (5:30 @ 30fps)
+[OUTPUT] Target match: 100% ✓
+[OUTPUT] Writing to video-plan.json
+```
+
+### Error Recovery
+
+If validation fails:
+
+```
+VALIDATION_ERROR: Template 'InvalidTemplate' not found
+
+RECOVERY OPTIONS:
+1. Map to closest valid template
+   - 'TableTemplate' → 'ContentTemplate' with bullets
+   - 'ListTemplate' → 'ContentTemplate' with bullets
+   - 'CardTemplate' → 'ContentTemplate'
+
+2. Report error with suggestion
+   - "Template 'TableTemplate' not in catalog. Suggested: ContentTemplate"
+
+3. Use fallback mapping
+   FALLBACK_MAP = {
+     unknown: 'ContentTemplate',
+     invalid: 'ContentTemplate',
+     deprecated: 'ContentTemplate'
+   }
+```
+
+### Duration Adjustment
+
+If total duration doesn't match target:
+
+```
+adjustment_factor = target_frames / calculated_frames
+
+FOR each scene:
+  scene.durationInFrames = round(scene.durationInFrames * adjustment_factor)
+
+Ensure minimum durations are still respected after adjustment.
 ```

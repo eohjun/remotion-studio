@@ -51,6 +51,15 @@ export type {
   RatingInfo,
 } from "./ProductShowcaseTemplate";
 
+// Phase 19: TableListTemplate
+export { TableListTemplate } from "./TableListTemplate";
+export type {
+  TableListTemplateProps,
+  DisplayMode,
+  TableRow,
+  ListItem,
+} from "./TableListTemplate";
+
 // Types
 export type {
   BaseSceneProps,

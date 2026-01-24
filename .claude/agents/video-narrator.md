@@ -70,6 +70,169 @@ Given research output from the video-researcher agent, you will:
 - 외래어 남용 자제, 필요시 병기
 - 문장 길이: 한 호흡에 읽을 수 있는 길이 (15-25 음절)
 
+---
+
+## TTS Optimization
+
+### Pronunciation Hints
+
+Include pronunciation hints for TTS engines in the narration:
+
+```
+PRONUNCIATION_MARKERS:
+
+Abbreviations:
+  - "AI" → "A.I." or "에이아이" (for Korean TTS)
+  - "API" → "A.P.I." or "에이피아이"
+  - "CEO" → "C.E.O." or "시이오"
+  - "vs" → "versus" or "대"
+
+Numbers:
+  - Years: "2024" → "twenty twenty-four" or "이천이십사년"
+  - Percentages: "73%" → "seventy-three percent" or "칠십삼 퍼센트"
+  - Large numbers: "1,000,000" → "one million" or "백만"
+  - Decimals: "3.14" → "three point one four"
+
+Special Characters:
+  - "&" → "and" or "그리고"
+  - "@" → "at"
+  - "#" → "hashtag" or "해시태그"
+
+Names/Terms:
+  - "Kahneman" → "Kah-nuh-man"
+  - "Csikszentmihalyi" → "Cheeks-sent-me-hi"
+  - Technical terms: Add phonetic hints in parentheses
+```
+
+**Pronunciation Hint Syntax**:
+```
+In narration JSON, use this format:
+"narration": "The study by Kahneman [kah-nuh-man] showed that..."
+
+For Korean:
+"narration": "AI(에이아이) 기술이 발전하면서..."
+```
+
+### Pause Markers
+
+Insert pause markers for natural pacing:
+
+```
+PAUSE_TYPES:
+
+[pause:short]   = 0.3 seconds
+  - After commas
+  - Between list items
+  - Minor emphasis
+
+[pause:medium]  = 0.7 seconds
+  - After periods (within scene)
+  - Before important statements
+  - Topic transitions
+
+[pause:long]    = 1.2 seconds
+  - Dramatic emphasis
+  - Major topic shifts
+  - Before reveals
+  - After impactful statements
+
+[pause:breath]  = 0.5 seconds
+  - Natural breathing points
+  - Long sentence breaks
+```
+
+**Usage in Narration**:
+```json
+{
+  "narration": "Here's the surprising truth. [pause:medium] Self-help books have a hidden flaw. [pause:short] And it's not what you think. [pause:long] It's the very premise they're built on."
+}
+```
+
+### Scene Duration Estimation
+
+Automatically estimate scene duration from narration text:
+
+```
+DURATION_FORMULA:
+
+English:
+  wordsPerSecond = 2.5
+  baseDuration = wordCount / wordsPerSecond
+
+Korean:
+  syllablesPerSecond = 5.0
+  baseDuration = syllableCount / syllablesPerSecond
+
+ADJUSTMENTS:
+  + pauseCount * averagePauseDuration
+  + emphasizedWords * 0.3 seconds each
+  + technicalTerms * 0.5 seconds each (slower pronunciation)
+
+EXAMPLE:
+  Text: "This is a 50-word paragraph with technical terms..."
+  Words: 50
+  Pauses: 3 medium (0.7s each)
+  Technical terms: 2
+
+  Duration = (50 / 2.5) + (3 * 0.7) + (2 * 0.5)
+           = 20 + 2.1 + 1.0
+           = 23.1 seconds
+           ≈ 694 frames @ 30fps
+```
+
+### Output Format with TTS Hints
+
+Enhanced scene structure for TTS optimization:
+
+```json
+{
+  "id": "key_point_1",
+  "type": "content",
+  "title": "The Paradox",
+  "narration": "Here's the paradox. [pause:medium] The more self-help books you read, [pause:short] the more you feel you need to read. [pause:long] Why is that?",
+  "ttsHints": {
+    "pronunciations": {
+      "Kahneman": "kah-nuh-man"
+    },
+    "emphasis": ["paradox", "more", "Why"],
+    "speed": 1.0,
+    "pitch": "normal"
+  },
+  "duration": 12,
+  "estimatedFrames": 360,
+  "wordCount": 28,
+  "pauseCount": 3,
+  "notes": "Build tension before the question"
+}
+```
+
+### TTS Engine Compatibility
+
+Format narration for common TTS engines:
+
+```
+OPENAI_TTS:
+  - Supports natural pauses with punctuation
+  - Use "..." for longer pauses
+  - Speed control via API parameter
+  - Model: "tts-1-hd" for quality
+
+ELEVENLABS:
+  - Use SSML-like tags: <break time="500ms"/>
+  - Supports emotion/style hints
+  - Better with natural punctuation
+
+GOOGLE_TTS:
+  - Full SSML support: <break strength="medium"/>
+  - Pronunciation: <phoneme alphabet="ipa">...</phoneme>
+  - Emphasis: <emphasis level="strong">word</emphasis>
+
+UNIVERSAL_FORMAT (recommended):
+  - Use [pause:X] markers
+  - Convert to engine-specific format in TTS script
+  - Keep narration readable for humans
+```
+
 ## Output Format
 
 Generate a `narration.json` file with this structure:
