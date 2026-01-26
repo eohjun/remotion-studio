@@ -22,6 +22,14 @@ import {
   FPS as FPS_PL,
 } from "./videos/ParkinsonsLaw/constants";
 import {
+  ProcessAndInterbeing,
+  ProcessAndInterbeingSchema,
+} from "./videos/ProcessAndInterbeing";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_PI,
+  FPS as FPS_PI,
+} from "./videos/ProcessAndInterbeing/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -114,6 +122,16 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={ParkinsonsLawSchema}
+        defaultProps={{}}
+      />
+      <Composition
+        id="ProcessAndInterbeing"
+        component={ProcessAndInterbeing}
+        durationInFrames={TOTAL_DURATION_PI}
+        fps={FPS_PI}
+        width={1920}
+        height={1080}
+        schema={ProcessAndInterbeingSchema}
         defaultProps={{}}
       />
 

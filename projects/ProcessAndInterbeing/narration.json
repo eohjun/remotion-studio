@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "title": "Process and Interbeing: When Western Philosophy Met Eastern Wisdom",
+    "compositionId": "ProcessAndInterbeing",
+    "targetDuration": 300,
+    "language": "en",
+    "voice": "onyx",
+    "style": "philosophical-reflective"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "Hook",
+      "text": "What if a Cambridge professor and a 2,500-year-old Buddhist teaching arrived at the same radical insight? That nothing exists as a fixed, separate thing.",
+      "duration": 10,
+      "visualNotes": "Split screen - Whitehead portrait merging with Buddha statue into cosmic pattern"
+    },
+    {
+      "id": "problem",
+      "title": "The Illusion We Live In",
+      "text": "We see the world as separate objects. This table. That chair. You. Me. Each seems solid and independent. But two wisdom traditions say: this is our deepest illusion.",
+      "duration": 16,
+      "visualNotes": "Solid objects slowly revealing flowing patterns beneath"
+    },
+    {
+      "id": "promise",
+      "title": "What You'll Discover",
+      "text": "Today, we'll explore how ancient Buddhist wisdom and modern Western philosophy reached the same truth. And why this insight matters for how you live.",
+      "duration": 12,
+      "visualNotes": "Journey path visual connecting East and West"
+    },
+    {
+      "id": "whitehead-intro",
+      "title": "Whitehead's Insight",
+      "text": "Alfred North Whitehead proposed something radical. Reality isn't made of things. It's made of events. What we call objects are really patterns of experience, always arising and passing.",
+      "duration": 18,
+      "visualNotes": "Timeline then transition to flowing event patterns"
+    },
+    {
+      "id": "actual-occasions",
+      "title": "Moments of Experience",
+      "text": "He called these 'actual occasions.' Each moment grasps the past, transforms it, and becomes something new. Like a wave that gathers the ocean's story before returning to the sea.",
+      "duration": 18,
+      "visualNotes": "Abstract wave patterns showing gathering and release"
+    },
+    {
+      "id": "dependent-origination",
+      "title": "The Buddha's Teaching",
+      "text": "Twenty-five centuries earlier, the Buddha taught dependent origination. Everything arises based on conditions. Nothing exists on its own. When this exists, that comes to be. When this ceases, that ceases.",
+      "duration": 20,
+      "visualNotes": "Twelve links as interconnected flowing chain"
+    },
+    {
+      "id": "emptiness",
+      "title": "Understanding Emptiness",
+      "text": "Buddhists call this emptiness. Not nothingness, but the absence of fixed essence. The sage Nagarjuna said: what arises through conditions has no independent core. Even your sense of self is a pattern, not a permanent thing.",
+      "duration": 20,
+      "visualNotes": "Visual showing emptiness as infinite interconnection"
+    },
+    {
+      "id": "journey",
+      "title": "The Journey of Understanding",
+      "text": "Here's the remarkable path these ideas share. Start with ordinary experience. Notice how everything depends on something else. See that what seems solid is actually flowing. Arrive at a new way of seeing the world.",
+      "duration": 18,
+      "visualNotes": "Step-by-step visual journey from ordinary perception to interconnected reality"
+    },
+    {
+      "id": "convergence",
+      "title": "Where East Meets West",
+      "text": "Both traditions reject the idea of fixed substances. Both see reality as relational. Both understand identity as pattern, not permanence. A person, a thought, a star - all are processes, not isolated things.",
+      "duration": 20,
+      "visualNotes": "Convergence visual showing shared insights"
+    },
+    {
+      "id": "interbeing",
+      "title": "Interbeing",
+      "text": "Thich Nhat Hanh called it interbeing. Look at paper and see the cloud, the tree, the sun. Look at yourself and see your parents, your food, the air you breathe. Nothing exists alone.",
+      "duration": 16,
+      "visualNotes": "Paper revealing origins - trees, rain, sun, workers"
+    },
+    {
+      "id": "differences",
+      "title": "Different Paths",
+      "text": "Yet there are differences. Whitehead builds a cosmic theory with creativity at its heart. Buddhism stays practical, focused on ending suffering. One maps reality. The other offers a path to walk.",
+      "duration": 18,
+      "visualNotes": "Split path - theoretical cosmos vs meditation practice"
+    },
+    {
+      "id": "ethics",
+      "title": "Ethics of Connection",
+      "text": "Both arrive at the same ethics. If nothing exists separately, harming others means harming yourself. Care isn't duty imposed from outside. It flows from seeing how things really are.",
+      "duration": 16,
+      "visualNotes": "Web of connections spreading outward"
+    },
+    {
+      "id": "modern-relevance",
+      "title": "Why This Matters Today",
+      "text": "Today, ecology and systems thinking echo these insights. Climate change teaches interdependence through crisis. Perhaps this century will finally learn what these traditions have long known.",
+      "duration": 18,
+      "visualNotes": "Modern contexts - ecosystems, AI networks, climate"
+    },
+    {
+      "id": "conclusion",
+      "title": "Living This Truth",
+      "text": "This isn't abstract theory. It's an invitation. See yourself not as separate substance but as living process. The mountain, the river, the stars - you are their continuation, and they are yours.",
+      "duration": 18,
+      "visualNotes": "Person dissolving into cosmic interconnection"
+    },
+    {
+      "id": "takeaway",
+      "title": "Takeaway",
+      "text": "Remember: both East and West agree. You are not a thing. You are an event. A momentary gathering of the universe, experiencing itself.",
+      "duration": 14,
+      "visualNotes": "Final cosmic zoom with key insight text"
+    }
+  ]
+}

@@ -130,6 +130,50 @@ export const TEXT_STYLES = {
   },
 } as const;
 
+// Typography system with letter spacing
+// Larger text needs more letter spacing for readability
+export const TYPOGRAPHY = {
+  /** Large titles (56px+) */
+  title: {
+    fontFamily: FONT_FAMILY.title,
+    fontWeight: 800 as const,
+    letterSpacing: 2,
+    lineHeight: 1.2,
+  },
+  /** Medium headings (36-48px) */
+  heading: {
+    fontFamily: FONT_FAMILY.title,
+    fontWeight: 700 as const,
+    letterSpacing: 1,
+    lineHeight: 1.3,
+  },
+  /** Body text (24-32px) */
+  body: {
+    fontFamily: FONT_FAMILY.body,
+    fontWeight: 500 as const,
+    letterSpacing: 0.5,
+    lineHeight: 1.5,
+  },
+  /** Small captions (16-20px) */
+  caption: {
+    fontFamily: FONT_FAMILY.body,
+    fontWeight: 400 as const,
+    letterSpacing: 0.3,
+    lineHeight: 1.4,
+  },
+} as const;
+
+/**
+ * Get appropriate letter spacing based on font size
+ * Larger text needs proportionally more spacing for readability
+ */
+export function getLetterSpacingForSize(fontSize: number): number {
+  if (fontSize >= 56) return 2;      // Large titles
+  if (fontSize >= 40) return 1.5;    // Medium headings
+  if (fontSize >= 28) return 1;      // Body text
+  return 0.5;                         // Small text
+}
+
 // Common card background helpers
 export const cardBackground = (color: string, opacity = 0.15) =>
   `rgba(${hexToRgb(color)}, ${opacity})`;

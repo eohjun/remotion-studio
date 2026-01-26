@@ -7,6 +7,7 @@ import {
   DEFAULT_SPRING,
 } from "./presets";
 import { containsKorean, getTextStyleForContent } from "../../utils/text";
+import { getLetterSpacingForSize } from "../../components/constants";
 
 export type StaggerMode = "none" | "word" | "character";
 
@@ -73,7 +74,14 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
   const renderContent = () => {
     // Get text style based on language
     const textStyle = getTextStyleForContent(text, language);
-    const mergedStyle = { ...textStyle, ...style };
+
+    // Auto-apply letterSpacing based on fontSize if not explicitly set
+    const fontSize = style?.fontSize;
+    const autoLetterSpacing = fontSize && typeof fontSize === 'number' && !style?.letterSpacing
+      ? { letterSpacing: getLetterSpacingForSize(fontSize) }
+      : {};
+
+    const mergedStyle = { ...textStyle, ...autoLetterSpacing, ...style };
 
     if (stagger === "none") {
       return (
@@ -150,20 +158,25 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         groups.push(currentGroup);
       }
 
+      // Calculate word gap based on fontSize (larger text needs more spacing)
+      const wordGap = fontSize && typeof fontSize === 'number'
+        ? `${Math.max(0.35, fontSize / 150)}em`
+        : "0.35em";
+
       return (
         <span
           style={{
             display: "inline-flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: "0.3em",
+            gap: wordGap,
             ...textStyle,
           }}
         >
           {groups.map((group, groupIndex) => (
             <span
               key={groupIndex}
-              style={{ display: "inline-flex", gap: "0.3em", whiteSpace: "nowrap" }}
+              style={{ display: "inline-flex", gap: wordGap, whiteSpace: "nowrap" }}
             >
               {group.map((word, wordIndex) => {
                 const globalIndex = groups

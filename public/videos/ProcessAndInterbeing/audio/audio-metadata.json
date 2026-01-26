@@ -1,0 +1,114 @@
+{
+  "generatedAt": "2026-01-26T12:11:38.899Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/ProcessAndInterbeing/audio",
+  "compositionId": "ProcessAndInterbeing",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 10.32,
+      "durationFrames": 310,
+      "text": "What if a Cambridge professor and a 2,500-year-old Buddhist teaching arrived at the same radical ins..."
+    },
+    {
+      "id": "problem",
+      "file": "problem.mp3",
+      "durationSeconds": 9.84,
+      "durationFrames": 296,
+      "text": "We see the world as separate objects. This table. That chair. You. Me. Each seems solid and independ..."
+    },
+    {
+      "id": "promise",
+      "file": "promise.mp3",
+      "durationSeconds": 9.144,
+      "durationFrames": 275,
+      "text": "Today, we'll explore how ancient Buddhist wisdom and modern Western philosophy reached the same trut..."
+    },
+    {
+      "id": "whitehead-intro",
+      "file": "whitehead-intro.mp3",
+      "durationSeconds": 11.568,
+      "durationFrames": 348,
+      "text": "Alfred North Whitehead proposed something radical. Reality isn't made of things. It's made of events..."
+    },
+    {
+      "id": "actual-occasions",
+      "file": "actual-occasions.mp3",
+      "durationSeconds": 10.992,
+      "durationFrames": 330,
+      "text": "He called these 'actual occasions.' Each moment grasps the past, transforms it, and becomes somethin..."
+    },
+    {
+      "id": "dependent-origination",
+      "file": "dependent-origination.mp3",
+      "durationSeconds": 12.168,
+      "durationFrames": 366,
+      "text": "Twenty-five centuries earlier, the Buddha taught dependent origination. Everything arises based on c..."
+    },
+    {
+      "id": "emptiness",
+      "file": "emptiness.mp3",
+      "durationSeconds": 13.632,
+      "durationFrames": 409,
+      "text": "Buddhists call this emptiness. Not nothingness, but the absence of fixed essence. The sage Nagarjuna..."
+    },
+    {
+      "id": "journey",
+      "file": "journey.mp3",
+      "durationSeconds": 13.056,
+      "durationFrames": 392,
+      "text": "Here's the remarkable path these ideas share. Start with ordinary experience. Notice how everything ..."
+    },
+    {
+      "id": "convergence",
+      "file": "convergence.mp3",
+      "durationSeconds": 12.768,
+      "durationFrames": 384,
+      "text": "Both traditions reject the idea of fixed substances. Both see reality as relational. Both understand..."
+    },
+    {
+      "id": "interbeing",
+      "file": "interbeing.mp3",
+      "durationSeconds": 10.776,
+      "durationFrames": 324,
+      "text": "Thich Nhat Hanh called it interbeing. Look at paper and see the cloud, the tree, the sun. Look at yo..."
+    },
+    {
+      "id": "differences",
+      "file": "differences.mp3",
+      "durationSeconds": 11.256,
+      "durationFrames": 338,
+      "text": "Yet there are differences. Whitehead builds a cosmic theory with creativity at its heart. Buddhism s..."
+    },
+    {
+      "id": "ethics",
+      "file": "ethics.mp3",
+      "durationSeconds": 11.136,
+      "durationFrames": 335,
+      "text": "Both arrive at the same ethics. If nothing exists separately, harming others means harming yourself...."
+    },
+    {
+      "id": "modern-relevance",
+      "file": "modern-relevance.mp3",
+      "durationSeconds": 11.952,
+      "durationFrames": 359,
+      "text": "Today, ecology and systems thinking echo these insights. Climate change teaches interdependence thro..."
+    },
+    {
+      "id": "conclusion",
+      "file": "conclusion.mp3",
+      "durationSeconds": 11.904,
+      "durationFrames": 358,
+      "text": "This isn't abstract theory. It's an invitation. See yourself not as separate substance but as living..."
+    },
+    {
+      "id": "takeaway",
+      "file": "takeaway.mp3",
+      "durationSeconds": 8.16,
+      "durationFrames": 245,
+      "text": "Remember: both East and West agree. You are not a thing. You are an event. A momentary gathering of ..."
+    }
+  ]
+}
