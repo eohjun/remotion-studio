@@ -38,6 +38,40 @@ const COLOR_PRESETS: Record<ColorGradingPreset, React.CSSProperties["filter"]> =
 
   // High contrast dramatic look
   dramatic: "saturate(1.1) contrast(1.25) brightness(0.92)",
+
+  // === NEW PROFESSIONAL PRESETS ===
+
+  // Dark moody - undersaturated with deep shadows, good for psychological content
+  "moody-dark":
+    "saturate(0.7) contrast(1.15) brightness(0.88) sepia(0.08) hue-rotate(-5deg)",
+
+  // Warm sunset - golden hour aesthetic, good for inspirational content
+  "warm-sunset":
+    "saturate(1.2) contrast(1.05) brightness(1.0) sepia(0.2) hue-rotate(10deg)",
+
+  // Cool tech - blue-tinted, clean look for AI/tech content
+  "cool-tech":
+    "saturate(0.95) contrast(1.08) brightness(1.02) hue-rotate(-15deg)",
+
+  // Documentary - natural, balanced look for educational content
+  "documentary":
+    "saturate(1.0) contrast(1.02) brightness(1.0) sepia(0.03)",
+
+  // Pastel - soft, dreamy colors
+  "pastel":
+    "saturate(0.75) contrast(0.9) brightness(1.12) sepia(0.05)",
+
+  // Neon - high saturation cyberpunk look
+  "neon":
+    "saturate(1.5) contrast(1.2) brightness(0.95) hue-rotate(5deg)",
+
+  // Forest - green-tinted natural look
+  "forest":
+    "saturate(1.1) contrast(1.02) brightness(0.98) hue-rotate(25deg) sepia(0.05)",
+
+  // Ocean - cool blue-green tones
+  "ocean":
+    "saturate(1.05) contrast(1.05) brightness(1.0) hue-rotate(-20deg)",
 };
 
 /**

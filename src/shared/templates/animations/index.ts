@@ -13,6 +13,7 @@ export {
   getAnimatedStyle,
   DEFAULT_SPRING,
   SPRING_PRESETS,
+  getSpringPreset,
   // New eased presets
   fadeInEased,
   slideInEased,
@@ -22,6 +23,10 @@ export {
   blurOut,
   blurInEffect,
   getEasedAnimatedStyle,
+  // Stagger utilities
+  calculateStaggerDelay,
+  createStaggerDelays,
+  getStaggerTotalDuration,
 } from "./presets";
 
 export type {
@@ -29,6 +34,8 @@ export type {
   AnimationPreset,
   EasedAnimationConfig,
   SlideDirection,
+  SpringPresetName,
+  StaggerDistribution,
 } from "./presets";
 
 // Easing functions
@@ -191,3 +198,39 @@ export type {
 // Popping text animation
 export { PoppingText, calculatePoppingDuration } from "./PoppingText";
 export type { PoppingTextProps } from "./PoppingText";
+
+// CSS Animation Utilities (@remotion/animation-utils)
+export {
+  // Transform utilities
+  makeTransform,
+  translateX,
+  translateY,
+  translateZ,
+  scale,
+  scaleX,
+  scaleY,
+  rotate,
+  rotateX,
+  rotateY,
+  rotateZ,
+  skewX,
+  skewY,
+  matrix,
+  matrix3d,
+  // Custom utilities
+  combineTransforms as combineCssTransforms,
+  entranceTransform,
+  popTransform,
+  shakeTransform,
+  flipTransform,
+  tilt3DTransform,
+  parallaxTransform,
+  zoomTransform,
+  kenBurnsTransform,
+  interpolateKeyframes,
+} from "./cssAnimations";
+export type { AnimationKeyframe } from "./cssAnimations";
+
+// Text Morph Animation
+export { TextMorph } from "./TextMorph";
+export type { TextMorphProps, MorphType } from "./TextMorph";

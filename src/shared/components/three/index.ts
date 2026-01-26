@@ -28,3 +28,15 @@ export {
   LaptopMockup,
 } from "./DeviceMockup";
 export type { DeviceMockupProps, DeviceType } from "./DeviceMockup";
+
+// Lazy-loaded versions (for performance optimization)
+export {
+  LazyThreeCanvas,
+  LazyText3D,
+  LazyFloatingText3D,
+  LazyDeviceMockup,
+  DelayedThreeCanvas,
+  ThreeLoadingPlaceholder,
+  preloadThreeComponents,
+  usePreloadThree,
+} from "./LazyThree";

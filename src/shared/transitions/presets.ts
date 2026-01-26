@@ -157,6 +157,64 @@ export const TRANSITION_PRESETS: Record<TransitionPresetName, TransitionConfig> 
     springConfig: TRANSITION_SPRING_PRESETS.snappy,
   },
 
+  // Morph transitions
+  morph: {
+    type: "morph",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.cinematic,
+  },
+  morphLeft: {
+    type: "morph",
+    direction: "from-left",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.standard,
+  },
+  morphRight: {
+    type: "morph",
+    direction: "from-right",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.standard,
+  },
+
+  // Glitch transitions
+  glitch: {
+    type: "glitch",
+    durationInFrames: 20,
+    springConfig: TRANSITION_SPRING_PRESETS.snappy,
+  },
+  glitchIntense: {
+    type: "glitch",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.standard,
+  },
+
+  // Blinds transitions
+  blindsHorizontal: {
+    type: "blinds",
+    direction: "from-top",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.standard,
+  },
+  blindsVertical: {
+    type: "blinds",
+    direction: "from-left",
+    durationInFrames: 30,
+    springConfig: TRANSITION_SPRING_PRESETS.standard,
+  },
+
+  // Ripple transitions
+  ripple: {
+    type: "ripple",
+    durationInFrames: 35,
+    springConfig: TRANSITION_SPRING_PRESETS.cinematic,
+  },
+  rippleCorner: {
+    type: "ripple",
+    direction: "from-bottom", // indicator for corner origin
+    durationInFrames: 40,
+    springConfig: TRANSITION_SPRING_PRESETS.cinematic,
+  },
+
   // Hard cut (no transition)
   cut: {
     type: "none",

@@ -81,7 +81,16 @@ export type ColorGradingPreset =
   | "moody"
   | "vibrant"
   | "faded"
-  | "dramatic";
+  | "dramatic"
+  // New professional presets
+  | "moody-dark"
+  | "warm-sunset"
+  | "cool-tech"
+  | "documentary"
+  | "pastel"
+  | "neon"
+  | "forest"
+  | "ocean";
 
 /**
  * Custom color grading settings

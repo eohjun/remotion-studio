@@ -55,3 +55,15 @@ export { default } from "./TransitionComposition";
 // Custom transitions
 export { dissolve } from "./custom/dissolve";
 export { zoom } from "./custom/zoom";
+export { morph } from "./custom/morph";
+export { glitch } from "./custom/glitch";
+export { blinds } from "./custom/blinds";
+export { ripple } from "./custom/ripple";
+
+// Custom transition types
+export type { DissolveProps } from "./custom/dissolve";
+export type { ZoomProps } from "./custom/zoom";
+export type { MorphProps } from "./custom/morph";
+export type { GlitchProps } from "./custom/glitch";
+export type { BlindsProps } from "./custom/blinds";
+export type { RippleProps } from "./custom/ripple";

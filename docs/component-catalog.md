@@ -1,8 +1,8 @@
 # Component Catalog
 
 **Remotion Studio Component Library Reference**
-**Last Updated**: 2026-01-26
-**Total Components**: 70+
+**Last Updated**: 2026-01-27
+**Total Components**: 75+ (including 29 transition presets)
 
 ---
 
@@ -22,7 +22,7 @@
 | Layouts | 4 | `@shared/components/layouts` |
 | Audio | 3+ | `@shared/audio` |
 | Icons | 2 | `@shared/components/icons` |
-| Transitions | 10+ | `@shared/transitions` |
+| Transitions | 29 | `@shared/transitions` |
 | Hooks | 2 | `@shared/hooks` |
 | Config | 4 | `@shared/config` |
 | Utils | 4 | `@shared/utils` |
@@ -1653,7 +1653,10 @@ interface RadarDataSeries {
 | Preset | Effect | Best For |
 |--------|--------|----------|
 | `fade` | Opacity crossfade | Default, smooth |
+| `fadeQuick` | Fast opacity fade | Quick cuts |
+| `fadeSlow` | Slow cinematic fade | Dramatic moments |
 | `dissolve` | Soft blend | Time passage, dreams |
+| `dissolveQuick` | Fast dissolve | Quick transitions |
 | `slideLeft` | Slide from right | Forward progression |
 | `slideRight` | Slide from left | Looking back |
 | `slideUp` | Slide from bottom | Rising, growth |
@@ -1664,9 +1667,105 @@ interface RadarDataSeries {
 | `wipeDown` | Vertical reveal | Reveals, builds |
 | `zoomIn` | Scale up | Emphasis, focus |
 | `zoomOut` | Scale down | Conclusion, overview |
-| `flipLeft` | 3D flip | Reveals, fun |
-| `flipRight` | 3D flip | Reveals, fun |
+| `flipHorizontal` | 3D horizontal flip | Reveals, fun |
+| `flipVertical` | 3D vertical flip | Reveals, reveals |
 | `clockWipe` | Radial wipe | Time, progress |
+| `morph` | Smooth morphing | Conceptual shifts |
+| `morphLeft` | Directional morph | Forward transitions |
+| `morphRight` | Directional morph | Backward transitions |
+| `glitch` | Digital glitch | Tech, dramatic |
+| `glitchIntense` | Strong glitch | Maximum impact |
+| `blindsHorizontal` | Venetian blinds (H) | Data reveals, lists |
+| `blindsVertical` | Venetian blinds (V) | Comparisons, wipes |
+| `ripple` | Water ripple | Emotional, change |
+| `rippleCorner` | Corner ripple | Unique reveals |
+| `cut` | No transition | Hard cuts |
+
+### New Custom Transitions (Phase 6)
+
+#### Morph Transition
+Smooth morphing effect combining scale, blur, and opacity.
+
+```typescript
+import { morph } from "@shared/transitions/custom/morph";
+
+// Basic usage
+morph()
+
+// With custom props
+morph({
+  scale: 0.8,        // Starting scale (default: 0.9)
+  blurAmount: 10,    // Blur amount in pixels (default: 5)
+})
+```
+
+**Best For**: Philosophical content, conceptual shifts, elegant transitions
+
+---
+
+#### Glitch Transition
+Digital glitch effect with RGB splitting and scan lines.
+
+```typescript
+import { glitch } from "@shared/transitions/custom/glitch";
+
+// Basic usage
+glitch()
+
+// With custom props
+glitch({
+  intensity: 'high',    // 'low' | 'medium' | 'high' (default: 'medium')
+  rgbSplit: true,       // RGB channel separation (default: true)
+  scanLines: true,      // CRT scan lines (default: true)
+})
+```
+
+**Best For**: Tech content, errors, dramatic moments, maximum impact reveals
+
+**Avoid**: Calm philosophical content, frequent use (jarring)
+
+---
+
+#### Blinds Transition
+Venetian blinds effect with horizontal or vertical strips.
+
+```typescript
+import { blinds } from "@shared/transitions/custom/blinds";
+
+// Basic usage
+blinds()
+
+// With custom props
+blinds({
+  count: 10,                // Number of blind strips (default: 10)
+  direction: 'horizontal', // 'horizontal' | 'vertical' (default: 'horizontal')
+  stagger: 0.1,             // Delay between strips (default: 0.1)
+  mode: 'rotate',           // 'rotate' | 'slide' (default: 'rotate')
+})
+```
+
+**Best For**: Data reveals, list presentations, structured content
+
+---
+
+#### Ripple Transition
+Water ripple effect emanating from center or corner.
+
+```typescript
+import { ripple } from "@shared/transitions/custom/ripple";
+
+// Basic usage
+ripple()
+
+// With custom props
+ripple({
+  rings: 5,          // Number of ripple rings (default: 5)
+  origin: 'center',  // 'center' | 'corner' (default: 'center')
+  speed: 1,          // Animation speed multiplier (default: 1)
+})
+```
+
+**Best For**: Emotional moments, water themes, change metaphors
 
 ### Usage
 ```typescript
@@ -1738,13 +1837,87 @@ RADIUS = {
 
 ### Spring Configs
 ```typescript
-SPRING_CONFIGS = {
-  snappy: { damping: 100, mass: 0.5, stiffness: 300 },
-  normal: { damping: 80, mass: 0.5, stiffness: 200 },
-  gentle: { damping: 100, mass: 0.8, stiffness: 150 },
-  bouncy: { damping: 60, mass: 0.4, stiffness: 300 },
+// Base presets
+SPRING_PRESETS = {
+  subtle:    { damping: 100, mass: 0.8, stiffness: 150 },  // Secondary elements
+  moderate:  { damping: 80, mass: 0.5, stiffness: 200 },   // Default for most uses
+  snappy:    { damping: 100, mass: 0.5, stiffness: 300 },  // Titles, emphasis
+  energetic: { damping: 60, mass: 0.4, stiffness: 300 },   // Some bounce
+  bouncy:    { damping: 50, mass: 0.3, stiffness: 200 },   // Playful elements
+
+  // NEW: Professional Motion Presets (Phase 6)
+  gentle:  { damping: 200, mass: 0.5, stiffness: 80, overshootClamping: true },   // Soft UI elements
+  smooth:  { damping: 25, mass: 1, stiffness: 100, overshootClamping: false },    // Elegant flowing
+  quick:   { damping: 15, mass: 0.2, stiffness: 400, overshootClamping: true },   // Micro-interactions
+  elastic: { damping: 8, mass: 0.3, stiffness: 180, overshootClamping: false },   // Satisfying overshoot
+  heavy:   { damping: 40, mass: 2, stiffness: 200, overshootClamping: false },    // Weighty, deliberate
+  crisp:   { damping: 30, mass: 0.4, stiffness: 350, overshootClamping: true },   // Sharp, precise
 }
 ```
+
+### Spring Preset Selection Guide (NEW)
+
+| Preset | Use Case | Feel |
+|--------|----------|------|
+| `subtle` | Backgrounds, secondary UI | Calm, understated |
+| `moderate` | Default animations | Balanced, natural |
+| `snappy` | Titles, buttons, emphasis | Responsive, crisp |
+| `energetic` | Call-to-action, alerts | Dynamic, attention-grabbing |
+| `bouncy` | Playful elements, mascots | Fun, casual |
+| `gentle` | Modal appearances, tooltips | Soft, non-intrusive |
+| `smooth` | Page transitions, slides | Elegant, flowing |
+| `quick` | Hover states, toggles | Instant feedback |
+| `elastic` | Success states, celebrations | Satisfying overshoot |
+| `heavy` | Important notifications | Weighty, important |
+| `crisp` | Data visualizations, charts | Precise, professional |
+
+```typescript
+import { SPRING_PRESETS, getSpringPreset } from "@shared/templates/animations/presets";
+
+// Usage
+spring({ frame, fps, config: SPRING_PRESETS.elastic });
+// or
+spring({ frame, fps, config: getSpringPreset('crisp') });
+```
+
+### Stagger Animation Utilities (NEW)
+
+Animate multiple elements with coordinated delays.
+
+```typescript
+import {
+  calculateStaggerDelay,
+  createStaggerDelays,
+  getStaggerTotalDuration,
+  StaggerDistribution
+} from "@shared/templates/animations/presets";
+
+// Distribution types: 'linear' | 'ease-out' | 'ease-in' | 'random' | 'center-out'
+
+// Calculate delay for single item
+const delay = calculateStaggerDelay(
+  index,           // Item index (0-based)
+  totalItems,      // Total count
+  3,               // Base delay in frames
+  'ease-out'       // Distribution
+);
+
+// Get all delays at once
+const delays = createStaggerDelays(5, 3, 'center-out');
+// [6, 3, 0, 3, 6] - items animate from center outward
+
+// Calculate total duration for planning
+const totalFrames = getStaggerTotalDuration(10, 3, 30, 'linear');
+// 30 + (9 * 3) = 57 frames total
+```
+
+| Distribution | Effect | Best For |
+|--------------|--------|----------|
+| `linear` | Even spacing | Standard lists |
+| `ease-out` | Fast start, slow end | Priority lists |
+| `ease-in` | Slow start, fast end | Building tension |
+| `center-out` | From center outward | Radial reveals |
+| `random` | Seeded random | Playful, organic |
 
 ---
 
@@ -1834,8 +2007,12 @@ import {
   duckVolume,
 } from "@shared/audio";
 
-// Transitions
+// Transitions (including new custom transitions)
 import { TransitionComposition, TRANSITION_PRESETS } from "@shared/transitions";
+import { morph } from "@shared/transitions/custom/morph";
+import { glitch } from "@shared/transitions/custom/glitch";
+import { blinds } from "@shared/transitions/custom/blinds";
+import { ripple } from "@shared/transitions/custom/ripple";
 
 // Design System
 import { COLORS, GRADIENTS, FONT_SIZES, SPACING, SPRING_CONFIGS } from "@shared/components/constants";

@@ -106,4 +106,56 @@ export {
   calculateBeatFrames,
   isOnBeat,
   getNearestBeatFrame,
+  // Advanced ducking
+  advancedDuckVolume,
+  getDuckingEnvelope,
+  getMultiBandDuckingParams,
+  getGainReductionDb,
+  ADVANCED_DUCKING_PRESETS,
+  // Crossfade
+  crossfade,
+  equalPowerCrossfade,
+  linearCrossfade,
+  multiTrackCrossfade,
+  getCombinedPower,
 } from "./utils";
+
+export type {
+  AdvancedDuckingConfig,
+  DuckingCurve,
+  MultiBandDuckingConfig,
+  CrossfadeCurve,
+  CrossfadeVolumes,
+  CrossfadeConfig,
+} from "./utils";
+
+// Hooks
+export {
+  // Narration ducking
+  useNarrationDucking,
+  createNarrationSegments,
+  mergeNarrationSegments,
+  // Beat sync
+  useBeatSync,
+  getBarNumber,
+  getBeatInBar,
+  isDownbeat,
+  // Audio transitions
+  useAudioTransition,
+  useMultiSceneAudio,
+  createTransitionTiming,
+} from "./hooks";
+
+export type {
+  NarrationSegment,
+  UseNarrationDuckingOptions,
+  UseNarrationDuckingResult,
+  BeatConfig,
+  BeatInfo,
+  UseBeatSyncResult,
+  TransitionTiming,
+  UseAudioTransitionOptions,
+  UseAudioTransitionResult,
+  SceneAudioConfig,
+  UseMultiSceneAudioOptions,
+} from "./hooks";

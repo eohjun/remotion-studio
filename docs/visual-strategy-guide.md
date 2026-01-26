@@ -410,6 +410,30 @@ Outro (6s)
 | Before/after comparison | `ComparisonBars` |
 | Progress toward goal | `GaugeChart` |
 
+**When to use advanced transitions (Phase 6):**
+
+| Scenario | Transition | Notes |
+|----------|------------|-------|
+| Conceptual shifts, thoughtful content | `morph` | Smooth, elegant - best for philosophical content |
+| Forward/backward conceptual flow | `morphLeft` / `morphRight` | Directional morphing |
+| Tech content, error states | `glitch` | Digital aesthetic - use sparingly |
+| Climax moments, maximum impact | `glitchIntense` | Heavy distortion - use only for key reveals |
+| Data list reveals | `blindsHorizontal` | Structured, rhythmic reveal |
+| Side-by-side comparisons | `blindsVertical` | Creates visual separation |
+| Emotional moments, change themes | `ripple` | Water/change metaphor - center origin |
+| Unique corner reveals | `rippleCorner` | Asymmetric, distinctive feel |
+| Hard cuts, quick pacing | `cut` | No transition effect |
+
+**Transition Style Guide:**
+
+| Content Type | Recommended | Avoid |
+|--------------|-------------|-------|
+| Philosophical | `morph`, `dissolve`, `fade` | `glitch`, `blinds` |
+| Technical | `slide`, `fade`, `glitch` | `ripple`, `morph` |
+| Emotional | `ripple`, `dissolve`, `morph` | `blinds`, `wipe` |
+| Data-Driven | `blinds`, `wipe`, `slide` | `ripple`, `glitch` |
+| Dramatic | `glitch`, `zoomIn`, `morph` | `fade`, `cut` |
+
 ---
 
 ## Color Harmony Guidelines

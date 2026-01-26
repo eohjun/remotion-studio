@@ -222,10 +222,30 @@ VALID_CHARTS = [
 ]
 
 VALID_TRANSITIONS = [
-  'fade', 'dissolve', 'slideLeft', 'slideRight',
-  'slideUp', 'slideDown', 'wipeLeft', 'wipeRight',
-  'wipeUp', 'wipeDown', 'zoomIn', 'zoomOut',
-  'flipLeft', 'flipRight', 'clockWipe'
+  // Fade transitions
+  'fade', 'fadeQuick', 'fadeSlow',
+  // Dissolve transitions
+  'dissolve', 'dissolveQuick',
+  // Slide transitions
+  'slideLeft', 'slideRight', 'slideUp', 'slideDown',
+  // Wipe transitions
+  'wipeLeft', 'wipeRight', 'wipeUp', 'wipeDown',
+  // Flip transitions
+  'flipHorizontal', 'flipVertical',
+  // Zoom transitions
+  'zoomIn', 'zoomOut',
+  // Clock wipe
+  'clockWipe',
+  // Morph transitions (NEW - smooth morphing effect)
+  'morph', 'morphLeft', 'morphRight',
+  // Glitch transitions (NEW - digital glitch effect)
+  'glitch', 'glitchIntense',
+  // Blinds transitions (NEW - venetian blinds effect)
+  'blindsHorizontal', 'blindsVertical',
+  // Ripple transitions (NEW - water ripple effect)
+  'ripple', 'rippleCorner',
+  // Hard cut (no transition)
+  'cut'
 ]
 
 // NEW: Effect Selection Rules
@@ -462,6 +482,52 @@ Scale for different formats:
 - PORTRAIT: multiply by 0.85 (smaller screens)
 - SQUARE: multiply by 0.9
 
+### Animation Spring Selection (NEW)
+
+Choose spring presets based on animation purpose:
+
+```
+SPRING_PRESETS = {
+  // Base presets
+  subtle:    "Secondary UI, backgrounds",
+  moderate:  "Default for most animations",
+  snappy:    "Titles, emphasis, buttons",
+  energetic: "Alerts, call-to-action",
+  bouncy:    "Playful elements, mascots",
+
+  // Professional presets (NEW)
+  gentle:    "Modal appearances, tooltips, soft UI",
+  smooth:    "Page transitions, slides, elegant flow",
+  quick:     "Hover states, toggles, micro-interactions",
+  elastic:   "Success states, celebrations, satisfying overshoot",
+  heavy:     "Important notifications, weighty movement",
+  crisp:     "Data visualizations, charts, precise animations"
+}
+
+SPRING_SELECTION_RULES:
+  IF contentType === 'philosophical':
+    DEFAULT: smooth (elegant flow)
+    EMPHASIS: gentle (soft transitions)
+
+  IF contentType === 'data_driven':
+    DEFAULT: crisp (precise data updates)
+    CHARTS: crisp or moderate
+
+  IF contentType === 'narrative':
+    DEFAULT: smooth (flowing narrative)
+    REVEALS: elastic (satisfying reveals)
+
+  IF contentType === 'technical':
+    DEFAULT: snappy (responsive feel)
+    CODE_BLOCKS: crisp
+
+  IF scene.isImpact OR scene.isClimax:
+    USE: elastic or energetic (emphasis)
+
+  IF scene.type === 'intro' OR scene.type === 'outro':
+    USE: smooth or gentle (elegant bookends)
+```
+
 ### Color Palette Selection
 
 Choose palette based on content type:
@@ -649,6 +715,37 @@ Generate a `video-plan.json` with this structure:
 | Sequential | `StaggerGroup` | List reveals, bullet points, step-by-step |
 | Transform | `TextMorph` | A→B text changes, counters, dramatic shifts |
 
+### Stagger Distribution Selection (NEW)
+
+For `StaggerGroup` and list animations, choose distribution based on effect:
+
+| Distribution | Effect | Best For |
+|--------------|--------|----------|
+| `linear` | Even spacing | Standard lists, neutral reveal |
+| `ease-out` | Fast start, slows down | Priority lists, key points first |
+| `ease-in` | Slow start, speeds up | Building tension, dramatic reveals |
+| `center-out` | From center outward | Radial reveals, focus on middle item |
+| `random` | Seeded random order | Playful, organic feel |
+
+```
+STAGGER_SELECTION_RULES:
+  IF scene.hasPriorityList:
+    USE: 'ease-out' (show important items first)
+
+  IF scene.isBuildingTension:
+    USE: 'ease-in' (accelerate toward climax)
+
+  IF scene.isRadialReveal OR scene.hasCenterFocus:
+    USE: 'center-out' (expand from focal point)
+
+  IF contentType === 'playful' OR tone === 'casual':
+    USE: 'random' (organic, fun feel)
+
+  DEFAULT: 'linear' (predictable, professional)
+
+// Frame calculation: baseDelay * (totalItems - 1) + itemDuration
+```
+
 ### Data Components
 | Data Type | Component | Props to Configure |
 |-----------|-----------|-------------------|
@@ -699,6 +796,44 @@ Generate a `video-plan.json` with this structure:
 - Standard: 15 frames (0.5s)
 - Quick: 10 frames (0.33s)
 - Dramatic: 20-30 frames (0.67-1s)
+
+### Advanced Transition Selection (NEW)
+
+| Transition | Best For | Avoid When |
+|------------|----------|------------|
+| `morph` | Smooth conceptual shifts, elegant reveals | Fast-paced content |
+| `morphLeft/Right` | Directional morphing with motion | Multiple quick cuts |
+| `glitch` | Tech content, dramatic moments, errors | Calm/philosophical content |
+| `glitchIntense` | Maximum impact moments, climax | Frequent use (jarring) |
+| `blindsHorizontal` | Data reveals, list presentations | Narrative content |
+| `blindsVertical` | Side-by-side comparisons, wipes | Organic/natural themes |
+| `ripple` | Emotional moments, water themes | Technical/data content |
+| `rippleCorner` | Corner-origin reveals, unique style | Frequent transitions |
+
+**NEW Transition Rules**:
+```
+// Morph: Best for thoughtful, conceptual content
+IF contentType === 'philosophical' OR tone === 'contemplative':
+  CONSIDER transition: 'morph' (smooth conceptual shifts)
+  USE 'morphLeft/Right' for directional transitions
+
+// Glitch: Tech content and dramatic moments ONLY
+IF contentType === 'technical' AND scene.isImpact:
+  USE transition: 'glitch' (medium impact)
+IF scene.isClimax OR scene.isReveal:
+  USE transition: 'glitchIntense' (maximum impact, use sparingly)
+
+// Blinds: Structured content, reveals
+IF scene.hasListItems OR scene.isDataReveal:
+  CONSIDER transition: 'blindsHorizontal' (structured reveal)
+IF scene.hasComparison:
+  CONSIDER transition: 'blindsVertical' (side-by-side feel)
+
+// Ripple: Emotional and thematic content
+IF tone === 'emotional' OR theme === 'water' OR theme === 'change':
+  USE transition: 'ripple' (center origin)
+  USE transition: 'rippleCorner' for corner-origin variant
+```
 
 ## Quality Checklist
 

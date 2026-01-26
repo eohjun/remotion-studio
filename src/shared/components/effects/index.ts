@@ -44,3 +44,20 @@ export { GlitchEffect } from "./GlitchEffect";
 export { ColorGrading, getColorGradingPresets } from "./ColorGrading";
 export { Bloom } from "./Bloom";
 export { EffectsComposer } from "./EffectsComposer";
+export { EffectsStack, getEffectsFromPreset, mergeEffectsConfigs } from "./EffectsStack";
+export type { EffectsStackProps } from "./EffectsStack";
+export {
+  useEffectsPreset,
+  getAvailablePresets,
+  getEffectsConfig,
+  PRESET_CATEGORIES,
+} from "./useEffectsPreset";
+export type { UseEffectsPresetResult, UseEffectsPresetOptions } from "./useEffectsPreset";
+export {
+  SCENE_EFFECT_PRESETS,
+  getSceneEffectPreset,
+  getPresetsForSceneType,
+  getScenePresetNames,
+  getSceneEffects,
+} from "./scenePresets";
+export type { SceneType, SceneEffectPreset } from "./scenePresets";

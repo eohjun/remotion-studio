@@ -75,7 +75,160 @@ export const SPRING_PRESETS = {
     mass: 0.3,
     stiffness: 200,
   } as SpringConfig,
+
+  // === NEW: Enhanced Spring Presets for Professional Motion ===
+
+  /** Gentle - UI elements appearing softly */
+  gentle: {
+    damping: 200,
+    mass: 0.5,
+    stiffness: 80,
+    overshootClamping: true,
+  } as SpringConfig,
+
+  /** Smooth - Elegant, flowing transitions */
+  smooth: {
+    damping: 25,
+    mass: 1,
+    stiffness: 100,
+    overshootClamping: false,
+  } as SpringConfig,
+
+  /** Quick - Fast response for micro-interactions */
+  quick: {
+    damping: 15,
+    mass: 0.2,
+    stiffness: 400,
+    overshootClamping: true,
+  } as SpringConfig,
+
+  /** Elastic - Satisfying overshoot for emphasis */
+  elastic: {
+    damping: 8,
+    mass: 0.3,
+    stiffness: 180,
+    overshootClamping: false,
+  } as SpringConfig,
+
+  /** Heavy - Weighty, deliberate movement */
+  heavy: {
+    damping: 40,
+    mass: 2,
+    stiffness: 200,
+    overshootClamping: false,
+  } as SpringConfig,
+
+  /** Crisp - Sharp, precise animations */
+  crisp: {
+    damping: 30,
+    mass: 0.4,
+    stiffness: 350,
+    overshootClamping: true,
+  } as SpringConfig,
 } as const;
+
+/** Spring preset name type */
+export type SpringPresetName = keyof typeof SPRING_PRESETS;
+
+/**
+ * Get spring config by preset name
+ */
+export const getSpringPreset = (name: SpringPresetName): SpringConfig => {
+  return SPRING_PRESETS[name];
+};
+
+// =============================================================================
+// Stagger Animation Utilities
+// =============================================================================
+
+/** Stagger distribution type */
+export type StaggerDistribution = "linear" | "ease-out" | "ease-in" | "random" | "center-out";
+
+/**
+ * Calculate stagger delay for an item in a sequence
+ *
+ * @param index - Item index (0-based)
+ * @param totalItems - Total number of items
+ * @param baseDelayFrames - Base delay between items in frames
+ * @param distribution - How delays are distributed
+ * @returns Delay in frames for this item
+ */
+export const calculateStaggerDelay = (
+  index: number,
+  totalItems: number,
+  baseDelayFrames: number = 3,
+  distribution: StaggerDistribution = "linear"
+): number => {
+  if (totalItems <= 1) return 0;
+
+  const normalizedIndex = index / (totalItems - 1);
+
+  switch (distribution) {
+    case "ease-out":
+      // Items appear faster initially, then slow down
+      return Math.pow(normalizedIndex, 0.5) * baseDelayFrames * (totalItems - 1);
+
+    case "ease-in":
+      // Items appear slowly initially, then speed up
+      return Math.pow(normalizedIndex, 2) * baseDelayFrames * (totalItems - 1);
+
+    case "center-out": {
+      // Items appear from center outward
+      const centerIndex = (totalItems - 1) / 2;
+      const distanceFromCenter = Math.abs(index - centerIndex);
+      return distanceFromCenter * baseDelayFrames;
+    }
+
+    case "random": {
+      // Seeded random based on index for consistency
+      const seed = index * 9301 + 49297;
+      const random = ((seed % 233280) / 233280);
+      return random * baseDelayFrames * (totalItems - 1);
+    }
+
+    case "linear":
+    default:
+      return index * baseDelayFrames;
+  }
+};
+
+/**
+ * Create an array of stagger delays for all items
+ *
+ * @param totalItems - Total number of items
+ * @param baseDelayFrames - Base delay between items in frames
+ * @param distribution - How delays are distributed
+ * @returns Array of delays in frames
+ */
+export const createStaggerDelays = (
+  totalItems: number,
+  baseDelayFrames: number = 3,
+  distribution: StaggerDistribution = "linear"
+): number[] => {
+  return Array.from({ length: totalItems }, (_, i) =>
+    calculateStaggerDelay(i, totalItems, baseDelayFrames, distribution)
+  );
+};
+
+/**
+ * Get total duration of staggered animation sequence
+ *
+ * @param totalItems - Total number of items
+ * @param baseDelayFrames - Base delay between items
+ * @param itemDurationFrames - Duration of each item's animation
+ * @param distribution - Stagger distribution type
+ * @returns Total duration in frames
+ */
+export const getStaggerTotalDuration = (
+  totalItems: number,
+  baseDelayFrames: number,
+  itemDurationFrames: number,
+  distribution: StaggerDistribution = "linear"
+): number => {
+  const delays = createStaggerDelays(totalItems, baseDelayFrames, distribution);
+  const maxDelay = Math.max(...delays);
+  return maxDelay + itemDurationFrames;
+};
 
 // Preset animations
 export const fadeIn = (config?: Partial<SpringConfig>): AnimationConfig => ({

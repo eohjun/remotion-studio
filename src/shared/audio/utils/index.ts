@@ -29,3 +29,34 @@ export {
   isOnBeat,
   getNearestBeatFrame,
 } from "./audioTiming";
+
+// Advanced ducking utilities
+export {
+  advancedDuckVolume,
+  getDuckingEnvelope,
+  getMultiBandDuckingParams,
+  getGainReductionDb,
+  ADVANCED_DUCKING_PRESETS,
+} from "./advancedDucking";
+export type {
+  AdvancedDuckingConfig,
+  DuckingCurve,
+  MultiBandDuckingConfig,
+} from "./advancedDucking";
+
+// Crossfade utilities
+export {
+  crossfade,
+  equalPowerCrossfade,
+  linearCrossfade,
+  exponentialCrossfade,
+  sCurveCrossfade,
+  logarithmicCrossfade,
+  multiTrackCrossfade,
+  getCombinedPower,
+} from "./crossfade";
+export type {
+  CrossfadeCurve,
+  CrossfadeVolumes,
+  CrossfadeConfig,
+} from "./crossfade";

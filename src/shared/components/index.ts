@@ -41,3 +41,13 @@ export * from "./three";
 
 // Audio Visualization Components
 export * from "./audio";
+
+// Development Utilities
+export {
+  SafeAreaGuide,
+  MinimalGuide,
+  BroadcastGuide,
+  CompositionGuide,
+  FullDevGuide,
+} from "./SafeAreaGuide";
+export type { SafeAreaGuideProps } from "./SafeAreaGuide";

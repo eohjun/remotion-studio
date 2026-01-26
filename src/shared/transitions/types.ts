@@ -18,6 +18,10 @@ export type TransitionType =
   | "clockWipe"
   | "dissolve"
   | "zoom"
+  | "morph"
+  | "glitch"
+  | "blinds"
+  | "ripple"
   | "none";
 
 /**
@@ -103,4 +107,13 @@ export type TransitionPresetName =
   | "dissolveQuick"
   | "zoomIn"
   | "zoomOut"
+  | "morph"
+  | "morphLeft"
+  | "morphRight"
+  | "glitch"
+  | "glitchIntense"
+  | "blindsHorizontal"
+  | "blindsVertical"
+  | "ripple"
+  | "rippleCorner"
   | "cut";

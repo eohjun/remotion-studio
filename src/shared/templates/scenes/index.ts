@@ -60,6 +60,21 @@ export type {
   ListItem,
 } from "./TableListTemplate";
 
+// SceneBase - Unified base component
+export {
+  SceneBase,
+  CenteredScene,
+  FullBleedScene,
+  BroadcastSafeScene,
+  CinematicScene,
+} from "./SceneBase";
+export type {
+  SceneBaseProps,
+  SafeAreaPadding,
+  ContentAlignment,
+  SceneEntryAnimation,
+} from "./SceneBase";
+
 // Types
 export type {
   BaseSceneProps,
