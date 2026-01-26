@@ -73,15 +73,20 @@
 
 | Element | Recommendation | Rationale |
 |---------|---------------|-----------|
-| **Background** | Solid dark (`#1a1a2e`), `ParticleField` (sparse) | Focus on content |
-| **Effects** | None or minimal `Vignette` | Clarity over aesthetics |
+| **Background** | Solid dark (`#1a1a2e`), `ParticleField` (sparse), `GridPattern` (lines/dots) | Focus on content, modern tech feel |
+| **Effects** | None or minimal `Vignette`, `ChromaticAberration` (subtle, 0.1-0.2) | Clarity with subtle tech aesthetic |
 | **Transitions** | `slide`, `fade` | Predictable, non-distracting |
-| **Templates** | `ContentTemplate`, `AnnotationTemplate` | Information delivery |
-| **Text Style** | `HighlightText`, `TypewriterText` | Code-like, precise |
+| **Templates** | `ContentTemplate`, `AnnotationTemplate`, `TableListTemplate` | Information delivery |
+| **Text Style** | `HighlightText`, `TypewriterText`, `StaggerGroup` | Code-like, precise, sequential reveals |
 | **Progress** | `StepIndicator` | Clear progression |
 | **Pacing** | Consistent (5-8 seconds per concept) | Learnable rhythm |
 
-**Avoid**: `GlitchText`, `LightLeak`, dramatic effects
+**Avoid**: `GlitchText` (intense), `LightLeak`, dramatic effects, `Bloom`
+
+**New Recommendations**:
+- Use `GridPattern` (type: 'dots') for modern programming tutorials
+- Use `ChromaticAberration` (intensity: 0.15) sparingly for tech accent
+- Use `StaggerGroup` for revealing code steps or bullet points
 
 ---
 
@@ -131,6 +136,99 @@
 - Background: `ParticleField` (fast), `FloatingShapes`
 - Transitions: Quick `slide`, `zoomIn`
 - Pacing: Faster scenes (4-6 seconds)
+
+---
+
+## New Effects Usage Guide
+
+### Effect-to-Content Mapping
+
+| Effect | Best For | Avoid For |
+|--------|----------|-----------|
+| `CameraMotionBlur` | Fast transitions, action sequences, dynamic reveals | Static data, calm explanations |
+| `ChromaticAberration` | Tech content, retro aesthetics, impact moments | Data analysis, educational content |
+| `GlitchEffect` | Tech themes, error states, tension/drama | Philosophical, calming content |
+| `ColorGrading` | All content (preset-dependent) | - |
+| `Bloom` | Dramatic highlights, sci-fi, magical moments | Text-heavy scenes (reduces readability) |
+
+### ColorGrading Preset Guide
+
+| Preset | Mood/Feeling | Best Content Types |
+|--------|--------------|-------------------|
+| `cinematic` | Professional, serious, film-like | Storytelling, documentaries, case studies |
+| `vintage` | Nostalgic, warm, retro | Historical content, retrospectives, memories |
+| `cold` | Analytical, detached, serious | Data analysis, critiques, technical reviews |
+| `warm` | Friendly, inviting, positive | Inspirational, motivational, tutorials |
+| `noir` | Mysterious, dramatic, artistic | Philosophical, noir themes, dramatic reveals |
+| `teal-orange` | Modern cinematic, Hollywood | General content, interviews, vlogs |
+
+### Effect Intensity Guidelines
+
+```
+SUBTLE (0.1-0.3):
+  - ChromaticAberration: Accent only, barely noticeable
+  - GlitchEffect: Brief flickers, not distracting
+  - Bloom: Soft glow, maintains readability
+
+MEDIUM (0.4-0.6):
+  - ChromaticAberration: Visible but not overwhelming
+  - GlitchEffect: Clear digital aesthetic
+  - Bloom: Noticeable highlights
+
+INTENSE (0.7-1.0):
+  - ChromaticAberration: Strong retro/distortion look
+  - GlitchEffect: Heavy distortion, dramatic
+  - Bloom: Dramatic glow, reduced readability
+```
+
+### Effect Combinations (Safe)
+
+| Combination | Effect | Use Case |
+|-------------|--------|----------|
+| `ColorGrading` + `Vignette` | Cinematic depth | Most content types |
+| `ChromaticAberration` + `GlitchEffect` | Heavy tech aesthetic | Tech content, errors |
+| `Bloom` + `ColorGrading (warm)` | Dreamy, magical | Inspirational moments |
+| `CameraMotionBlur` + `ChromaticAberration` | Dynamic action | Fast sequences |
+
+### Effect Combinations (Avoid)
+
+| Combination | Problem |
+|-------------|---------|
+| `FilmGrain` + `NoiseTexture` | Redundant noise |
+| `GlitchEffect` + `Bloom` | Visual confusion |
+| `ChromaticAberration` (intense) + `ColorGrading` | Unpredictable color shifts |
+
+---
+
+## Background Selection (Extended)
+
+### Background-to-Content Mapping
+
+| Content Type | Primary Options | New Options |
+|--------------|-----------------|-------------|
+| Tech/Tutorial | `ParticleField` (sparse) | `GridPattern` (lines/dots) |
+| Data-Driven | `FloatingShapes` | `GridPattern` (squares) |
+| Film/Vintage | - | `NoiseTexture` (grain) |
+| Modern/Clean | Solid color | `GridPattern` (hexagons) |
+| Professional | `AnimatedGradient` (subtle) | `GridPattern` (lines) |
+
+### GridPattern Type Guide
+
+| Grid Type | Aesthetic | Best For |
+|-----------|-----------|----------|
+| `lines` | Clean, technical | Programming, tutorials, minimalist |
+| `dots` | Modern, subtle | General tech, dashboards |
+| `squares` | Structured, organized | Data content, grids, tables |
+| `hexagons` | Futuristic, organic | Science, nature-tech fusion |
+
+### NoiseTexture Type Guide
+
+| Noise Type | Effect | Best For |
+|------------|--------|----------|
+| `static` | TV static, digital | Glitch themes, errors |
+| `perlin` | Smooth, flowing | Abstract backgrounds, organic |
+| `grain` | Film-like texture | Cinematic, vintage |
+| `stipple` | Dotted, artistic | Artistic, illustration style |
 
 ---
 
@@ -281,11 +379,36 @@ Outro (6s)
 
 | Content Type | Background | Effects | Primary Template | Transition |
 |-------------|-----------|---------|-----------------|------------|
-| Philosophy | AnimatedGradient(pulse) | Vignette, FilmGrain | Content, Quote | dissolve |
-| Data | FloatingShapes, Solid | Minimal | DataViz, Timeline | wipe, slide |
-| Story | AnimatedGradient(cycle) | LightLeak, Vignette | Story, Image | dissolve, zoom |
-| Tutorial | Solid dark, ParticleField | None | Annotation, Content | slide |
-| Critical | Solid, AnimatedGradient | Vignette | Comparison, Content | wipe, fade |
+| Philosophy | AnimatedGradient(pulse) | Vignette, FilmGrain, ColorGrading(noir) | Content, Quote | dissolve |
+| Data | FloatingShapes, GridPattern(squares) | Minimal, Vignette(light) | DataViz, Timeline | wipe, slide |
+| Story | AnimatedGradient(cycle), NoiseTexture(grain) | LightLeak, Vignette, ColorGrading(cinematic) | Story, Image | dissolve, zoom |
+| Tutorial | Solid dark, GridPattern(lines) | None or minimal | Annotation, Content | slide |
+| Critical | Solid, AnimatedGradient | Vignette, ColorGrading(cold) | Comparison, Content | wipe, fade |
+| Tech | GridPattern(dots), ParticleField | ChromaticAberration(subtle), Vignette | Content, Annotation | slide, fade |
+| Dramatic | AnimatedGradient, NoiseTexture | GlitchEffect, Bloom, ChromaticAberration | Quote, Content | zoom, dissolve |
+
+### Extended Decision Criteria
+
+**When to use new effects:**
+
+| Scenario | Effect Choice |
+|----------|---------------|
+| Fast-paced action or transitions | `CameraMotionBlur` (shutterAngle: 180) |
+| Tech/programming content | `ChromaticAberration` (subtle) + `GridPattern` |
+| Error or failure states | `GlitchEffect` (medium) |
+| Establishing overall mood | `ColorGrading` (choose preset by tone) |
+| Highlighting key moments | `Bloom` (threshold: 0.6) |
+| Vintage/nostalgic feel | `NoiseTexture` (grain) + `ColorGrading` (vintage) |
+
+**When to use new charts:**
+
+| Data Pattern | Chart Choice |
+|--------------|--------------|
+| Cumulative changes (budget flow) | `WaterfallChart` |
+| Multi-dimensional comparison | `RadarChart` |
+| Correlation/intensity matrix | `HeatmapChart` |
+| Before/after comparison | `ComparisonBars` |
+| Progress toward goal | `GaugeChart` |
 
 ---
 

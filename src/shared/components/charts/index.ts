@@ -23,3 +23,12 @@ export type { GaugeChartProps } from "./GaugeChart";
 
 export { ComparisonBars } from "./ComparisonBars";
 export type { ComparisonBarsProps, ComparisonBarItem } from "./ComparisonBars";
+
+export { WaterfallChart } from "./WaterfallChart";
+export type { WaterfallChartProps, WaterfallDataPoint } from "./WaterfallChart";
+
+export { RadarChart } from "./RadarChart";
+export type { RadarChartProps, RadarDataSeries } from "./RadarChart";
+
+export { HeatmapChart } from "./HeatmapChart";
+export type { HeatmapChartProps } from "./HeatmapChart";

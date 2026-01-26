@@ -82,6 +82,15 @@ Source Material (PDF, Docx, URL, Topic)
       │
       ▼
 ┌─────────────────────────────────┐
+│  Phase 7.5: YOUTUBE ASSETS      │
+│  Script: generate-youtube-assets│
+│  Output: metadata.json,         │
+│          description.txt        │
+│  (AUTOMATIC after render)       │
+└─────────────────────────────────┘
+      │
+      ▼
+┌─────────────────────────────────┐
 │  Phase 8: PUBLISHING            │
 │  Agent: video-publisher         │
 │  Output: YouTube Upload         │
@@ -178,6 +187,48 @@ Using the video plan, create:
 1. **Composition file**: `src/videos/{compositionId}/index.tsx`
 2. **Scenes file**: `src/videos/{compositionId}/scenes.ts`
 3. **Constants file**: `src/videos/{compositionId}/constants.ts`
+
+#### ⚠️ CRITICAL: Text & Typography Rules
+
+**NEVER create custom inline text components.** Always use shared components:
+
+```tsx
+// ✅ CORRECT: Use shared components
+import { AnimatedText, fadeInUp } from "../../shared/templates/animations";
+import { TitleCard } from "../../shared/components/cards";
+import { FONT_FAMILY } from "../../shared/components/constants";
+
+<AnimatedText animation={fadeInUp}>제목</AnimatedText>
+<TitleCard title="제목" subtitle="부제" durationInFrames={150} />
+
+// ❌ WRONG: Custom inline text components
+const AnimatedTitle = ({ children }) => (
+  <h1 style={{ fontSize: 48 }}>{children}</h1>  // Missing fontFamily!
+);
+```
+
+**If custom text styling is unavoidable, ALWAYS include `fontFamily`:**
+
+```tsx
+// ✅ If custom styling needed
+import { FONT_FAMILY } from "../../shared/components/constants";
+
+<div style={{
+  fontSize: 48,
+  fontFamily: FONT_FAMILY.title,  // REQUIRED
+  color: COLORS.text,
+}}>
+  텍스트
+</div>
+```
+
+**Available Shared Text Components:**
+- `AnimatedText` - General animated text with presets
+- `TitleCard` - Title + subtitle with transitions
+- `TypewriterText` - Typewriter effect
+- `HighlightText` - Text with highlight
+- `CaptionText` - Word-by-word sync
+- `StaggerGroup` - Staggered child animations
 
 Implementation pattern:
 ```tsx
@@ -308,9 +359,43 @@ node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json --eleve
 
 ### Step 9: Render Video
 
+**Quality Presets** (Recommended):
+```bash
+# Draft preview (fast, lower quality - good for review)
+node scripts/render-quality.mjs {compositionId} --preset draft
+
+# Standard YouTube quality (default)
+node scripts/render-quality.mjs {compositionId} --preset standard
+
+# Premium master quality (ProRes, for editing)
+node scripts/render-quality.mjs {compositionId} --preset premium
+```
+
+**Manual render** (if needed):
 ```bash
 npx remotion render {compositionId} out/video.mp4
 ```
+
+**Quality Preset Details**:
+| Preset | Resolution | CRF | Codec | Use Case |
+|--------|------------|-----|-------|----------|
+| `draft` | 50% scale | 28 | h264 | Quick preview, review |
+| `standard` | Full | 18 | h264 | YouTube upload |
+| `premium` | Full | 10 | ProRes | Master for editing |
+
+### Step 9.5: Generate YouTube Assets (AUTOMATIC)
+
+**ALWAYS run this after rendering completes:**
+
+```bash
+node scripts/generate-youtube-assets.mjs {compositionId}
+```
+
+This automatically generates:
+- `projects/{compositionId}/youtube/metadata.json` - SEO-optimized metadata
+- `projects/{compositionId}/youtube/description.txt` - Copy-paste ready description with chapters
+
+The script reads from narration.json, video-plan.json, research-report.md, and constants.ts to create accurate chapters and metadata. **No manual metadata creation needed.**
 
 ### Step 10: Publish (Optional)
 
@@ -375,10 +460,24 @@ Before completion, verify:
 - [ ] Narration flows naturally when read aloud
 - [ ] Visual plan matches content tone
 - [ ] All scenes use templates from shared library
+- [ ] **NO custom inline text components** (use shared AnimatedText, TitleCard, etc.)
+- [ ] **All text elements have fontFamily** (if custom styling used, include FONT_FAMILY)
 - [ ] Composition renders without errors
 - [ ] User has approved the plan (Phase 5)
 - [ ] Audio files are generated
 - [ ] Total duration matches plan
+- [ ] YouTube assets generated (`node scripts/generate-youtube-assets.mjs`)
+- [ ] metadata.json and description.txt exist in `projects/{id}/youtube/`
+
+### Typography Verification
+
+Before rendering, verify typography:
+```bash
+# Check for missing fontFamily in custom components
+grep -n "fontSize:" src/videos/{compositionId}/*.tsx | grep -v "fontFamily"
+```
+
+If results show text elements without fontFamily, add `fontFamily: FONT_FAMILY.title` or `FONT_FAMILY.body`.
 
 ## Error Recovery
 
@@ -416,6 +515,22 @@ For users, provide these commands:
 
 # Create video from Obsidian note
 "Create a video from note 202601150123"
+```
+
+## Rendering Commands
+
+```bash
+# Preview (draft quality, fast)
+node scripts/render-quality.mjs {compositionId} --preset draft
+
+# Standard render (YouTube quality)
+node scripts/render-quality.mjs {compositionId} --preset standard
+
+# Master quality (for editing/archival)
+node scripts/render-quality.mjs {compositionId} --preset premium
+
+# Manual render (basic)
+npx remotion render {compositionId} out/video.mp4
 ```
 
 ## Coordination Notes

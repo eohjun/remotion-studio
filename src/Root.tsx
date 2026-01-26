@@ -30,6 +30,11 @@ import {
   FPS as FPS_PI,
 } from "./videos/ProcessAndInterbeing/constants";
 import {
+  DevCompetencyComparison,
+  DevCompetencyComparisonSchema,
+} from "./videos/DevCompetencyComparison";
+import { VIDEO_CONFIG as VIDEO_CONFIG_DC } from "./videos/DevCompetencyComparison/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -132,6 +137,16 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={ProcessAndInterbeingSchema}
+        defaultProps={{}}
+      />
+      <Composition
+        id="DevCompetencyComparison"
+        component={DevCompetencyComparison}
+        durationInFrames={VIDEO_CONFIG_DC.totalFrames}
+        fps={VIDEO_CONFIG_DC.fps}
+        width={VIDEO_CONFIG_DC.width}
+        height={VIDEO_CONFIG_DC.height}
+        schema={DevCompetencyComparisonSchema}
         defaultProps={{}}
       />
 

@@ -17,3 +17,9 @@ export type {
 export { AnimatedGradient } from "./AnimatedGradient";
 export { ParticleField } from "./ParticleField";
 export { FloatingShapes } from "./FloatingShapes";
+export { GridPattern } from "./GridPattern";
+export { NoiseTexture } from "./NoiseTexture";
+
+// New component types
+export type { GridPatternProps, GridType } from "./GridPattern";
+export type { NoiseTextureProps, NoiseType } from "./NoiseTexture";

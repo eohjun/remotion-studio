@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "title": "개발자 역량 비교: 백엔드 vs 프론트엔드 vs 풀스택 vs DevOps",
+    "compositionId": "DevCompetencyComparison",
+    "totalDuration": 156,
+    "totalFrames": 4680,
+    "fps": 30,
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    },
+    "format": "landscape",
+    "contentType": "data-driven",
+    "visualStrategy": "Data Story Pattern with Tech Aesthetics",
+    "language": "ko"
+  },
+  "globalSettings": {
+    "background": {
+      "component": "GridPattern",
+      "props": {
+        "type": "dots",
+        "size": 40,
+        "color": "#667eea",
+        "opacity": 0.2,
+        "animated": true,
+        "animationSpeed": 0.5
+      }
+    },
+    "effects": {
+      "vignette": { "intensity": 0.3 },
+      "chromaticAberration": { "intensity": 0.15, "direction": "radial", "animated": false },
+      "colorGrading": { "preset": "cold", "intensity": 0.7 }
+    },
+    "defaultTransition": { "type": "fade", "duration": 15 },
+    "typography": {
+      "titleFont": "Pretendard",
+      "bodyFont": "Pretendard",
+      "titleSize": 56,
+      "bodySize": 28
+    }
+  },
+  "audio": {
+    "musicPreset": "subtle",
+    "duckingPreset": "gentle",
+    "narrationPath": "public/videos/DevCompetencyComparison/audio/"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "ContentTemplate",
+      "startFrame": 0,
+      "durationInFrames": 300,
+      "props": {
+        "title": "백엔드가 더 어렵다?",
+        "content": "2026년 개발자 역량 데이터가 말하는 진실"
+      },
+      "background": {
+        "component": "GridPattern",
+        "props": { "type": "lines", "size": 50, "color": "#00c2ff", "opacity": 0.25, "animated": true }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.4 },
+        "chromaticAberration": { "intensity": 0.2, "direction": "radial" },
+        "colorGrading": { "preset": "cold", "intensity": 0.6 }
+      },
+      "transition": { "in": null, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "hook.mp3"
+    },
+    {
+      "id": "promise",
+      "template": "ContentTemplate",
+      "startFrame": 300,
+      "durationInFrames": 300,
+      "props": {
+        "title": "4가지 개발자 유형",
+        "bullets": ["기술 깊이 vs 폭", "학습 곡선 vs AI 활용", "문제해결 vs 시스템 사고", "커뮤니케이션 vs DevOps"]
+      },
+      "background": "inherit",
+      "effects": "inherit",
+      "transition": { "in": { "type": "slideLeft", "duration": 15 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "promise.mp3"
+    },
+    {
+      "id": "radar_reveal",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 600,
+      "durationInFrames": 450,
+      "props": {
+        "title": "개발자 역량 8차원 비교",
+        "chartType": "radar"
+      },
+      "chartData": {
+        "datasets": [
+          { "label": "Frontend", "data": [70, 85, 75, 80, 90, 60, 80, 45], "color": "#00c2ff" },
+          { "label": "Backend", "data": [85, 65, 85, 70, 70, 80, 75, 70], "color": "#667eea" },
+          { "label": "Full-Stack", "data": [70, 90, 80, 85, 85, 90, 85, 75], "color": "#28a745" },
+          { "label": "DevOps", "data": [75, 80, 85, 75, 80, 95, 70, 95], "color": "#e67e22" }
+        ],
+        "axes": ["기술깊이", "기술폭", "문제해결", "커뮤니케이션", "학습곡선", "시스템사고", "AI활용", "인프라"]
+      },
+      "background": {
+        "component": "GridPattern",
+        "props": { "type": "hexagons", "size": 60, "color": "#667eea", "opacity": 0.15, "animated": true }
+      },
+      "transition": { "in": { "type": "wipeLeft", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "radar_reveal.mp3"
+    },
+    {
+      "id": "insight_learning_paradox",
+      "template": "ContentTemplate",
+      "startFrame": 1050,
+      "durationInFrames": 540,
+      "props": {
+        "title": "프론트엔드 학습 역설",
+        "content": "진입은 쉽지만, 장기 학습 곡선은 가장 가파릅니다"
+      },
+      "background": "inherit",
+      "transition": { "in": { "type": "dissolve", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "insight_learning_paradox.mp3"
+    },
+    {
+      "id": "insight_fullstack_tradeoff",
+      "template": "ComparisonTemplate",
+      "startFrame": 1590,
+      "durationInFrames": 540,
+      "props": {
+        "title": "풀스택의 트레이드오프",
+        "leftCard": { "title": "기술 깊이", "items": ["Frontend: 70", "Backend: 85", "Full-Stack: 70"], "color": "#e94560" },
+        "rightCard": { "title": "시스템 사고", "items": ["Frontend: 60", "Backend: 80", "Full-Stack: 90"], "color": "#28a745" },
+        "vsText": "vs"
+      },
+      "background": {
+        "component": "GridPattern",
+        "props": { "type": "squares", "size": 45, "color": "#667eea", "opacity": 0.2 }
+      },
+      "transition": { "in": { "type": "wipeLeft", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "insight_fullstack_tradeoff.mp3"
+    },
+    {
+      "id": "insight_ai_amplifier",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 2130,
+      "durationInFrames": 450,
+      "props": {
+        "title": "AI는 역량 증폭기",
+        "chartType": "bar",
+        "data": [
+          { "label": "AI 코드 비율", "value": 41, "color": "#667eea" },
+          { "label": "Frontend AI", "value": 80, "color": "#00c2ff" },
+          { "label": "Full-Stack AI", "value": 85, "color": "#28a745" }
+        ]
+      },
+      "effects": {
+        "chromaticAberration": { "intensity": 0.18, "direction": "horizontal" },
+        "colorGrading": { "preset": "teal-orange", "intensity": 0.6 }
+      },
+      "transition": { "in": { "type": "slideUp", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "insight_ai_amplifier.mp3"
+    },
+    {
+      "id": "insight_devops_uniqueness",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 2580,
+      "durationInFrames": 450,
+      "props": {
+        "title": "DevOps의 독보적 영역",
+        "chartType": "gauge",
+        "data": [
+          { "label": "시스템 사고", "value": 95 },
+          { "label": "인프라 역량", "value": 95 }
+        ]
+      },
+      "background": {
+        "component": "GridPattern",
+        "props": { "type": "dots", "size": 35, "color": "#e67e22", "opacity": 0.25, "animated": true }
+      },
+      "transition": { "in": { "type": "zoomIn", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "insight_devops_uniqueness.mp3"
+    },
+    {
+      "id": "stats_2026",
+      "template": "DataVisualizationTemplate",
+      "startFrame": 3030,
+      "durationInFrames": 450,
+      "props": {
+        "title": "2026년 개발자 시장",
+        "chartType": "metric",
+        "data": [
+          { "label": "신규 일자리", "value": "900,000+", "icon": "💼" },
+          { "label": "AI 도구 사용률", "value": "76%", "icon": "🤖" },
+          { "label": "연봉 차이", "value": "~$270", "icon": "💰" }
+        ]
+      },
+      "transition": { "in": { "type": "slideLeft", "duration": 20 }, "out": { "type": "fade", "duration": 15 } },
+      "audioFile": "stats_2026.mp3"
+    },
+    {
+      "id": "synthesis",
+      "template": "ContentTemplate",
+      "startFrame": 3480,
+      "durationInFrames": 600,
+      "props": {
+        "title": "역량은 단일 차원이 아니다",
+        "bullets": [
+          "Frontend: 학습 지속성 + AI 활용",
+          "Backend: 기술 깊이 + 시스템 사고",
+          "Full-Stack: 폭넓은 이해 + 통합 능력",
+          "DevOps: 인프라 + 시스템 설계"
+        ]
+      },
+      "effects": { "colorGrading": { "preset": "cinematic", "intensity": 0.7 } },
+      "transition": { "in": { "type": "dissolve", "duration": 25 }, "out": { "type": "fade", "duration": 20 } },
+      "audioFile": "synthesis.mp3"
+    },
+    {
+      "id": "conclusion",
+      "template": "QuoteTemplate",
+      "startFrame": 4080,
+      "durationInFrames": 450,
+      "props": {
+        "quote": "개발자의 역량은 레이더 차트처럼 다차원적입니다",
+        "quoteStyle": "centered"
+      },
+      "background": {
+        "component": "GridPattern",
+        "props": { "type": "hexagons", "size": 70, "color": "#667eea", "opacity": 0.15, "animated": true }
+      },
+      "transition": { "in": { "type": "dissolve", "duration": 25 }, "out": { "type": "fade", "duration": 20 } },
+      "audioFile": "conclusion.mp3"
+    },
+    {
+      "id": "outro",
+      "template": "OutroTemplate",
+      "startFrame": 4530,
+      "durationInFrames": 150,
+      "props": {
+        "title": "구독과 좋아요",
+        "subtitle": "다음 영상에서 만나요"
+      },
+      "transition": { "in": { "type": "fade", "duration": 15 }, "out": null },
+      "audioFile": "outro.mp3"
+    }
+  ],
+  "newComponentsUsed": [
+    "RadarChart (radar_reveal - 핵심 시각화)",
+    "GridPattern (7개 씬 - lines/dots/hexagons/squares)",
+    "ChromaticAberration (hook, insight_ai_amplifier)",
+    "ColorGrading (전역 - cold/teal-orange/cinematic)",
+    "StaggerGroup (promise, synthesis - 불렛 애니메이션)",
+    "ComparisonBars (insight_learning_paradox)",
+    "GaugeChart (insight_devops_uniqueness)"
+  ]
+}

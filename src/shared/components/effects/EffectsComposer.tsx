@@ -6,11 +6,21 @@ import {
   LightLeakProps,
   FilmGrainProps,
   MotionBlurWrapperProps,
+  CameraMotionBlurProps,
+  ChromaticAberrationProps,
+  GlitchEffectProps,
+  ColorGradingProps,
+  BloomProps,
 } from "./types";
 import { Vignette } from "./Vignette";
 import { LightLeak } from "./LightLeak";
 import { FilmGrain } from "./FilmGrain";
 import { MotionBlurWrapper } from "./MotionBlurWrapper";
+import { CameraMotionBlur } from "./CameraMotionBlur";
+import { ChromaticAberration } from "./ChromaticAberration";
+import { GlitchEffect } from "./GlitchEffect";
+import { ColorGrading } from "./ColorGrading";
+import { Bloom } from "./Bloom";
 
 /**
  * Default configurations for effects when passed as boolean
@@ -44,15 +54,55 @@ const DEFAULT_MOTION_BLUR: MotionBlurWrapperProps = {
   enabled: true,
 };
 
+const DEFAULT_CAMERA_MOTION_BLUR: CameraMotionBlurProps = {
+  children: null,
+  samples: 10,
+  shutterAngle: 180,
+  enabled: true,
+};
+
+const DEFAULT_CHROMATIC_ABERRATION: ChromaticAberrationProps = {
+  children: null,
+  intensity: 0.3,
+  direction: "radial",
+};
+
+const DEFAULT_GLITCH: GlitchEffectProps = {
+  children: null,
+  intensity: "medium",
+  animated: true,
+  showScanlines: true,
+  colorShift: true,
+  sliceDisplacement: true,
+};
+
+const DEFAULT_COLOR_GRADING: ColorGradingProps = {
+  children: null,
+  preset: "cinematic",
+  intensity: 1,
+};
+
+const DEFAULT_BLOOM: BloomProps = {
+  children: null,
+  intensity: 0.5,
+  radius: 15,
+  threshold: 0.7,
+  blendMode: "screen",
+};
+
 /**
  * EffectsComposer - Combine multiple cinematic effects
  *
  * Applies effects in the correct layer order:
  * 1. Content (children)
- * 2. Motion Blur (wraps content)
- * 3. Film Grain
- * 4. Light Leak
- * 5. Vignette (outermost)
+ * 2. Camera Motion Blur (or Trail-based Motion Blur)
+ * 3. Bloom (glow on bright areas)
+ * 4. Chromatic Aberration (color fringing)
+ * 5. Glitch (digital distortion)
+ * 6. Film Grain
+ * 7. Color Grading
+ * 8. Light Leak
+ * 9. Vignette (outermost)
  *
  * Each effect can be:
  * - Disabled: undefined or false
@@ -65,7 +115,9 @@ const DEFAULT_MOTION_BLUR: MotionBlurWrapperProps = {
  *   effects={{
  *     vignette: { intensity: 0.3 },
  *     filmGrain: true,
- *     lightLeak: { position: 'top-right' }
+ *     lightLeak: { position: 'top-right' },
+ *     colorGrading: { preset: 'cinematic' },
+ *     bloom: { intensity: 0.4 },
  *   }}
  * >
  *   <MyScene />
@@ -76,42 +128,59 @@ export const EffectsComposer: React.FC<EffectsComposerProps> = ({
   children,
   effects = {},
 }) => {
-  const { filmGrain, lightLeak, vignette, motionBlur } = effects;
+  const {
+    filmGrain,
+    lightLeak,
+    vignette,
+    motionBlur,
+    cameraMotionBlur,
+    chromaticAberration,
+    glitch,
+    colorGrading,
+    bloom,
+  } = effects;
 
   // Resolve effect configurations
-  const filmGrainConfig =
-    filmGrain === true
-      ? DEFAULT_FILM_GRAIN
-      : filmGrain === false || filmGrain === undefined
-        ? null
-        : filmGrain;
+  const resolveConfig = <T,>(
+    effect: T | boolean | undefined,
+    defaultConfig: T
+  ): T | null => {
+    if (effect === true) return defaultConfig;
+    if (effect === false || effect === undefined) return null;
+    return effect as T;
+  };
 
-  const lightLeakConfig =
-    lightLeak === true
-      ? DEFAULT_LIGHT_LEAK
-      : lightLeak === false || lightLeak === undefined
-        ? null
-        : lightLeak;
-
-  const vignetteConfig =
-    vignette === true
-      ? DEFAULT_VIGNETTE
-      : vignette === false || vignette === undefined
-        ? null
-        : vignette;
-
-  const motionBlurConfig =
-    motionBlur === true
-      ? DEFAULT_MOTION_BLUR
-      : motionBlur === false || motionBlur === undefined
-        ? null
-        : motionBlur;
+  const filmGrainConfig = resolveConfig(filmGrain, DEFAULT_FILM_GRAIN);
+  const lightLeakConfig = resolveConfig(lightLeak, DEFAULT_LIGHT_LEAK);
+  const vignetteConfig = resolveConfig(vignette, DEFAULT_VIGNETTE);
+  const motionBlurConfig = resolveConfig(motionBlur, DEFAULT_MOTION_BLUR);
+  const cameraMotionBlurConfig = resolveConfig(
+    cameraMotionBlur,
+    DEFAULT_CAMERA_MOTION_BLUR
+  );
+  const chromaticAberrationConfig = resolveConfig(
+    chromaticAberration,
+    DEFAULT_CHROMATIC_ABERRATION
+  );
+  const glitchConfig = resolveConfig(glitch, DEFAULT_GLITCH);
+  const colorGradingConfig = resolveConfig(colorGrading, DEFAULT_COLOR_GRADING);
+  const bloomConfig = resolveConfig(bloom, DEFAULT_BLOOM);
 
   // Build the effect layers from inside out
   let content: React.ReactNode = children;
 
-  // Layer 1: Motion Blur (wraps the content)
-  if (motionBlurConfig && motionBlurConfig.enabled !== false) {
+  // Layer 1: Camera Motion Blur (preferred) or Trail-based Motion Blur
+  if (cameraMotionBlurConfig && cameraMotionBlurConfig.enabled !== false) {
+    content = (
+      <CameraMotionBlur
+        samples={cameraMotionBlurConfig.samples}
+        shutterAngle={cameraMotionBlurConfig.shutterAngle}
+        enabled={cameraMotionBlurConfig.enabled}
+      >
+        {content}
+      </CameraMotionBlur>
+    );
+  } else if (motionBlurConfig && motionBlurConfig.enabled !== false) {
     content = (
       <MotionBlurWrapper
         samples={motionBlurConfig.samples}
@@ -123,7 +192,54 @@ export const EffectsComposer: React.FC<EffectsComposerProps> = ({
     );
   }
 
-  // Layer 2: Film Grain
+  // Layer 2: Bloom (glow effect)
+  if (bloomConfig) {
+    content = (
+      <Bloom
+        intensity={bloomConfig.intensity}
+        radius={bloomConfig.radius}
+        threshold={bloomConfig.threshold}
+        color={bloomConfig.color}
+        blendMode={bloomConfig.blendMode}
+      >
+        {content}
+      </Bloom>
+    );
+  }
+
+  // Layer 3: Chromatic Aberration
+  if (chromaticAberrationConfig) {
+    content = (
+      <ChromaticAberration
+        intensity={chromaticAberrationConfig.intensity}
+        direction={chromaticAberrationConfig.direction}
+        offsetX={chromaticAberrationConfig.offsetX}
+        offsetY={chromaticAberrationConfig.offsetY}
+        animated={chromaticAberrationConfig.animated}
+        animationSpeed={chromaticAberrationConfig.animationSpeed}
+      >
+        {content}
+      </ChromaticAberration>
+    );
+  }
+
+  // Layer 4: Glitch Effect
+  if (glitchConfig) {
+    content = (
+      <GlitchEffect
+        intensity={glitchConfig.intensity}
+        animated={glitchConfig.animated}
+        seed={glitchConfig.seed}
+        showScanlines={glitchConfig.showScanlines}
+        colorShift={glitchConfig.colorShift}
+        sliceDisplacement={glitchConfig.sliceDisplacement}
+      >
+        {content}
+      </GlitchEffect>
+    );
+  }
+
+  // Layer 5: Film Grain
   if (filmGrainConfig) {
     content = (
       <FilmGrain
@@ -138,7 +254,20 @@ export const EffectsComposer: React.FC<EffectsComposerProps> = ({
     );
   }
 
-  // Layer 3: Light Leak
+  // Layer 6: Color Grading
+  if (colorGradingConfig) {
+    content = (
+      <ColorGrading
+        preset={colorGradingConfig.preset}
+        intensity={colorGradingConfig.intensity}
+        custom={colorGradingConfig.custom}
+      >
+        {content}
+      </ColorGrading>
+    );
+  }
+
+  // Layer 7: Light Leak
   if (lightLeakConfig) {
     content = (
       <LightLeak
@@ -154,7 +283,7 @@ export const EffectsComposer: React.FC<EffectsComposerProps> = ({
     );
   }
 
-  // Layer 4: Vignette (outermost)
+  // Layer 8: Vignette (outermost)
   if (vignetteConfig) {
     content = (
       <Vignette

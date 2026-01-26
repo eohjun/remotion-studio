@@ -11,20 +11,20 @@
 | Category | Components | Import From |
 |----------|-----------|-------------|
 | Scene Templates | 15 | `@shared/templates/scenes` |
-| Backgrounds | 3 | `@shared/components/backgrounds` |
-| Effects | 5 | `@shared/components/effects` |
-| Text Animations | 5 | `@shared/templates/animations` |
+| Backgrounds | 5 | `@shared/components/backgrounds` |
+| Effects | 10 | `@shared/components/effects` |
+| Text Animations | 7 | `@shared/templates/animations` |
 | Audio Visualization | 1 | `@shared/components/waveforms` |
 | Diagrams | 1 | `@shared/components/diagrams` |
 | Cards | 5 | `@shared/components/cards` |
-| Charts | 8 | `@shared/components/charts` |
+| Charts | 11 | `@shared/components/charts` |
 | Progress | 4 | `@shared/components/progress` |
 | Layouts | 4 | `@shared/components/layouts` |
 | Audio | 3+ | `@shared/audio` |
 | Icons | 2 | `@shared/components/icons` |
 | Transitions | 10+ | `@shared/transitions` |
 | Hooks | 2 | `@shared/hooks` |
-| Config | 2 | `@shared/config` |
+| Config | 4 | `@shared/config` |
 | Utils | 4 | `@shared/utils` |
 
 ---
@@ -508,6 +508,79 @@ interface DialogueEntry {
 
 ---
 
+### GridPattern
+**Purpose**: Decorative grid patterns for tech/modern aesthetics
+
+**Import**: `@shared/components/backgrounds`
+
+**Props**:
+```typescript
+{
+  type?: 'lines' | 'dots' | 'squares' | 'hexagons';
+  size?: number;              // Grid cell size
+  color?: string;             // Grid color
+  opacity?: number;           // 0-1
+  animated?: boolean;         // Enable subtle animation
+  animationSpeed?: number;    // Animation speed multiplier
+}
+```
+
+**Grid Types**:
+- `lines`: Clean intersecting lines (default)
+- `dots`: Dot matrix pattern
+- `squares`: Square grid cells
+- `hexagons`: Honeycomb pattern
+
+**Best For**: Tech tutorials, modern UI, programming content, data dashboards
+
+**Example**:
+```tsx
+<GridPattern
+  type="dots"
+  size={40}
+  color="#667eea"
+  opacity={0.3}
+  animated
+/>
+```
+
+---
+
+### NoiseTexture
+**Purpose**: Procedural noise textures for film-like aesthetics
+
+**Import**: `@shared/components/backgrounds`
+
+**Props**:
+```typescript
+{
+  type?: 'static' | 'perlin' | 'grain' | 'stipple';
+  opacity?: number;           // 0-1
+  animated?: boolean;         // Enable noise animation
+  scale?: number;             // Noise scale
+  color?: string;             // Tint color
+}
+```
+
+**Noise Types**:
+- `static`: Random TV static noise
+- `perlin`: Smooth flowing Perlin noise
+- `grain`: Film grain simulation
+- `stipple`: Dotted stipple pattern
+
+**Best For**: Film grain replacement, vintage aesthetics, texture overlay
+
+**Example**:
+```tsx
+<NoiseTexture
+  type="grain"
+  opacity={0.05}
+  animated
+/>
+```
+
+---
+
 ## Cinematic Effects
 
 ### Vignette
@@ -594,6 +667,174 @@ interface DialogueEntry {
   filmGrain?: FilmGrainProps | boolean;
   lightLeak?: LightLeakProps | boolean;
 }
+```
+
+---
+
+### CameraMotionBlur
+**Purpose**: Cinematic motion blur effect (based on @remotion/motion-blur)
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  shutterAngle?: number;      // 0-360, controls blur amount (default: 180)
+  samples?: number;           // Blur quality samples (default: 10)
+  enabled?: boolean;          // Toggle effect on/off
+  children: React.ReactNode;
+}
+```
+
+**Shutter Angle Guide**:
+- `90`: Subtle blur, quick movements
+- `180`: Natural motion blur (default, film-like)
+- `270`: Heavy blur, dramatic effect
+- `360`: Maximum blur, very cinematic
+
+**Best For**: Fast-moving elements, action sequences, smooth transitions
+
+**Example**:
+```tsx
+<CameraMotionBlur shutterAngle={180} samples={12}>
+  <AnimatedElement />
+</CameraMotionBlur>
+```
+
+---
+
+### ChromaticAberration
+**Purpose**: RGB channel separation for retro/cinematic look
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  intensity?: number;         // 0-1, strength of effect
+  direction?: 'radial' | 'horizontal' | 'vertical' | 'diagonal';
+  animated?: boolean;         // Animate intensity over time
+  offset?: { r: number; g: number; b: number };  // Custom channel offsets
+  children: React.ReactNode;
+}
+```
+
+**Direction Guide**:
+- `radial`: Classic lens distortion (default)
+- `horizontal`: Left-right separation
+- `vertical`: Top-bottom separation
+- `diagonal`: Corner-to-corner separation
+
+**Best For**: Tech content, retro aesthetics, impact moments, transitions
+
+**Example**:
+```tsx
+<ChromaticAberration intensity={0.3} direction="radial" animated>
+  <SceneContent />
+</ChromaticAberration>
+```
+
+---
+
+### GlitchEffect
+**Purpose**: Digital glitch/distortion for tech and dramatic moments
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  intensity?: 'subtle' | 'medium' | 'intense' | number;  // 0-1 for custom
+  showScanlines?: boolean;    // CRT scanline overlay
+  colorShift?: boolean;       // RGB color separation
+  sliceDisplacement?: boolean; // Horizontal slice displacement
+  noiseAmount?: number;       // 0-1, digital noise
+  flickerRate?: number;       // Flicker frequency
+  children: React.ReactNode;
+}
+```
+
+**Intensity Presets**:
+- `subtle`: Light glitches, good for accents
+- `medium`: Noticeable but not overwhelming
+- `intense`: Heavy distortion, dramatic effect
+
+**Best For**: Tech content, error states, tension/drama, digital themes
+
+**Example**:
+```tsx
+<GlitchEffect intensity="medium" showScanlines colorShift>
+  <ErrorMessage />
+</GlitchEffect>
+```
+
+---
+
+### ColorGrading
+**Purpose**: CSS filter-based color correction presets
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  preset?: 'cinematic' | 'vintage' | 'cold' | 'warm' | 'noir' | 'teal-orange';
+  intensity?: number;         // 0-1, blend with original
+  customFilters?: {           // Custom CSS filter values
+    brightness?: number;
+    contrast?: number;
+    saturate?: number;
+    sepia?: number;
+    hueRotate?: number;       // degrees
+  };
+  children: React.ReactNode;
+}
+```
+
+**Preset Guide**:
+| Preset | Effect | Best For |
+|--------|--------|----------|
+| `cinematic` | Crushed blacks, subtle teal | Storytelling, documentaries |
+| `vintage` | Sepia tones, reduced saturation | Historical, nostalgic content |
+| `cold` | Blue-shifted, desaturated | Analytical, serious topics |
+| `warm` | Orange/yellow boost | Inspirational, friendly content |
+| `noir` | High contrast B&W | Dramatic, mysterious themes |
+| `teal-orange` | Hollywood blockbuster look | General cinematic content |
+
+**Best For**: Establishing mood, visual consistency, cinematic look
+
+**Example**:
+```tsx
+<ColorGrading preset="cinematic" intensity={0.8}>
+  <WholeVideo />
+</ColorGrading>
+```
+
+---
+
+### Bloom
+**Purpose**: Glow effect for bright areas
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  threshold?: number;         // Brightness threshold for bloom (0-1)
+  intensity?: number;         // Bloom strength (0-1)
+  radius?: number;            // Blur radius in pixels
+  color?: string;             // Tint color for bloom
+  children: React.ReactNode;
+}
+```
+
+**Best For**: Highlights, dramatic lighting, sci-fi aesthetics, glowing text
+
+**Example**:
+```tsx
+<Bloom threshold={0.6} intensity={0.5} radius={20} color="#ffffff">
+  <BrightElement />
+</Bloom>
 ```
 
 ---
@@ -692,6 +933,80 @@ calculatePoppingDuration(textLength, delayPerChar?, settleDuration?)
 ```
 
 **Best For**: Dynamic titles, energetic intros, Shorts content, key phrases
+
+---
+
+### StaggerGroup
+**Purpose**: Sequential child element animation with configurable patterns
+
+**Import**: `@shared/templates/animations`
+
+**Props**:
+```typescript
+{
+  direction?: 'forward' | 'reverse' | 'center-out' | 'edges-in';
+  delayPerItem?: number;      // Frame delay between items (default: 8)
+  animationType?: 'fadeIn' | 'slideUp' | 'slideLeft' | 'scale' | 'custom';
+  easing?: 'linear' | 'easeIn' | 'easeOut' | 'spring';
+  staggerOffset?: number;     // Starting frame offset
+  children: React.ReactNode;
+}
+```
+
+**Direction Patterns**:
+- `forward`: First to last (default)
+- `reverse`: Last to first
+- `center-out`: Middle items first, then edges
+- `edges-in`: Edge items first, then center
+
+**Best For**: List reveals, bullet points, card grids, sequential content
+
+**Example**:
+```tsx
+<StaggerGroup direction="forward" delayPerItem={10} animationType="slideUp">
+  <ListItem>First</ListItem>
+  <ListItem>Second</ListItem>
+  <ListItem>Third</ListItem>
+</StaggerGroup>
+```
+
+---
+
+### TextMorph
+**Purpose**: Character-by-character text transformation animation
+
+**Import**: `@shared/templates/animations`
+
+**Props**:
+```typescript
+{
+  fromText: string;
+  toText: string;
+  morphStyle?: 'scramble' | 'fade' | 'slide' | 'flip';
+  duration?: number;          // Duration in frames
+  charDelay?: number;         // Delay between character transforms
+  scrambleChars?: string;     // Characters for scramble effect
+  style?: React.CSSProperties;
+}
+```
+
+**Morph Styles**:
+- `scramble`: Random character cycling before settling (default)
+- `fade`: Opacity crossfade between characters
+- `slide`: Vertical slide transition
+- `flip`: 3D flip per character
+
+**Best For**: Dramatic text changes, A→B transformations, number counters
+
+**Example**:
+```tsx
+<TextMorph
+  fromText="OLD VALUE"
+  toText="NEW VALUE"
+  morphStyle="scramble"
+  duration={60}
+/>
+```
 
 ---
 
@@ -995,6 +1310,143 @@ interface CycleStep {
 - A/B test results
 - Year-over-year analysis
 - Competitive comparison
+
+---
+
+### WaterfallChart
+**Purpose**: Cumulative value change visualization (start → changes → end)
+
+**Import**: `@shared/components/charts`
+
+**Props**:
+```typescript
+{
+  data: WaterfallDataPoint[];  // { label, value, isTotal?, color? }
+  positiveColor?: string;      // Color for increases (default: "#22C55E")
+  negativeColor?: string;      // Color for decreases (default: "#EF4444")
+  totalColor?: string;         // Color for total bars (default: "#3B82F6")
+  showConnectors?: boolean;    // Lines connecting bars (default: true)
+  showValues?: boolean;        // Display values on bars (default: true)
+  staggerDelay?: number;       // Stagger animation delay (default: 5)
+  labelFontSize?: number;      // Font size for labels (default: 14)
+  valueFontSize?: number;      // Font size for values (default: 13)
+}
+```
+
+**When to Use**:
+- Financial analysis (revenue → costs → profit)
+- Budget breakdowns
+- Performance attribution
+- Change explanations
+
+**Example**:
+```tsx
+<WaterfallChart
+  data={[
+    { label: "Start", value: 100, isTotal: true },
+    { label: "Sales", value: 50 },
+    { label: "Costs", value: -30 },
+    { label: "Total", value: 120, isTotal: true }
+  ]}
+  labelFontSize={16}
+  showConnectors
+  showValues
+/>
+```
+
+---
+
+### RadarChart
+**Purpose**: Multi-dimensional comparison (spider/radar chart)
+
+**Import**: `@shared/components/charts`
+
+**Props**:
+```typescript
+{
+  labels: string[];              // Axis labels
+  series: RadarDataSeries[];     // Data series to display
+  size?: number;                 // Chart size (default: 400)
+  maxValue?: number;             // Max scale value (auto-detected if not set)
+  rings?: number;                // Number of concentric rings (default: 5)
+  gridColor?: string;            // Grid/axis color
+  textColor?: string;            // Text color
+  showDots?: boolean;            // Show value dots (default: true)
+  showLegend?: boolean;          // Show legend (default: true)
+  animationStart?: number;       // Animation start frame
+  labelFontSize?: number;        // Font size for axis labels (default: 16)
+  legendFontSize?: number;       // Font size for legend text (default: 14)
+}
+
+interface RadarDataSeries {
+  name: string;
+  values: number[];
+  color: string;
+  fillOpacity?: number;
+}
+```
+
+**When to Use**:
+- Multi-attribute comparison (speed, price, quality, etc.)
+- Skill assessments
+- Product feature comparisons
+- Competitive analysis
+
+**Example**:
+```tsx
+<RadarChart
+  labels={["Speed", "Quality", "Price", "Support", "Features"]}
+  series={[
+    { name: "Product A", values: [85, 70, 60, 90, 75], color: "#3B82F6" },
+    { name: "Product B", values: [70, 85, 80, 60, 90], color: "#EF4444" }
+  ]}
+  size={500}
+  labelFontSize={18}
+  legendFontSize={16}
+/>
+```
+
+---
+
+### HeatmapChart
+**Purpose**: Grid-based color intensity visualization
+
+**Import**: `@shared/components/charts`
+
+**Props**:
+```typescript
+{
+  data: number[][];            // 2D array of values [rows][columns]
+  rowLabels?: string[];        // Row labels
+  columnLabels?: string[];     // Column labels
+  minColor?: string;           // Color for minimum values
+  maxColor?: string;           // Color for maximum values
+  neutralColor?: string;       // Color for middle values
+  showValues?: boolean;        // Display cell values (default: true)
+  cellGap?: number;            // Gap between cells (default: 2)
+  borderRadius?: number;       // Cell border radius (default: 4)
+  labelFontSize?: number;      // Font size for labels (default: 13)
+  animationStart?: number;     // Animation start frame
+  staggerByRow?: boolean;      // Stagger animation by row (default: true)
+}
+```
+
+**When to Use**:
+- Correlation matrices
+- Time-based patterns (hours × days)
+- Geographic data grids
+- Performance dashboards
+
+**Example**:
+```tsx
+<HeatmapChart
+  data={[[10, 20, 30], [40, 50, 60], [70, 80, 90]]}
+  rowLabels={["A", "B", "C"]}
+  columnLabels={["X", "Y", "Z"]}
+  labelFontSize={16}
+  showValues
+/>
+```
 
 ---
 
@@ -1306,39 +1758,66 @@ import {
   ComparisonTemplate,
   QuoteTemplate,
   OutroTemplate,
+  RecapTemplate,
   DataVisualizationTemplate,
   TimelineTemplate,
   ImageTemplate,
   AnnotationTemplate,
   StoryTemplate,
+  NewsTemplate,
+  InterviewTemplate,
+  ProductShowcaseTemplate,
+  TableListTemplate,
 } from "@shared/templates/scenes";
 
-// Backgrounds
+// Backgrounds (including new)
 import {
   AnimatedGradient,
   ParticleField,
   FloatingShapes,
+  GridPattern,          // NEW: Tech/modern grid patterns
+  NoiseTexture,         // NEW: Film grain/noise textures
 } from "@shared/components/backgrounds";
 
-// Effects
+// Effects (including new)
 import {
   Vignette,
   FilmGrain,
   LightLeak,
   MotionBlurWrapper,
   EffectsComposer,
+  CameraMotionBlur,     // NEW: Cinematic motion blur
+  ChromaticAberration,  // NEW: RGB channel separation
+  GlitchEffect,         // NEW: Digital glitch
+  ColorGrading,         // NEW: Color correction presets
+  Bloom,                // NEW: Glow effect
 } from "@shared/components/effects";
 
-// Text Animations
+// Text Animations (including new)
 import {
   TypewriterText,
   HighlightText,
   RevealText,
   GlitchText,
+  PoppingText,
+  StaggerGroup,         // NEW: Sequential child animation
+  TextMorph,            // NEW: Character-by-character transform
 } from "@shared/templates/animations";
 
-// Charts
-import { BarChart, LineChart, PieChart } from "@shared/components/charts";
+// Charts (including new)
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  AreaChart,
+  ScatterPlot,
+  FunnelChart,
+  GaugeChart,
+  ComparisonBars,
+  WaterfallChart,       // NEW: Cumulative value changes
+  RadarChart,           // NEW: Multi-dimensional comparison
+  HeatmapChart,         // NEW: Grid color intensity
+} from "@shared/components/charts";
 
 // Progress
 import { CountUp, ProgressBar, ProgressCircle, StepIndicator } from "@shared/components/progress";
@@ -1360,9 +1839,128 @@ import { TransitionComposition, TRANSITION_PRESETS } from "@shared/transitions";
 
 // Design System
 import { COLORS, GRADIENTS, FONT_SIZES, SPACING, SPRING_CONFIGS } from "@shared/components/constants";
+
+// Theme System (NEW)
+import { ThemeProvider, useTheme, THEMES } from "@shared/components/ThemeProvider";
+
+// Quality Presets (NEW)
+import { QUALITY_PRESETS, applyQualityPreset } from "@shared/config/qualityPresets";
 ```
 
 ---
+
+## Theme System
+
+### ThemeProvider
+**Purpose**: Global theme management with 8 preset themes
+
+**Import**: `@shared/components/ThemeProvider`
+
+**Props**:
+```typescript
+{
+  theme?: ThemeName;
+  customTheme?: Partial<Theme>;
+  children: React.ReactNode;
+}
+
+type ThemeName =
+  | 'default'      // Primary purple gradient
+  | 'dark'         // Deep dark mode
+  | 'light'        // Clean light mode
+  | 'cinematic'    // Film-inspired colors
+  | 'neon'         // Bright cyberpunk
+  | 'pastel'       // Soft muted colors
+  | 'corporate'    // Professional blue
+  | 'vintage'      // Retro warm tones
+```
+
+**Theme Structure**:
+```typescript
+interface Theme {
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    background: string;
+    surface: string;
+    text: string;
+    textMuted: string;
+    success: string;
+    warning: string;
+    error: string;
+  };
+  typography: {
+    fontFamily: string;
+    titleWeight: number;
+    bodyWeight: number;
+  };
+  spacing: {
+    xs: number; sm: number; md: number; lg: number; xl: number;
+  };
+}
+```
+
+**Usage**:
+```tsx
+import { ThemeProvider, useTheme } from "@shared/components/ThemeProvider";
+
+// Wrap composition
+<ThemeProvider theme="cinematic">
+  <MyVideo />
+</ThemeProvider>
+
+// Use in components
+const { colors, spacing } = useTheme();
+```
+
+---
+
+## Quality Presets
+
+### Render Quality Configuration
+
+**Import**: `@shared/config/qualityPresets`
+
+**Available Presets**:
+```typescript
+QUALITY_PRESETS = {
+  draft: {
+    scale: 0.5,           // 960x540 for 1080p
+    codec: 'h264',
+    crf: 28,              // Lower quality, faster
+    pixelFormat: 'yuv420p',
+    description: 'Quick preview renders'
+  },
+  standard: {
+    scale: 1,             // Full resolution
+    codec: 'h264',
+    crf: 18,              // Good quality
+    pixelFormat: 'yuv420p',
+    description: 'Standard YouTube quality'
+  },
+  premium: {
+    scale: 1,
+    codec: 'prores',      // ProRes 422 for editing
+    crf: 10,              // High quality
+    pixelFormat: 'yuv422p10le',
+    audioBitrate: '320k',
+    description: 'Master quality for editing'
+  }
+}
+```
+
+**CLI Usage**:
+```bash
+# Draft preview
+node scripts/render-quality.mjs {compositionId} --preset draft
+
+# Standard YouTube upload
+node scripts/render-quality.mjs {compositionId} --preset standard
+
+# High quality master
+node scripts/render-quality.mjs {compositionId} --preset premium
+```
 
 ---
 

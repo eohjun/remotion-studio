@@ -196,16 +196,29 @@ VALID_TEMPLATES = [
 ]
 
 VALID_BACKGROUNDS = [
-  'AnimatedGradient', 'ParticleField', 'FloatingShapes'
+  'AnimatedGradient', 'ParticleField', 'FloatingShapes',
+  'GridPattern', 'NoiseTexture'  // NEW: Tech grids and film textures
 ]
 
 VALID_EFFECTS = [
   'Vignette', 'FilmGrain', 'LightLeak',
-  'MotionBlurWrapper', 'EffectsComposer'
+  'MotionBlurWrapper', 'EffectsComposer',
+  'CameraMotionBlur',     // NEW: Cinematic motion blur
+  'ChromaticAberration',  // NEW: RGB channel separation (tech/retro)
+  'GlitchEffect',         // NEW: Digital glitch (tech/dramatic)
+  'ColorGrading',         // NEW: Color correction presets
+  'Bloom'                 // NEW: Glow effect for highlights
 ]
 
 VALID_TEXT_ANIMATIONS = [
-  'TypewriterText', 'HighlightText', 'RevealText', 'GlitchText'
+  'TypewriterText', 'HighlightText', 'RevealText', 'GlitchText',
+  'PoppingText', 'StaggerGroup', 'TextMorph'  // NEW
+]
+
+VALID_CHARTS = [
+  'BarChart', 'LineChart', 'PieChart', 'AreaChart',
+  'ScatterPlot', 'FunnelChart', 'GaugeChart', 'ComparisonBars',
+  'WaterfallChart', 'RadarChart', 'HeatmapChart'  // NEW
 ]
 
 VALID_TRANSITIONS = [
@@ -214,6 +227,66 @@ VALID_TRANSITIONS = [
   'wipeUp', 'wipeDown', 'zoomIn', 'zoomOut',
   'flipLeft', 'flipRight', 'clockWipe'
 ]
+
+// NEW: Effect Selection Rules
+EFFECT_SELECTION_RULES:
+  // Tech/Programming content
+  IF contentType === 'technical':
+    CONSIDER background: GridPattern (type: 'lines' or 'dots')
+    CONSIDER effect: ChromaticAberration (intensity: 0.15, subtle only)
+    AVOID: GlitchEffect (intense), LightLeak, Bloom
+
+  // Dramatic/Impact moments
+  IF scene.hasDramaticMoment OR scene.isImpact OR scene.isReveal:
+    CONSIDER effect: GlitchEffect (intensity: 'medium')
+    CONSIDER effect: Bloom (threshold: 0.6)
+    CONSIDER effect: ChromaticAberration (animated: true)
+
+  // Cinematic/Story content
+  IF contentType === 'narrative' OR globalStyle === 'cinematic':
+    ADD effect: ColorGrading (preset based on tone)
+      - serious/philosophical → 'cinematic' or 'noir'
+      - warm/inspirational → 'warm'
+      - analytical/critical → 'cold'
+      - nostalgic/historical → 'vintage'
+      - general → 'teal-orange'
+    CONSIDER effect: CameraMotionBlur for action scenes
+    CONSIDER background: NoiseTexture (type: 'grain', opacity: 0.05)
+
+  // Vintage/Nostalgic content
+  IF tone === 'nostalgic' OR contentType === 'historical':
+    ADD background: NoiseTexture (type: 'grain')
+    ADD effect: ColorGrading (preset: 'vintage')
+    CONSIDER effect: FilmGrain
+
+  // Data-driven with multi-dimensional comparison
+  IF scene.hasMultiDimensionalComparison OR scene.comparesMultipleAttributes:
+    USE chart: RadarChart instead of multiple BarCharts
+
+  // Cumulative change visualization
+  IF scene.showsCumulativeChange OR scene.hasWaterfallData:
+    USE chart: WaterfallChart
+
+  // Correlation/matrix data
+  IF scene.hasCorrelationData OR scene.hasMatrixData:
+    USE chart: HeatmapChart
+
+// NEW: Background Selection Rules
+BACKGROUND_SELECTION_RULES:
+  IF contentType === 'technical':
+    PRIMARY: GridPattern (type: 'dots' or 'lines')
+    FALLBACK: ParticleField (particleCount: 15, sparse)
+
+  IF contentType === 'data_driven':
+    PRIMARY: FloatingShapes (shapes: ['hexagon'], sparse)
+    ALTERNATIVE: GridPattern (type: 'squares')
+
+  IF contentType === 'narrative' OR contentType === 'philosophical':
+    PRIMARY: AnimatedGradient (mode: 'pulse' or 'cycle')
+    LAYER: NoiseTexture (type: 'grain', opacity: 0.03) // subtle film look
+
+  IF globalStyle === 'modern' OR globalStyle === 'minimal':
+    PRIMARY: GridPattern (type: 'hexagons', opacity: 0.2)
 
 VALIDATE_PLAN(plan):
   FOR each scene IN plan.scenes:
@@ -246,33 +319,51 @@ Based on content analysis, select from the Visual Strategy Guide:
 
 **Philosophical/Abstract**:
 - Background: `AnimatedGradient` (pulse/cycle)
-- Effects: `Vignette`, `FilmGrain`
+- Effects: `Vignette`, `FilmGrain`, `ColorGrading` (preset: 'noir' or 'cinematic')
 - Transitions: `dissolve`, `fade`
 - Templates: `ContentTemplate`, `QuoteTemplate`
+- NEW: Layer `NoiseTexture` (grain, opacity: 0.03) for film-like depth
 
 **Data-Driven**:
-- Background: `FloatingShapes`, solid dark
+- Background: `FloatingShapes`, solid dark, `GridPattern` (squares)
 - Effects: minimal or light `Vignette`
 - Transitions: `slide`, `wipe`
 - Templates: `DataVisualizationTemplate`, `TimelineTemplate`
+- NEW Charts: `WaterfallChart` for cumulative changes, `RadarChart` for multi-attribute comparison, `HeatmapChart` for correlation data
 
 **Narrative/Story**:
-- Background: `AnimatedGradient` (cycle)
-- Effects: `LightLeak`, `Vignette`
+- Background: `AnimatedGradient` (cycle), `NoiseTexture` (grain, subtle)
+- Effects: `LightLeak`, `Vignette`, `ColorGrading` (preset: 'cinematic' or 'teal-orange')
 - Transitions: `dissolve`, `zoom`
 - Templates: `StoryTemplate`, `ImageTemplate`
+- NEW: `CameraMotionBlur` for action sequences
 
 **Technical/Tutorial**:
-- Background: solid dark, sparse `ParticleField`
-- Effects: none or minimal
+- Background: solid dark, sparse `ParticleField`, `GridPattern` (lines/dots)
+- Effects: none or minimal, `ChromaticAberration` (subtle, intensity: 0.15)
 - Transitions: `slide`, `fade`
-- Templates: `AnnotationTemplate`, `ContentTemplate`
+- Templates: `AnnotationTemplate`, `ContentTemplate`, `TableListTemplate`
+- NEW: `StaggerGroup` for sequential bullet reveals
 
 **Critical/Analytical**:
 - Background: solid dark, subtle `AnimatedGradient`
-- Effects: `Vignette`
+- Effects: `Vignette`, `ColorGrading` (preset: 'cold')
 - Transitions: `wipe`, `fade`
 - Templates: `ComparisonTemplate`, `ContentTemplate`
+
+**Tech/Programming** (NEW):
+- Background: `GridPattern` (type: 'dots' or 'lines'), `ParticleField` (sparse)
+- Effects: `ChromaticAberration` (subtle), minimal `Vignette`
+- Transitions: `slide`, `fade`
+- Templates: `ContentTemplate`, `AnnotationTemplate`, `TableListTemplate`
+- Text: `TypewriterText`, `StaggerGroup`
+
+**Dramatic/Impact Moments** (NEW):
+- Background: `AnimatedGradient`, `NoiseTexture`
+- Effects: `GlitchEffect` (medium), `Bloom`, `ChromaticAberration`
+- Transitions: `zoomIn`, `dissolve`
+- Templates: `QuoteTemplate`, `ContentTemplate`
+- Use sparingly for key moments only
 
 ### Step 3: Scene-by-Scene Planning
 
@@ -554,6 +645,9 @@ Generate a `video-plan.json` with this structure:
 | Drama | `RevealText` | Headlines, reveals |
 | Tech | `GlitchText` | Tech content, errors |
 | Captions | `CaptionText` | Word-by-word sync |
+| Energy | `PoppingText` | Dynamic titles, Shorts intros |
+| Sequential | `StaggerGroup` | List reveals, bullet points, step-by-step |
+| Transform | `TextMorph` | A→B text changes, counters, dramatic shifts |
 
 ### Data Components
 | Data Type | Component | Props to Configure |
@@ -563,6 +657,10 @@ Generate a `video-plan.json` with this structure:
 | Distribution | `PieChart` | type (pie/donut) |
 | Progress | `ProgressBar`, `ProgressCircle` | progress, color |
 | Count | `CountUp` | from, to, suffix |
+| Cumulative Change | `WaterfallChart` | showConnectors, showValues |
+| Multi-Attribute | `RadarChart` | showLabels, fillOpacity |
+| Correlation Matrix | `HeatmapChart` | colorScale, showValues |
+| Before/After | `ComparisonBars` | showChange, labelA/B |
 
 ### Backgrounds by Mood
 | Mood | Component | Configuration |
@@ -571,6 +669,22 @@ Generate a `video-plan.json` with this structure:
 | Energetic | ParticleField | high count, fast speed |
 | Professional | FloatingShapes | geometric, sparse |
 | Neutral | Solid color | COLORS.dark |
+| Tech/Modern | GridPattern | type: 'dots', opacity: 0.3 |
+| Cinematic | NoiseTexture + AnimatedGradient | type: 'grain', opacity: 0.03 |
+| Futuristic | GridPattern | type: 'hexagons', animated: true |
+| Minimal | GridPattern | type: 'lines', opacity: 0.2 |
+
+### Effects by Purpose
+| Purpose | Component | Configuration |
+|---------|-----------|---------------|
+| Cinematic depth | Vignette | intensity: 0.5 |
+| Film look | FilmGrain | amount: 0.03 |
+| Warm moments | LightLeak | type: 'gradient' |
+| Overall mood | ColorGrading | preset: by tone |
+| Tech aesthetic | ChromaticAberration | intensity: 0.15, subtle |
+| Dramatic moment | GlitchEffect | intensity: 'medium' |
+| Highlight glow | Bloom | threshold: 0.6 |
+| Action blur | CameraMotionBlur | shutterAngle: 180 |
 
 ## Transition Strategy
 
