@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "compositionId": "ParkinsonsLaw",
+    "title": "Parkinson's Law: Why Work Expands to Fill Time",
+    "language": "en",
+    "fps": 60,
+    "totalDuration": 160
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "Hook",
+      "text": "Why does a task that could take an hour somehow take all day? Why does a two-week project always finish at the last minute? You're not lazy. Your brain is following an invisible law.",
+      "duration": 12,
+      "visual": "Clock hands spinning, calendar pages flipping, question marks appearing."
+    },
+    {
+      "id": "intro",
+      "title": "The Origin",
+      "text": "In 1955, a British naval historian named Cyril Northcote Parkinson discovered something strange. He noticed that bureaucracies kept growing, even when they had less work to do. His conclusion? Work expands to fill the time available for its completion. This became Parkinson's Law.",
+      "duration": 18,
+      "visual": "1955 The Economist cover, Parkinson portrait, quote reveal with typewriter effect."
+    },
+    {
+      "id": "problem",
+      "title": "The Psychology",
+      "text": "But why does this happen? When a deadline is far away, your brain perceives the task as more complex than it actually is. Without urgency, you procrastinate. You overthink. You add unnecessary details. Sound familiar?",
+      "duration": 16,
+      "visual": "Brain animation, timeline stretching, complexity perception growing."
+    },
+    {
+      "id": "evidence",
+      "title": "The Evidence",
+      "text": "Researchers put this to the test. They gave people a simple five-minute task. Some got five minutes. Others got fifteen. What happened? People with more time spent more time working, even though the task was identical. The work literally expanded to fill the time.",
+      "duration": 18,
+      "visual": "Study visualization: two groups, timer comparison, bar chart showing time spent."
+    },
+    {
+      "id": "realworld",
+      "title": "Real World Proof",
+      "text": "Here's the flip side. In 2018, a New Zealand company switched to a four-day work week. No pay cut. Productivity didn't drop. It improved. When people had less time, they wasted less of it. Isn't that interesting?",
+      "duration": 14,
+      "visual": "New Zealand map, company building, productivity chart with 4-day marker."
+    },
+    {
+      "id": "solution1",
+      "title": "Solution: Artificial Deadlines",
+      "text": "So how do you fight Parkinson's Law? First, set artificial deadlines. If you have a week, tell yourself you have three days. Create the urgency your brain needs.",
+      "duration": 12,
+      "visual": "Calendar showing week compressed to 3 days, urgency meter rising."
+    },
+    {
+      "id": "solution2",
+      "title": "Solution: Timeboxing",
+      "text": "Second, use timeboxing. Give yourself exactly ninety minutes for a task. When time's up, stop. Move on. The constraint forces focus.",
+      "duration": 10,
+      "visual": "Timer counting down, task completion animation, moving to next task."
+    },
+    {
+      "id": "solution3",
+      "title": "Solution: 80/20 Rule",
+      "text": "Third, apply the eighty-twenty rule. What's the twenty percent of work that produces eighty percent of results? Focus there. Cut the rest.",
+      "duration": 10,
+      "visual": "Pie chart showing 80/20 split, tasks being crossed off."
+    },
+    {
+      "id": "conclusion",
+      "title": "The Truth",
+      "text": "Parkinson's Law reveals an uncomfortable truth. We're not naturally efficient. We're naturally adaptive. Give us more time, and we'll use it, whether we need to or not.",
+      "duration": 12,
+      "visual": "Human silhouette with time expanding and contracting around them."
+    },
+    {
+      "id": "takeaway",
+      "title": "Takeaway",
+      "text": "The solution isn't to work harder. It's to give yourself less time. Work expands to fill the time. So give it less time to fill. What will you finish faster this week?",
+      "duration": 10,
+      "visual": "Final quote with compression animation, call to action."
+    }
+  ],
+  "ttsConfig": {
+    "voice": "nova",
+    "speed": 1.0,
+    "model": "tts-1-hd"
+  },
+  "qualityMetrics": {
+    "engagementScore": 82,
+    "hookStrength": "strong",
+    "narrativeArcComplete": true,
+    "avgCognitiveLoad": "medium"
+  }
+}

@@ -14,6 +14,14 @@ import {
   HEIGHT as HEIGHT_2MIN,
 } from "./videos/TwoMinuteRule/constants";
 import {
+  ParkinsonsLaw,
+  ParkinsonsLawSchema,
+} from "./videos/ParkinsonsLaw";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_PL,
+  FPS as FPS_PL,
+} from "./videos/ParkinsonsLaw/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -94,6 +102,18 @@ export const RemotionRoot: React.FC = () => {
         width={WIDTH_2MIN}
         height={HEIGHT_2MIN}
         schema={TwoMinuteRuleSchema}
+        defaultProps={{}}
+      />
+
+      {/* Educational videos */}
+      <Composition
+        id="ParkinsonsLaw"
+        component={ParkinsonsLaw}
+        durationInFrames={TOTAL_DURATION_PL}
+        fps={FPS_PL}
+        width={1920}
+        height={1080}
+        schema={ParkinsonsLawSchema}
         defaultProps={{}}
       />
 

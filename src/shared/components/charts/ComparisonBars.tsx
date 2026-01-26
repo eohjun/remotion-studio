@@ -40,6 +40,10 @@ export interface ComparisonBarsProps {
   barHeight?: number;
   /** Gap between items (default: 24) */
   gap?: number;
+  /** Maximum bar width (default: 300) */
+  barMaxWidth?: number;
+  /** Label column width (default: 120) */
+  labelWidth?: number;
   /** Custom style overrides */
   style?: React.CSSProperties;
 }
@@ -76,6 +80,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
   staggerDelay = 8,
   barHeight = 32,
   gap = 24,
+  barMaxWidth = 300,
+  labelWidth = 120,
   style,
 }) => {
   const frame = useCurrentFrame();
@@ -84,10 +90,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
   const allValues = data.flatMap((d) => [d.valueA, d.valueB]);
   const maxValue = providedMaxValue || Math.max(...allValues) * 1.1;
 
-  const labelWidth = 120;
   const valueWidth = 80;
   const changeWidth = 100;
-  const barMaxWidth = 300;
 
   return (
     <div

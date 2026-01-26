@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-01-26T08:31:15.686Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/ParkinsonsLaw/audio",
+  "compositionId": "ParkinsonsLaw",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 11.28,
+      "durationFrames": 339,
+      "text": "Why does a task that could take an hour somehow take all day? Why does a two-week project always fin..."
+    },
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 17.4,
+      "durationFrames": 522,
+      "text": "In 1955, a British naval historian named Cyril Northcote Parkinson discovered something strange. He ..."
+    },
+    {
+      "id": "problem",
+      "file": "problem.mp3",
+      "durationSeconds": 13.104,
+      "durationFrames": 394,
+      "text": "But why does this happen? When a deadline is far away, your brain perceives the task as more complex..."
+    },
+    {
+      "id": "evidence",
+      "file": "evidence.mp3",
+      "durationSeconds": 16.128,
+      "durationFrames": 484,
+      "text": "Researchers put this to the test. They gave people a simple five-minute task. Some got five minutes...."
+    },
+    {
+      "id": "realworld",
+      "file": "realworld.mp3",
+      "durationSeconds": 13.128,
+      "durationFrames": 394,
+      "text": "Here's the flip side. In 2018, a New Zealand company switched to a four-day work week. No pay cut. P..."
+    },
+    {
+      "id": "solution1",
+      "file": "solution1.mp3",
+      "durationSeconds": 9.936,
+      "durationFrames": 299,
+      "text": "So how do you fight Parkinson's Law? First, set artificial deadlines. If you have a week, tell yours..."
+    },
+    {
+      "id": "solution2",
+      "file": "solution2.mp3",
+      "durationSeconds": 8.016,
+      "durationFrames": 241,
+      "text": "Second, use timeboxing. Give yourself exactly ninety minutes for a task. When time's up, stop. Move ..."
+    },
+    {
+      "id": "solution3",
+      "file": "solution3.mp3",
+      "durationSeconds": 8.424,
+      "durationFrames": 253,
+      "text": "Third, apply the eighty-twenty rule. What's the twenty percent of work that produces eighty percent ..."
+    },
+    {
+      "id": "conclusion",
+      "file": "conclusion.mp3",
+      "durationSeconds": 10.344,
+      "durationFrames": 311,
+      "text": "Parkinson's Law reveals an uncomfortable truth. We're not naturally efficient. We're naturally adapt..."
+    },
+    {
+      "id": "takeaway",
+      "file": "takeaway.mp3",
+      "durationSeconds": 10.056,
+      "durationFrames": 302,
+      "text": "The solution isn't to work harder. It's to give yourself less time. Work expands to fill the time. S..."
+    }
+  ]
+}
