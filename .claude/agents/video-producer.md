@@ -217,14 +217,63 @@ import { {compositionId}Composition } from "./videos/{compositionId}";
 <Composition {...{compositionId}Composition} />
 ```
 
+### Step 6.5: Quality Validation Gates
+
+Before proceeding to user review, run these validation checks:
+
+#### Narration Quality Check
+```bash
+node scripts/analyze-narration.mjs -f projects/{compositionId}/narration.json --verbose
+```
+
+**Required Metrics**:
+| Metric | Minimum | Action if Failed |
+|--------|---------|------------------|
+| Engagement Score | ≥60 | Revise hook or add questions |
+| Narrative Arc | Complete | Add missing arc elements |
+| Cognitive Load | ≤High | Simplify complex scenes |
+
+#### Composition Validation
+```bash
+node scripts/validate-composition.mjs {compositionId}
+```
+
+**Checks**:
+- Scene duration vs audio duration (5% tolerance)
+- Referenced templates exist
+- Audio files exist (after TTS)
+- Transition overlap validation
+
+#### Style Lint
+```bash
+node scripts/lint-video-styles.mjs src/videos/{compositionId}/
+```
+
+**Validates**:
+- Font size ≥24px (WCAG compliance)
+- Color contrast ≥4.5:1
+- Design system compliance
+
+#### Render Time Estimation
+```bash
+node scripts/estimate-render-time.mjs {compositionId}
+```
+
+Reports expected render time and complexity analysis.
+
+---
+
 ### Step 7: User Review (CRITICAL GATE)
 
-**STOP** after creating the composition.
+**STOP** after creating the composition AND passing validation gates.
 
 Present to the user:
 1. Summary of `video-plan.json`
-2. Preview command: `npm run dev`
-3. Ask: "Ready to proceed with TTS generation and rendering? (y/n)"
+2. Quality metrics from narration analysis
+3. Validation results (pass/warnings)
+4. Estimated render time
+5. Preview command: `npm run dev`
+6. Ask: "Ready to proceed with TTS generation and rendering? (y/n)"
 
 **DO NOT PROCEED** without explicit user approval.
 
@@ -232,6 +281,18 @@ If rejected, go back to the appropriate phase:
 - Narration issues → Phase 3
 - Planning issues → Phase 4
 - Implementation issues → Phase 5
+
+### Step 7.5: Generate Captions (Optional)
+
+For accessibility, generate captions:
+```bash
+node scripts/generate-captions.mjs -f projects/{compositionId}/narration.json
+```
+
+**Output**:
+- `projects/{compositionId}/captions/video.srt`
+- `projects/{compositionId}/captions/video.vtt`
+- `projects/{compositionId}/captions/timing-data.json`
 
 ### Step 8: Generate TTS Audio
 

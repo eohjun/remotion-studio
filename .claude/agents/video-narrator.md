@@ -322,6 +322,111 @@ Generate a `narration.json` file with this structure:
 5. Address counterpoints
 6. Conclude with call to action
 
+## Quality Metrics & Analysis
+
+After writing narration, run the quality analyzer to validate your script:
+
+```bash
+node scripts/analyze-narration.mjs -f projects/{compositionId}/narration.json --verbose
+```
+
+### Quality Metrics to Target
+
+| Metric | Target | Description |
+|--------|--------|-------------|
+| Engagement Score | ≥70/100 | Hook strength + question density + emotional variety |
+| Hook Strength | Strong | Opening matches patterns like "You're...", "What if...", "Imagine..." |
+| Question Density | ≥0.5/scene | Rhetorical questions to engage viewers |
+| Cognitive Load | Medium | Avg words/scene ≤35, simple vocabulary |
+| Narrative Arc | Complete | Hook → Promise → Journey → Conclusion |
+| Rhythm Score | ≥70/100 | Varied scene durations, not monotonous |
+
+### Engagement Optimization
+
+**Hook Patterns (Strong)**:
+- `"You're not lazy..."` - Direct address
+- `"What if everything you knew about X was wrong?"` - Challenge assumption
+- `"Imagine..."` - Visualization trigger
+- `"Here's a secret..."` - Curiosity gap
+- Questions ending with `?`
+
+**Emotional Variety Targets**:
+Include at least 2-3 of these emotional tones:
+- Positive: amazing, powerful, breakthrough
+- Negative: fear, struggle, risk
+- Urgent: now, must, critical
+- Curious: secret, surprising, discover
+
+### Cognitive Load Guidelines
+
+Keep narration digestible:
+
+| Load Level | Words/Scene | Sentence Length | When to Use |
+|------------|-------------|-----------------|-------------|
+| Low | ≤25 | ≤15 words | Hooks, transitions |
+| Medium | 25-35 | 15-25 words | Main content |
+| High | 35-50 | 25-35 words | Complex explanations (use sparingly) |
+
+**Reducing Cognitive Load**:
+- Break long sentences into shorter ones
+- Replace jargon with common words
+- Use concrete examples instead of abstractions
+- Add "pause for breath" markers
+
+## Cognitive Scaffolding
+
+Enhance viewer comprehension and retention with these techniques:
+
+### Automatic Recap Insertion
+
+For videos with 5+ content scenes, consider adding recap scenes:
+
+```
+Every 3-4 content scenes → Quick Recap scene
+```
+
+**Recap Scene Format**:
+```json
+{
+  "id": "recap-1",
+  "type": "recap",
+  "title": "Quick Recap",
+  "narration": "Let's pause and recap: First, we learned that [point 1]. Then, we explored [point 2]. And finally, [point 3].",
+  "duration": 8,
+  "recapPoints": ["point 1 summary", "point 2 summary", "point 3 summary"],
+  "notes": "Use RecapTemplate, bullet point visuals"
+}
+```
+
+### Progress Indicators
+
+For longer videos (>3 minutes), add progress context:
+
+```json
+{
+  "id": "point_3",
+  "type": "content",
+  "progress": {
+    "part": 3,
+    "total": 5,
+    "label": "Part 3 of 5"
+  },
+  "narration": "Now let's explore the third principle..."
+}
+```
+
+### Bridge Phrases
+
+Use transition phrases between scenes:
+
+| Transition Type | Example Phrases |
+|-----------------|-----------------|
+| Continuation | "Building on that...", "Taking this further..." |
+| Contrast | "But here's the twist...", "However..." |
+| Example | "Let me show you...", "Consider this..." |
+| Conclusion | "So what does this mean?", "The bottom line..." |
+| Transition | "Now...", "This brings us to..." |
+
 ## Quality Checklist
 
 Before finalizing narration:
@@ -336,6 +441,9 @@ Before finalizing narration:
 - [ ] Conclusion is memorable
 - [ ] Total duration matches target
 - [ ] Language is conversational, not academic
+- [ ] **Quality score ≥70** (run analyzer)
+- [ ] **Cognitive load is medium or lower**
+- [ ] **Narrative arc complete** (all 4 elements)
 
 ## Example Scene Narration
 

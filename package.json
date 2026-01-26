@@ -22,6 +22,7 @@
     "@remotion/zod-types": "^4.0.0",
     "@types/three": "^0.182.0",
     "cheerio": "^1.1.2",
+    "glob": "^13.0.0",
     "lucide-react": "^0.563.0",
     "mammoth": "^1.11.0",
     "pdf-parse": "^2.4.5",

@@ -297,6 +297,114 @@ Plan audio based on content type:
 | Technical | tutorial | gentle |
 | Critical | ambient | standard |
 
+## Multi-Format Support
+
+### Video Format Presets
+
+Support multiple aspect ratios for cross-platform distribution:
+
+```
+VIDEO_FORMATS = {
+  LANDSCAPE: { width: 1920, height: 1080, ratio: '16:9' },   // YouTube
+  PORTRAIT:  { width: 1080, height: 1920, ratio: '9:16' },   // Shorts/TikTok
+  SQUARE:    { width: 1080, height: 1080, ratio: '1:1' },    // Instagram
+}
+```
+
+### Format Selection Logic
+
+```
+SELECT_FORMAT(metadata):
+  IF metadata.format === 'shorts' OR metadata.totalDuration < 60:
+    RETURN PORTRAIT
+  ELSE IF metadata.platform === 'instagram':
+    RETURN SQUARE
+  ELSE:
+    RETURN LANDSCAPE (default)
+```
+
+### Responsive Layout Considerations
+
+For PORTRAIT (9:16) format:
+- Use vertical stacking instead of side-by-side layouts
+- Increase font sizes by 15-20% for readability
+- Reduce content density per scene
+- Avoid ComparisonTemplate (use sequential scenes instead)
+- Safe zone: top/bottom 8% for platform UI
+
+For SQUARE (1:1) format:
+- Center-weighted compositions
+- Balanced margins all around
+- Good for data visualizations
+
+Include format in plan metadata:
+
+```json
+{
+  "metadata": {
+    "format": "portrait",
+    "resolution": { "width": 1080, "height": 1920 }
+  }
+}
+```
+
+---
+
+## Design System Standards
+
+### Typography Guidelines
+
+Use consistent typography from the design system:
+
+```
+TYPOGRAPHY = {
+  title:    { size: 56, weight: 800 },   // Main titles
+  subtitle: { size: 36, weight: 700 },   // Section headers
+  body:     { size: 28, weight: 500 },   // Content text
+  caption:  { size: 20, weight: 400 },   // Supporting text
+}
+
+MIN_READABLE_SIZE = 24  // WCAG compliance
+```
+
+Scale for different formats:
+- PORTRAIT: multiply by 0.85 (smaller screens)
+- SQUARE: multiply by 0.9
+
+### Color Palette Selection
+
+Choose palette based on content type:
+
+```
+PALETTES = {
+  philosophical: ['#667eea', '#764ba2', '#1a1a2e'],  // Purple gradient
+  datadriven:   ['#00c2ff', '#667eea', '#16213e'],  // Blue/cyan
+  narrative:    ['#ff6b6b', '#4ecdc4', '#2d1b4e'],  // Warm contrast
+  professional: ['#3498db', '#2c3e50', '#1a252f'],  // Corporate blue
+  warm:         ['#ff7e5f', '#feb47b', '#2d2438'],  // Sunset tones
+  calm:         ['#56ccf2', '#2f80ed', '#1f2937'],  // Ocean blues
+  tech:         ['#00ff88', '#0077ff', '#0a0a0f'],  // Neon green
+}
+```
+
+### Contrast Requirements (WCAG AA)
+
+Ensure text/background contrast ratio ≥4.5:1:
+
+```
+SAFE_COMBINATIONS = {
+  dark_bg:  text: '#ffffff' or '#f8f9fa'
+  light_bg: text: '#1a1a2e' or '#1f2937'
+}
+```
+
+Run style lint before finalizing:
+```bash
+node scripts/lint-video-styles.mjs src/videos/{compositionId}/
+```
+
+---
+
 ## Output Format
 
 Generate a `video-plan.json` with this structure:

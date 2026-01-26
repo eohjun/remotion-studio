@@ -1,7 +1,7 @@
 # Visual Strategy Guide
 
 **Purpose**: Topic-to-visual mapping for purposeful video design
-**Last Updated**: 2026-01-24
+**Last Updated**: 2026-01-26
 
 ---
 
@@ -306,6 +306,123 @@ Outro (6s)
 ### Triadic (Three Evenly Spaced)
 - **Use for**: Dynamic, varied content
 - **Example**: Primary, accent, and success colors
+
+---
+
+## Multi-Format Strategy
+
+### Video Format Presets
+
+| Format | Resolution | Ratio | Platform |
+|--------|-----------|-------|----------|
+| LANDSCAPE | 1920×1080 | 16:9 | YouTube, Desktop |
+| PORTRAIT | 1080×1920 | 9:16 | Shorts, TikTok, Reels |
+| SQUARE | 1080×1080 | 1:1 | Instagram, Facebook |
+
+### Format-Specific Adaptations
+
+#### PORTRAIT (9:16) - Vertical Video
+
+**Layout Adjustments**:
+- Stack elements vertically instead of side-by-side
+- Avoid `ComparisonTemplate` (use sequential scenes)
+- Center-align all content
+- Increase vertical spacing between elements
+
+**Typography**:
+- Title: 48px (down from 56px)
+- Body: 24px (down from 28px)
+- Increase line height to 1.6
+
+**Safe Zones**:
+- Top 8%: Platform UI (title, profile)
+- Bottom 8%: Platform UI (buttons, CTA)
+- Keep critical content in middle 84%
+
+**Template Recommendations**:
+| Standard Template | Portrait Alternative |
+|-------------------|---------------------|
+| ComparisonTemplate | 2 sequential ContentTemplates |
+| DataVisualizationTemplate | Use vertical bar chart |
+| TimelineTemplate | Vertical timeline (default) |
+
+#### SQUARE (1:1) - Social Media
+
+**Layout Adjustments**:
+- Center-weighted compositions
+- Balanced margins all sides
+- Works well for data visualizations
+
+**Typography**:
+- Title: 48px
+- Body: 26px
+- More compact layouts needed
+
+**Template Recommendations**:
+- All templates work with minor adjustments
+- `BarChart` in vertical orientation
+- `PieChart` centered with labels
+
+### Responsive Component Guidelines
+
+When creating components, use the `useResponsive()` hook pattern:
+
+```tsx
+import { useVideoConfig } from "remotion";
+import { detectFormat, getResponsiveFontSize } from "@shared/config/formats";
+
+const { width, height } = useVideoConfig();
+const format = detectFormat(width, height);
+
+const titleSize = getResponsiveFontSize(56, format);
+```
+
+### Platform-Specific Considerations
+
+| Platform | Format | Duration | Special Notes |
+|----------|--------|----------|---------------|
+| YouTube | 16:9 | 3-15 min | Long-form optimization |
+| YouTube Shorts | 9:16 | ≤60s | Hook in first 3s |
+| TikTok | 9:16 | 15-60s | Trending audio integration |
+| Instagram Reels | 9:16 | ≤90s | Caption overlay space |
+| Instagram Feed | 1:1 | ≤60s | Static thumbnail important |
+
+---
+
+## Cognitive Scaffolding in Visual Design
+
+### Recap Scene Placement
+
+For videos >3 minutes with multiple concepts:
+
+```
+Scene 1 (Hook)
+Scene 2 (Content)
+Scene 3 (Content)
+Scene 4 (Content)
+Scene 5 (RECAP) ← Insert RecapTemplate
+Scene 6 (Content)
+...
+```
+
+### Progress Indicators
+
+Add visual progress for long content:
+- Part X of Y labels
+- Progress bar in corner
+- Chapter markers
+
+### Visual Bridging
+
+Use transitions that signal relationship:
+
+| Relationship | Transition |
+|--------------|-----------|
+| Same topic continues | `fade`, `dissolve` |
+| New topic begins | `slide`, `wipe` |
+| Contrast/twist | `zoomIn` |
+| Time passage | `dissolve` (longer) |
+| Recap/summary | `fade` (with blur) |
 
 ---
 

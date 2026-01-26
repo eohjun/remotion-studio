@@ -1,8 +1,8 @@
 # Component Catalog
 
 **Remotion Studio Component Library Reference**
-**Last Updated**: 2026-01-24
-**Total Components**: 60+
+**Last Updated**: 2026-01-26
+**Total Components**: 70+
 
 ---
 
@@ -10,20 +10,22 @@
 
 | Category | Components | Import From |
 |----------|-----------|-------------|
-| Scene Templates | 14 | `@shared/templates/scenes` |
+| Scene Templates | 15 | `@shared/templates/scenes` |
 | Backgrounds | 3 | `@shared/components/backgrounds` |
 | Effects | 5 | `@shared/components/effects` |
 | Text Animations | 5 | `@shared/templates/animations` |
 | Audio Visualization | 1 | `@shared/components/waveforms` |
 | Diagrams | 1 | `@shared/components/diagrams` |
 | Cards | 5 | `@shared/components/cards` |
-| Charts | 3 | `@shared/components/charts` |
+| Charts | 8 | `@shared/components/charts` |
 | Progress | 4 | `@shared/components/progress` |
 | Layouts | 4 | `@shared/components/layouts` |
 | Audio | 3+ | `@shared/audio` |
 | Icons | 2 | `@shared/components/icons` |
 | Transitions | 10+ | `@shared/transitions` |
 | Hooks | 2 | `@shared/hooks` |
+| Config | 2 | `@shared/config` |
+| Utils | 4 | `@shared/utils` |
 
 ---
 
@@ -160,6 +162,49 @@
 - Last 5-15 seconds
 - Call to action
 - Subscribe reminder
+
+---
+
+### RecapTemplate
+**Purpose**: Summary/recap scene for cognitive scaffolding
+
+**Props**:
+```typescript
+{
+  title?: string;              // Default: "Quick Recap"
+  points: string[];            // Key points to summarize
+  pointIcon?: string;          // Default: "✓"
+  numbered?: boolean;          // Show numbered list instead of icons
+  accentColor?: string;
+  partIndicator?: string;      // e.g., "Part 1 of 3"
+  durationInFrames: number;
+}
+```
+
+**When to Use**:
+- Every 3-4 content scenes in long videos
+- Before major topic transitions
+- Reinforcing key learning points
+- Videos > 3 minutes with multiple concepts
+
+**Combinations**:
+- After 3-4 ContentTemplate scenes
+- Use with cognitiveScaffolding utilities
+- Pair with progress indicators
+
+**Example**:
+```tsx
+<RecapTemplate
+  title="Quick Recap"
+  points={[
+    "Point 1 from earlier",
+    "Point 2 explained",
+    "Point 3 insight"
+  ]}
+  partIndicator="Part 1 of 3"
+  durationInFrames={240}
+/>
+```
 
 ---
 
@@ -826,6 +871,130 @@ interface CycleStep {
   innerRadius?: number;
 }
 ```
+
+---
+
+### AreaChart
+**Purpose**: Filled line chart for trends and time series
+
+**Props**:
+```typescript
+{
+  data: AreaChartDataPoint[];  // { label, value }
+  fillColor?: string;
+  strokeColor?: string;
+  showDots?: boolean;
+  showLabels?: boolean;
+  showGrid?: boolean;
+  fillOpacity?: number;        // 0-1, default 0.3
+  width?: number;
+  height?: number;
+}
+```
+
+**When to Use**:
+- Time series data
+- Trend visualization
+- Cumulative data
+
+---
+
+### ScatterPlot
+**Purpose**: 2D scatter plot for correlation visualization
+
+**Props**:
+```typescript
+{
+  data: ScatterDataPoint[];    // { x, y, label?, color?, size? }
+  xLabel?: string;
+  yLabel?: string;
+  xRange?: [number, number];
+  yRange?: [number, number];
+  showGrid?: boolean;
+  showTrendLine?: boolean;
+  pointRadius?: number;
+}
+```
+
+**When to Use**:
+- Correlation analysis
+- Distribution visualization
+- Multi-variable comparison
+
+---
+
+### FunnelChart
+**Purpose**: Conversion funnel visualization
+
+**Props**:
+```typescript
+{
+  data: FunnelStage[];         // { label, value, color?, icon? }
+  showPercentages?: boolean;
+  showValues?: boolean;
+  minWidthPercent?: number;    // Minimum stage width (default: 30)
+  staggerDelay?: number;       // Animation stagger in frames
+}
+```
+
+**When to Use**:
+- Conversion funnels
+- Process stages
+- Drop-off analysis
+
+---
+
+### GaugeChart
+**Purpose**: Speedometer/gauge meter visualization
+
+**Props**:
+```typescript
+{
+  value: number;
+  maxValue?: number;
+  minValue?: number;
+  label?: string;
+  unit?: string;               // e.g., "%", "km/h"
+  showValue?: boolean;
+  showRange?: boolean;
+  thickness?: number;
+  size?: number;
+  zones?: Array<{
+    upTo: number;
+    color: string;
+  }>;
+}
+```
+
+**When to Use**:
+- Performance metrics
+- Progress indicators
+- Score displays
+- KPI dashboards
+
+---
+
+### ComparisonBars
+**Purpose**: Side-by-side bar comparison for A/B or before/after
+
+**Props**:
+```typescript
+{
+  data: ComparisonBarItem[];   // { label, valueA, valueB, icon? }
+  labelA?: string;             // e.g., "Before"
+  labelB?: string;             // e.g., "After"
+  colorA?: string;
+  colorB?: string;
+  showChange?: boolean;        // Show percentage change
+  showValues?: boolean;
+}
+```
+
+**When to Use**:
+- Before/after comparisons
+- A/B test results
+- Year-over-year analysis
+- Competitive comparison
 
 ---
 
