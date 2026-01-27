@@ -103,16 +103,75 @@ type: permanent
 ```
 
 ### Audio/TTS Generation
-- API keys are stored in `.env` file (copy from `.env.example`)
-- Generate narration audio:
-  - `node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json` - OpenAI 사용
-  - Add `--elevenlabs` flag for ElevenLabs
-- **Audio file structure**: `public/videos/{compositionId}/audio/`
-  - 각 컴포지션별로 폴더 분리
-  - narration.json의 `metadata.compositionId`로 자동 결정
-- Use `<Audio src={staticFile("videos/{compositionId}/audio/filename.mp3")} />` in compositions
-- TTS 설정은 `projects/{compositionId}/narration.json`에서 조정 가능
-- **Audio cleanup**: `node scripts/cleanup-audio.mjs` - 미사용 오디오 파일 감지/삭제
+
+**기본 사용법:**
+```bash
+# TTS 생성 (자동: 검증 + 동기화 + 타임스탬프 추출)
+node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json
+
+# 특정 씬만 재생성
+node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json --scene hook,discovery
+
+# ElevenLabs 사용
+node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json --elevenlabs
+```
+
+**자동화 파이프라인 (generate-tts.mjs 실행 시):**
+1. TTS 오디오 생성 (OpenAI/ElevenLabs)
+2. 오디오 품질 검증 (비정상 길이/속도 감지)
+3. constants.ts 자동 동기화 (SCENE_FRAMES 업데이트)
+4. **Whisper 타임스탬프 추출** → timestamps.json 생성
+
+**비활성화 옵션:**
+- `--no-sync` - constants.ts 동기화 건너뛰기
+- `--no-validate` - 품질 검증 건너뛰기
+- `--no-timestamps` - 타임스탬프 추출 건너뛰기
+
+### visualPanels 타이밍 (오디오-비주얼 동기화)
+
+**문제**: 나레이션의 어떤 문장이 언제 시작/끝나는지 모르면 화면 타이밍이 맞지 않음
+
+**해결책 - 타임스탬프 기반 자동화:**
+```bash
+# 1. TTS 생성 시 timestamps.json 자동 생성됨
+
+# 2. visualPanels 자동 생성
+node scripts/generate-visual-panels.mjs {compositionId}
+
+# 3. 결과 확인
+cat projects/{compositionId}/visual-panels.json
+```
+
+**출력 예시 (visual-panels.json):**
+```json
+{
+  "scenes": [{
+    "id": "hook",
+    "panels": [
+      { "text": "1920년대 비엔나", "startFrame": 0, "endFrame": 85 },
+      { "text": "웨이터가 수십 개의 주문을...", "startFrame": 170, "endFrame": 320 }
+    ]
+  }]
+}
+```
+
+**컴포지션에서 사용:**
+```tsx
+import visualPanels from "../../../projects/{compositionId}/visual-panels.json";
+
+const panels = visualPanels.scenes.find(s => s.id === "hook")?.panels || [];
+```
+
+**⚠️ 중요 규칙:**
+- `[pause:X]` 마커는 **문서화 전용** (TTS에 전송 안 됨)
+- 버퍼는 **5프레임** (0.17초) - 과도하면 공백 누적
+- snake_case (audio) → camelCase (constants) 자동 변환
+
+**Audio file structure**: `public/videos/{compositionId}/audio/`
+- audio-metadata.json: 씬별 길이 정보
+- timestamps.json: Whisper 타임스탬프 (세그먼트/단어별)
+
+**Audio cleanup**: `node scripts/cleanup-audio.mjs` - 미사용 오디오 파일 감지/삭제
 
 ### Video Management Scripts
 
@@ -196,14 +255,19 @@ video-planner → video-plan.json
         ↓
 video-producer → Remotion composition
         ↓
-User Review (승인 필요)
+generate-tts.mjs → Audio files + 자동 검증 + constants.ts 자동 동기화
         ↓
-generate-tts.mjs → Audio files
+npm run dev → 완성본 테스트 가능
+        ↓
+User Review (수정 요청 시 반복)
         ↓
 npx remotion render → video.mp4
         ↓
 video-publisher → YouTube upload (optional)
 ```
+
+**중요**: TTS 생성 전에 사용자 확인을 요청하지 않습니다.
+영상은 오디오가 포함된 완성 상태로 제공해야 제대로 된 검토가 가능합니다.
 
 ### Reference Documents
 

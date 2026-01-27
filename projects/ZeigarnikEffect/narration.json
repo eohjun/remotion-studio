@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "compositionId": "ZeigarnikEffect",
+    "title": "자이가르닉 효과 - 미완의 일이 더 오래 기억되는 이유",
+    "language": "ko",
+    "voice": "nova",
+    "targetDuration": 150,
+    "tone": "narrative-educational"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "title": "타이틀",
+      "text": "자이가르닉 효과. 왜 미완성된 일이 더 오래 기억될까요?",
+      "visualCue": "Title card with glowing text effect",
+      "duration": 6
+    },
+    {
+      "id": "hook",
+      "title": "비엔나 웨이터의 비밀",
+      "text": "1920년대 비엔나의 한 카페. 한 웨이터가 메모 한 장 없이 수십 명의 복잡한 주문을 완벽하게 기억합니다. 그런데 이상한 일이 벌어졌습니다. 손님들이 계산을 마치는 순간, 그는 방금 전 주문을 완전히 잊어버렸습니다. 왜 이런 일이 일어났을까요?",
+      "visualCue": "Vienna cafe, waiter serving",
+      "duration": 20
+    },
+    {
+      "id": "discovery",
+      "title": "블루마 자이가르닉의 발견",
+      "text": "이 현상을 목격한 심리학자 쿠르트 레빈은 제자 블루마 자이가르닉에게 연구를 맡겼습니다. 1927년, 그녀는 놀라운 실험 결과를 발표합니다. 사람들은 완료된 과제보다 중단된 과제를 무려 90% 더 잘 기억했습니다.",
+      "visualCue": "Zeigarnik portrait, 1927 experiment visualization",
+      "duration": 18
+    },
+    {
+      "id": "mechanism",
+      "title": "뇌의 작동 방식",
+      "text": "우리 뇌는 미완성된 일에 대해 심리적 긴장 상태를 유지합니다. 마치 늘어난 고무줄처럼요. 이 긴장이 작업 기억을 활성화시켜 정보가 사라지지 않게 합니다. 일을 마치면 긴장이 풀리고, 기억도 함께 사라지는 거죠.",
+      "visualCue": "Brain visualization, tension metaphor",
+      "duration": 18
+    },
+    {
+      "id": "study_application",
+      "title": "공부에 활용하기",
+      "text": "이 효과를 공부에 활용해보세요. 챕터 끝까지 공부하는 대신, 중간에 의도적으로 멈춰보세요. 연구에 따르면 중단된 학습은 80%의 재개율을 보인 반면, 완료된 학습은 겨우 12%만이 다시 살펴봤습니다.",
+      "visualCue": "Bar chart comparison 80% vs 12%",
+      "duration": 17
+    },
+    {
+      "id": "productivity_hack",
+      "title": "생산성의 비밀",
+      "text": "미루던 일이 있다면, 그냥 시작하세요. 한 문장만 써도 됩니다. 일단 시작하면 자이가르닉 효과가 작동해서 뇌가 완료 충동을 느끼게 됩니다. 헤밍웨이도 이 방법을 썼습니다. 항상 문장 중간에 글쓰기를 멈췄죠. 다음 날 다시 시작하기 훨씬 쉬웠으니까요.",
+      "visualCue": "Hemingway, typewriter, productivity metaphor",
+      "duration": 20
+    },
+    {
+      "id": "dark_side",
+      "title": "주의해야 할 점",
+      "text": "하지만 경고가 있습니다. 미완료된 일이 네 개 이상 쌓이면 스트레스와 불안이 급증합니다. 뇌가 여러 개의 열린 고리를 동시에 유지하려다 과부하가 걸리는 거죠. 수면까지 방해받을 수 있습니다.",
+      "visualCue": "Stress visualization, 4+ open loops",
+      "duration": 16
+    },
+    {
+      "id": "solution",
+      "title": "해결책",
+      "text": "해결책은 의외로 간단합니다. 바로 할 일 목록입니다. 적어두는 것만으로도 뇌는 심리적 긴장을 내려놓습니다. 연구에 따르면 계획을 세우는 것만으로도 실제로 일을 완료한 것과 비슷한 효과가 있었습니다.",
+      "visualCue": "Todo list, writing action",
+      "duration": 15
+    },
+    {
+      "id": "takeaway",
+      "title": "핵심 메시지",
+      "text": "자이가르닉 효과를 기억하세요. 시작하면 끝내고 싶어지고, 적어두면 마음이 편해집니다. 당신의 뇌를 위해 전략적으로 사용하세요. 미완의 일은 기억의 무기가 될 수도, 스트레스의 원인이 될 수도 있습니다. 선택은 당신에게 있습니다.",
+      "visualCue": "Summary, call to action",
+      "duration": 21
+    }
+  ],
+  "totalDuration": 151
+}

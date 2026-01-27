@@ -858,19 +858,81 @@ npx remotion render {compositionId} out/video.mp4
 | `standard` | Full | 18 | h264 | YouTube upload |
 | `premium` | Full | 10 | ProRes | Master for editing |
 
-### Step 9.5: Generate YouTube Assets (AUTOMATIC)
+### Step 9.5: Generate YouTube Assets (MANDATORY - DO NOT SKIP!)
 
-**ALWAYS run this after rendering completes:**
+**🚨 CRITICAL: 렌더링 완료 후 반드시 실행해야 합니다!**
+
+**이 단계를 빠뜨리면 YouTube 업로드에 필요한 메타데이터가 없습니다.**
 
 ```bash
-node scripts/generate-youtube-assets.mjs {compositionId}
+# MANDATORY after every render:
+mkdir -p projects/{compositionId}/youtube
 ```
 
-This automatically generates:
-- `projects/{compositionId}/youtube/metadata.json` - SEO-optimized metadata
-- `projects/{compositionId}/youtube/description.txt` - Copy-paste ready description with chapters
+Then create these files:
 
-The script reads from narration.json, video-plan.json, research-report.md, and constants.ts to create accurate chapters and metadata. **No manual metadata creation needed.**
+**1. `projects/{compositionId}/youtube/metadata.json`:**
+```json
+{
+  "title": "영상 제목 | 부제목",
+  "description": "영상 설명 (줄바꿈 포함)...",
+  "tags": ["태그1", "태그2", ...],
+  "category": "Education",
+  "language": "ko",
+  "chapters": [
+    { "time": "0:00", "title": "인트로" },
+    { "time": "0:XX", "title": "챕터 제목" }
+  ],
+  "thumbnailConfig": {
+    "title": "썸네일\n텍스트",
+    "subtitle": "부제",
+    "icon": "icon_name",
+    "style": "dramatic"
+  }
+}
+```
+
+**2. `projects/{compositionId}/youtube/description.txt`:**
+```
+영상 제목
+
+영상 설명...
+
+---
+
+CHAPTERS
+0:00 인트로
+0:XX 챕터 제목
+...
+
+---
+
+KEY TAKEAWAYS
+1. 핵심 내용 1
+2. 핵심 내용 2
+...
+
+---
+
+REFERENCES
+- 참고 자료...
+
+---
+
+#태그1 #태그2 ...
+```
+
+**Chapter 시간 계산 방법:**
+- narration.json의 scene duration 값을 누적하여 계산
+- 또는 실제 렌더링된 영상에서 확인
+
+**✅ 체크리스트 (렌더링 완료 후):**
+```
+□ projects/{compositionId}/youtube/ 폴더 생성됨
+□ metadata.json 생성됨 (title, tags, chapters 포함)
+□ description.txt 생성됨 (CHAPTERS, KEY TAKEAWAYS 포함)
+□ chapter 시간이 실제 영상과 일치함
+```
 
 ### Step 10: Publish (Optional)
 
@@ -941,8 +1003,13 @@ Before completion, verify:
 - [ ] User has approved the plan (Phase 5)
 - [ ] Audio files are generated
 - [ ] Total duration matches plan
-- [ ] YouTube assets generated (`node scripts/generate-youtube-assets.mjs`)
-- [ ] metadata.json and description.txt exist in `projects/{id}/youtube/`
+
+### 🚨 MANDATORY: YouTube Assets (렌더링 후 필수!)
+After rendering is complete, **IMMEDIATELY** create:
+- [ ] `projects/{compositionId}/youtube/metadata.json` - 제목, 태그, 챕터
+- [ ] `projects/{compositionId}/youtube/description.txt` - 설명, 챕터, 핵심요약
+
+**이 단계를 건너뛰지 마세요! 매번 빠뜨리고 있습니다.**
 
 ### Typography Verification
 

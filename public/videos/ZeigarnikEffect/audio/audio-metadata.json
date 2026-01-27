@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-01-27T13:26:26.011Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/ZeigarnikEffect/audio",
+  "compositionId": "ZeigarnikEffect",
+  "scenes": [
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 3.744,
+      "durationFrames": 113,
+      "text": "자이가르닉 효과. 왜 미완성된 일이 더 오래 기억될까요?"
+    },
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 19.2,
+      "durationFrames": 576,
+      "text": "1920년대 비엔나의 한 카페. 한 웨이터가 메모 한 장 없이 수십 명의 복잡한 주문을 완벽하게 기억합니다. 그런데 이상한 일이 벌어졌습니다. 손님들이 계산을 마치는 순간, 그는 ..."
+    },
+    {
+      "id": "discovery",
+      "file": "discovery.mp3",
+      "durationSeconds": 16.416,
+      "durationFrames": 493,
+      "text": "이 현상을 목격한 심리학자 쿠르트 레빈은 제자 블루마 자이가르닉에게 연구를 맡겼습니다. 1927년, 그녀는 놀라운 실험 결과를 발표합니다. 사람들은 완료된 과제보다 중단된 과제를 ..."
+    },
+    {
+      "id": "mechanism",
+      "file": "mechanism.mp3",
+      "durationSeconds": 16.152,
+      "durationFrames": 485,
+      "text": "우리 뇌는 미완성된 일에 대해 심리적 긴장 상태를 유지합니다. 마치 늘어난 고무줄처럼요. 이 긴장이 작업 기억을 활성화시켜 정보가 사라지지 않게 합니다. 일을 마치면 긴장이 풀리고..."
+    },
+    {
+      "id": "study_application",
+      "file": "study_application.mp3",
+      "durationSeconds": 15.48,
+      "durationFrames": 465,
+      "text": "이 효과를 공부에 활용해보세요. 챕터 끝까지 공부하는 대신, 중간에 의도적으로 멈춰보세요. 연구에 따르면 중단된 학습은 80%의 재개율을 보인 반면, 완료된 학습은 겨우 12%만이..."
+    },
+    {
+      "id": "productivity_hack",
+      "file": "productivity_hack.mp3",
+      "durationSeconds": 19.032,
+      "durationFrames": 571,
+      "text": "미루던 일이 있다면, 그냥 시작하세요. 한 문장만 써도 됩니다. 일단 시작하면 자이가르닉 효과가 작동해서 뇌가 완료 충동을 느끼게 됩니다. 헤밍웨이도 이 방법을 썼습니다. 항상 문..."
+    },
+    {
+      "id": "dark_side",
+      "file": "dark_side.mp3",
+      "durationSeconds": 14.688,
+      "durationFrames": 441,
+      "text": "하지만 경고가 있습니다. 미완료된 일이 네 개 이상 쌓이면 스트레스와 불안이 급증합니다. 뇌가 여러 개의 열린 고리를 동시에 유지하려다 과부하가 걸리는 거죠. 수면까지 방해받을 수..."
+    },
+    {
+      "id": "solution",
+      "file": "solution.mp3",
+      "durationSeconds": 15.504,
+      "durationFrames": 466,
+      "text": "해결책은 의외로 간단합니다. 바로 할 일 목록입니다. 적어두는 것만으로도 뇌는 심리적 긴장을 내려놓습니다. 연구에 따르면 계획을 세우는 것만으로도 실제로 일을 완료한 것과 비슷한 ..."
+    },
+    {
+      "id": "takeaway",
+      "file": "takeaway.mp3",
+      "durationSeconds": 17.64,
+      "durationFrames": 530,
+      "text": "자이가르닉 효과를 기억하세요. 시작하면 끝내고 싶어지고, 적어두면 마음이 편해집니다. 당신의 뇌를 위해 전략적으로 사용하세요. 미완의 일은 기억의 무기가 될 수도, 스트레스의 원인..."
+    }
+  ]
+}

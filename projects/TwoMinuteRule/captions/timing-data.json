@@ -1,0 +1,159 @@
+{
+  "compositionId": "TwoMinuteRule",
+  "generatedAt": "2026-01-26T08:16:52.802Z",
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "hook",
+      "startTime": 0,
+      "endTime": 2.88,
+      "duration": 2.88,
+      "wordCount": 8,
+      "segmentCount": 2,
+      "segments": [
+        {
+          "text": "You're not lazy.",
+          "startTime": 0,
+          "endTime": 1.188,
+          "startFrame": 0,
+          "endFrame": 36
+        },
+        {
+          "text": "Your brain just hates starting.",
+          "startTime": 1.188,
+          "endTime": 2.88,
+          "startFrame": 36,
+          "endFrame": 86
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "startTime": 2.88,
+      "endTime": 9.431999999999999,
+      "duration": 6.552,
+      "wordCount": 19,
+      "segmentCount": 5,
+      "segments": [
+        {
+          "text": "The hardest part of any task isn't",
+          "startTime": 2.88,
+          "endTime": 5.293894736842106,
+          "startFrame": 86,
+          "endFrame": 159
+        },
+        {
+          "text": "doing it.",
+          "startTime": 5.293894736842106,
+          "endTime": 6.08703157894737,
+          "startFrame": 159,
+          "endFrame": 183
+        },
+        {
+          "text": "It's starting.",
+          "startTime": 6.08703157894737,
+          "endTime": 6.880168421052633,
+          "startFrame": 183,
+          "endFrame": 206
+        },
+        {
+          "text": "Your brain sees the whole mountain and",
+          "startTime": 6.880168421052633,
+          "endTime": 9.294063157894739,
+          "startFrame": 206,
+          "endFrame": 279
+        },
+        {
+          "text": "freezes.",
+          "startTime": 9.294063157894739,
+          "endTime": 9.431999999999999,
+          "startFrame": 279,
+          "endFrame": 283
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "startTime": 9.431999999999999,
+      "endTime": 17.087999999999997,
+      "duration": 7.656,
+      "wordCount": 25,
+      "segmentCount": 5,
+      "segments": [
+        {
+          "text": "Here's the fix: The Two Minute Rule.",
+          "startTime": 9.431999999999999,
+          "endTime": 11.713488000000002,
+          "startFrame": 283,
+          "endFrame": 351
+        },
+        {
+          "text": "If something takes less than two minutes,",
+          "startTime": 11.713488000000002,
+          "endTime": 13.903104000000006,
+          "startFrame": 351,
+          "endFrame": 417
+        },
+        {
+          "text": "do it now.",
+          "startTime": 13.903104000000006,
+          "endTime": 14.913696000000007,
+          "startFrame": 417,
+          "endFrame": 447
+        },
+        {
+          "text": "If it's bigger, just commit to two",
+          "startTime": 14.913696000000007,
+          "endTime": 17.087999999999997,
+          "startFrame": 447,
+          "endFrame": 513
+        },
+        {
+          "text": "minutes.",
+          "startTime": 17.087999999999997,
+          "endTime": 17.087999999999997,
+          "startFrame": 513,
+          "endFrame": 513
+        }
+      ]
+    },
+    {
+      "id": "takeaway",
+      "startTime": 17.087999999999997,
+      "endTime": 21.407999999999998,
+      "duration": 4.32,
+      "wordCount": 13,
+      "segmentCount": 4,
+      "segments": [
+        {
+          "text": "Two minutes is all it takes to",
+          "startTime": 17.087999999999997,
+          "endTime": 19.414153846153855,
+          "startFrame": 513,
+          "endFrame": 582
+        },
+        {
+          "text": "beat resistance.",
+          "startTime": 19.414153846153855,
+          "endTime": 20.178461538461548,
+          "startFrame": 582,
+          "endFrame": 605
+        },
+        {
+          "text": "Start small.",
+          "startTime": 20.178461538461548,
+          "endTime": 20.94276923076924,
+          "startFrame": 605,
+          "endFrame": 628
+        },
+        {
+          "text": "Start now.",
+          "startTime": 20.94276923076924,
+          "endTime": 21.407999999999998,
+          "startFrame": 628,
+          "endFrame": 642
+        }
+      ]
+    }
+  ]
+}

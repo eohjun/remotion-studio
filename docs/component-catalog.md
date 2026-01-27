@@ -315,19 +315,49 @@
 ```typescript
 {
   panels: StoryPanel[];
-  layout?: 'single' | 'split' | 'sequence';
+  layout?: 'single' | 'split' | 'sequence' | 'timed-sequence';
   character?: { name: string; avatar: string };
   narrator?: { text: string; style: 'quote' | 'caption' };
   panelFontSize?: 'md' | 'lg' | 'xl' | '2xl';  // Control panel text size
   durationInFrames: number;
 }
+
+// StoryPanel interface
+interface StoryPanel {
+  content: React.ReactNode | string;
+  background?: string;
+  mood?: 'neutral' | 'positive' | 'negative' | 'dramatic';
+  transition?: 'fade' | 'slide' | 'zoom';
+  startFrame?: number;  // Required for timed-sequence
+  endFrame?: number;    // Required for timed-sequence
+}
 ```
+
+**Layout Options**:
+- `single`: One panel, centered
+- `split`: Two panels side-by-side
+- `sequence`: Multiple panels shown progressively (may overlap)
+- `timed-sequence`: **Recommended** - One panel at a time with fade in/out (no overlap)
 
 **Font Size Guidelines**:
 - `md`: Sequence layout (many small panels)
 - `lg`: Default for split layout
 - `xl`: Single panel with longer text
 - `2xl`: Short impactful statements
+
+**timed-sequence Example**:
+```typescript
+<StoryTemplate
+  layout="timed-sequence"
+  panelFontSize="xl"
+  panels={[
+    { content: "첫 번째 텍스트", startFrame: 0, endFrame: 90 },
+    { content: "두 번째 텍스트", startFrame: 100, endFrame: 190 },
+    { content: "세 번째 텍스트", startFrame: 200, endFrame: 290 },
+  ]}
+  durationInFrames={300}
+/>
+```
 
 **When to Use**:
 - Case studies
@@ -1813,14 +1843,47 @@ GRADIENTS = {
 
 ### Typography
 ```typescript
+// Optimized for 1920x1080 video (updated for better readability)
 FONT_SIZES = {
-  xs: 20, sm: 24, md: 28, lg: 36,
-  xl: 48, "2xl": 56, "3xl": 72, "4xl": 80,
+  xs: 24, sm: 32, md: 38, lg: 46,
+  xl: 56, "2xl": 68, "3xl": 84, "4xl": 100,
 }
 
 FONT_FAMILY = {
   title: "Pretendard, SF Pro Display, -apple-system, sans-serif",
   body: "Pretendard, SF Pro Text, -apple-system, sans-serif",
+}
+
+TYPOGRAPHY = {
+  title: { fontWeight: 800, letterSpacing: 2, lineHeight: 1.2 },
+  heading: { fontWeight: 700, letterSpacing: 1, lineHeight: 1.3 },
+  body: { fontWeight: 500, letterSpacing: 0.5, lineHeight: 1.5 },
+  caption: { fontWeight: 400, letterSpacing: 0.3, lineHeight: 1.4 },
+}
+```
+
+### Layout (1920x1080)
+```typescript
+LAYOUT = {
+  width: 1920, height: 1080,
+  safeArea: { horizontal: 80, vertical: 60 },
+  maxContentWidth: 1760, maxContentHeight: 960,
+
+  // Recommended sizes for diagrams
+  diagram: {
+    cycle: { width: 550, height: 550, radius: 200 },
+    flow: { width: 1400, height: 300 },
+    comparison: { width: 1600, cardWidth: 450 },
+  },
+
+  // Recommended sizes for charts
+  chart: {
+    bar: { maxBarLength: 450, barSize: 120, gap: 80 },
+    pie: { size: 400 },
+  },
+
+  // Icon/circle element sizes
+  iconSizes: { sm: 50, md: 70, lg: 90, xl: 110 },
 }
 ```
 

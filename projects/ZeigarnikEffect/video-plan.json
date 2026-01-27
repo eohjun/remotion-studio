@@ -1,0 +1,301 @@
+{
+  "metadata": {
+    "compositionId": "ZeigarnikEffect",
+    "title": "자이가르닉 효과",
+    "subtitle": "미완의 일이 더 오래 기억되는 이유",
+    "totalDuration": 145,
+    "fps": 60,
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    },
+    "theme": {
+      "primary": "#667eea",
+      "secondary": "#764ba2",
+      "accent": "#00c2ff",
+      "background": "#1a1a2e",
+      "backgroundAlt": "#16213e"
+    },
+    "defaultTransition": "dissolve"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "StoryTemplate",
+      "duration": 20,
+      "startFrame": 0,
+      "config": {
+        "layout": "timed-sequence",
+        "panelFontSize": "xl",
+        "panels": [
+          {
+            "content": "1920년대 비엔나의 한 카페",
+            "mood": "neutral",
+            "startFrame": 0,
+            "endFrame": 180
+          },
+          {
+            "content": "메모 없이 수십 명의 주문을\n완벽하게 기억하는 웨이터",
+            "mood": "positive",
+            "startFrame": 190,
+            "endFrame": 420
+          },
+          {
+            "content": "그런데 계산 후에는...\n모든 것을 잊어버렸다",
+            "mood": "dramatic",
+            "startFrame": 430,
+            "endFrame": 660
+          },
+          {
+            "content": "왜?",
+            "mood": "dramatic",
+            "startFrame": 670,
+            "endFrame": 1200
+          }
+        ]
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "config": {
+          "mode": "cycle",
+          "colors": ["#1a1a2e", "#2d1b4e"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.5 },
+        "filmGrain": { "amount": 0.03 }
+      },
+      "transition": "dissolve",
+      "audio": "hook.mp3"
+    },
+    {
+      "id": "discovery",
+      "template": "TimelineTemplate",
+      "duration": 18,
+      "startFrame": 1200,
+      "config": {
+        "title": "자이가르닉 효과의 발견",
+        "orientation": "horizontal",
+        "events": [
+          {
+            "year": "1920s",
+            "label": "비엔나 카페",
+            "description": "쿠르트 레빈의 관찰"
+          },
+          {
+            "year": "1927",
+            "label": "베를린 대학",
+            "description": "블루마 자이가르닉 실험"
+          },
+          {
+            "year": "결과",
+            "label": "90% 향상",
+            "description": "중단된 과제 기억력"
+          }
+        ],
+        "highlight": "1927"
+      },
+      "background": {
+        "type": "FloatingShapes",
+        "config": {
+          "shapes": ["circle", "hexagon"],
+          "count": 15,
+          "colors": ["rgba(102, 126, 234, 0.15)", "rgba(118, 75, 162, 0.1)"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.3 }
+      },
+      "transition": "slideLeft",
+      "audio": "discovery.mp3"
+    },
+    {
+      "id": "mechanism",
+      "template": "Custom",
+      "duration": 18,
+      "startFrame": 2280,
+      "config": {
+        "type": "BrainMechanism",
+        "description": "Brain visualization with tension metaphor",
+        "elements": [
+          {
+            "type": "animated-emoji",
+            "content": "brain",
+            "animation": "pulse"
+          },
+          {
+            "type": "rubber-band-metaphor",
+            "states": ["stretched", "released"]
+          },
+          {
+            "type": "bullets",
+            "items": [
+              { "icon": "rubber-band", "text": "심리적 긴장 유지" },
+              { "icon": "brain", "text": "작업 기억 활성화" },
+              { "icon": "check", "text": "완료 시 긴장 해소" }
+            ]
+          }
+        ]
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "config": {
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#16213e"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.4 }
+      },
+      "transition": "morph",
+      "audio": "mechanism.mp3"
+    },
+    {
+      "id": "study_application",
+      "template": "DataVisualizationTemplate",
+      "duration": 17,
+      "startFrame": 3360,
+      "config": {
+        "title": "학습 재개율 비교",
+        "chartType": "horizontalBar",
+        "data": [
+          { "label": "중단된 학습", "value": 80, "color": "#4ade80" },
+          { "label": "완료된 학습", "value": 12, "color": "#ef4444" }
+        ],
+        "source": "Ovsiankina, 1928",
+        "highlight": "80% vs 12%"
+      },
+      "background": {
+        "type": "FloatingShapes",
+        "config": {
+          "shapes": ["square", "hexagon"],
+          "count": 12
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.3 }
+      },
+      "transition": "wipeUp",
+      "audio": "study_application.mp3"
+    },
+    {
+      "id": "productivity_hack",
+      "template": "ContentTemplate",
+      "duration": 20,
+      "startFrame": 4380,
+      "config": {
+        "title": "생산성의 비밀",
+        "content": "시작하면 끝내고 싶어진다",
+        "bullets": [
+          "한 문장만 시작해도 효과 발동",
+          "뇌가 완료 충동을 느낌",
+          "헤밍웨이: 항상 문장 중간에 멈춤"
+        ],
+        "icon": "productivity"
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "config": {
+          "mode": "shift",
+          "colors": ["#16213e", "#1a1a2e", "#2d1b4e"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.35 }
+      },
+      "transition": "slideLeft",
+      "audio": "productivity_hack.mp3"
+    },
+    {
+      "id": "dark_side",
+      "template": "ComparisonTemplate",
+      "duration": 16,
+      "startFrame": 5580,
+      "config": {
+        "title": "주의해야 할 점",
+        "leftCard": {
+          "title": "1-3개 미완료",
+          "items": ["적절한 동기부여", "집중력 유지", "건강한 긴장감"],
+          "color": "#4ade80",
+          "icon": "check"
+        },
+        "rightCard": {
+          "title": "4개 이상 미완료",
+          "items": ["스트레스 급증", "수면 방해", "인지 과부하"],
+          "color": "#ef4444",
+          "icon": "warning"
+        },
+        "vsText": "VS"
+      },
+      "background": {
+        "type": "solid",
+        "color": "#1a1a2e"
+      },
+      "effects": {
+        "vignette": { "intensity": 0.45 }
+      },
+      "transition": "wipeLeft",
+      "audio": "dark_side.mp3"
+    },
+    {
+      "id": "solution",
+      "template": "ContentTemplate",
+      "duration": 15,
+      "startFrame": 6540,
+      "config": {
+        "title": "해결책: 외부화",
+        "content": "적어두면 마음이 편해진다",
+        "bullets": [
+          "할 일 목록 작성",
+          "뇌의 심리적 긴장 해소",
+          "계획 수립 = 완료와 유사한 효과"
+        ],
+        "icon": "list"
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "config": {
+          "mode": "pulse",
+          "colors": ["#1a1a2e", "#1e3a5f"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.3 }
+      },
+      "transition": "dissolve",
+      "audio": "solution.mp3"
+    },
+    {
+      "id": "takeaway",
+      "template": "QuoteTemplate",
+      "duration": 21,
+      "startFrame": 7440,
+      "config": {
+        "quote": "시작하면 끝내고 싶어지고,\n적어두면 마음이 편해진다.",
+        "author": "자이가르닉 효과의 교훈",
+        "quoteStyle": "dramatic"
+      },
+      "background": {
+        "type": "AnimatedGradient",
+        "config": {
+          "mode": "rotate",
+          "colors": ["#667eea", "#764ba2"]
+        }
+      },
+      "effects": {
+        "vignette": { "intensity": 0.4 },
+        "lightLeak": { "type": "gradient", "position": "topRight" }
+      },
+      "transition": "zoomOut",
+      "audio": "takeaway.mp3"
+    }
+  ],
+  "globalEffects": {
+    "progressBar": true,
+    "colorGrading": "cinematic"
+  },
+  "audioConfig": {
+    "basePath": "videos/ZeigarnikEffect/audio",
+    "format": "mp3"
+  }
+}
