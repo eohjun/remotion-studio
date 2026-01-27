@@ -795,7 +795,7 @@ const MistakesScene: React.FC = () => {
                 <div style={{ fontSize: 38, color: THEME.text, fontWeight: 600 }}>{mistake.wrong}</div>
               </div>
 
-              <div style={{ fontSize: 50, textAlign: "center" }}>→</div>
+              <div style={{ fontSize: 50, textAlign: "center", color: THEME.accent }}>→</div>
 
               {/* Right */}
               <div
