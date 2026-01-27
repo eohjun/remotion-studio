@@ -234,6 +234,13 @@ export const RECOMMENDED_SIZES = {
     paddingX: 52,
     borderRadius: 55,
   },
+  /** Inline text box minimum widths (텍스트 한 줄 보장) */
+  inlineBox: {
+    minWidth4Chars: 180,   // 한글 4글자 (예: "작업 25분")
+    minWidth6Chars: 260,   // 한글 6글자
+    minWidthWithNumber: 220, // 텍스트+숫자 조합
+    paddingX: 25,          // 좌우 내부 여백
+  },
   /** DEPRECATED - use text.body instead */
   body: 38,
   /** DEPRECATED - use text.description instead */

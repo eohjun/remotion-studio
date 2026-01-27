@@ -868,14 +868,17 @@ const VariationsScene: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           gap: 50,
-          maxWidth: 1400,
+          maxWidth: 1600,
           margin: "0 auto",
+          width: "100%",
         }}
       >
         {variations.map((v, i) => {
           const delay = 50 + i * 25;
           const progress = spring({ frame: frame - delay, fps, config: { damping: 15 } });
-          const workWidth = (v.work / maxWork) * 100;
+          // Minimum width ensures text fits on one line, proportional growth for larger values
+          const minWorkWidth = 220; // Minimum width for "작업 25분" to fit on one line
+          const workWidthPx = Math.max(minWorkWidth, (v.work / maxWork) * 700);
 
           return (
             <div
@@ -885,24 +888,26 @@ const VariationsScene: React.FC = () => {
                 transform: `translateY(${interpolate(progress, [0, 1], [30, 0])}px)`,
               }}
             >
-              <div style={{ fontSize: 42, color: v.color, fontWeight: 700, marginBottom: 20 }}>
+              <div style={{ fontSize: 42, color: v.color, fontWeight: 700, marginBottom: 20, fontFamily: FONT_FAMILY.title }}>
                 {v.name}
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                {/* Work bar */}
+              <div style={{ display: "flex", alignItems: "center", gap: 25 }}>
+                {/* Work bar - fixed minimum width to ensure text fits */}
                 <div
                   style={{
-                    width: `${workWidth * progress}%`,
+                    width: workWidthPx * progress,
+                    minWidth: minWorkWidth,
                     height: 70,
                     background: `linear-gradient(90deg, ${v.color}, ${v.color}88)`,
                     borderRadius: 15,
                     display: "flex",
                     alignItems: "center",
-                    paddingLeft: 30,
-                    transition: "width 0.3s",
+                    justifyContent: "center",
+                    paddingLeft: 25,
+                    paddingRight: 25,
                   }}
                 >
-                  <span style={{ fontSize: 32, fontWeight: 700, color: THEME.text }}>
+                  <span style={{ fontSize: 34, fontWeight: 700, color: THEME.text, fontFamily: FONT_FAMILY.body, whiteSpace: "nowrap" }}>
                     작업 {v.work}분
                   </span>
                 </div>
@@ -910,10 +915,12 @@ const VariationsScene: React.FC = () => {
                 <div
                   style={{
                     background: "rgba(255,255,255,0.2)",
-                    padding: "15px 30px",
+                    padding: "18px 35px",
                     borderRadius: 15,
-                    fontSize: 28,
+                    fontSize: 32,
                     color: THEME.text,
+                    fontFamily: FONT_FAMILY.body,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   휴식 {v.rest}분
