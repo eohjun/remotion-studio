@@ -77,27 +77,28 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
           opacity: interpolate(progress, [0, 1], [0, 1]),
           transform: `translateX(${interpolate(progress, [0, 1], [direction, 0])}px)`,
           flex: 1,
-          maxWidth: 700,
+          maxWidth: 750,  // 700 → 750
           backgroundColor: cardBackground(card.color),
           borderRadius: RADIUS.xl,
-          padding: SPACING.md,
+          padding: SPACING.lg,  // md(40) → lg(60)
           border: `3px solid ${card.color}`,
         }}
       >
+        {/* Icon - 크게! */}
         <AnimatedText
           text={card.icon}
           animation={popIn()}
           stagger="none"
           delay={baseDelay}
-          style={{ fontSize: FONT_SIZES.xl, display: "block", marginBottom: 16 }}
+          style={{ fontSize: 80, display: "block", marginBottom: 24 }}  // 56 → 80
         />
         <h3
           style={{
-            fontSize: FONT_SIZES.lg,
+            fontSize: FONT_SIZES["2xl"],  // lg(46) → 2xl(68)
             fontWeight: 700,
             color: card.color,
             fontFamily: FONT_FAMILY.title,
-            marginBottom: SPACING.sm,
+            marginBottom: SPACING.md,  // sm → md
           }}
         >
           <AnimatedText
@@ -111,11 +112,11 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
         </h3>
         <ul
           style={{
-            fontSize: FONT_SIZES.sm + 2,
+            fontSize: FONT_SIZES.lg,  // sm+2(34) → lg(46)
             color: COLORS.white,
             fontFamily: FONT_FAMILY.body,
-            lineHeight: 1.8,
-            paddingLeft: 24,
+            lineHeight: 1.7,
+            paddingLeft: 32,  // 24 → 32
             listStyle: "none",
             margin: 0,
           }}
@@ -125,7 +126,8 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
               key={i}
               style={{
                 color: item.highlight && item.color ? item.color : COLORS.white,
-                marginBottom: i < card.items.length - 1 ? 8 : 0,
+                marginBottom: i < card.items.length - 1 ? 20 : 0,  // 8 → 20
+                fontWeight: item.highlight ? 600 : 500,
               }}
             >
               <AnimatedText
@@ -159,7 +161,7 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
             stagger="none"
             delay={0}
             style={{
-              fontSize: FONT_SIZES.sm,
+              fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
               color: COLORS.accent,
               fontFamily: FONT_FAMILY.body,
             }}
@@ -167,11 +169,11 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
         )}
         <h2
           style={{
-            fontSize: FONT_SIZES["2xl"],
+            fontSize: FONT_SIZES["3xl"],  // 2xl(68) → 3xl(84)
             fontWeight: 700,
             color: COLORS.white,
             fontFamily: FONT_FAMILY.title,
-            margin: "10px 0",
+            margin: "16px 0",  // 10px → 16px
           }}
         >
           <AnimatedText
@@ -185,12 +187,12 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
         </h2>
       </div>
 
-      {/* Cards Container */}
+      {/* Cards Container - 간격 확대! */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: SPACING.lg,
+          gap: SPACING.xl,  // lg(60) → xl(80)
           flex: 1,
           alignItems: "center",
         }}
@@ -198,8 +200,8 @@ export const ComparisonLayout: React.FC<ComparisonLayoutProps> = ({
         {/* Left Card */}
         {renderCard(leftCard, "left", leftCardProgress, 35)}
 
-        {/* Separator */}
-        <div style={{ fontSize: FONT_SIZES.xl, fontWeight: 800, color: COLORS.white }}>
+        {/* Separator - 크게! */}
+        <div style={{ fontSize: FONT_SIZES["2xl"], fontWeight: 800, color: COLORS.white }}>  {/* xl(56) → 2xl(68) */}
           <AnimatedText
             text={separator}
             animation={popIn()}

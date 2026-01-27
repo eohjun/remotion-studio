@@ -65,22 +65,23 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
           border: `3px solid ${card.color}`,
         }}
       >
+        {/* Icon - 크게! */}
         {card.icon && (
           <AnimatedText
             text={card.icon}
             animation={popIn()}
             stagger="none"
             delay={baseDelay}
-            style={{ fontSize: FONT_SIZES.xl, display: "block", marginBottom: 16 }}
+            style={{ fontSize: 80, display: "block", marginBottom: 24 }}  // 56 → 80
           />
         )}
         <h3
           style={{
-            fontSize: FONT_SIZES["2xl"],
+            fontSize: FONT_SIZES["3xl"],  // 2xl(68) → 3xl(84)
             fontWeight: 700,
             color: card.color,
             fontFamily: FONT_FAMILY.title,
-            marginBottom: SPACING.sm,
+            marginBottom: SPACING.md,  // sm → md
           }}
         >
           <AnimatedText
@@ -94,11 +95,11 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
         </h3>
         <ul
           style={{
-            fontSize: FONT_SIZES.lg,
+            fontSize: FONT_SIZES.xl,  // lg(46) → xl(56)
             color: COLORS.white,
             fontFamily: FONT_FAMILY.body,
-            lineHeight: 1.8,
-            paddingLeft: 24,
+            lineHeight: 1.7,
+            paddingLeft: 32,  // 24 → 32
             listStyle: "none",
             margin: 0,
           }}
@@ -143,7 +144,7 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
             stagger="none"
             delay={0}
             style={{
-              fontSize: FONT_SIZES.sm,
+              fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
               color: sectionLabelColor,
               fontFamily: FONT_FAMILY.body,
             }}
@@ -151,11 +152,11 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
         )}
         <h2
           style={{
-            fontSize: FONT_SIZES["2xl"],
+            fontSize: FONT_SIZES["3xl"],  // 2xl(68) → 3xl(84)
             fontWeight: 700,
             color: COLORS.white,
             fontFamily: FONT_FAMILY.title,
-            margin: "10px 0",
+            margin: "16px 0",  // 10px → 16px
           }}
         >
           <AnimatedText
@@ -169,19 +170,19 @@ export const ComparisonTemplate: React.FC<ComparisonTemplateProps> = ({
         </h2>
       </div>
 
-      {/* Cards Container */}
+      {/* Cards Container - 간격 확대! */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: SPACING.lg,
+          gap: SPACING.xl,  // lg(60) → xl(80)
           flex: 1,
           alignItems: "center",
         }}
       >
         {renderCard(leftCard, "left", leftProgress, 35)}
 
-        <div style={{ fontSize: FONT_SIZES.xl, fontWeight: 800, color: COLORS.white }}>
+        <div style={{ fontSize: FONT_SIZES["2xl"], fontWeight: 800, color: COLORS.white }}>  {/* xl(56) → 2xl(68) */}
           <AnimatedText
             text={separator}
             animation={popIn()}

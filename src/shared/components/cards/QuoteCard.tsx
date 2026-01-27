@@ -34,7 +34,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({
   quoteColor = COLORS.primary,
   attributionColor = COLORS.dark,
   delay = 0,
-  fontSize = "lg",
+  fontSize = "xl",  // lg(46) → xl(56): 인용문은 더 크게!
   showQuoteMarks = false,
   style,
 }) => {
@@ -56,20 +56,21 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({
         opacity: interpolate(cardProgress, [0, 1], [0, 1]),
         transform: `scale(${interpolate(cardProgress, [0, 1], [0.95, 1])})`,
         backgroundColor,
-        borderRadius: RADIUS.lg,
-        padding: SPACING.md,
+        borderRadius: RADIUS.xl,  // lg → xl
+        padding: SPACING.lg,  // md(40) → lg(60)
         textAlign: "center",
         ...style,
       }}
     >
+      {/* Icon - 크게! */}
       {icon && (
-        <div style={{ marginBottom: SPACING.sm }}>
+        <div style={{ marginBottom: SPACING.md }}>  {/* sm → md */}
           <AnimatedText
             text={icon}
             animation={popIn()}
             stagger="none"
             delay={delay + 5}
-            style={{ fontSize: FONT_SIZES.xl }}
+            style={{ fontSize: FONT_SIZES["2xl"] }}  // xl(56) → 2xl(68)
           />
         </div>
       )}
@@ -95,10 +96,10 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({
       {attribution && (
         <p
           style={{
-            fontSize: FONT_SIZES.sm,
+            fontSize: FONT_SIZES.md,  // sm(32) → md(38)
             color: attributionColor,
             fontFamily: FONT_FAMILY.body,
-            marginTop: SPACING.sm,
+            marginTop: SPACING.md,  // sm → md
             opacity: 0.8,
           }}
         >

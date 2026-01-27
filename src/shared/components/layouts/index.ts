@@ -17,3 +17,6 @@ export type { SplitProps } from "./Split";
 
 export { SafeAreaContainer } from "./SafeAreaContainer";
 export type { SafeAreaContainerProps } from "./SafeAreaContainer";
+
+export { AutoFitContainer, CONTENT_LIMITS, calculateContentFit } from "./AutoFitContainer";
+export type { AutoFitContainerProps } from "./AutoFitContainer";

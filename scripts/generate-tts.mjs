@@ -1,5 +1,5 @@
 /**
- * TTS 음성 생성 스크립트
+ * TTS 음성 생성 스크립트 (통합 파이프라인)
  *
  * 사용법:
  *   node scripts/generate-tts.mjs              # OpenAI 사용 (기본값)
@@ -7,10 +7,27 @@
  *   node scripts/generate-tts.mjs --elevenlabs # ElevenLabs 사용
  *   node scripts/generate-tts.mjs --lang en    # 영어 음성 생성
  *   node scripts/generate-tts.mjs --translate --lang en # 번역 후 영어 음성 생성
+ *   node scripts/generate-tts.mjs --scene hook # 특정 씬만 재생성
+ *   node scripts/generate-tts.mjs --scene hook,discovery # 여러 씬 재생성
+ *   node scripts/generate-tts.mjs --no-sync       # constants.ts 자동 동기화 비활성화
+ *   node scripts/generate-tts.mjs --no-validate   # 오디오 검증 비활성화
+ *   node scripts/generate-tts.mjs --no-timestamps # 타임스탬프 추출 비활성화
  *
  * 출력:
  *   - 각 씬별 MP3 파일
  *   - audio-metadata.json (오디오 길이 정보 포함)
+ *   - timestamps.json (Whisper 타임스탬프 - visualPanels용)
+ *   - constants.ts 자동 업데이트 (SCENE_FRAMES 동기화)
+ *
+ * 자동화 파이프라인 (기본 활성화):
+ *   1. TTS 오디오 생성
+ *   2. 오디오 품질 검증 (무음 구간, 이상 길이 감지)
+ *   3. constants.ts 자동 동기화 (버퍼 5프레임)
+ *   4. Whisper 타임스탬프 추출 (visualPanels 정확한 타이밍용)
+ *   5. Visual Panels 자동 생성 (하드코딩 타이밍 대신 사용)
+ *
+ * ⚠️ 중요: 코드에 하드코딩된 패널 타이밍이 있다면
+ *    visual-panels.json의 값으로 업데이트 필요!
  */
 
 import fs from "fs";
@@ -59,12 +76,26 @@ if (!SUPPORTED_LANGUAGES.includes(targetLang)) {
   process.exit(1);
 }
 
+// 특정 씬만 재생성 (--scene 옵션)
+const sceneArgIndex = args.findIndex(arg => arg === "--scene" || arg === "-s");
+const sceneFilter = sceneArgIndex !== -1 && args[sceneArgIndex + 1]
+  ? args[sceneArgIndex + 1].split(",").map(s => s.trim())
+  : null;
+
+// 자동 동기화 및 검증 옵션 (기본값: 활성화)
+const skipSync = args.includes("--no-sync");
+const skipValidation = args.includes("--no-validate");
+const skipTimestamps = args.includes("--no-timestamps");
+
 // 나레이션 파일 경로 (--file 옵션으로 지정 가능)
 const fileArgIndex = args.findIndex(arg => arg === "--file" || arg === "-f");
 const narrationFile = fileArgIndex !== -1 && args[fileArgIndex + 1]
   ? args[fileArgIndex + 1]
   : "narration.json";
-const narrationPath = path.join(__dirname, narrationFile);
+// projectRoot 기준으로 경로 해석 (scripts/ 디렉토리에서 실행해도 프로젝트 루트 기준)
+const narrationPath = path.isAbsolute(narrationFile)
+  ? narrationFile
+  : path.join(projectRoot, narrationFile);
 
 if (!fs.existsSync(narrationPath)) {
   console.error(`❌ 나레이션 파일을 찾을 수 없습니다: ${narrationPath}`);
@@ -101,6 +132,23 @@ if (customOutputDir) {
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
+}
+
+// ============================================
+// 텍스트 정리 (TTS용)
+// ============================================
+function cleanTextForTTS(text) {
+  // [pause:X] 마커 제거 - TTS가 자연스럽게 문장부호로 쉼을 처리함
+  let cleaned = text
+    .replace(/\s*\[pause:short\]\s*/g, ' ')   // 짧은 쉼 - 공백으로
+    .replace(/\s*\[pause:medium\]\s*/g, ' ')  // 중간 쉼 - 공백으로
+    .replace(/\s*\[pause:long\]\s*/g, ' ')    // 긴 쉼 - 공백으로
+    .replace(/\s*\[pause:breath\]\s*/g, ' ')  // 호흡 - 공백으로
+    .replace(/\s*\[pause:\w+\]\s*/g, ' ')     // 기타 pause 마커
+    .replace(/\s+/g, ' ')                      // 연속 공백 정리
+    .trim();
+
+  return cleaned;
 }
 
 // ============================================
@@ -256,6 +304,150 @@ function getAudioDuration(filePath) {
 }
 
 // ============================================
+// 오디오 품질 검증
+// ============================================
+function validateAudio(scenes) {
+  const issues = [];
+  const warnings = [];
+
+  for (const scene of scenes) {
+    if (scene.error) {
+      issues.push(`❌ [${scene.id}] 생성 실패: ${scene.error}`);
+      continue;
+    }
+
+    const duration = scene.durationSeconds;
+
+    // 1. 너무 짧은 오디오 (0.5초 미만)
+    if (duration && duration < 0.5) {
+      warnings.push(`⚠️ [${scene.id}] 매우 짧은 오디오: ${duration.toFixed(2)}초`);
+    }
+
+    // 2. 텍스트 대비 이상한 길이 검사 (한국어 기준: 초당 약 4-6 음절)
+    const textLength = scene.text?.length || 0;
+    if (duration && textLength > 10) {
+      const charPerSec = textLength / duration;
+
+      // 너무 빠름: 초당 8자 이상 (TTS 생성 오류 가능성)
+      if (charPerSec > 8) {
+        warnings.push(`⚠️ [${scene.id}] 빠른 속도 감지: ${charPerSec.toFixed(1)}자/초 (${textLength}자, ${duration.toFixed(1)}초)`);
+      }
+
+      // 너무 느림: 초당 2자 미만 (긴 침묵 가능성)
+      if (charPerSec < 2) {
+        warnings.push(`⚠️ [${scene.id}] 느린 속도 감지: ${charPerSec.toFixed(1)}자/초 - 불필요한 침묵 가능성`);
+      }
+    }
+
+    // 3. 씬 간 길이 일관성 검사 (intro/outro 제외)
+    if (!["intro", "outro"].includes(scene.id)) {
+      if (duration && duration < 5) {
+        warnings.push(`⚠️ [${scene.id}] 콘텐츠 씬이 너무 짧음: ${duration.toFixed(1)}초`);
+      }
+      if (duration && duration > 45) {
+        warnings.push(`⚠️ [${scene.id}] 콘텐츠 씬이 너무 김: ${duration.toFixed(1)}초 - 분할 고려`);
+      }
+    }
+  }
+
+  return { issues, warnings };
+}
+
+// ============================================
+// constants.ts 자동 동기화
+// ============================================
+function syncConstants(metadataPath) {
+  console.log("\n🔄 constants.ts 자동 동기화 중...");
+
+  try {
+    const syncScript = path.join(__dirname, "sync-durations.mjs");
+
+    // sync-durations.mjs 실행
+    const result = execSync(
+      `node "${syncScript}" "${metadataPath}"`,
+      { encoding: "utf-8", cwd: projectRoot }
+    );
+
+    // 주요 결과만 출력
+    const lines = result.split("\n");
+    for (const line of lines) {
+      if (line.includes("✅") || line.includes("저장됨") || line.includes("총 길이")) {
+        console.log(`   ${line.trim()}`);
+      }
+    }
+
+    console.log("✅ constants.ts 동기화 완료");
+    return true;
+  } catch (error) {
+    console.error(`❌ constants.ts 동기화 실패: ${error.message}`);
+    return false;
+  }
+}
+
+// ============================================
+// 타임스탬프 추출 (Whisper API)
+// ============================================
+async function extractTimestamps(compositionId) {
+  console.log("\n🕐 타임스탬프 추출 중 (Whisper API)...");
+
+  try {
+    const timestampScript = path.join(__dirname, "extract-timestamps.mjs");
+
+    const result = execSync(
+      `node "${timestampScript}" "${compositionId}"`,
+      { encoding: "utf-8", cwd: projectRoot, timeout: 300000 } // 5분 타임아웃
+    );
+
+    // 주요 결과만 출력
+    const lines = result.split("\n");
+    for (const line of lines) {
+      if (line.includes("✅") || line.includes("완료") || line.includes("저장")) {
+        console.log(`   ${line.trim()}`);
+      }
+    }
+
+    console.log("✅ 타임스탬프 추출 완료");
+    return true;
+  } catch (error) {
+    console.error(`⚠️ 타임스탬프 추출 실패: ${error.message}`);
+    console.log("   💡 수동 실행: node scripts/extract-timestamps.mjs " + compositionId);
+    return false;
+  }
+}
+
+// ============================================
+// Visual Panels 생성 (timestamps.json 기반)
+// ============================================
+function generateVisualPanels(compositionId) {
+  console.log("\n📊 Visual Panels 생성 중 (오디오 타이밍 동기화)...");
+
+  try {
+    const visualPanelsScript = path.join(__dirname, "generate-visual-panels.mjs");
+
+    const result = execSync(
+      `node "${visualPanelsScript}" "${compositionId}"`,
+      { encoding: "utf-8", cwd: projectRoot }
+    );
+
+    // 주요 결과만 출력
+    const lines = result.split("\n");
+    for (const line of lines) {
+      if (line.includes("✅") || line.includes("생성") || line.includes("저장")) {
+        console.log(`   ${line.trim()}`);
+      }
+    }
+
+    console.log("✅ Visual Panels 생성 완료");
+    console.log("   ⚠️ 하드코딩된 패널 타이밍이 있다면 visual-panels.json 값으로 업데이트 필요!");
+    return true;
+  } catch (error) {
+    console.error(`⚠️ Visual Panels 생성 실패: ${error.message}`);
+    console.log("   💡 수동 실행: node scripts/generate-visual-panels.mjs " + compositionId);
+    return false;
+  }
+}
+
+// ============================================
 // 메인 실행
 // ============================================
 async function main() {
@@ -266,6 +458,9 @@ async function main() {
   console.log(`🎙️  ${providerName} TTS 음성 생성 시작`);
   console.log(`Provider: ${providerName}`);
   console.log(`씬 개수: ${narration.scenes.length}`);
+  if (sceneFilter) {
+    console.log(`🎯 선택된 씬만 재생성: ${sceneFilter.join(", ")}`);
+  }
   if (doTranslate) {
     console.log(`번역: 활성화 (→ ${LANGUAGE_NAMES[targetLang]})`);
   }
@@ -273,6 +468,14 @@ async function main() {
 
   // 번역된 텍스트 저장 (나중에 참조용)
   const translatedScenes = [];
+
+  // 기존 메타데이터 로드 (특정 씬만 재생성할 때 기존 정보 유지)
+  const existingMetadataPath = path.join(outputDir, "audio-metadata.json");
+  let existingMetadata = null;
+  if (sceneFilter && fs.existsSync(existingMetadataPath)) {
+    existingMetadata = JSON.parse(fs.readFileSync(existingMetadataPath, "utf-8"));
+  }
+
   // 오디오 메타데이터 저장
   const audioMetadata = {
     generatedAt: new Date().toISOString(),
@@ -284,6 +487,15 @@ async function main() {
   };
 
   for (const scene of narration.scenes) {
+    // 특정 씬만 재생성하는 경우, 필터에 없는 씬은 기존 메타데이터 사용
+    if (sceneFilter && !sceneFilter.includes(scene.id)) {
+      const existingScene = existingMetadata?.scenes?.find(s => s.id === scene.id);
+      if (existingScene) {
+        audioMetadata.scenes.push(existingScene);
+        console.log(`⏭️  [${scene.id}] 스킵 (기존 오디오 유지)`);
+      }
+      continue;
+    }
     const outputPath = path.join(outputDir, `${scene.id}.mp3`);
     let textToSpeak = scene.text;
 
@@ -306,6 +518,9 @@ async function main() {
       }
     }
 
+    // TTS용 텍스트 정리 ([pause:X] 마커 제거)
+    textToSpeak = cleanTextForTTS(textToSpeak);
+
     console.log(`⏳ [${scene.id}] 생성 중...`);
     console.log(`   "${textToSpeak.substring(0, 50)}..."`);
 
@@ -318,7 +533,7 @@ async function main() {
         id: scene.id,
         file: `${scene.id}.mp3`,
         durationSeconds: durationSeconds,
-        durationFrames: durationSeconds ? Math.ceil(durationSeconds * 30) : null, // 30fps 기준
+        durationFrames: durationSeconds ? Math.ceil(durationSeconds * 60) : null, // 60fps 기준
         text: textToSpeak.substring(0, 100) + (textToSpeak.length > 100 ? "..." : ""),
       };
       audioMetadata.scenes.push(sceneMetadata);
@@ -357,9 +572,9 @@ async function main() {
   }
 
   // 오디오 메타데이터 저장
-  const metadataPath = path.join(outputDir, "audio-metadata.json");
-  fs.writeFileSync(metadataPath, JSON.stringify(audioMetadata, null, 2));
-  console.log(`\n📊 오디오 메타데이터 저장: ${metadataPath}`);
+  const savedMetadataPath = path.join(outputDir, "audio-metadata.json");
+  fs.writeFileSync(savedMetadataPath, JSON.stringify(audioMetadata, null, 2));
+  console.log(`\n📊 오디오 메타데이터 저장: ${savedMetadataPath}`);
 
   // 총 길이 계산
   const totalSeconds = audioMetadata.scenes
@@ -369,9 +584,57 @@ async function main() {
   const seconds = Math.round(totalSeconds % 60);
   console.log(`⏱️  총 오디오 길이: ${minutes}분 ${seconds}초`);
 
+  // ============================================
+  // 오디오 품질 검증 (기본 활성화)
+  // ============================================
+  if (!skipValidation) {
+    console.log("\n🔍 오디오 품질 검증 중...");
+    const { issues, warnings } = validateAudio(audioMetadata.scenes);
+
+    if (issues.length > 0) {
+      console.log("\n🚨 심각한 문제 발견:");
+      issues.forEach(issue => console.log(`   ${issue}`));
+    }
+
+    if (warnings.length > 0) {
+      console.log("\n⚠️ 경고 (확인 권장):");
+      warnings.forEach(warning => console.log(`   ${warning}`));
+    }
+
+    if (issues.length === 0 && warnings.length === 0) {
+      console.log("✅ 품질 검증 통과 - 문제 없음");
+    }
+  }
+
+  // ============================================
+  // constants.ts 자동 동기화 (기본 활성화)
+  // ============================================
+  if (!skipSync && compositionId) {
+    syncConstants(savedMetadataPath);
+  } else if (!compositionId) {
+    console.log("\n⚠️ compositionId가 없어 자동 동기화를 건너뜁니다.");
+    console.log(`💡 수동 실행: node scripts/sync-durations.mjs "${savedMetadataPath}"`);
+  } else {
+    console.log(`\n💡 수동 동기화: node scripts/sync-durations.mjs "${savedMetadataPath}"`);
+  }
+
+  // ============================================
+  // 타임스탬프 추출 (Whisper - 기본 활성화)
+  // visualPanels 정확한 타이밍을 위해 필수
+  // ============================================
+  if (!skipTimestamps && compositionId) {
+    const timestampsOk = await extractTimestamps(compositionId);
+
+    // 타임스탬프 추출 성공 시 visual-panels 자동 생성
+    if (timestampsOk) {
+      generateVisualPanels(compositionId);
+    }
+  } else if (!skipTimestamps) {
+    console.log("\n⚠️ compositionId가 없어 타임스탬프 추출을 건너뜁니다.");
+  }
+
   console.log("\n🎉 모든 음성 생성 완료!");
   console.log(`📁 출력 위치: ${outputDir}`);
-  console.log(`\n💡 Tip: 'node scripts/sync-durations.mjs ${metadataPath}' 로 constants.ts 자동 생성 가능`);
 }
 
 main().catch(console.error);

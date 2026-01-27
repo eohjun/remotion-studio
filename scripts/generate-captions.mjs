@@ -37,7 +37,7 @@ const wordsPerCaption = wordsArgIndex !== -1 && args[wordsArgIndex + 1]
   ? parseInt(args[wordsArgIndex + 1], 10)
   : 7;
 
-const fps = 30; // Default FPS for frame calculations
+const fps = 60; // Default FPS for frame calculations
 
 if (!narrationFile) {
   console.error("Usage: node scripts/generate-captions.mjs -f <narration.json>");

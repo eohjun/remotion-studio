@@ -469,7 +469,7 @@ function generateCompositionConfig(note, scenes) {
     name: note.title,
     width: 1920,
     height: 1080,
-    fps: 30,
+    fps: 60,
     scenes: scenes,
     transitionDuration: 15,
     sceneBuffer: 15,

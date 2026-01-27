@@ -103,7 +103,7 @@ if (fs.existsSync(researchPath)) {
 
 // constants.ts에서 SCENE_START_FRAMES 파싱
 let sceneFrames = null;
-let fps = 30;
+let fps = 60;
 const constantsPath = path.join(srcDir, "constants.ts");
 if (fs.existsSync(constantsPath)) {
   const constantsContent = fs.readFileSync(constantsPath, "utf-8");

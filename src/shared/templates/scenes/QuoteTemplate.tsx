@@ -62,14 +62,14 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
         ...style,
       }}
     >
-      <div style={{ textAlign: "center", maxWidth: 1200 }}>
-        {/* Icon */}
+      <div style={{ textAlign: "center", maxWidth: 1400 }}>  {/* 1200 → 1400 */}
+        {/* Icon - 크게! */}
         {icon && (
           <div
             style={{
               opacity: interpolate(iconProgress, [0, 1], [0, 1]),
               transform: `scale(${interpolate(iconProgress, [0, 1], [0.5, 1])})`,
-              marginBottom: SPACING.md,
+              marginBottom: SPACING.lg,  // md → lg
             }}
           >
             <AnimatedText
@@ -77,12 +77,12 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
               animation={popIn()}
               stagger="none"
               delay={0}
-              style={{ fontSize: FONT_SIZES["4xl"] }}
+              style={{ fontSize: 120 }}  // 4xl(100) → 120
             />
           </div>
         )}
 
-        {/* Quote */}
+        {/* Quote - 크게! */}
         <div
           style={{
             opacity: interpolate(quoteProgress, [0, 1], [0, 1]),
@@ -91,12 +91,12 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
         >
           <blockquote
             style={{
-              fontSize: FONT_SIZES["2xl"],
+              fontSize: FONT_SIZES["3xl"],  // 2xl(68) → 3xl(84)
               fontWeight: 700,
               color: quoteColor,
               fontFamily: FONT_FAMILY.title,
               margin: 0,
-              lineHeight: 1.4,
+              lineHeight: 1.5,  // 1.4 → 1.5
               fontStyle: showQuoteMarks ? "italic" : "normal",
               wordBreak: "keep-all",
               overflowWrap: "normal",
@@ -113,12 +113,12 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
           </blockquote>
         </div>
 
-        {/* Attribution */}
+        {/* Attribution - 크게! */}
         {attribution && (
           <div
             style={{
               opacity: interpolate(attributionProgress, [0, 1], [0, 1]),
-              marginTop: SPACING.lg,
+              marginTop: SPACING.xl,  // lg → xl
             }}
           >
             <AnimatedText
@@ -128,7 +128,7 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
               staggerDuration={3}
               delay={50}
               style={{
-                fontSize: FONT_SIZES.xl,
+                fontSize: FONT_SIZES["2xl"],  // xl(56) → 2xl(68)
                 color: attributionColor,
                 fontFamily: FONT_FAMILY.body,
               }}
@@ -136,15 +136,15 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
           </div>
         )}
 
-        {/* Context */}
+        {/* Context - 크게! */}
         {context && (
           <div
             style={{
               opacity: interpolate(contextProgress, [0, 1], [0, 1]),
               marginTop: SPACING.xl,
               backgroundColor: "rgba(255,255,255,0.15)",
-              borderRadius: RADIUS.md,
-              padding: SPACING.lg,
+              borderRadius: RADIUS.lg,  // md → lg
+              padding: SPACING.xl,  // lg → xl
               wordBreak: "keep-all",
               overflowWrap: "normal",
             }}
@@ -156,7 +156,7 @@ export const QuoteTemplate: React.FC<QuoteTemplateProps> = ({
               staggerDuration={3}
               delay={70}
               style={{
-                fontSize: FONT_SIZES.lg,
+                fontSize: FONT_SIZES.xl,  // lg(46) → xl(56)
                 color: COLORS.white,
                 fontFamily: FONT_FAMILY.body,
               }}

@@ -1,0 +1,500 @@
+{
+  "metadata": {
+    "compositionId": "PomodoroTechnique",
+    "title": "뽀모도로 테크닉: 25분의 마법",
+    "language": "ko",
+    "voice": "nova",
+    "totalDuration": 330
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "title": "인트로",
+      "text": "뽀모도로 테크닉. 25분의 마법.",
+      "duration": 6,
+      "visualType": "title-card",
+      "visualPanels": [
+        {
+          "text": "뽀모도로 테크닉 25분의 마법",
+          "startPercent": 0,
+          "endPercent": 93,
+          "startFrame": 0,
+          "endFrame": 64
+        }
+      ]
+    },
+    {
+      "id": "hook",
+      "title": "주의력 위기",
+      "text": "당신은 지금 이 영상을 끝까지 볼 수 있을까요? 2003년, 사람들은 평균 2분 30초 동안 하나의 작업에 집중할 수 있었습니다. 그런데 최근 연구에 따르면, 이 수치가 단 40초로 떨어졌습니다. 우리의 집중력은 점점 짧아지고 있습니다. 스마트폰 알림, 이메일, SNS. 끊임없는 방해 속에서 우리는 어떻게 집중할 수 있을까요?",
+      "duration": 28,
+      "visualType": "story-hook",
+      "visualPanels": [
+        {
+          "text": "당신은 지금 이 영상을 끝까지 볼 수 있을까요?",
+          "startPercent": 0,
+          "endPercent": 12,
+          "startFrame": 0,
+          "endFrame": 90
+        },
+        {
+          "text": "2003년, 사람들은 평균 2분 30초 동안 하나의 작업에 집중할 수 있었습니다.",
+          "startPercent": 18,
+          "endPercent": 39,
+          "startFrame": 133,
+          "endFrame": 292
+        },
+        {
+          "text": "그런데 최근 연구에 따르면 이 수치가 단 40초로 떨어졌습니다.",
+          "startPercent": 41,
+          "endPercent": 57,
+          "startFrame": 311,
+          "endFrame": 434
+        },
+        {
+          "text": "우리의 집중력은 점점 짧아지고 있습니다.",
+          "startPercent": 61,
+          "endPercent": 70,
+          "startFrame": 461,
+          "endFrame": 527
+        },
+        {
+          "text": "스마트폰 알림, 이메일, SNS.",
+          "startPercent": 74,
+          "endPercent": 81,
+          "startFrame": 557,
+          "endFrame": 615
+        },
+        {
+          "text": "끊임없는 방해 속에서 우리는 어떻게 집중할 수 있을까요?",
+          "startPercent": 85,
+          "endPercent": 99,
+          "startFrame": 646,
+          "endFrame": 751
+        }
+      ]
+    },
+    {
+      "id": "origin",
+      "title": "토마토 타이머의 탄생",
+      "text": "1980년대 후반, 이탈리아. 대학생 프란체스코 시릴로는 과제와 공부에 치여 심각한 집중력 문제를 겪고 있었습니다. 어느 날, 그는 스스로에게 작은 도전을 했습니다. 단 10분만이라도 집중해보자. 그가 손에 든 것은 토마토 모양의 주방 타이머였습니다. 이탈리아어로 토마토를 뜻하는 뽀모도로. 바로 이것이 세계적인 시간 관리 기법의 시작이었습니다.",
+      "duration": 35,
+      "visualType": "story-timeline",
+      "visualPanels": [
+        {
+          "text": "1980년대 후반 이탈리아, 대학생 프란체스코 시릴로는 과제와 공부에 치여 심각한 집중력 문제를 겪고 있었습니다.",
+          "startPercent": 0,
+          "endPercent": 35,
+          "startFrame": 0,
+          "endFrame": 290
+        },
+        {
+          "text": "어느 날, 그는 스스로에게 작은 도전을 했습니다.",
+          "startPercent": 38,
+          "endPercent": 48,
+          "startFrame": 311,
+          "endFrame": 395
+        },
+        {
+          "text": "단 10분만이라도 집중해보자.",
+          "startPercent": 52,
+          "endPercent": 58,
+          "startFrame": 428,
+          "endFrame": 473
+        },
+        {
+          "text": "그가 손에 든 것은 토마토 모양의 주방 타이머였습니다.",
+          "startPercent": 60,
+          "endPercent": 73,
+          "startFrame": 496,
+          "endFrame": 595
+        },
+        {
+          "text": "이탈리아어로 토마토를 뜻하는 pomodoro.",
+          "startPercent": 77,
+          "endPercent": 84,
+          "startFrame": 629,
+          "endFrame": 688
+        },
+        {
+          "text": "바로 이것이 세계적인 시간 관리 기법의 시작이었습니다.",
+          "startPercent": 87,
+          "endPercent": 100,
+          "startFrame": 714,
+          "endFrame": 816
+        }
+      ]
+    },
+    {
+      "id": "methodology",
+      "title": "25분 + 5분의 마법",
+      "text": "뽀모도로 테크닉의 핵심은 놀라울 정도로 단순합니다. 첫째, 타이머를 25분으로 설정합니다. 둘째, 25분 동안 오직 하나의 작업에만 집중합니다. 셋째, 타이머가 울리면 5분간 휴식합니다. 넷째, 이 사이클을 4번 반복한 후, 15분에서 30분의 긴 휴식을 취합니다. 이것이 전부입니다.",
+      "duration": 32,
+      "visualType": "step-by-step",
+      "visualPanels": [
+        {
+          "text": "뽀모도로 테크닉의 핵심은 놀라울 정도로 단순합니다.",
+          "startPercent": 0,
+          "endPercent": 15,
+          "startFrame": 0,
+          "endFrame": 100
+        },
+        {
+          "text": "첫째, 타이머를 25분으로 설정합니다.",
+          "startPercent": 18,
+          "endPercent": 29,
+          "startFrame": 122,
+          "endFrame": 194
+        },
+        {
+          "text": "둘째, 25분 동안 오직 하나의 작업에만 집중합니다.",
+          "startPercent": 33,
+          "endPercent": 48,
+          "startFrame": 221,
+          "endFrame": 319
+        },
+        {
+          "text": "셋째, 타이머가 울리면 휴식합니다.",
+          "startPercent": 52,
+          "endPercent": 62,
+          "startFrame": 347,
+          "endFrame": 415
+        },
+        {
+          "text": "넷째, 이 사이클을 4번 반복한 후",
+          "startPercent": 66,
+          "endPercent": 79,
+          "startFrame": 445,
+          "endFrame": 530
+        },
+        {
+          "text": "15분에서 30분의 긴 휴식을 취합니다.",
+          "startPercent": 79,
+          "endPercent": 93,
+          "startFrame": 530,
+          "endFrame": 626
+        },
+        {
+          "text": "이것이 전부입니다.",
+          "startPercent": 95,
+          "endPercent": 99,
+          "startFrame": 635,
+          "endFrame": 662
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "뇌과학이 증명하는 효과",
+      "text": "왜 하필 25분일까요? 과학이 그 답을 알고 있습니다. 연구에 따르면 인간의 뇌는 20분에서 45분 정도 최적의 집중 상태를 유지할 수 있습니다. 이후에는 인지적 피로가 급격히 증가합니다. 또한 방해를 받은 후 원래 작업에 다시 집중하기까지 평균 23분이 걸립니다. 현대인이 평균 11분마다 방해를 받는다는 것을 고려하면, 우리는 항상 반쯤 집중한 상태로 일하고 있는 셈입니다.",
+      "duration": 38,
+      "visualType": "brain-diagram",
+      "visualPanels": [
+        {
+          "text": "왜 하필 25분일까요? 과학이 그 답을 알고 있습니다.",
+          "startPercent": 0,
+          "endPercent": 15,
+          "startFrame": 0,
+          "endFrame": 131
+        },
+        {
+          "text": "연구에 따르면 인간의 뇌는 20분에서 45분 정도 최적의 집중 상태를 유지할 수 있습니다.",
+          "startPercent": 17,
+          "endPercent": 39,
+          "startFrame": 151,
+          "endFrame": 340
+        },
+        {
+          "text": "이후에는 인지적 피로가 급격히 증가합니다.",
+          "startPercent": 43,
+          "endPercent": 51,
+          "startFrame": 370,
+          "endFrame": 443
+        },
+        {
+          "text": "또한 방해를 받은 후 원래 작업에 다시 집중하기까지 평균 23분이 걸립니다.",
+          "startPercent": 53,
+          "endPercent": 70,
+          "startFrame": 464,
+          "endFrame": 610
+        },
+        {
+          "text": "현대인이 평균 11분마다 방해를 받는다는 것을 고려하면",
+          "startPercent": 75,
+          "endPercent": 85,
+          "startFrame": 649,
+          "endFrame": 742
+        },
+        {
+          "text": "우리는 항상 반쯤 집중한 상태로 일하고 있는 셈입니다.",
+          "startPercent": 85,
+          "endPercent": 99,
+          "startFrame": 742,
+          "endFrame": 862
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "title": "놀라운 효과",
+      "text": "실제로 뽀모도로 테크닉은 얼마나 효과적일까요? Toggl 설문조사에 따르면, 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다. 86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다. Harvard Business Review에 따르면, 원격 근무자들의 번아웃 가능성이 40% 감소했습니다. 한 광고 대행사는 3개월 만에 직원 만족도 40% 상승, 프로젝트 완료율 15% 증가를 달성했습니다.",
+      "duration": 40,
+      "visualType": "bar-chart",
+      "visualPanels": [
+        {
+          "text": "실제로 뽀모도르 테크닉은 얼마나 효과적일까요?",
+          "startPercent": 0,
+          "endPercent": 10,
+          "startFrame": 0,
+          "endFrame": 87
+        },
+        {
+          "text": "터글 설문조사에 따르면 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다.",
+          "startPercent": 13,
+          "endPercent": 33,
+          "startFrame": 115,
+          "endFrame": 296
+        },
+        {
+          "text": "86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다.",
+          "startPercent": 37,
+          "endPercent": 51,
+          "startFrame": 338,
+          "endFrame": 463
+        },
+        {
+          "text": "하버드비즈니스 리뷰에 따르면 원격 근무자들의 번아웃 가능성이 40% 감소했습니다.",
+          "startPercent": 55,
+          "endPercent": 73,
+          "startFrame": 502,
+          "endFrame": 664
+        },
+        {
+          "text": "한 광고 대행사는 3개월 만에 직원 만족도 40% 상승, 프로젝트 완료율 15% 이상이 더다",
+          "startPercent": 73,
+          "endPercent": 98,
+          "startFrame": 664,
+          "endFrame": 892
+        }
+      ]
+    },
+    {
+      "id": "mistakes",
+      "title": "흔한 실수",
+      "text": "하지만 뽀모도로를 잘못 사용하면 오히려 역효과가 날 수 있습니다. 첫 번째 실수는 휴식 시간에 SNS를 확인하는 것입니다. 5분만 보려던 것이 15분, 20분으로 늘어납니다. 두 번째는 휴식을 건너뛰는 것입니다. 집중이 잘 되니까 계속하자는 생각은 결국 더 큰 피로로 돌아옵니다. 세 번째는 25분을 무조건 고수하는 것입니다. 깊은 몰입 상태에서 타이머에 흐름이 끊기면 오히려 생산성이 떨어집니다.",
+      "duration": 38,
+      "visualType": "comparison",
+      "visualPanels": [
+        {
+          "text": "하지만 뽀모도로를 잘못 사용하면 오히려 역효과가 날 수 있습니다.",
+          "startPercent": 0,
+          "endPercent": 16,
+          "startFrame": 0,
+          "endFrame": 151
+        },
+        {
+          "text": "첫 번째 실수는 휴식 시간에 SNS를 확인하는 것입니다.",
+          "startPercent": 19,
+          "endPercent": 30,
+          "startFrame": 176,
+          "endFrame": 283
+        },
+        {
+          "text": "5분만 보려던 것이 15분, 20분으로 늘어납니다.",
+          "startPercent": 34,
+          "endPercent": 43,
+          "startFrame": 314,
+          "endFrame": 403
+        },
+        {
+          "text": "두 번째는 휴식을 건너뛰는 것입니다.",
+          "startPercent": 46,
+          "endPercent": 52,
+          "startFrame": 428,
+          "endFrame": 490
+        },
+        {
+          "text": "집중이 잘 되니까 계속하자는 생각은 결국 더 큰 피로로 돌아옵니다.",
+          "startPercent": 55,
+          "endPercent": 69,
+          "startFrame": 509,
+          "endFrame": 644
+        },
+        {
+          "text": "세 번째는 25분을 무조건 고수하는 것입니다.",
+          "startPercent": 71,
+          "endPercent": 81,
+          "startFrame": 666,
+          "endFrame": 760
+        },
+        {
+          "text": "깊은 몰입 상태에서 타이머의 흐름이 끊기면 오히려 생산성이 떨어집니다.",
+          "startPercent": 81,
+          "endPercent": 100,
+          "startFrame": 760,
+          "endFrame": 930
+        }
+      ]
+    },
+    {
+      "id": "variations",
+      "title": "나만의 리듬 찾기",
+      "text": "사실 25분은 시작점일 뿐입니다. DeskTime의 연구에 따르면 가장 생산적인 상위 10% 직원들은 52분 작업 후 17분 휴식하는 패턴을 보였습니다. 최신 연구에서는 75분 작업, 33분 휴식이 최적이라는 결과도 있습니다. 중요한 것은 자신만의 리듬을 찾는 것입니다. 작업의 성격, 개인의 집중력 특성에 따라 유연하게 조절하세요.",
+      "duration": 35,
+      "visualType": "comparison-bars",
+      "visualPanels": [
+        {
+          "text": "사실 25분은 시작점일 뿐입니다.",
+          "startPercent": 0,
+          "endPercent": 9,
+          "startFrame": 0,
+          "endFrame": 70
+        },
+        {
+          "text": "데스크타임의 연구에 따르면 가장 생산적인 상위 10% 직원들은 52분 작업 후 17분 휴식하는 패턴을 보였습니다.",
+          "startPercent": 12,
+          "endPercent": 43,
+          "startFrame": 96,
+          "endFrame": 335
+        },
+        {
+          "text": "최신 연구에서는 75분 작업 33분 휴식이 최적이라는 결과도 있습니다.",
+          "startPercent": 48,
+          "endPercent": 66,
+          "startFrame": 368,
+          "endFrame": 514
+        },
+        {
+          "text": "중요한 것은 자신만의 리듬을 찾는 것입니다.",
+          "startPercent": 70,
+          "endPercent": 80,
+          "startFrame": 546,
+          "endFrame": 622
+        },
+        {
+          "text": "작업의 성격, 개인의 집중력 특성에 따라 유연하게 조절하세요.",
+          "startPercent": 84,
+          "endPercent": 99,
+          "startFrame": 650,
+          "endFrame": 771
+        }
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": "오늘부터 시작하기",
+      "text": "지금 바로 시작할 수 있습니다. 먼저 오늘 해야 할 일 중 하나를 선택하세요. 그리고 자신과 작은 약속을 하세요. 나는 이 작업에 25분을 투자하고 스스로를 방해하지 않겠다. 할 수 있다. 결국 25분일 뿐이니까. 타이머를 시작하고, 오직 그 작업에만 집중하세요. 다른 생각이 나면 종이에 적어두고 나중에 처리하면 됩니다.",
+      "duration": 32,
+      "visualType": "hero-bullets",
+      "visualPanels": [
+        {
+          "text": "지금 바로 시작할 수 있습니다.",
+          "startPercent": 0,
+          "endPercent": 7,
+          "startFrame": 0,
+          "endFrame": 53
+        },
+        {
+          "text": "먼저 오늘 해야 할 일 중 하나를 선택하세요.",
+          "startPercent": 12,
+          "endPercent": 21,
+          "startFrame": 86,
+          "endFrame": 158
+        },
+        {
+          "text": "그리고 자신과 작은 약속을 하세요.",
+          "startPercent": 24,
+          "endPercent": 32,
+          "startFrame": 181,
+          "endFrame": 236
+        },
+        {
+          "text": "나는 이 작업에 25분을 투자하고",
+          "startPercent": 36,
+          "endPercent": 46,
+          "startFrame": 266,
+          "endFrame": 339
+        },
+        {
+          "text": "스스로를 방해하지 않겠다. 할 수 있다.",
+          "startPercent": 47,
+          "endPercent": 57,
+          "startFrame": 345,
+          "endFrame": 422
+        },
+        {
+          "text": "결국 25분일 뿐이니까.",
+          "startPercent": 60,
+          "endPercent": 67,
+          "startFrame": 446,
+          "endFrame": 494
+        },
+        {
+          "text": "타이머를 시작하고 오직 그 작업에만 집중하세요.",
+          "startPercent": 70,
+          "endPercent": 82,
+          "startFrame": 516,
+          "endFrame": 602
+        },
+        {
+          "text": "다른 생각이 나면 종이에 적어두고",
+          "startPercent": 86,
+          "endPercent": 94,
+          "startFrame": 632,
+          "endFrame": 694
+        },
+        {
+          "text": "나중에 처리하면 됩니다.",
+          "startPercent": 94,
+          "endPercent": 99,
+          "startFrame": 694,
+          "endFrame": 733
+        }
+      ]
+    },
+    {
+      "id": "takeaway",
+      "title": "결론",
+      "text": "프란체스코 시릴로는 이렇게 말했습니다. 시간을 다루는 법을 배우면, 시간은 사악한 포식자에서 생산성을 높이는 동맹이 된다. 오늘, 단 하나의 뽀모도로부터 시작하세요. 25분. 그것이 당신의 시간을 되찾는 첫걸음입니다.",
+      "duration": 26,
+      "visualType": "quote",
+      "visualPanels": [
+        {
+          "text": "프란체스코 시릴로는 이렇게 말했습니다.",
+          "startPercent": 0,
+          "endPercent": 12,
+          "startFrame": 0,
+          "endFrame": 62
+        },
+        {
+          "text": "시간을 다루는 법을 배우면 시간은 사악한 포식자에서 생산성을 높이는 동맹이 된다.",
+          "startPercent": 20,
+          "endPercent": 55,
+          "startFrame": 103,
+          "endFrame": 279
+        },
+        {
+          "text": "오늘 단 하나의 뽀모도로부터 시작하세요.",
+          "startPercent": 60,
+          "endPercent": 73,
+          "startFrame": 304,
+          "endFrame": 369
+        },
+        {
+          "text": "25분.",
+          "startPercent": 76,
+          "endPercent": 80,
+          "startFrame": 385,
+          "endFrame": 407
+        },
+        {
+          "text": "그것이 당신의 시간을 되찾는 첫 걸음입니다.",
+          "startPercent": 85,
+          "endPercent": 97,
+          "startFrame": 433,
+          "endFrame": 494
+        }
+      ]
+    }
+  ]
+}

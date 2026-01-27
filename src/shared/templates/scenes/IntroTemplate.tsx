@@ -26,8 +26,8 @@ export const IntroTemplate: React.FC<IntroTemplateProps> = ({
   subtitle,
   background = "primary",
   durationInFrames,
-  titleSize = "3xl",
-  subtitleSize = "md",
+  titleSize = "4xl",  // 3xl(84) → 4xl(100): 인트로 제목은 더 크게!
+  subtitleSize = "lg",  // md(38) → lg(46): 부제목도 크게!
   useTransition = true,
   style,
 }) => {
@@ -72,8 +72,8 @@ export const IntroTemplate: React.FC<IntroTemplateProps> = ({
               staggerDuration={4}
               delay={5}
               style={{
-                fontSize: FONT_SIZES.lg,
-                color: "rgba(255,255,255,0.8)",
+                fontSize: FONT_SIZES.xl,  // lg(46) → xl(56)
+                color: "rgba(255,255,255,0.85)",
                 fontFamily: FONT_FAMILY.body,
               }}
             />

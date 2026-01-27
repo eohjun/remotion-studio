@@ -26,8 +26,8 @@ export type PanelFontSize = "md" | "lg" | "xl" | "2xl";
 export interface StoryTemplateProps extends BaseSceneProps {
   /** Story panels */
   panels: StoryPanel[];
-  /** Layout type */
-  layout: "single" | "split" | "sequence";
+  /** Layout type - "timed-sequence" shows one panel at a time based on startFrame/endFrame */
+  layout: "single" | "split" | "sequence" | "timed-sequence";
   /** Narrator configuration */
   narrator?: {
     text: string;
@@ -437,6 +437,117 @@ const SequencePanel: React.FC<{
   );
 };
 
+// Sub-component: Timed Sequence Panel Layout (one panel at a time with fade in/out)
+const TimedSequencePanel: React.FC<{
+  panels: StoryPanel[];
+  frame: number;
+  fps: number;
+  fontSize?: PanelFontSize;
+}> = ({ panels, frame, fps, fontSize = "xl" }) => {
+  // Find the active panel based on current frame
+  const activePanel = panels.find(
+    (panel) =>
+      panel.startFrame !== undefined &&
+      panel.endFrame !== undefined &&
+      frame >= panel.startFrame &&
+      frame <= panel.endFrame
+  );
+
+  if (!activePanel || activePanel.startFrame === undefined || activePanel.endFrame === undefined) {
+    return null;
+  }
+
+  const localFrame = frame - activePanel.startFrame;
+  const panelDuration = activePanel.endFrame - activePanel.startFrame;
+
+  // Fade in animation
+  const fadeIn = spring({
+    frame: localFrame,
+    fps,
+    config: SPRING_CONFIGS.gentle,
+  });
+
+  // Fade out (last 20 frames of panel)
+  const fadeOutStart = panelDuration - 20;
+  const fadeOut =
+    localFrame > fadeOutStart
+      ? interpolate(localFrame, [fadeOutStart, panelDuration], [1, 0], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      : 1;
+
+  const opacity = fadeIn * fadeOut;
+  const moodStyle = getMoodStyle(activePanel.mood || "neutral");
+
+  return (
+    <AbsoluteFill
+      style={{
+        ...moodStyle,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: SPACING["2xl"],
+      }}
+    >
+      {/* Background */}
+      {activePanel.background && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              activePanel.background.startsWith("http") ||
+              activePanel.background.startsWith("/")
+                ? undefined
+                : activePanel.background,
+          }}
+        >
+          {(activePanel.background.startsWith("http") ||
+            activePanel.background.startsWith("/")) && (
+            <Img
+              src={
+                activePanel.background.startsWith("http")
+                  ? activePanel.background
+                  : staticFile(activePanel.background)
+              }
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                opacity: 0.6,
+              }}
+            />
+          )}
+        </div>
+      )}
+
+      {/* Content */}
+      {typeof activePanel.content === "string" ? (
+        <div
+          style={{
+            fontSize: FONT_SIZES[fontSize],
+            color: COLORS.white,
+            fontFamily: FONT_FAMILY.title,
+            fontWeight: 600,
+            textAlign: "center",
+            lineHeight: 1.5,
+            maxWidth: 1400,
+            opacity,
+            transform: `translateY(${interpolate(fadeIn, [0, 1], [30, 0])}px)`,
+            textShadow: "0 6px 30px rgba(0,0,0,0.5)",
+            whiteSpace: "pre-line",
+          }}
+        >
+          {activePanel.content}
+        </div>
+      ) : (
+        <div style={{ opacity }}>{activePanel.content}</div>
+      )}
+    </AbsoluteFill>
+  );
+};
+
 // Sub-component: Narrator Text
 const NarratorText: React.FC<{
   narrator: NonNullable<StoryTemplateProps["narrator"]>;
@@ -623,6 +734,10 @@ export const StoryTemplate: React.FC<StoryTemplateProps> = ({
 
       {layout === "sequence" && panels.length > 0 && (
         <SequencePanel panels={panels} frame={frame} fps={fps} fontSize={panelFontSize} />
+      )}
+
+      {layout === "timed-sequence" && panels.length > 0 && (
+        <TimedSequencePanel panels={panels} frame={frame} fps={fps} fontSize={panelFontSize} />
       )}
 
       {/* Character */}

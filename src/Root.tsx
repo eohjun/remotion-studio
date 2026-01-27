@@ -35,6 +35,22 @@ import {
 } from "./videos/DevCompetencyComparison";
 import { VIDEO_CONFIG as VIDEO_CONFIG_DC } from "./videos/DevCompetencyComparison/constants";
 import {
+  ZeigarnikEffect,
+  ZeigarnikEffectSchema,
+} from "./videos/ZeigarnikEffect";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_ZE,
+  FPS as FPS_ZE,
+} from "./videos/ZeigarnikEffect/constants";
+import {
+  PomodoroTechnique,
+  PomodoroTechniqueSchema,
+} from "./videos/PomodoroTechnique";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_PT,
+  FPS as FPS_PT,
+} from "./videos/PomodoroTechnique/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -147,6 +163,26 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO_CONFIG_DC.width}
         height={VIDEO_CONFIG_DC.height}
         schema={DevCompetencyComparisonSchema}
+        defaultProps={{}}
+      />
+      <Composition
+        id="ZeigarnikEffect"
+        component={ZeigarnikEffect}
+        durationInFrames={TOTAL_DURATION_ZE}
+        fps={FPS_ZE}
+        width={1920}
+        height={1080}
+        schema={ZeigarnikEffectSchema}
+        defaultProps={{}}
+      />
+      <Composition
+        id="PomodoroTechnique"
+        component={PomodoroTechnique}
+        durationInFrames={TOTAL_DURATION_PT}
+        fps={FPS_PT}
+        width={1920}
+        height={1080}
+        schema={PomodoroTechniqueSchema}
         defaultProps={{}}
       />
 

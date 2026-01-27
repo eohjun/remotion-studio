@@ -99,7 +99,7 @@ function analyzeNarration(compositionId) {
     sceneCount: narration.scenes?.length || 0,
     totalDuration:
       narration.scenes?.reduce((sum, s) => sum + (s.duration || 5), 0) || 0,
-    fps: narration.metadata?.fps || 30,
+    fps: narration.metadata?.fps || 60,
     format: narration.metadata?.format || "standard",
   };
 }
@@ -238,7 +238,7 @@ function estimateRenderTime(compositionId) {
   // Default values if narration not found
   const sceneCount = narrationInfo?.sceneCount || 5;
   const totalDurationSeconds = narrationInfo?.totalDuration || 30;
-  const fps = narrationInfo?.fps || 30;
+  const fps = narrationInfo?.fps || 60;
   const totalFrames = totalDurationSeconds * fps;
 
   // Calculate complexity score

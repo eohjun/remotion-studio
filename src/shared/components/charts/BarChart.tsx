@@ -70,7 +70,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   delay = 0,
   highlight,
   barSize,
-  gap = 20,
+  gap = 40,  // 20 → 40: 더 넓은 간격
   style,
 }) => {
   const frame = useCurrentFrame();
@@ -81,13 +81,13 @@ export const BarChart: React.FC<BarChartProps> = ({
 
   const isVertical = orientation === "vertical";
 
-  // Calculate bar dimensions
+  // Calculate bar dimensions (optimized for 1920x1080 - 크게!)
   const defaultBarSize = isVertical
-    ? Math.min(80, (800 - data.length * gap) / data.length)
-    : Math.min(40, 300 / data.length);
+    ? Math.min(140, (1200 - data.length * gap) / data.length)  // 120 → 140
+    : Math.min(90, 600 / data.length);  // 50 → 90 (바 높이)
   const actualBarSize = barSize || defaultBarSize;
 
-  const maxBarLength = isVertical ? 300 : 600;
+  const maxBarLength = isVertical ? 550 : 1000;  // 450/800 → 550/1000
 
   if (isVertical) {
     return (
@@ -124,7 +124,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 gap: 8,
               }}
             >
-              {/* Value Label */}
+              {/* Value Label - 크게! */}
               {showValues && (
                 <div
                   style={{
@@ -132,7 +132,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                       extrapolateLeft: "clamp",
                       extrapolateRight: "clamp",
                     }),
-                    fontSize: FONT_SIZES.sm,
+                    fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
                     fontWeight: 700,
                     color: isHighlighted ? itemColor : COLORS.white,
                     fontFamily: FONT_FAMILY.body,
@@ -152,7 +152,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                   boxShadow: isHighlighted ? `0 0 20px ${itemColor}60` : undefined,
                 }}
               />
-              {/* Label */}
+              {/* Label - 크게! */}
               {showLabels && (
                 <div
                   style={{
@@ -160,14 +160,15 @@ export const BarChart: React.FC<BarChartProps> = ({
                       extrapolateLeft: "clamp",
                       extrapolateRight: "clamp",
                     }),
-                    fontSize: FONT_SIZES.xs,
+                    fontSize: FONT_SIZES.md,  // xs(24) → md(38)
                     color: isHighlighted ? COLORS.white : COLORS.light,
                     fontFamily: FONT_FAMILY.body,
                     textAlign: "center",
-                    maxWidth: actualBarSize + 20,
+                    maxWidth: actualBarSize + 40,
+                    fontWeight: 500,
                   }}
                 >
-                  {item.icon && <span style={{ marginRight: 4 }}>{item.icon}</span>}
+                  {item.icon && <span style={{ marginRight: 8 }}>{item.icon}</span>}
                   {item.label}
                 </div>
               )}
@@ -178,15 +179,15 @@ export const BarChart: React.FC<BarChartProps> = ({
     );
   }
 
-  // Horizontal orientation
+  // Horizontal orientation - 크기 대폭 확대!
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 16,
+        gap: 40,  // 16 → 40
         width: "100%",
-        maxWidth: 900,
+        maxWidth: 1400,  // 900 → 1400
         ...style,
       }}
     >
@@ -208,25 +209,26 @@ export const BarChart: React.FC<BarChartProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              gap: 32,  // 16 → 32
             }}
           >
-            {/* Label */}
+            {/* Label - 크게! */}
             {showLabels && (
               <div
                 style={{
-                  width: 150,
-                  fontSize: FONT_SIZES.sm - 2,
+                  width: 240,  // 150 → 240
+                  fontSize: FONT_SIZES.lg,  // sm-2(30) → lg(46)
                   color: isHighlighted ? COLORS.white : COLORS.light,
                   fontFamily: FONT_FAMILY.body,
                   textAlign: "right",
+                  fontWeight: 500,
                   opacity: interpolate(barProgress, [0, 0.3], [0, 1], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
                   }),
                 }}
               >
-                {item.icon && <span style={{ marginRight: 6 }}>{item.icon}</span>}
+                {item.icon && <span style={{ marginRight: 12 }}>{item.icon}</span>}
                 {item.label}
               </div>
             )}
@@ -236,7 +238,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 flex: 1,
                 height: actualBarSize,
                 backgroundColor: "rgba(255,255,255,0.1)",
-                borderRadius: RADIUS.sm,
+                borderRadius: RADIUS.md,  // sm → md
                 overflow: "hidden",
               }}
             >
@@ -245,18 +247,18 @@ export const BarChart: React.FC<BarChartProps> = ({
                   width: barWidth,
                   height: "100%",
                   backgroundColor: itemColor,
-                  borderRadius: RADIUS.sm,
+                  borderRadius: RADIUS.md,
                   opacity: isHighlighted ? 1 : 0.85,
-                  boxShadow: isHighlighted ? `0 0 15px ${itemColor}50` : undefined,
+                  boxShadow: isHighlighted ? `0 0 20px ${itemColor}60` : undefined,
                 }}
               />
             </div>
-            {/* Value */}
+            {/* Value - 크게! */}
             {showValues && (
               <div
                 style={{
-                  width: 60,
-                  fontSize: FONT_SIZES.sm,
+                  width: 100,  // 60 → 100
+                  fontSize: FONT_SIZES.xl,  // sm(32) → xl(56)
                   fontWeight: 700,
                   color: isHighlighted ? itemColor : COLORS.white,
                   fontFamily: FONT_FAMILY.body,

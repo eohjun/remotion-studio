@@ -78,10 +78,10 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
   animate = true,
   delay = 0,
   staggerDelay = 8,
-  barHeight = 32,
-  gap = 24,
-  barMaxWidth = 300,
-  labelWidth = 120,
+  barHeight = 70,  // 32 → 70: 바 높이 대폭 증가!
+  gap = 50,  // 24 → 50
+  barMaxWidth = 700,  // 300 → 700: 바 너비 대폭 증가!
+  labelWidth = 240,  // 120 → 240
   style,
 }) => {
   const frame = useCurrentFrame();
@@ -90,8 +90,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
   const allValues = data.flatMap((d) => [d.valueA, d.valueB]);
   const maxValue = providedMaxValue || Math.max(...allValues) * 1.1;
 
-  const valueWidth = 80;
-  const changeWidth = 100;
+  const valueWidth = 120;  // 80 → 120
+  const changeWidth = 140;  // 100 → 140
 
   return (
     <div
@@ -100,7 +100,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
         flexDirection: "column",
         gap: gap,
         width: "100%",
-        maxWidth: 900,
+        maxWidth: 1500,  // 900 → 1500: 전체 너비 대폭 증가!
         ...style,
       }}
     >
@@ -109,8 +109,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 16,
-          marginBottom: 8,
+          gap: 24,  // 16 → 24
+          marginBottom: 16,  // 8 → 16
         }}
       >
         <div style={{ width: labelWidth }} />
@@ -126,8 +126,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 8,
-              fontSize: FONT_SIZES.sm,
+              gap: 12,  // 8 → 12
+              fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
               color: colorA,
               fontFamily: FONT_FAMILY.body,
               fontWeight: 600,
@@ -135,9 +135,9 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
           >
             <div
               style={{
-                width: 12,
-                height: 12,
-                borderRadius: 3,
+                width: 20,  // 12 → 20
+                height: 20,
+                borderRadius: 5,
                 backgroundColor: colorA,
               }}
             />
@@ -147,8 +147,8 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 8,
-              fontSize: FONT_SIZES.sm,
+              gap: 12,
+              fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
               color: colorB,
               fontFamily: FONT_FAMILY.body,
               fontWeight: 600,
@@ -156,20 +156,20 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
           >
             <div
               style={{
-                width: 12,
-                height: 12,
-                borderRadius: 3,
+                width: 20,
+                height: 20,
+                borderRadius: 5,
                 backgroundColor: colorB,
               }}
             />
             {labelB}
           </div>
         </div>
-        {showValues && <div style={{ width: valueWidth * 2 + 16 }} />}
+        {showValues && <div style={{ width: valueWidth * 2 + 24 }} />}
         {showChange && <div style={{ width: changeWidth }} />}
       </div>
 
-      {/* Data rows */}
+      {/* Data rows - 크기 대폭 증가! */}
       {data.map((item, i) => {
         const progress = animate
           ? spring({
@@ -190,14 +190,14 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 16,
+              gap: 24,  // 16 → 24
             }}
           >
-            {/* Label */}
+            {/* Label - 크게! */}
             <div
               style={{
                 width: labelWidth,
-                fontSize: FONT_SIZES.sm,
+                fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
                 color: COLORS.white,
                 fontFamily: FONT_FAMILY.body,
                 fontWeight: 500,
@@ -207,7 +207,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                 }),
               }}
             >
-              {item.icon && <span style={{ marginRight: 8 }}>{item.icon}</span>}
+              {item.icon && <span style={{ marginRight: 12 }}>{item.icon}</span>}
               {item.label}
             </div>
 
@@ -218,7 +218,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                 maxWidth: barMaxWidth,
                 display: "flex",
                 flexDirection: "column",
-                gap: 4,
+                gap: 8,  // 4 → 8
               }}
             >
               {/* Bar A */}
@@ -227,7 +227,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                   height: barHeight / 2,
                   width: widthA,
                   backgroundColor: colorA,
-                  borderRadius: RADIUS.sm,
+                  borderRadius: RADIUS.md,  // sm → md
                   opacity: 0.9,
                 }}
               />
@@ -237,18 +237,18 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                   height: barHeight / 2,
                   width: widthB,
                   backgroundColor: colorB,
-                  borderRadius: RADIUS.sm,
-                  boxShadow: `0 2px 10px ${colorB}40`,
+                  borderRadius: RADIUS.md,
+                  boxShadow: `0 4px 15px ${colorB}50`,
                 }}
               />
             </div>
 
-            {/* Values */}
+            {/* Values - 크게! */}
             {showValues && (
               <div
                 style={{
                   display: "flex",
-                  gap: 16,
+                  gap: 24,  // 16 → 24
                   opacity: interpolate(progress, [0.5, 1], [0, 1], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
@@ -258,7 +258,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                 <div
                   style={{
                     width: valueWidth,
-                    fontSize: FONT_SIZES.sm,
+                    fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
                     color: colorA,
                     fontFamily: FONT_FAMILY.body,
                     fontWeight: 600,
@@ -270,7 +270,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                 <div
                   style={{
                     width: valueWidth,
-                    fontSize: FONT_SIZES.sm,
+                    fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
                     color: colorB,
                     fontFamily: FONT_FAMILY.body,
                     fontWeight: 700,
@@ -282,7 +282,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
               </div>
             )}
 
-            {/* Change indicator */}
+            {/* Change indicator - 크게! */}
             {showChange && (
               <div
                 style={{
@@ -290,7 +290,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-end",
-                  gap: 4,
+                  gap: 8,
                   opacity: interpolate(progress, [0.7, 1], [0, 1], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
@@ -299,7 +299,7 @@ export const ComparisonBars: React.FC<ComparisonBarsProps> = ({
               >
                 <span
                   style={{
-                    fontSize: FONT_SIZES.sm,
+                    fontSize: FONT_SIZES.lg,  // sm(32) → lg(46)
                     fontWeight: 700,
                     color: isPositive ? COLORS.success : COLORS.danger,
                     fontFamily: FONT_FAMILY.body,

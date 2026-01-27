@@ -107,10 +107,10 @@ Names/Terms:
 **Pronunciation Hint Syntax**:
 ```
 In narration JSON, use this format:
-"narration": "The study by Kahneman [kah-nuh-man] showed that..."
+"text": "The study by Kahneman [kah-nuh-man] showed that..."
 
 For Korean:
-"narration": "AI(에이아이) 기술이 발전하면서..."
+"text": "AI(에이아이) 기술이 발전하면서..."
 ```
 
 ### Pause Markers
@@ -141,10 +141,19 @@ PAUSE_TYPES:
   - Long sentence breaks
 ```
 
+**⚠️ CRITICAL: Pause 마커는 문서화 전용입니다!**
+
+- `[pause:X]` 마커는 TTS에 전송되지 않습니다 (자동 제거됨)
+- 실제 쉼은 TTS가 문장부호로 자연스럽게 처리합니다
+- 마커의 용도:
+  1. 나레이션의 의도된 리듬 문서화
+  2. 영상 타이밍 계획 참고
+  3. visualPanels 타이밍 계산에 활용
+
 **Usage in Narration**:
 ```json
 {
-  "narration": "Here's the surprising truth. [pause:medium] Self-help books have a hidden flaw. [pause:short] And it's not what you think. [pause:long] It's the very premise they're built on."
+  "text": "Here's the surprising truth. [pause:medium] Self-help books have a hidden flaw. [pause:short] And it's not what you think. [pause:long] It's the very premise they're built on."
 }
 ```
 
@@ -189,7 +198,7 @@ Enhanced scene structure for TTS optimization:
   "id": "key_point_1",
   "type": "content",
   "title": "The Paradox",
-  "narration": "Here's the paradox. [pause:medium] The more self-help books you read, [pause:short] the more you feel you need to read. [pause:long] Why is that?",
+  "text": "Here's the paradox. [pause:medium] The more self-help books you read, [pause:short] the more you feel you need to read. [pause:long] Why is that?",
   "ttsHints": {
     "pronunciations": {
       "Kahneman": "kah-nuh-man"
@@ -240,10 +249,12 @@ Generate a `narration.json` file with this structure:
 ```json
 {
   "metadata": {
+    "compositionId": "VideoName",
     "title": "Video Title",
     "description": "Brief video description",
-    "targetDuration": "5:30",
+    "targetDuration": 150,
     "language": "ko",
+    "voice": "nova",
     "tone": "serious|inspirational|critical|calm|dynamic",
     "contentType": "philosophical|data-driven|narrative|technical|critical"
   },
@@ -251,34 +262,148 @@ Generate a `narration.json` file with this structure:
     {
       "id": "intro",
       "type": "intro",
-      "title": "Scene Title (for reference)",
-      "narration": "The actual narration text...",
-      "duration": 12,
-      "notes": "Visual/emotional notes for planner",
-      "keyPoints": ["point1", "point2"]
+      "title": "타이틀",
+      "text": "자이가르닉 효과. 왜 미완성된 일이 더 오래 기억될까요?",
+      "duration": 6,
+      "visualCue": "Title card with topic name",
+      "notes": "제목을 크게 표시하며 주제 소개"
     },
     {
       "id": "hook",
-      "type": "content",
+      "type": "hook",
       "title": "The Hook",
-      "narration": "Did you know that...",
-      "duration": 10,
-      "notes": "Surprising statistic visual",
-      "keyPoints": ["shocking stat"]
+      "text": "1920년대 비엔나의 한 카페. 한 웨이터가...",
+      "duration": 15,
+      "visualCue": "Vienna cafe scene",
+      "notes": "스토리로 시청자 관심 유도"
     }
   ],
-  "totalDuration": 330,
-  "wordCount": 850,
-  "sceneCount": 12
+  "totalDuration": 150,
+  "sceneCount": 8
+}
+```
+
+**⚠️ 필수 필드**:
+- `metadata.compositionId`: TTS 출력 폴더 결정에 사용
+- `scenes[].text`: TTS 생성에 사용되는 나레이션 텍스트 (반드시 `text` 필드 사용)
+- `scenes[0]`: 반드시 `intro` 타입이어야 함
+
+### Visual Panel Timing (중요)
+
+**나레이션 텍스트 중 일부만 화면에 표시되는 경우**, 반드시 `visualPanels` 배열을 포함해야 합니다.
+이를 통해 오디오와 시각적 텍스트의 타이밍을 정확하게 동기화할 수 있습니다.
+
+```json
+{
+  "id": "hook",
+  "type": "story",
+  "title": "The Waiter's Secret",
+  "text": "1920년대 비엔나의 한 레스토랑. [pause:short] 심리학자 쿠르트 레빈은 놀라운 광경을 목격합니다. [pause:medium] 웨이터가 수십 개의 주문을 완벽하게 기억하고 있었습니다.",
+  "duration": 25,
+  "visualPanels": [
+    {
+      "text": "1920년대 비엔나의 한 레스토랑",
+      "startPercent": 0,
+      "endPercent": 12
+    },
+    {
+      "text": "웨이터가 수십 개의 주문을\n완벽하게 기억하고 있었습니다",
+      "startPercent": 30,
+      "endPercent": 50
+    }
+  ],
+  "notes": "첫 번째 패널 후 '심리학자 쿠르트 레빈...' 나레이션이 나오는 동안 화면 전환 없음"
+}
+```
+
+**visualPanels 필드 설명**:
+- `text`: 화면에 표시할 텍스트 (줄바꿈: `\n`)
+- `startPercent`: 씬 시작 기준 표시 시작 시점 (0-100%)
+- `endPercent`: 씬 시작 기준 표시 종료 시점 (0-100%)
+
+**타이밍 계산 예시** (30fps 기준):
+```
+씬 duration: 25초 = 750 프레임
+패널 startPercent: 30% → 750 * 0.30 = 225 프레임
+패널 endPercent: 50% → 750 * 0.50 = 375 프레임
+```
+
+**언제 visualPanels가 필요한가?**
+- 나레이션 텍스트 중 일부만 화면에 표시할 때
+- 스토리텔링 씬에서 텍스트가 순차적으로 나타날 때
+- 오디오에 화면에 표시되지 않는 내용이 포함될 때
+
+**visualPanels가 필요 없는 경우**:
+- 전체 나레이션 텍스트가 그대로 화면에 표시될 때
+- 텍스트 없이 그래픽/차트만 표시할 때
+
+### Content Density Guidelines (콘텐츠 밀도 가이드라인)
+
+**⚠️ 화면 오버플로우 방지**: 1920×1080 영상에서 콘텐츠가 화면을 벗어나지 않도록 아이템 수를 제한해야 합니다.
+
+**사용 가능한 공간**:
+- 전체 높이: 1080px
+- Safe Area 패딩 (상/하): 60px씩 → 사용 가능: 960px
+- 타이틀 섹션: ~180px
+- 푸터/CTA 섹션: ~120px
+- **콘텐츠 영역: ~660px**
+
+**아이템 수 제한 (검증된 권장값)**:
+| 레이아웃 타입 | 아이템당 높이 | 최대 아이템 수 | 권장 gap/padding |
+|--------------|--------------|---------------|------------------|
+| 큰 스텝 카드 (아이콘 포함) | ~120px | **4개** | gap: 28, padding: 28px 40px |
+| 컴팩트 리스트 | ~90px | **5개** | gap: 22, padding: 22px 32px |
+| 불릿 포인트 | ~60px | **8개** | gap: 16 |
+| 2열 그리드 | ~180px/row | **6개 (3행)** | gap: 24 |
+
+**5개 이상 아이템이 필요한 경우**:
+1. **씬 분할**: 여러 씬으로 나누기 (권장)
+2. **컴팩트 스타일**: 작은 패딩/간격 사용
+3. **AutoFitContainer**: 자동 스케일 다운 (최후 수단)
+
+**예시 - 4개 스텝 씬 (적절)**:
+```json
+{
+  "id": "implementation",
+  "type": "content",
+  "title": "시작하기",
+  "text": "첫째, 작업을 선택하세요. 둘째, 타이머를 설정하세요. 셋째, 집중하세요. 넷째, 휴식을 취하세요.",
+  "visualType": "steps",
+  "items": 4,
+  "notes": "4개 스텝 - 화면에 적합"
+}
+```
+
+**예시 - 6개 아이템 (씬 분할 필요)**:
+```json
+// ❌ 피하세요: 6개 스텝을 하나의 씬에
+// ✅ 권장: 2개 씬으로 분할
+{
+  "id": "benefits-1",
+  "type": "content",
+  "title": "주요 장점 (1/2)",
+  "text": "...",
+  "items": 3
+},
+{
+  "id": "benefits-2",
+  "type": "content",
+  "title": "주요 장점 (2/2)",
+  "text": "...",
+  "items": 3
 }
 ```
 
 ## Scene Types
 
-| Type | Purpose | Typical Duration |
-|------|---------|------------------|
-| `intro` | Opening with title | 8-15 seconds |
-| `hook` | Attention grabber | 8-12 seconds |
+**⚠️ REQUIRED SCENES**: Every video MUST include these scenes in order:
+1. `intro` - 제목과 함께 주제를 소개하는 나레이션 (예: "자이가르닉 효과. 왜 미완성된 일이 더 오래 기억될까요?")
+2. `hook` - 시청자의 관심을 끄는 스토리/질문
+
+| Type | Purpose | Typical Duration | Required |
+|------|---------|------------------|----------|
+| `intro` | **제목 + 주제 소개 나레이션** | 5-10 seconds | **YES** |
+| `hook` | Attention grabber | 8-12 seconds | **YES** |
 | `content` | Main information | 15-30 seconds |
 | `data` | Statistics/charts | 10-20 seconds |
 | `quote` | Expert quote | 8-15 seconds |
@@ -391,7 +516,7 @@ Every 3-4 content scenes → Quick Recap scene
   "id": "recap-1",
   "type": "recap",
   "title": "Quick Recap",
-  "narration": "Let's pause and recap: First, we learned that [point 1]. Then, we explored [point 2]. And finally, [point 3].",
+  "text": "Let's pause and recap: First, we learned that [point 1]. Then, we explored [point 2]. And finally, [point 3].",
   "duration": 8,
   "recapPoints": ["point 1 summary", "point 2 summary", "point 3 summary"],
   "notes": "Use RecapTemplate, bullet point visuals"
@@ -411,7 +536,7 @@ For longer videos (>3 minutes), add progress context:
     "total": 5,
     "label": "Part 3 of 5"
   },
-  "narration": "Now let's explore the third principle..."
+  "text": "Now let's explore the third principle..."
 }
 ```
 

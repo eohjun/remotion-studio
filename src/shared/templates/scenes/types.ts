@@ -122,4 +122,8 @@ export interface StoryPanel {
   background?: string;
   mood?: "neutral" | "positive" | "negative" | "dramatic";
   transition?: "fade" | "slide" | "zoom";
+  /** Start frame for timed-sequence layout */
+  startFrame?: number;
+  /** End frame for timed-sequence layout */
+  endFrame?: number;
 }

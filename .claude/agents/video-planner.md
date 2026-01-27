@@ -463,24 +463,106 @@ Include format in plan metadata:
 
 ## Design System Standards
 
+### ⚠️ CRITICAL: Screen Space Utilization
+
+**1920x1080 화면을 충분히 활용해야 합니다. 작은 요소들이 화면 중앙에 몰려있으면 안 됩니다.**
+
+```
+SCREEN_UTILIZATION_RULES:
+
+1. CONTENT AREA
+   - Safe area: 1760x960 (padding 80px horizontal, 60px vertical)
+   - Content should fill 70-90% of this area
+   - NEVER leave more than 30% empty space
+
+2. MINIMUM COMPONENT SIZES (1920x1080 기준)
+   - Title text: 최소 64px, 권장 72-100px
+   - Card width: 최소 380px, 권장 420-500px
+   - Card height: 최소 200px
+   - Timeline badge: 최소 44px font, padding 24px 48px
+   - Icon/emoji: 최소 80px, 권장 100-150px
+   - Gap between cards: 60-100px
+
+3. LAYOUT PATTERNS
+   - 3-column layout: 각 카드 최소 420px wide
+   - 2-column layout: 각 컬럼 최소 700px wide
+   - Full-width content: 최소 1400px wide
+   - Centered content: maxWidth 1200-1600px
+
+4. VERTICAL DISTRIBUTION
+   - Title: 상단 15-20%
+   - Main content: 중앙 60-70%
+   - Footer/caption: 하단 10-15%
+
+5. ANTI-PATTERNS (금지)
+   ❌ 320px 이하 카드
+   ❌ 36px 이하 제목
+   ❌ 화면 중앙에 작게 몰린 콘텐츠
+   ❌ 50% 이상의 빈 공간
+   ❌ 화면 밖으로 콘텐츠 벗어남
+
+6. CONTENT DENSITY (오버플로우 방지)
+   Safe Area 높이: 960px (1080 - 패딩 60×2)
+   타이틀 섹션: ~180px
+   푸터 섹션: ~120px
+   콘텐츠 영역: ~660px
+
+   아이템 수 제한:
+   - 큰 스텝 카드 (140px): 최대 4개
+   - 컴팩트 리스트 (100px): 최대 5개
+   - 불릿 포인트 (60px): 최대 8개
+
+   5개+ 아이템 → 씬 분할 권장
+```
+
+**예시 - Timeline 씬:**
+```
+WRONG:
+  - Card width: 320px (너무 작음)
+  - Font size: 28px (너무 작음)
+  - Total width: 1000px (화면의 52%만 사용)
+
+CORRECT:
+  - Card width: 420px
+  - Badge font: 48px
+  - Label font: 38px
+  - Description font: 28px
+  - Total width: 1500px (화면의 78% 사용)
+```
+
 ### Typography Guidelines
 
-Use consistent typography from the design system:
+Use consistent typography from the design system (optimized for 1920x1080):
 
 ```
 TYPOGRAPHY = {
-  title:    { size: 56, weight: 800 },   // Main titles
-  subtitle: { size: 36, weight: 700 },   // Section headers
-  body:     { size: 28, weight: 500 },   // Content text
-  caption:  { size: 20, weight: 400 },   // Supporting text
+  title:    { size: 68, weight: 800 },   // Main titles (was 56)
+  subtitle: { size: 46, weight: 700 },   // Section headers (was 36)
+  body:     { size: 38, weight: 500 },   // Content text (was 28)
+  caption:  { size: 24, weight: 400 },   // Supporting text (was 20)
 }
 
-MIN_READABLE_SIZE = 24  // WCAG compliance
+// Updated FONT_SIZES scale (from constants.ts)
+FONT_SIZES = {
+  xs: 24,     // Supporting text
+  sm: 32,     // Captions
+  md: 38,     // Body text
+  lg: 46,     // Subtitles
+  xl: 56,     // Section titles
+  "2xl": 68,  // Main titles
+  "3xl": 84,  // Large emphasis
+  "4xl": 100, // Hero text
+}
+
+MIN_READABLE_SIZE = 28  // WCAG compliance for video
 ```
 
 Scale for different formats:
 - PORTRAIT: multiply by 0.85 (smaller screens)
 - SQUARE: multiply by 0.9
+
+**CRITICAL**: Font sizes were updated to be larger for 1920x1080 video.
+Old videos may appear too small - always use the new scale.
 
 ### Animation Spring Selection (NEW)
 
@@ -700,6 +782,79 @@ Generate a `video-plan.json` with this structure:
 | transition | ContentTemplate (minimal) | QuoteTemplate |
 | conclusion | ContentTemplate | QuoteTemplate |
 | outro | OutroTemplate | - |
+
+---
+
+## Visual Panel Timing (오디오-비주얼 동기화)
+
+### 중요: visualPanels 사용
+
+나레이션 텍스트 중 **일부만 화면에 표시**되는 경우, narration.json의 `visualPanels` 정보를 반드시 사용해야 합니다.
+visualPanels가 없으면 오디오와 화면 텍스트가 맞지 않는 문제가 발생합니다.
+
+### 프레임 타이밍 계산
+
+narration.json의 `visualPanels`를 실제 프레임 타이밍으로 변환:
+
+```typescript
+// narration.json의 visualPanels
+{
+  "visualPanels": [
+    { "text": "첫 번째 텍스트", "startPercent": 0, "endPercent": 12 },
+    { "text": "두 번째 텍스트", "startPercent": 30, "endPercent": 50 }
+  ]
+}
+
+// 프레임 타이밍으로 변환 (씬이 750프레임이라면)
+const sceneDurationFrames = 750;
+const storyPanels = visualPanels.map(panel => ({
+  text: panel.text,
+  start: Math.round(sceneDurationFrames * panel.startPercent / 100),
+  end: Math.round(sceneDurationFrames * panel.endPercent / 100),
+}));
+
+// 결과:
+// [
+//   { text: "첫 번째 텍스트", start: 0, end: 90 },
+//   { text: "두 번째 텍스트", start: 225, end: 375 }
+// ]
+```
+
+### video-plan.json에 포함
+
+visualPanels 정보는 video-plan.json에 그대로 전달:
+
+```json
+{
+  "sceneId": "hook",
+  "template": "StoryTemplate",
+  "props": {
+    "layout": "timed-sequence",
+    "panelFontSize": "xl"
+  },
+  "visualPanels": [
+    { "text": "1920년대 비엔나의 한 레스토랑", "startPercent": 0, "endPercent": 12 },
+    { "text": "웨이터가 수십 개의 주문을\n완벽하게 기억하고 있었습니다", "startPercent": 30, "endPercent": 50 }
+  ],
+  "notes": "visualPanels의 startPercent/endPercent를 프레임으로 변환하여 사용"
+}
+```
+
+### visualPanels가 없는 경우
+
+narration.json에 `visualPanels`가 없으면:
+1. 해당 씬의 모든 텍스트가 동시에 표시되는 것으로 간주
+2. 또는 keyPoints를 사용하여 균등 분할
+3. **스토리/내러티브 씬에서는 narrator에게 visualPanels 추가 요청**
+
+### StoryTemplate 사용 시 필수
+
+StoryTemplate의 `timed-sequence` 레이아웃을 사용할 때는:
+- 반드시 visualPanels 기반으로 panels 배열 생성
+- startFrame/endFrame을 정확히 계산
+- 화면에 표시되지 않는 나레이션 구간도 고려
+
+---
 
 ## Component Selection Guide
 

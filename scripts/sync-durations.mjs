@@ -1,19 +1,23 @@
 /**
- * 오디오 메타데이터를 기반으로 constants.ts 자동 생성
+ * 오디오 메타데이터를 기반으로 constants.ts의 SCENE_FRAMES만 업데이트
  *
  * 사용법:
  *   node scripts/sync-durations.mjs <audio-metadata.json 경로> [옵션]
  *
  * 옵션:
- *   --output, -o <경로>   출력 constants.ts 경로 (기본: src/<compositionId>/constants.ts)
- *   --buffer, -b <초>     각 씬에 추가할 버퍼 시간 (기본: 1.5초)
- *   --fps <숫자>          프레임 레이트 (기본: 30)
+ *   --output, -o <경로>   출력 constants.ts 경로 (기본: src/videos/<compositionId>/constants.ts)
+ *   --buffer, -b <프레임> 각 씬에 추가할 버퍼 프레임 (기본: 5)
+ *   --fps <숫자>          프레임 레이트 (기본: 60)
  *   --dry-run             파일 생성 없이 미리보기만
+ *   --create              constants.ts가 없으면 새로 생성
  *
  * 예시:
- *   node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json
- *   node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json --buffer 2
- *   node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json -o src/MyComp/constants.ts
+ *   node scripts/sync-durations.mjs public/videos/ZeigarnikEffect/audio/audio-metadata.json
+ *   node scripts/sync-durations.mjs public/videos/ZeigarnikEffect/audio/audio-metadata.json --buffer 10
+ *
+ * ⚠️ 중요: 버퍼는 프레임 단위입니다 (초가 아님!)
+ *    - 5프레임 = 0.17초 (권장)
+ *    - 이전 기본값 1.5초(45프레임)는 과도한 공백을 유발했음
  */
 
 import fs from "fs";
@@ -32,13 +36,16 @@ if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
 
 옵션:
   --output, -o <경로>   출력 constants.ts 경로
-  --buffer, -b <초>     각 씬에 추가할 버퍼 시간 (기본: 1.5초)
-  --fps <숫자>          프레임 레이트 (기본: 30)
+  --buffer, -b <프레임> 각 씬에 추가할 버퍼 프레임 (기본: 5)
+  --fps <숫자>          프레임 레이트 (기본: 60)
   --dry-run             파일 생성 없이 미리보기만
+  --create              constants.ts가 없으면 새로 생성
+
+⚠️ 버퍼는 프레임 단위입니다! (5프레임 = 약 0.17초)
 
 예시:
-  node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json
-  node scripts/sync-durations.mjs public/audio/en-full/audio-metadata.json --buffer 2
+  node scripts/sync-durations.mjs public/videos/ZeigarnikEffect/audio/audio-metadata.json
+  node scripts/sync-durations.mjs public/videos/ZeigarnikEffect/audio/audio-metadata.json --buffer 10
 `);
   process.exit(0);
 }
@@ -58,21 +65,28 @@ const outputArgIndex = args.findIndex(arg => arg === "--output" || arg === "-o")
 const bufferArgIndex = args.findIndex(arg => arg === "--buffer" || arg === "-b");
 const fpsArgIndex = args.findIndex(arg => arg === "--fps");
 const dryRun = args.includes("--dry-run");
+const createIfMissing = args.includes("--create");
 
-const bufferSeconds = bufferArgIndex !== -1 && args[bufferArgIndex + 1]
-  ? parseFloat(args[bufferArgIndex + 1])
-  : 1.5;
+// 버퍼: 프레임 단위 (기본 5프레임 = ~0.17초)
+const bufferFrames = bufferArgIndex !== -1 && args[bufferArgIndex + 1]
+  ? parseInt(args[bufferArgIndex + 1], 10)
+  : 5;
 
 const fps = fpsArgIndex !== -1 && args[fpsArgIndex + 1]
   ? parseInt(args[fpsArgIndex + 1], 10)
-  : 30;
+  : 60; // 기본 60fps (이 프로젝트의 표준)
+
+// snake_case를 camelCase로 변환
+function toCamelCase(str) {
+  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+}
 
 // 메타데이터 로드
 const metadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
 console.log(`📄 메타데이터 로드: ${metadataPath}`);
 console.log(`🎬 Composition: ${metadata.compositionId || "(미지정)"}`);
 console.log(`📊 씬 개수: ${metadata.scenes.length}`);
-console.log(`⏱️  버퍼: ${bufferSeconds}초, FPS: ${fps}\n`);
+console.log(`⏱️  버퍼: ${bufferFrames}프레임 (${(bufferFrames / fps).toFixed(2)}초), FPS: ${fps}\n`);
 
 // 출력 경로 결정
 let outputPath;
@@ -81,103 +95,180 @@ if (outputArgIndex !== -1 && args[outputArgIndex + 1]) {
     ? args[outputArgIndex + 1]
     : path.join(projectRoot, args[outputArgIndex + 1]);
 } else if (metadata.compositionId) {
-  outputPath = path.join(projectRoot, "src", metadata.compositionId, "constants.ts");
+  outputPath = path.join(projectRoot, "src", "videos", metadata.compositionId, "constants.ts");
 } else {
   console.error("❌ 출력 경로를 지정해주세요 (--output) 또는 메타데이터에 compositionId가 필요합니다.");
   process.exit(1);
 }
 
-// scene ID를 CONSTANT_CASE로 변환
-function toConstantCase(str) {
-  return str
-    .replace(/([a-z])([A-Z])/g, "$1_$2")
-    .replace(/[^a-zA-Z0-9]/g, "_")
-    .toUpperCase();
-}
-
-// constants.ts 생성
-function generateConstants() {
-  const sceneDurations = {};
-  const sceneComments = {};
+// ============================================
+// SCENE_FRAMES 생성
+// ============================================
+function generateSceneFrames() {
+  const lines = [];
+  lines.push("export const SCENE_FRAMES = {");
 
   for (const scene of metadata.scenes) {
-    const constName = toConstantCase(scene.id);
-    const audioSeconds = scene.durationSeconds || 0;
-    const totalSeconds = audioSeconds + bufferSeconds;
-    const frames = Math.ceil(totalSeconds * fps);
+    const audioFrames = scene.durationFrames || Math.ceil((scene.durationSeconds || 0) * fps);
+    const totalFrames = audioFrames + bufferFrames;
+    const audioSeconds = scene.durationSeconds?.toFixed(1) || "?";
 
-    sceneDurations[constName] = frames;
-    sceneComments[constName] = `${totalSeconds.toFixed(1)}s (audio: ${audioSeconds.toFixed(1)}s)`;
+    // snake_case → camelCase 변환 (audio-metadata.json → constants.ts 호환)
+    const sceneId = toCamelCase(scene.id);
+    const padding = " ".repeat(Math.max(1, 20 - sceneId.length));
+    lines.push(`  ${sceneId}: ${totalFrames},${padding}// ${audioFrames} + ${bufferFrames} (${audioSeconds}s audio)`);
   }
 
-  // 씬 duration 코드 생성
-  const durationEntries = Object.entries(sceneDurations)
-    .map(([name, frames]) => `  ${name}: ${frames},${" ".repeat(Math.max(1, 25 - name.length))}// ${sceneComments[name]}`)
-    .join("\n");
+  lines.push("} as const;");
+  return lines.join("\n");
+}
 
-  // 씬 시작 시간 계산 코드 생성
-  const sceneNames = Object.keys(sceneDurations);
-  let sceneStartCode = "";
+// ============================================
+// SCENES 생성 (start/duration in seconds 형식)
+// PomodoroTechnique 등 일부 비디오에서 사용
+// ============================================
+function generateScenes() {
+  const lines = [];
+  lines.push("export const SCENES = {");
 
-  for (let i = 0; i < sceneNames.length; i++) {
-    const name = sceneNames[i];
+  let currentStart = 0;
+  for (const scene of metadata.scenes) {
+    const audioSeconds = scene.durationSeconds || 0;
+    // 버퍼를 초 단위로 변환하여 추가
+    const bufferSeconds = bufferFrames / fps;
+    const totalDuration = Math.ceil(audioSeconds + bufferSeconds);
+
+    const sceneId = toCamelCase(scene.id);
+    const padding = " ".repeat(Math.max(1, 20 - sceneId.length));
+    lines.push(`  ${sceneId}: { start: ${currentStart}, duration: ${totalDuration} },${padding}// ${audioSeconds.toFixed(2)}s audio`);
+
+    currentStart += totalDuration;
+  }
+
+  lines.push("} as const;");
+  return { code: lines.join("\n"), totalDuration: currentStart };
+}
+
+// ============================================
+// SCENE_START_FRAMES 생성
+// ============================================
+function generateSceneStartFrames() {
+  // snake_case → camelCase 변환
+  const sceneIds = metadata.scenes.map(s => toCamelCase(s.id));
+  const lines = [];
+  lines.push("export const SCENE_START_FRAMES = {");
+
+  for (let i = 0; i < sceneIds.length; i++) {
+    const id = sceneIds[i];
     if (i === 0) {
-      sceneStartCode += `  ${name}: { start: 0, duration: SCENE_DURATIONS.${name} },\n`;
+      lines.push(`  ${id}: 0,`);
     } else {
-      const prevNames = sceneNames.slice(0, i);
-      const startCalc = prevNames.map(n => `SCENE_DURATIONS.${n}`).join(" + ");
-      sceneStartCode += `  ${name}: {\n`;
-      sceneStartCode += `    start: ${startCalc},\n`;
-      sceneStartCode += `    duration: SCENE_DURATIONS.${name}\n`;
-      sceneStartCode += `  },\n`;
+      const prevIds = sceneIds.slice(0, i);
+      const calc = prevIds.map(pid => `SCENE_FRAMES.${pid}`).join(" + ");
+      lines.push(`  ${id}: ${calc},`);
     }
   }
 
-  // 총 길이 계산
-  const totalFrames = Object.values(sceneDurations).reduce((a, b) => a + b, 0);
-  const totalSeconds = totalFrames / fps;
-  const totalMinutes = Math.floor(totalSeconds / 60);
-  const totalSecondsRemainder = Math.round(totalSeconds % 60);
-
-  const code = `/**
- * Auto-generated constants for ${metadata.compositionId || "Composition"}
- * Generated: ${new Date().toISOString()}
- * Source: ${path.basename(metadataPath)}
- *
- * ⚠️ 이 파일은 sync-durations.mjs에 의해 자동 생성됩니다.
- *    수동으로 수정하면 다음 동기화 시 덮어씌워질 수 있습니다.
- */
-
-// Scene durations in frames (${fps}fps) - synced from audio metadata
-export const SCENE_DURATIONS = {
-${durationEntries}
-} as const;
-
-// Calculate scene start times
-export const SCENES = {
-${sceneStartCode}} as const;
-
-// Total duration
-export const TOTAL_DURATION = Object.values(SCENE_DURATIONS).reduce((a, b) => a + b, 0);
-// ${totalFrames} frames = ${Math.round(totalSeconds)} seconds = ${totalMinutes}:${totalSecondsRemainder.toString().padStart(2, "0")}
-
-export const VIDEO_METADATA = {
-  title: "${metadata.compositionId || "Video"}",
-  description: "Auto-generated video composition",
-  language: "${metadata.language || "en"}",
-  generatedFrom: "${path.basename(metadataPath)}",
-} as const;
-`;
-
-  return code;
+  lines.push("} as const;");
+  return lines.join("\n");
 }
 
-// 미리보기 또는 저장
-const generatedCode = generateConstants();
+// ============================================
+// 기존 파일 업데이트 또는 새로 생성
+// ============================================
+function updateOrCreateConstants() {
+  const sceneFramesCode = generateSceneFrames();
+  const sceneStartFramesCode = generateSceneStartFrames();
+  const { code: scenesCode, totalDuration } = generateScenes();
 
-console.log("📝 생성된 constants.ts:\n");
+  // 기존 파일이 있는지 확인
+  if (fs.existsSync(outputPath)) {
+    console.log(`📝 기존 파일 업데이트: ${outputPath}`);
+
+    let content = fs.readFileSync(outputPath, "utf-8");
+    const originalContent = content;
+
+    // 파일에서 사용 중인 형식 감지
+    const usesScenesFormat = /export const SCENES = \{/.test(content);
+    const usesSceneFramesFormat = /export const SCENE_FRAMES = \{/.test(content);
+
+    if (usesScenesFormat) {
+      // SCENES 형식 (start/duration in seconds)
+      const scenesRegex = /export const SCENES = \{[\s\S]*?\} as const;/;
+      content = content.replace(scenesRegex, scenesCode);
+      console.log("   ✅ SCENES 업데이트됨 (start/duration 형식)");
+
+      // TOTAL_DURATION_SECONDS 업데이트
+      const totalDurationRegex = /export const TOTAL_DURATION_SECONDS = \d+;/;
+      if (totalDurationRegex.test(content)) {
+        content = content.replace(totalDurationRegex, `export const TOTAL_DURATION_SECONDS = ${totalDuration};`);
+        console.log(`   ✅ TOTAL_DURATION_SECONDS 업데이트됨: ${totalDuration}초`);
+      }
+    } else if (usesSceneFramesFormat) {
+      // SCENE_FRAMES 형식 (기존 방식)
+      const sceneFramesRegex = /export const SCENE_FRAMES = \{[\s\S]*?\} as const;/;
+      content = content.replace(sceneFramesRegex, sceneFramesCode);
+      console.log("   ✅ SCENE_FRAMES 업데이트됨");
+
+      // SCENE_START_FRAMES 블록 교체
+      const sceneStartFramesRegex = /export const SCENE_START_FRAMES = \{[\s\S]*?\} as const;/;
+      if (sceneStartFramesRegex.test(content)) {
+        content = content.replace(sceneStartFramesRegex, sceneStartFramesCode);
+        console.log("   ✅ SCENE_START_FRAMES 업데이트됨");
+      } else {
+        console.log("   ⚠️ SCENE_START_FRAMES를 찾을 수 없음 - 건너뜀");
+      }
+    } else {
+      console.log("   ⚠️ SCENE_FRAMES 또는 SCENES를 찾을 수 없음 - 건너뜀");
+    }
+
+    // 헤더 주석 업데이트 (날짜)
+    const dateComment = `// Updated: ${new Date().toISOString().split("T")[0]} from audio-metadata.json`;
+    const headerRegex = /\/\/ Updated: \d{4}-\d{2}-\d{2} from audio-metadata\.json/;
+    if (headerRegex.test(content)) {
+      content = content.replace(headerRegex, dateComment);
+    }
+
+    if (content === originalContent) {
+      console.log("   ℹ️ 변경 사항 없음");
+      return content;
+    }
+
+    return content;
+  } else if (createIfMissing) {
+    console.log(`📝 새 파일 생성: ${outputPath}`);
+
+    // 새 파일 생성
+    const newContent = `// ${metadata.compositionId || "Video"} Constants
+// Based on audio-metadata.json durations
+// Updated: ${new Date().toISOString().split("T")[0]} from audio-metadata.json
+
+export const FPS = ${fps};
+
+// Scene durations in frames (오디오 길이 + 버퍼 ${bufferFrames}프레임)
+${sceneFramesCode}
+
+// Calculate cumulative start frames
+${sceneStartFramesCode}
+
+// Total duration
+export const TOTAL_FRAMES = Object.values(SCENE_FRAMES).reduce((a, b) => a + b, 0);
+`;
+    return newContent;
+  } else {
+    console.error(`❌ constants.ts가 존재하지 않습니다: ${outputPath}`);
+    console.error(`   --create 옵션을 사용하면 새로 생성할 수 있습니다.`);
+    process.exit(1);
+  }
+}
+
+// 실행
+const updatedContent = updateOrCreateConstants();
+
+console.log("\n" + "─".repeat(60));
+console.log("📋 SCENE_FRAMES 미리보기:");
 console.log("─".repeat(60));
-console.log(generatedCode);
+console.log(generateSceneFrames());
 console.log("─".repeat(60));
 
 if (dryRun) {
@@ -189,16 +280,30 @@ if (dryRun) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  fs.writeFileSync(outputPath, generatedCode);
+  fs.writeFileSync(outputPath, updatedContent);
   console.log(`\n✅ 저장됨: ${outputPath}`);
 }
 
 // 요약 출력
 console.log("\n📊 씬별 duration 요약:");
+let totalAudioFrames = 0;
+let totalFrames = 0;
+
 for (const scene of metadata.scenes) {
-  const constName = toConstantCase(scene.id);
-  const audioSeconds = scene.durationSeconds || 0;
-  const totalSeconds = audioSeconds + bufferSeconds;
-  const frames = Math.ceil(totalSeconds * fps);
-  console.log(`   ${scene.id}: ${audioSeconds.toFixed(1)}s → ${frames} frames (${totalSeconds.toFixed(1)}s)`);
+  const audioFrames = scene.durationFrames || Math.ceil((scene.durationSeconds || 0) * fps);
+  const sceneTotal = audioFrames + bufferFrames;
+  const audioSeconds = scene.durationSeconds?.toFixed(1) || "?";
+  const sceneId = toCamelCase(scene.id);
+
+  totalAudioFrames += audioFrames;
+  totalFrames += sceneTotal;
+
+  console.log(`   ${sceneId}: ${audioSeconds}s → ${audioFrames} + ${bufferFrames} = ${sceneTotal} frames`);
 }
+
+const totalSeconds = totalFrames / fps;
+const minutes = Math.floor(totalSeconds / 60);
+const seconds = Math.round(totalSeconds % 60);
+
+console.log(`\n⏱️  총 길이: ${totalFrames} frames (${minutes}:${seconds.toString().padStart(2, "0")})`);
+console.log(`   오디오: ${totalAudioFrames} frames, 버퍼: ${metadata.scenes.length * bufferFrames} frames`);

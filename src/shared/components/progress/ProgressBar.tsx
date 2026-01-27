@@ -45,13 +45,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   maxValue = 100,
   color = COLORS.primary,
   backgroundColor = "rgba(255, 255, 255, 0.15)",
-  height = 24,
+  height = 40,  // 24 → 40: 프로그레스바 높이 증가!
   width = "100%",
   showLabel = false,
   labelPosition = "right",
   animate = true,
   delay = 0,
-  borderRadius = RADIUS.sm,
+  borderRadius = RADIUS.md,  // sm → md
   style,
 }) => {
   const frame = useCurrentFrame();
@@ -81,8 +81,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const labelElement = showLabel && (
     <span
       style={{
-        fontSize: FONT_SIZES.xs,
-        fontWeight: 600,
+        fontSize: FONT_SIZES.md,  // xs(24) → md(38): 라벨 크기 증가!
+        fontWeight: 700,  // 600 → 700
         color: labelPosition === "inside" ? COLORS.white : color,
         fontFamily: FONT_FAMILY.body,
         whiteSpace: "nowrap",

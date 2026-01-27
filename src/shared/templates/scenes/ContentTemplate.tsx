@@ -63,7 +63,7 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
             stagger="none"
             delay={0}
             style={{
-              fontSize: FONT_SIZES.lg,
+              fontSize: FONT_SIZES.xl,  // lg(46) → xl(56)
               color: sectionLabelColor,
               fontFamily: FONT_FAMILY.body,
             }}
@@ -71,11 +71,11 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
         )}
         <h2
           style={{
-            fontSize: FONT_SIZES["2xl"],
+            fontSize: FONT_SIZES["3xl"],  // 2xl(68) → 3xl(84)
             fontWeight: 700,
             color: COLORS.white,
             fontFamily: FONT_FAMILY.title,
-            margin: "10px 0",
+            margin: "16px 0",  // 10px → 16px
           }}
         >
           {titleIcon && <span style={{ marginRight: 12 }}>{titleIcon}</span>}
@@ -132,9 +132,9 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
           </div>
         )}
 
-        {/* Icon Items */}
+        {/* Icon Items - 크기 확대! */}
         {items && items.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: SPACING.md }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: SPACING.lg }}>  {/* md → lg */}
             {items.map((item, i) => (
               <div
                 key={i}
@@ -142,11 +142,11 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
                   backgroundColor: item.color
                     ? `${item.color}30`
                     : "rgba(0, 194, 255, 0.3)",
-                  padding: "20px 40px",
-                  borderRadius: 40,
+                  padding: "28px 52px",  // 20px 40px → 28px 52px
+                  borderRadius: 50,  // 40 → 50
                   display: "flex",
                   alignItems: "center",
-                  gap: 16,
+                  gap: 20,  // 16 → 20
                 }}
               >
                 <AnimatedText
@@ -154,7 +154,7 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
                   animation={popIn()}
                   stagger="none"
                   delay={50 + i * 8}
-                  style={{ fontSize: FONT_SIZES.xl }}
+                  style={{ fontSize: FONT_SIZES["2xl"] }}  // xl(56) → 2xl(68)
                 />
                 <AnimatedText
                   text={item.text}
@@ -162,7 +162,7 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
                   stagger="none"
                   delay={55 + i * 8}
                   style={{
-                    fontSize: FONT_SIZES.lg,
+                    fontSize: FONT_SIZES.xl,  // lg(46) → xl(56)
                     color: COLORS.white,
                     fontFamily: FONT_FAMILY.body,
                     fontWeight: 600,
@@ -174,22 +174,22 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
         )}
       </div>
 
-      {/* Highlight Box */}
+      {/* Highlight Box - 핵심 메시지는 크게! */}
       {highlightContent && (
         <div
           style={{
             opacity: interpolate(highlightProgress, [0, 1], [0, 1]),
             transform: `scale(${interpolate(highlightProgress, [0, 1], [0.95, 1])})`,
             backgroundColor: COLORS.white,
-            borderRadius: RADIUS.md,
-            padding: SPACING.lg,
+            borderRadius: RADIUS.lg,  // md → lg
+            padding: SPACING.xl,  // lg(60) → xl(80)
             textAlign: "center",
             marginTop: SPACING.lg,
           }}
         >
           <p
             style={{
-              fontSize: FONT_SIZES.xl,
+              fontSize: FONT_SIZES["2xl"],  // xl(56) → 2xl(68)
               color: COLORS.primary,
               fontFamily: FONT_FAMILY.title,
               fontWeight: 700,
