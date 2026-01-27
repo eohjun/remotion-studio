@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-27T14:49:14.558Z",
+  "generatedAt": "2026-01-27T16:03:01.933Z",
   "provider": "OpenAI",
   "language": "ko",
   "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/PomodoroTechnique/audio",
@@ -43,8 +43,8 @@
     {
       "id": "benefits",
       "file": "benefits.mp3",
-      "durationSeconds": 30.24,
-      "durationFrames": 908,
+      "durationSeconds": 30.936,
+      "durationFrames": 1857,
       "text": "실제로 뽀모도로 테크닉은 얼마나 효과적일까요? Toggl 설문조사에 따르면, 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다. 86%는 스트레스가 줄고 업무 통제감이 ..."
     },
     {

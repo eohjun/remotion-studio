@@ -42,7 +42,7 @@
           "startPercent": 18,
           "endPercent": 39,
           "startFrame": 133,
-          "endFrame": 292
+          "endFrame": 293
         },
         {
           "text": "그런데 최근 연구에 따르면 이 수치가 단 40초로 떨어졌습니다.",
@@ -237,44 +237,44 @@
     {
       "id": "benefits",
       "title": "놀라운 효과",
-      "text": "실제로 뽀모도로 테크닉은 얼마나 효과적일까요? Toggl 설문조사에 따르면, 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다. 86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다. Harvard Business Review에 따르면, 원격 근무자들의 번아웃 가능성이 40% 감소했습니다. 한 광고 대행사는 3개월 만에 직원 만족도 40% 상승, 프로젝트 완료율 15% 증가를 달성했습니다.",
+      "text": "실제로 뽀모도로 테크닉은 얼마나 효과적일까요? Toggl 설문조사에 따르면, 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다. 86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다. Harvard Business Review에 따르면, 원격 근무자들의 번아웃 가능성이 40% 감소했습니다. 한 광고 대행사는 3개월 만에 직원 만족도가 40% 상승했습니다. 그리고 프로젝트 완료율도 15% 증가했습니다.",
       "duration": 40,
       "visualType": "bar-chart",
       "visualPanels": [
         {
           "text": "실제로 뽀모도르 테크닉은 얼마나 효과적일까요?",
           "startPercent": 0,
-          "endPercent": 10,
+          "endPercent": 20,
           "startFrame": 0,
-          "endFrame": 87
+          "endFrame": 184
         },
         {
           "text": "터글 설문조사에 따르면 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다.",
-          "startPercent": 13,
-          "endPercent": 33,
-          "startFrame": 115,
+          "startPercent": 12,
+          "endPercent": 32,
+          "startFrame": 107,
           "endFrame": 296
         },
         {
           "text": "86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다.",
-          "startPercent": 37,
-          "endPercent": 51,
-          "startFrame": 338,
-          "endFrame": 463
+          "startPercent": 36,
+          "endPercent": 50,
+          "startFrame": 334,
+          "endFrame": 464
         },
         {
           "text": "하버드비즈니스 리뷰에 따르면 원격 근무자들의 번아웃 가능성이 40% 감소했습니다.",
-          "startPercent": 55,
-          "endPercent": 73,
-          "startFrame": 502,
-          "endFrame": 664
+          "startPercent": 53,
+          "endPercent": 75,
+          "startFrame": 490,
+          "endFrame": 697
         },
         {
           "text": "한 광고 대행사는 3개월 만에 직원 만족도 40% 상승, 프로젝트 완료율 15% 이상이 더다",
-          "startPercent": 73,
-          "endPercent": 98,
-          "startFrame": 664,
-          "endFrame": 892
+          "startPercent": 65,
+          "endPercent": 99,
+          "startFrame": 606,
+          "endFrame": 914
         }
       ]
     },

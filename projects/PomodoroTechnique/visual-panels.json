@@ -1,7 +1,7 @@
 {
   "compositionId": "PomodoroTechnique",
-  "generatedAt": "2026-01-27T14:50:45.944Z",
-  "fps": 30,
+  "generatedAt": "2026-01-27T16:03:34.464Z",
+  "fps": 60,
   "scenes": [
     {
       "id": "intro",
@@ -17,7 +17,7 @@
           "startPercent": 0,
           "endPercent": 93,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -35,18 +35,18 @@
           "startPercent": 0,
           "endPercent": 12,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "2003년, 사람들은 평균 2분 30초 동안 하나의 작업에 집중할 수 있었습니다.",
           "startSeconds": 4.440000057220459,
-          "endSeconds": 9.720000267028809,
+          "endSeconds": 9.760000228881836,
           "startFrame": 133,
-          "endFrame": 292,
+          "endFrame": 293,
           "startPercent": 18,
           "endPercent": 39,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "그런데 최근 연구에 따르면 이 수치가 단 40초로 떨어졌습니다.",
@@ -57,7 +57,7 @@
           "startPercent": 41,
           "endPercent": 57,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "우리의 집중력은 점점 짧아지고 있습니다.",
@@ -68,7 +68,7 @@
           "startPercent": 61,
           "endPercent": 70,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "스마트폰 알림, 이메일, SNS.",
@@ -79,7 +79,7 @@
           "startPercent": 74,
           "endPercent": 81,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "끊임없는 방해 속에서 우리는 어떻게 집중할 수 있을까요?",
@@ -90,7 +90,7 @@
           "startPercent": 85,
           "endPercent": 99,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -108,7 +108,7 @@
           "startPercent": 0,
           "endPercent": 35,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "어느 날, 그는 스스로에게 작은 도전을 했습니다.",
@@ -119,7 +119,7 @@
           "startPercent": 38,
           "endPercent": 48,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "단 10분만이라도 집중해보자.",
@@ -130,7 +130,7 @@
           "startPercent": 52,
           "endPercent": 58,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "그가 손에 든 것은 토마토 모양의 주방 타이머였습니다.",
@@ -141,7 +141,7 @@
           "startPercent": 60,
           "endPercent": 73,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "이탈리아어로 토마토를 뜻하는 pomodoro.",
@@ -152,7 +152,7 @@
           "startPercent": 77,
           "endPercent": 84,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "바로 이것이 세계적인 시간 관리 기법의 시작이었습니다.",
@@ -163,7 +163,7 @@
           "startPercent": 87,
           "endPercent": 100,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -181,7 +181,7 @@
           "startPercent": 0,
           "endPercent": 15,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "첫째, 타이머를 25분으로 설정합니다.",
@@ -192,7 +192,7 @@
           "startPercent": 18,
           "endPercent": 29,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "둘째, 25분 동안 오직 하나의 작업에만 집중합니다.",
@@ -203,7 +203,7 @@
           "startPercent": 33,
           "endPercent": 48,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "셋째, 타이머가 울리면 휴식합니다.",
@@ -214,7 +214,7 @@
           "startPercent": 52,
           "endPercent": 62,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "넷째, 이 사이클을 4번 반복한 후",
@@ -225,7 +225,7 @@
           "startPercent": 66,
           "endPercent": 79,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "15분에서 30분의 긴 휴식을 취합니다.",
@@ -236,7 +236,7 @@
           "startPercent": 79,
           "endPercent": 93,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "이것이 전부입니다.",
@@ -247,7 +247,7 @@
           "startPercent": 95,
           "endPercent": 99,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -265,7 +265,7 @@
           "startPercent": 0,
           "endPercent": 15,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "연구에 따르면 인간의 뇌는 20분에서 45분 정도 최적의 집중 상태를 유지할 수 있습니다.",
@@ -276,7 +276,7 @@
           "startPercent": 17,
           "endPercent": 39,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "이후에는 인지적 피로가 급격히 증가합니다.",
@@ -287,7 +287,7 @@
           "startPercent": 43,
           "endPercent": 51,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "또한 방해를 받은 후 원래 작업에 다시 집중하기까지 평균 23분이 걸립니다.",
@@ -298,7 +298,7 @@
           "startPercent": 53,
           "endPercent": 70,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "현대인이 평균 11분마다 방해를 받는다는 것을 고려하면",
@@ -309,7 +309,7 @@
           "startPercent": 75,
           "endPercent": 85,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "우리는 항상 반쯤 집중한 상태로 일하고 있는 셈입니다.",
@@ -320,69 +320,69 @@
           "startPercent": 85,
           "endPercent": 99,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
     {
       "id": "benefits",
-      "duration": 30.24,
-      "durationFrames": 908,
+      "duration": 30.936,
+      "durationFrames": 1857,
       "panels": [
         {
           "text": "실제로 뽀모도르 테크닉은 얼마나 효과적일까요?",
           "startSeconds": 0,
-          "endSeconds": 2.9000000953674316,
+          "endSeconds": 6.139999866485596,
           "startFrame": 0,
-          "endFrame": 87,
+          "endFrame": 184,
           "startPercent": 0,
-          "endPercent": 10,
-          "confidence": 1,
-          "matchType": "auto-segment"
+          "endPercent": 20,
+          "confidence": 0.7,
+          "matchType": "words"
         },
         {
           "text": "터글 설문조사에 따르면 사용자의 92%가 집중력과 효율성이 향상되었다고 응답했습니다.",
-          "startSeconds": 3.819999933242798,
-          "endSeconds": 9.859999656677246,
-          "startFrame": 115,
+          "startSeconds": 3.5799999237060547,
+          "endSeconds": 9.880000114440918,
+          "startFrame": 107,
           "endFrame": 296,
-          "startPercent": 13,
-          "endPercent": 33,
+          "startPercent": 12,
+          "endPercent": 32,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "86%는 스트레스가 줄고 업무 통제감이 높아졌다고 보고했습니다.",
-          "startSeconds": 11.279999732971191,
-          "endSeconds": 15.4399995803833,
-          "startFrame": 338,
-          "endFrame": 463,
-          "startPercent": 37,
-          "endPercent": 51,
+          "startSeconds": 11.140000343322754,
+          "endSeconds": 15.460000038146973,
+          "startFrame": 334,
+          "endFrame": 464,
+          "startPercent": 36,
+          "endPercent": 50,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "하버드비즈니스 리뷰에 따르면 원격 근무자들의 번아웃 가능성이 40% 감소했습니다.",
-          "startSeconds": 16.739999771118164,
-          "endSeconds": 22.1200008392334,
-          "startFrame": 502,
-          "endFrame": 664,
-          "startPercent": 55,
-          "endPercent": 73,
-          "confidence": 1,
-          "matchType": "auto-segment"
+          "startSeconds": 16.34000015258789,
+          "endSeconds": 23.219999313354492,
+          "startFrame": 490,
+          "endFrame": 697,
+          "startPercent": 53,
+          "endPercent": 75,
+          "confidence": 0.7,
+          "matchType": "words"
         },
         {
           "text": "한 광고 대행사는 3개월 만에 직원 만족도 40% 상승, 프로젝트 완료율 15% 이상이 더다",
-          "startSeconds": 22.1200008392334,
-          "endSeconds": 29.739999771118164,
-          "startFrame": 664,
-          "endFrame": 892,
-          "startPercent": 73,
-          "endPercent": 98,
-          "confidence": 1,
-          "matchType": "auto-segment"
+          "startSeconds": 20.200000762939453,
+          "endSeconds": 30.479999542236328,
+          "startFrame": 606,
+          "endFrame": 914,
+          "startPercent": 65,
+          "endPercent": 99,
+          "confidence": 0.7,
+          "matchType": "words"
         }
       ]
     },
@@ -400,7 +400,7 @@
           "startPercent": 0,
           "endPercent": 16,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "첫 번째 실수는 휴식 시간에 SNS를 확인하는 것입니다.",
@@ -411,7 +411,7 @@
           "startPercent": 19,
           "endPercent": 30,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "5분만 보려던 것이 15분, 20분으로 늘어납니다.",
@@ -422,7 +422,7 @@
           "startPercent": 34,
           "endPercent": 43,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "두 번째는 휴식을 건너뛰는 것입니다.",
@@ -433,7 +433,7 @@
           "startPercent": 46,
           "endPercent": 52,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "집중이 잘 되니까 계속하자는 생각은 결국 더 큰 피로로 돌아옵니다.",
@@ -444,7 +444,7 @@
           "startPercent": 55,
           "endPercent": 69,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "세 번째는 25분을 무조건 고수하는 것입니다.",
@@ -455,7 +455,7 @@
           "startPercent": 71,
           "endPercent": 81,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "깊은 몰입 상태에서 타이머의 흐름이 끊기면 오히려 생산성이 떨어집니다.",
@@ -466,7 +466,7 @@
           "startPercent": 81,
           "endPercent": 100,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -484,7 +484,7 @@
           "startPercent": 0,
           "endPercent": 9,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "데스크타임의 연구에 따르면 가장 생산적인 상위 10% 직원들은 52분 작업 후 17분 휴식하는 패턴을 보였습니다.",
@@ -495,7 +495,7 @@
           "startPercent": 12,
           "endPercent": 43,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "최신 연구에서는 75분 작업 33분 휴식이 최적이라는 결과도 있습니다.",
@@ -506,7 +506,7 @@
           "startPercent": 48,
           "endPercent": 66,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "중요한 것은 자신만의 리듬을 찾는 것입니다.",
@@ -517,7 +517,7 @@
           "startPercent": 70,
           "endPercent": 80,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "작업의 성격, 개인의 집중력 특성에 따라 유연하게 조절하세요.",
@@ -528,7 +528,7 @@
           "startPercent": 84,
           "endPercent": 99,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -546,7 +546,7 @@
           "startPercent": 0,
           "endPercent": 7,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "먼저 오늘 해야 할 일 중 하나를 선택하세요.",
@@ -557,7 +557,7 @@
           "startPercent": 12,
           "endPercent": 21,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "그리고 자신과 작은 약속을 하세요.",
@@ -568,7 +568,7 @@
           "startPercent": 24,
           "endPercent": 32,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "나는 이 작업에 25분을 투자하고",
@@ -579,7 +579,7 @@
           "startPercent": 36,
           "endPercent": 46,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "스스로를 방해하지 않겠다. 할 수 있다.",
@@ -590,7 +590,7 @@
           "startPercent": 47,
           "endPercent": 57,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "결국 25분일 뿐이니까.",
@@ -601,7 +601,7 @@
           "startPercent": 60,
           "endPercent": 67,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "타이머를 시작하고 오직 그 작업에만 집중하세요.",
@@ -612,7 +612,7 @@
           "startPercent": 70,
           "endPercent": 82,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "다른 생각이 나면 종이에 적어두고",
@@ -623,7 +623,7 @@
           "startPercent": 86,
           "endPercent": 94,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "나중에 처리하면 됩니다.",
@@ -634,7 +634,7 @@
           "startPercent": 94,
           "endPercent": 99,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     },
@@ -652,7 +652,7 @@
           "startPercent": 0,
           "endPercent": 12,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "시간을 다루는 법을 배우면 시간은 사악한 포식자에서 생산성을 높이는 동맹이 된다.",
@@ -663,7 +663,7 @@
           "startPercent": 20,
           "endPercent": 55,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "오늘 단 하나의 뽀모도로부터 시작하세요.",
@@ -674,7 +674,7 @@
           "startPercent": 60,
           "endPercent": 73,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "25분.",
@@ -685,7 +685,7 @@
           "startPercent": 76,
           "endPercent": 80,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         },
         {
           "text": "그것이 당신의 시간을 되찾는 첫 걸음입니다.",
@@ -696,7 +696,7 @@
           "startPercent": 85,
           "endPercent": 97,
           "confidence": 1,
-          "matchType": "auto-segment"
+          "matchType": "segment"
         }
       ]
     }
