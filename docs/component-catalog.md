@@ -1,8 +1,8 @@
 # Component Catalog
 
 **Remotion Studio Component Library Reference**
-**Last Updated**: 2026-01-27
-**Total Components**: 75+ (including 29 transition presets)
+**Last Updated**: 2026-01-30
+**Total Components**: 87+ (including 29 transition presets)
 
 ---
 
@@ -14,6 +14,9 @@
 | Backgrounds | 5 | `@shared/components/backgrounds` |
 | Effects | 10 | `@shared/components/effects` |
 | Text Animations | 7 | `@shared/templates/animations` |
+| Auto-Sizing Text | 4 | `@shared/components/text` |
+| Vector Animations (Lottie) | 5 | `@shared/components/animations` |
+| GIF Playback | 3 | `@shared/components/media` |
 | Audio Visualization | 1 | `@shared/components/waveforms` |
 | Diagrams | 1 | `@shared/components/diagrams` |
 | Cards | 5 | `@shared/components/cards` |
@@ -1040,6 +1043,426 @@ calculatePoppingDuration(textLength, delayPerChar?, settleDuration?)
 
 ---
 
+## Auto-Sizing Text
+
+Components that automatically scale text to fit within containers using `@remotion/layout-utils`.
+
+### FitText
+**Purpose**: Single-line text that automatically scales to fit container width
+
+**Import**: `@shared/components/text`
+
+**Props**:
+```typescript
+{
+  children: string;                  // Text content to display
+  maxWidth?: number;                 // Maximum width in pixels (default: safe area width)
+  maxFontSize?: number;              // Maximum font size (default: 84px)
+  minFontSize?: number;              // Minimum font size (default: 32px)
+  fontFamily?: string;               // Font family
+  fontWeight?: number | string;      // Font weight (default: 800)
+  letterSpacing?: number;            // Letter spacing in pixels
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';  // HTML tag
+  color?: string;                    // Text color (default: white)
+  textAlign?: 'left' | 'center' | 'right';  // Text alignment
+  style?: React.CSSProperties;       // Additional styles
+}
+```
+
+**When to Use**:
+- Dynamic titles that may vary in length
+- User-generated content that needs to fit
+- Localized text (different languages have different lengths)
+- Video titles that must fit within safe area
+
+**Avoid When**:
+- Fixed, short text (use regular text instead)
+- Body text paragraphs (use FitMultilineText)
+
+**Example**:
+```tsx
+<FitText maxWidth={1400} maxFontSize={100}>
+  This Title Will Scale Down If Too Long
+</FitText>
+```
+
+---
+
+### FitTitle
+**Purpose**: Pre-configured title component with automatic fitting
+
+**Import**: `@shared/components/text`
+
+**Props**:
+```typescript
+{
+  children: string;
+  maxWidth?: number;
+  maxFontSize?: number;              // Default: 100px (FONT_SIZES["4xl"])
+  color?: string;
+  textAlign?: 'left' | 'center' | 'right';
+  style?: React.CSSProperties;
+}
+```
+
+**Preset Configuration**:
+- Renders as `<h1>`
+- Font weight: 800 (extra bold)
+- Min font size: 56px
+- Letter spacing: 2px
+- Font family: title font (Pretendard)
+
+**Best For**: Main scene titles, video titles, headlines
+
+**Example**:
+```tsx
+<FitTitle maxWidth={1600}>
+  자기계발서의 숨겨진 진실
+</FitTitle>
+```
+
+---
+
+### FitSubtitle
+**Purpose**: Pre-configured subtitle component with automatic fitting
+
+**Import**: `@shared/components/text`
+
+**Props**:
+```typescript
+{
+  children: string;
+  maxWidth?: number;
+  maxFontSize?: number;              // Default: 68px (FONT_SIZES["2xl"])
+  color?: string;                    // Default: rgba(255,255,255,0.8)
+  textAlign?: 'left' | 'center' | 'right';
+  style?: React.CSSProperties;
+}
+```
+
+**Preset Configuration**:
+- Renders as `<h2>`
+- Font weight: 600
+- Min font size: 38px
+- Letter spacing: 1px
+- Slightly transparent white color
+
+**Best For**: Scene subtitles, taglines, supporting headlines
+
+---
+
+### FitMultilineText
+**Purpose**: Multi-line text that scales to fit within line constraints
+
+**Import**: `@shared/components/text`
+
+**Props**:
+```typescript
+{
+  children: string;
+  maxWidth?: number;
+  maxFontSize?: number;
+  minFontSize?: number;
+  maxLines?: number;                 // Maximum lines before scaling (default: 2)
+  lineHeight?: number;               // Line height multiplier (default: 1.2)
+  fontFamily?: string;
+  fontWeight?: number | string;
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
+  color?: string;
+  textAlign?: 'left' | 'center' | 'right';
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Longer text that should wrap but stay within bounds
+- Quotes that vary in length
+- Descriptions that must fit in a fixed area
+
+**Example**:
+```tsx
+<FitMultilineText maxWidth={1200} maxLines={3}>
+  A longer paragraph that can wrap to multiple lines
+  but will scale down if it exceeds the maximum.
+</FitMultilineText>
+```
+
+---
+
+### useFitText Hook
+**Purpose**: Low-level hook for custom text fitting logic
+
+**Import**: `@shared/hooks`
+
+**Returns**:
+```typescript
+{
+  fontSize: number;          // Calculated optimal font size
+  fitsAtMax: boolean;        // Whether text fits at max size
+  maxFontSize: number;       // Original max for reference
+  style: React.CSSProperties; // Ready-to-use style object
+}
+```
+
+**When to Use**:
+- Custom components that need text fitting
+- Integration with existing text components
+- Complex layouts requiring font size calculations
+
+**Example**:
+```tsx
+const { style } = useFitText({
+  text: titleText,
+  maxWidth: 1400,
+  maxFontSize: 100,
+});
+
+return <h1 style={style}>{titleText}</h1>;
+```
+
+---
+
+## Vector Animations (Lottie)
+
+Components for rendering Lottie vector animations synchronized with video frames using `@remotion/lottie`.
+
+### LottieAnimation
+**Purpose**: Render Lottie JSON animations in videos
+
+**Import**: `@shared/components/animations`
+
+**Props**:
+```typescript
+{
+  src: LottieAnimationData | string;  // Animation data or path to JSON
+  size?: number;                       // Square size in pixels (default: 200)
+  width?: number;                      // Explicit width (overrides size)
+  height?: number;                     // Explicit height (overrides size)
+  loop?: boolean;                      // Loop animation (default: true)
+  speed?: number;                      // Playback speed (default: 1)
+  direction?: 1 | -1;                  // 1 = forward, -1 = backward
+  startFrame?: number;                 // Start from this video frame
+  fadeIn?: boolean;                    // Fade in animation
+  scaleIn?: boolean;                   // Scale in animation
+  style?: React.CSSProperties;
+  className?: string;
+}
+```
+
+**Asset Location**: `public/lottie/` directory
+
+**When to Use**:
+- Animated icons (loading, success, error)
+- Complex vector animations
+- Smooth scalable graphics
+- Interactive state indicators
+
+**Avoid When**:
+- Simple static icons (use emoji or SVG)
+- Photo-realistic content (use GIF or video)
+
+**Example**:
+```tsx
+<LottieAnimation
+  src="/lottie/celebration.json"
+  size={300}
+  loop
+  speed={1.5}
+  fadeIn
+/>
+```
+
+---
+
+### LoadingSpinner
+**Purpose**: Preset loading spinner animation
+
+**Import**: `@shared/components/animations`
+
+**Props**:
+```typescript
+{
+  size?: number;         // Default: 100
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Requires**: `public/lottie/loading-spinner.json`
+
+**Best For**: Loading states, processing indicators
+
+---
+
+### SuccessCheck
+**Purpose**: Preset success checkmark animation
+
+**Import**: `@shared/components/animations`
+
+**Props**:
+```typescript
+{
+  size?: number;         // Default: 120
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Requires**: `public/lottie/success-check.json`
+
+**Best For**: Completion states, confirmation feedback, achievement moments
+
+**Features**: Non-looping, includes scale-in animation
+
+---
+
+### ErrorAnimation
+**Purpose**: Preset error/failure animation
+
+**Import**: `@shared/components/animations`
+
+**Props**:
+```typescript
+{
+  size?: number;         // Default: 120
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Requires**: `public/lottie/error-x.json`
+
+**Best For**: Error states, failure feedback, warning moments
+
+---
+
+### ConfettiAnimation
+**Purpose**: Preset celebration confetti animation
+
+**Import**: `@shared/components/animations`
+
+**Props**:
+```typescript
+{
+  width?: number;        // Default: 400
+  height?: number;       // Default: 300
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Requires**: `public/lottie/confetti.json`
+
+**Best For**: Celebrations, achievements, success moments
+
+---
+
+## GIF Playback
+
+Components for rendering GIF animations synchronized with video frames using `@remotion/gif`.
+
+### GifPlayer
+**Purpose**: Play GIF animations in videos
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+{
+  src: string;                        // URL or path to GIF (/ paths = public assets)
+  width: number;                      // Width in pixels (required)
+  height?: number;                    // Height (maintains aspect ratio if not set)
+  fit?: 'cover' | 'contain' | 'fill'; // Object-fit mode (default: 'contain')
+  loop?: boolean;                     // Loop GIF (default: true)
+  startFrame?: number;                // Start from this video frame
+  fadeIn?: boolean;                   // Fade in animation
+  scaleIn?: boolean;                  // Scale in animation
+  playbackRate?: number;              // Playback speed (default: 1)
+  borderRadius?: number;              // Border radius in pixels
+  shadow?: boolean;                   // Add drop shadow
+  style?: React.CSSProperties;
+  className?: string;
+}
+```
+
+**Asset Location**: `public/gifs/` directory
+
+**When to Use**:
+- Meme reactions
+- Quick visual demonstrations
+- Embedded social media content
+- Humor and entertainment content
+
+**Avoid When**:
+- High-quality footage needed (use video)
+- Simple animations (use Lottie)
+- Static images (use Img)
+
+**Example**:
+```tsx
+<GifPlayer
+  src="/gifs/reaction.gif"
+  width={400}
+  height={300}
+  fit="cover"
+  borderRadius={16}
+  shadow
+  fadeIn
+/>
+```
+
+---
+
+### ReactionGif
+**Purpose**: Circular reaction GIF with shadow (meme style)
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+{
+  src: string;
+  size?: number;         // Default: 200 (square)
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Features**: Circular crop, shadow, fade-in, scale-in
+
+**Best For**: Meme-style reactions, personality moments, humor
+
+**Example**:
+```tsx
+<ReactionGif
+  src="/gifs/mind-blown.gif"
+  size={250}
+/>
+```
+
+---
+
+### BannerGif
+**Purpose**: Full-width GIF banner
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+{
+  src: string;
+  height?: number;       // Default: 300
+  startFrame?: number;
+  style?: React.CSSProperties;
+}
+```
+
+**Features**: 1920px width, cover fit, fade-in
+
+**Best For**: Scene dividers, ambient backgrounds, full-width visuals
+
+---
+
 ## Audio Visualization
 
 ### BarWaveform
@@ -2036,9 +2459,33 @@ import {
   RevealText,
   GlitchText,
   PoppingText,
-  StaggerGroup,         // NEW: Sequential child animation
-  TextMorph,            // NEW: Character-by-character transform
+  StaggerGroup,         // Sequential child animation
+  TextMorph,            // Character-by-character transform
 } from "@shared/templates/animations";
+
+// Auto-Sizing Text (using @remotion/layout-utils)
+import {
+  FitText,              // Single-line auto-scaling text
+  FitTitle,             // Pre-configured title with fitting
+  FitSubtitle,          // Pre-configured subtitle with fitting
+  FitMultilineText,     // Multi-line text with fitting
+} from "@shared/components/text";
+
+// Vector Animations (using @remotion/lottie)
+import {
+  LottieAnimation,      // Core Lottie component
+  LoadingSpinner,       // Preset: loading indicator
+  SuccessCheck,         // Preset: success checkmark
+  ErrorAnimation,       // Preset: error indicator
+  ConfettiAnimation,    // Preset: celebration confetti
+} from "@shared/components/animations";
+
+// GIF Playback (using @remotion/gif)
+import {
+  GifPlayer,            // Core GIF player
+  ReactionGif,          // Circular meme-style reaction
+  BannerGif,            // Full-width banner GIF
+} from "@shared/components/media";
 
 // Charts (including new)
 import {
@@ -2275,6 +2722,9 @@ interface ListItem {
 **Import**:
 ```typescript
 import { useResponsive, RESOLUTION_PRESETS } from "@shared/hooks";
+
+// Also available: useFitText hook for text sizing
+import { useFitText, useFitMultilineText } from "@shared/hooks";
 ```
 
 **Returns**:

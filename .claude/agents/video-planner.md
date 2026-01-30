@@ -212,7 +212,25 @@ VALID_EFFECTS = [
 
 VALID_TEXT_ANIMATIONS = [
   'TypewriterText', 'HighlightText', 'RevealText', 'GlitchText',
-  'PoppingText', 'StaggerGroup', 'TextMorph'  // NEW
+  'PoppingText', 'StaggerGroup', 'TextMorph',
+  // Auto-sizing text components
+  'FitText', 'FitTitle', 'FitSubtitle', 'FitMultilineText'
+]
+
+// Vector animations (Lottie)
+VALID_LOTTIE_ANIMATIONS = [
+  'LottieAnimation',     // Core component - use with custom JSON
+  'LoadingSpinner',      // Preset: loading indicator
+  'SuccessCheck',        // Preset: success checkmark
+  'ErrorAnimation',      // Preset: error indicator
+  'ConfettiAnimation'    // Preset: celebration
+]
+
+// GIF playback components
+VALID_MEDIA_COMPONENTS = [
+  'GifPlayer',           // Core GIF player
+  'ReactionGif',         // Circular meme-style reaction GIF
+  'BannerGif'            // Full-width banner GIF
 ]
 
 VALID_CHARTS = [
@@ -247,6 +265,77 @@ VALID_TRANSITIONS = [
   // Hard cut (no transition)
   'cut'
 ]
+
+// NEW: Auto-Sizing Text Selection Rules
+TEXT_SIZING_SELECTION_RULES:
+  // Dynamic titles (length varies or unknown)
+  IF title.length > 30 OR title.isUserGenerated OR title.isLocalized:
+    USE FitTitle or FitText
+    RATIONALE: Automatically scales to fit container
+
+  // Subtitles and taglines
+  IF scene.hasSubtitle AND subtitle.length > 40:
+    USE FitSubtitle
+    RATIONALE: Maintains visual hierarchy with auto-scaling
+
+  // Multi-line content that must fit
+  IF content.isLongText AND content.maxLines <= 4:
+    USE FitMultilineText
+    RATIONALE: Scales to fit within line constraints
+
+  // Short, fixed text
+  IF title.length < 20 AND title.isFixed:
+    USE regular text (TypewriterText, RevealText, etc.)
+    RATIONALE: No scaling needed for short fixed text
+
+// NEW: Lottie Animation Selection Rules
+LOTTIE_SELECTION_RULES:
+  // Success states and completions
+  IF scene.hasSuccessState OR scene.isCompletion:
+    CONSIDER SuccessCheck
+    RATIONALE: Satisfying visual confirmation
+
+  // Loading or processing states
+  IF scene.hasLoadingState OR scene.isWaiting:
+    CONSIDER LoadingSpinner
+    RATIONALE: Clear processing indicator
+
+  // Error or failure states
+  IF scene.hasErrorState OR scene.isFailure:
+    CONSIDER ErrorAnimation
+    RATIONALE: Clear error feedback
+
+  // Celebration or achievement moments
+  IF scene.isCelebration OR scene.isAchievement:
+    CONSIDER ConfettiAnimation
+    RATIONALE: Engaging celebration visual
+
+  // Custom vector animations
+  IF scene.needsCustomAnimation:
+    USE LottieAnimation with custom JSON
+    ASSET_PATH: public/lottie/{animation-name}.json
+
+// NEW: GIF Selection Rules
+GIF_SELECTION_RULES:
+  // Humorous or meme content
+  IF tone === 'humorous' OR content.hasMemeReference:
+    CONSIDER ReactionGif
+    RATIONALE: Engaging, relatable visual
+
+  // Quick visual demonstrations
+  IF scene.needsQuickDemo AND !needsHighQuality:
+    CONSIDER GifPlayer
+    RATIONALE: Lightweight, looping demonstration
+
+  // Full-width ambient visuals
+  IF scene.needsAmbientVisual AND layout === 'fullWidth':
+    CONSIDER BannerGif
+    RATIONALE: Full-width atmospheric element
+
+  // Avoid GIFs when:
+  - High quality footage needed (use Video)
+  - Simple animations sufficient (use Lottie)
+  - Static images work (use Img)
 
 // NEW: Effect Selection Rules
 EFFECT_SELECTION_RULES:
@@ -869,6 +958,37 @@ StoryTemplate의 `timed-sequence` 레이아웃을 사용할 때는:
 | Energy | `PoppingText` | Dynamic titles, Shorts intros |
 | Sequential | `StaggerGroup` | List reveals, bullet points, step-by-step |
 | Transform | `TextMorph` | A→B text changes, counters, dramatic shifts |
+
+### Auto-Sizing Text (NEW)
+| Purpose | Component | When to Use |
+|---------|-----------|-------------|
+| Dynamic titles | `FitTitle` | Titles >30 chars, localized text, user-generated |
+| Dynamic subtitles | `FitSubtitle` | Subtitles that vary in length |
+| Custom fitting | `FitText` | Custom text that must fit container |
+| Multi-line fitting | `FitMultilineText` | Paragraphs that must fit within line limits |
+
+**Selection Rule**: Use FitText components when text length is unpredictable or varies.
+Regular text components are fine for short, fixed text.
+
+### Lottie Animations (NEW)
+| Purpose | Component | When to Use |
+|---------|-----------|-------------|
+| Success state | `SuccessCheck` | Task completion, achievement unlocked |
+| Error state | `ErrorAnimation` | Failures, warnings, problems |
+| Loading state | `LoadingSpinner` | Processing, waiting, loading |
+| Celebration | `ConfettiAnimation` | Big wins, achievements, celebrations |
+| Custom animation | `LottieAnimation` | Any custom Lottie JSON animation |
+
+**Asset Location**: `public/lottie/` - requires JSON animation files
+
+### GIF Playback (NEW)
+| Purpose | Component | When to Use |
+|---------|-----------|-------------|
+| Meme reactions | `ReactionGif` | Humorous moments, relatable reactions |
+| General GIF | `GifPlayer` | Any GIF with custom sizing |
+| Full-width banner | `BannerGif` | Ambient visuals, scene dividers |
+
+**Asset Location**: `public/gifs/`
 
 ### Stagger Distribution Selection (NEW)
 

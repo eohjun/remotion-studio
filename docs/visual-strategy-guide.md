@@ -1,7 +1,7 @@
 # Visual Strategy Guide
 
 **Purpose**: Topic-to-visual mapping for purposeful video design
-**Last Updated**: 2026-01-26
+**Last Updated**: 2026-01-30
 
 ---
 
@@ -87,6 +87,173 @@
 - Use `GridPattern` (type: 'dots') for modern programming tutorials
 - Use `ChromaticAberration` (intensity: 0.15) sparingly for tech accent
 - Use `StaggerGroup` for revealing code steps or bullet points
+
+---
+
+## Text Sizing Strategy
+
+### When to Use Auto-Sizing Text (FitText Components)
+
+**Decision Flow:**
+```
+Is text length predictable and short (<30 chars)?
+├─ YES → Use regular text (TypewriterText, RevealText, etc.)
+└─ NO → Does it need to fit a specific container?
+    ├─ YES → Use FitText components
+    └─ NO → Use regular text with appropriate font size
+```
+
+### Component Selection
+
+| Scenario | Component | Example |
+|----------|-----------|---------|
+| Video title (varies by language) | `FitTitle` | "자기계발서의 숨겨진 진실" vs "Hidden Truth of Self-Help Books" |
+| Scene subtitle (longer than expected) | `FitSubtitle` | Dynamic taglines, contextual subtitles |
+| Custom text fitting | `FitText` | Custom styled text that must fit |
+| Quote that varies in length | `FitMultilineText` | User testimonials, varying quotes |
+| Short, fixed title | Regular text | "Chapter 1", "결론" |
+
+### Best Practices
+
+**DO:**
+- Use `FitTitle` for main scene titles when text length varies
+- Set appropriate `maxWidth` based on safe area (typically 1400-1600px)
+- Test with longest expected text to ensure minimum font size is readable
+
+**DON'T:**
+- Use FitText for very short text (unnecessary overhead)
+- Set `minFontSize` too small (below 32px becomes hard to read in video)
+- Ignore the `fitsAtMax` return value when debugging sizing issues
+
+### Example Usage
+
+```tsx
+// Good: Dynamic title that may vary
+<FitTitle maxWidth={1500}>
+  {sceneTitle}  // Could be 10 or 50 characters
+</FitTitle>
+
+// Good: Multi-line quote
+<FitMultilineText maxWidth={1200} maxLines={3}>
+  {quote}  // Varying length quotes
+</FitMultilineText>
+
+// Bad: Short fixed text (use regular styling instead)
+<FitTitle>Chapter 1</FitTitle>  // Overkill for 9 characters
+```
+
+---
+
+## Vector Animation (Lottie) Strategy
+
+### When to Use Lottie Animations
+
+**Decision Flow:**
+```
+Need animated visual element?
+├─ Is it a simple state indicator (loading, success, error)?
+│   └─ YES → Use preset components (LoadingSpinner, SuccessCheck, etc.)
+├─ Is it a complex custom animation?
+│   └─ YES → Use LottieAnimation with custom JSON
+├─ Is it photo-realistic or detailed?
+│   └─ YES → Use GIF or Video instead
+└─ Is it a static icon?
+    └─ YES → Use emoji or SVG instead
+```
+
+### Preset Components
+
+| State | Component | Asset Required |
+|-------|-----------|----------------|
+| Loading/Processing | `LoadingSpinner` | `public/lottie/loading-spinner.json` |
+| Success/Completion | `SuccessCheck` | `public/lottie/success-check.json` |
+| Error/Failure | `ErrorAnimation` | `public/lottie/error-x.json` |
+| Celebration | `ConfettiAnimation` | `public/lottie/confetti.json` |
+
+### Content Type Mapping
+
+| Content Type | Lottie Usage | Examples |
+|--------------|--------------|----------|
+| Technical | `LoadingSpinner`, `SuccessCheck` | Process completions, API responses |
+| Tutorial | `SuccessCheck` after steps | Step completion indicators |
+| Celebratory | `ConfettiAnimation` | Achievements, milestones |
+| Error States | `ErrorAnimation` | Failed operations, warnings |
+
+### Best Practices
+
+**DO:**
+- Place Lottie JSON files in `public/lottie/`
+- Use `fadeIn` and `scaleIn` for smooth entry animations
+- Set appropriate `size` for visibility (100-300px typically)
+
+**DON'T:**
+- Use Lottie for simple icons (emoji or SVG is lighter)
+- Loop animations that should play once (success, error)
+- Use very large Lottie files (>500KB) - impacts render time
+
+### Finding Lottie Animations
+
+- LottieFiles: https://lottiefiles.com/
+- IconScout: https://iconscout.com/lottie-animations
+- Lordicon: https://lordicon.com/
+
+---
+
+## GIF Playback Strategy
+
+### When to Use GIFs
+
+**Decision Flow:**
+```
+Need embedded visual content?
+├─ Is it meme/reaction content?
+│   └─ YES → Use ReactionGif
+├─ Is it a full-width ambient visual?
+│   └─ YES → Use BannerGif
+├─ Is it a quick demonstration?
+│   └─ YES → Use GifPlayer
+├─ Does it need high quality/resolution?
+│   └─ YES → Use Video instead
+└─ Is it a simple animation?
+    └─ YES → Use Lottie instead
+```
+
+### Component Selection
+
+| Use Case | Component | Configuration |
+|----------|-----------|---------------|
+| Meme reactions | `ReactionGif` | Circular, shadow, size: 150-250px |
+| General GIF | `GifPlayer` | Custom width/height, fit mode |
+| Scene dividers | `BannerGif` | Full width, height: 200-400px |
+
+### Content Appropriateness
+
+| Content Type | GIF Suitability | Alternative |
+|--------------|-----------------|-------------|
+| Philosophical | ❌ Low | AnimatedGradient, Vignette |
+| Data-Driven | ❌ Low | Charts, DataVisualizationTemplate |
+| Humorous/Casual | ✅ High | - |
+| Tutorial | ⚠️ Medium | Screen recording video |
+| Narrative | ⚠️ Medium | StoryTemplate panels |
+
+### Best Practices
+
+**DO:**
+- Place GIF files in `public/gifs/`
+- Use `fit="cover"` for ReactionGif to fill circular container
+- Use `fadeIn` for smooth entry
+- Keep GIF file sizes reasonable (<5MB)
+
+**DON'T:**
+- Use GIFs for serious/professional content
+- Use very long GIFs (>10 seconds) - use video instead
+- Use GIFs when Lottie animations would be smoother
+
+### GIF Sources
+
+- GIPHY: https://giphy.com/
+- Tenor: https://tenor.com/
+- Custom screen recordings
 
 ---
 
@@ -409,6 +576,36 @@ Outro (6s)
 | Correlation/intensity matrix | `HeatmapChart` |
 | Before/after comparison | `ComparisonBars` |
 | Progress toward goal | `GaugeChart` |
+
+**When to use auto-sizing text (FitText):**
+
+| Scenario | Component | Notes |
+|----------|-----------|-------|
+| Dynamic title length (>30 chars or varies) | `FitTitle` | Automatically scales to fit |
+| Localized/translated titles | `FitTitle` | Different languages = different lengths |
+| Variable-length subtitles | `FitSubtitle` | Maintains hierarchy with scaling |
+| Quotes of varying length | `FitMultilineText` | Fits within line constraints |
+| Short, fixed text (<20 chars) | Regular text | No auto-sizing needed |
+
+**When to use Lottie animations:**
+
+| Scenario | Component | Asset Required |
+|----------|-----------|----------------|
+| Success/completion feedback | `SuccessCheck` | `public/lottie/success-check.json` |
+| Error/failure indication | `ErrorAnimation` | `public/lottie/error-x.json` |
+| Loading/processing state | `LoadingSpinner` | `public/lottie/loading-spinner.json` |
+| Celebration/achievement | `ConfettiAnimation` | `public/lottie/confetti.json` |
+| Custom vector animation | `LottieAnimation` | Custom JSON in `public/lottie/` |
+
+**When to use GIFs:**
+
+| Scenario | Component | Notes |
+|----------|-----------|-------|
+| Meme/reaction content | `ReactionGif` | Circular, shadowed, engaging |
+| Humorous moments | `ReactionGif` | Relatable, casual tone |
+| Full-width ambient visual | `BannerGif` | Scene dividers, backgrounds |
+| Quick demonstrations | `GifPlayer` | Lightweight, looping |
+| Serious/professional content | ❌ Avoid GIFs | Use other components |
 
 **When to use advanced transitions (Phase 6):**
 
