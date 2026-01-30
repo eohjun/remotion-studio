@@ -197,6 +197,60 @@ Using the video plan, create:
 2. **Scenes file**: `src/videos/{compositionId}/scenes.ts`
 3. **Constants file**: `src/videos/{compositionId}/constants.ts`
 
+#### 🚨 MANDATORY: Scene Centering (씬 중앙 정렬)
+
+**⚠️ 모든 씬의 콘텐츠는 반드시 화면 중앙에 정렬되어야 합니다!**
+
+콘텐츠가 왼쪽이나 오른쪽으로 쏠리면 아마추어처럼 보입니다.
+
+```tsx
+// ❌ WRONG: 중앙 정렬 없음 - 콘텐츠가 왼쪽으로 쏠림!
+<AbsoluteFill style={{ backgroundColor, padding: SPACING.xl }}>
+  <div>🧠</div>
+  <h2>제목</h2>
+</AbsoluteFill>
+
+// ✅ CORRECT: 중앙 정렬 필수
+<AbsoluteFill
+  style={{
+    backgroundColor,
+    padding: SPACING.xl,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",  // 수직 중앙
+    alignItems: "center",       // 수평 중앙
+  }}
+>
+  <div>🧠</div>
+  <h2>제목</h2>
+</AbsoluteFill>
+```
+
+**필수 스타일 (모든 씬의 최상위 AbsoluteFill에 적용):**
+```tsx
+{
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+}
+```
+
+**예외: 의도적으로 정렬을 다르게 하는 경우**
+- `alignItems: "flex-start"` - 좌측 정렬 (뉴스, 리스트 등)
+- `justifyContent: "flex-start"` - 상단 정렬 (타임라인 등)
+- 반드시 의도를 주석으로 명시할 것
+
+**체크리스트:**
+```
+□ 최상위 AbsoluteFill에 display: "flex" 있는가?
+□ justifyContent: "center" 있는가?
+□ alignItems: "center" 있는가?
+□ 미리보기에서 콘텐츠가 중앙에 있는가?
+```
+
+---
+
 #### 🚨 MANDATORY: Screen Space Utilization (화면 공간 활용)
 
 **⚠️ 이 규칙은 선택이 아닌 필수입니다. 모든 씬에 적용해야 합니다.**

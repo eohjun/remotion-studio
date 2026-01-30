@@ -48,7 +48,17 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
   const highlightProgress = spring({ frame: frame - 60, fps, config: SPRING_CONFIGS.normal });
 
   const sceneContent = (
-    <AbsoluteFill style={{ backgroundColor, padding: SPACING.xl, ...style }}>
+    <AbsoluteFill
+      style={{
+        backgroundColor,
+        padding: SPACING.xl,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        ...style,
+      }}
+    >
       {/* Header */}
       <div
         style={{
