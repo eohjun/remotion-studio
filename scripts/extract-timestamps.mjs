@@ -60,6 +60,33 @@ if (!fs.existsSync(metadataPath)) {
 }
 
 const metadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
+
+// ============================================
+// FPS 읽기 (constants.ts에서)
+// ============================================
+function getFpsFromConstants(compositionId) {
+  const DEFAULT_FPS = 60;
+  const constantsPath = path.join(projectRoot, "src", "videos", compositionId, "constants.ts");
+
+  if (!fs.existsSync(constantsPath)) {
+    console.log(`⚠️ constants.ts 없음, 기본 FPS 사용: ${DEFAULT_FPS}`);
+    return DEFAULT_FPS;
+  }
+
+  try {
+    const content = fs.readFileSync(constantsPath, "utf-8");
+    const match = content.match(/export\s+const\s+FPS\s*=\s*(\d+)/);
+    if (match) {
+      return parseInt(match[1], 10);
+    }
+  } catch (error) {
+    console.error(`⚠️ constants.ts 읽기 실패: ${error.message}`);
+  }
+
+  return DEFAULT_FPS;
+}
+
+const PROJECT_FPS = getFpsFromConstants(compositionId);
 console.log(`📄 메타데이터 로드: ${compositionId}`);
 console.log(`📊 씬 개수: ${metadata.scenes.length}`);
 if (sceneFilter) {
@@ -113,7 +140,7 @@ async function main() {
   const timestamps = {
     compositionId,
     generatedAt: new Date().toISOString(),
-    fps: 60,
+    fps: PROJECT_FPS,
     scenes: [],
   };
 

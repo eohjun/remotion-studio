@@ -135,6 +135,44 @@ if (!fs.existsSync(outputDir)) {
 }
 
 // ============================================
+// FPS 읽기 (constants.ts에서)
+// ============================================
+function getFpsFromConstants(compositionId) {
+  const DEFAULT_FPS = 60;
+
+  if (!compositionId) {
+    console.log(`⚠️ compositionId 없음, 기본 FPS 사용: ${DEFAULT_FPS}`);
+    return DEFAULT_FPS;
+  }
+
+  const constantsPath = path.join(projectRoot, "src", "videos", compositionId, "constants.ts");
+
+  if (!fs.existsSync(constantsPath)) {
+    console.log(`⚠️ constants.ts 없음, 기본 FPS 사용: ${DEFAULT_FPS}`);
+    return DEFAULT_FPS;
+  }
+
+  try {
+    const content = fs.readFileSync(constantsPath, "utf-8");
+    // export const FPS = 60; 또는 export const FPS = 30; 패턴 찾기
+    const match = content.match(/export\s+const\s+FPS\s*=\s*(\d+)/);
+    if (match) {
+      const fps = parseInt(match[1], 10);
+      console.log(`📊 constants.ts에서 FPS 읽음: ${fps}`);
+      return fps;
+    }
+  } catch (error) {
+    console.error(`⚠️ constants.ts 읽기 실패: ${error.message}`);
+  }
+
+  console.log(`⚠️ FPS를 찾을 수 없음, 기본값 사용: ${DEFAULT_FPS}`);
+  return DEFAULT_FPS;
+}
+
+// 현재 프로젝트의 FPS
+const PROJECT_FPS = getFpsFromConstants(compositionId);
+
+// ============================================
 // 텍스트 정리 (TTS용)
 // ============================================
 function cleanTextForTTS(text) {
@@ -533,7 +571,7 @@ async function main() {
         id: scene.id,
         file: `${scene.id}.mp3`,
         durationSeconds: durationSeconds,
-        durationFrames: durationSeconds ? Math.ceil(durationSeconds * 60) : null, // 60fps 기준
+        durationFrames: durationSeconds ? Math.ceil(durationSeconds * PROJECT_FPS) : null, // constants.ts FPS 기준
         text: textToSpeak.substring(0, 100) + (textToSpeak.length > 100 ? "..." : ""),
       };
       audioMetadata.scenes.push(sceneMetadata);
