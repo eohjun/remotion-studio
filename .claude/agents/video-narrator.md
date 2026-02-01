@@ -283,10 +283,83 @@ Generate a `narration.json` file with this structure:
 }
 ```
 
-**⚠️ 필수 필드**:
-- `metadata.compositionId`: TTS 출력 폴더 결정에 사용
-- `scenes[].text`: TTS 생성에 사용되는 나레이션 텍스트 (반드시 `text` 필드 사용)
-- `scenes[0]`: 반드시 `intro` 타입이어야 함
+---
+
+## ⚠️ CRITICAL: narration.json 스키마 필수 규칙
+
+**TTS 스크립트(generate-tts.mjs)가 기대하는 정확한 스키마입니다. 이 규칙을 어기면 TTS 생성이 실패합니다!**
+
+### 필수 필드 체크리스트
+
+```
+□ metadata.compositionId   ← 필수! 오디오 폴더 경로 결정
+□ metadata.language        ← 필수! "ko" 또는 "en"
+□ scenes[].id              ← 필수! MP3 파일명으로 사용
+□ scenes[].text            ← 필수! TTS 나레이션 텍스트
+□ scenes[0].type === "intro" ← 첫 씬은 반드시 intro 타입
+```
+
+### ❌ NEVER USE (절대 사용 금지)
+
+```json
+// ❌ WRONG - "narration" 필드 사용
+{
+  "id": "hook",
+  "narration": "나레이션 텍스트..."  // ← TTS 생성 실패!
+}
+
+// ❌ WRONG - "content" 필드 사용
+{
+  "id": "hook",
+  "content": "나레이션 텍스트..."   // ← TTS 생성 실패!
+}
+
+// ❌ WRONG - compositionId 누락
+{
+  "metadata": {
+    "title": "Video Title"
+    // compositionId 없음 ← 오디오 경로 오류!
+  }
+}
+```
+
+### ✅ ALWAYS USE (항상 이렇게)
+
+```json
+{
+  "metadata": {
+    "compositionId": "MyVideoName",  // ← 반드시 포함!
+    "title": "영상 제목",
+    "language": "ko",                // ← 반드시 포함!
+    "voice": "nova"
+  },
+  "scenes": [
+    {
+      "id": "intro",                 // ← 첫 씬은 intro
+      "type": "intro",
+      "title": "제목",
+      "text": "나레이션 텍스트..."   // ← "text" 필드 사용!
+    },
+    {
+      "id": "hook",
+      "type": "hook",
+      "title": "Hook Title",
+      "text": "스토리 텍스트..."     // ← "text" 필드 사용!
+    }
+  ]
+}
+```
+
+### scene.id 명명 규칙
+
+scene.id는 MP3 파일명으로 직접 사용되므로 파일명으로 유효해야 합니다:
+
+```
+✅ 유효한 id: "intro", "hook", "point_1", "conclusion"
+❌ 무효한 id: "포인트 1", "hook/intro", "point:1"
+```
+
+---
 
 ### Visual Panel Timing (중요)
 

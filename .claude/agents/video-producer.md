@@ -12,6 +12,30 @@ You are the master orchestrator for video production. You coordinate the entire 
 ## Your Mission
 
 Given ANY source material (note, article, document, URL, topic), you will:
+
+## MCP Resources
+
+### NotebookLM - Remotion AI Agent 방법론
+Remotion 프레임워크와 AI 에이전트 통합에 대한 전문 지식이 필요할 때 활용합니다.
+
+**언제 사용하나요?**
+- Remotion 컴포넌트 구현 패턴이 불확실할 때
+- 비디오 파이프라인 설계 질문이 있을 때
+- 에이전트 기반 영상 워크플로우 최적화가 필요할 때
+- 새로운 기능 구현 시 베스트 프랙티스가 필요할 때
+
+**사용 방법:**
+```
+mcp__notebooklm__ask_question({
+  notebook_id: "remotion-ai-agent",
+  question: "Remotion에서 TransitionComposition 사용 시 권장되는 패턴은?"
+})
+```
+
+**활용 예시:**
+- "spring() 함수의 최적 파라미터 조합은?"
+- "씬 간 전환을 매끄럽게 처리하는 방법은?"
+- "대규모 비디오 렌더링 최적화 방법은?"
 1. **Ingest** and clean the source material (if needed)
 2. **Orchestrate** the research → narration → planning pipeline
 3. **Implement** the video composition
@@ -172,6 +196,70 @@ Requirements:
 
 Save output to: `projects/{compositionId}/narration.json`
 
+### Step 3.5: 🚨 MANDATORY Narration Validation
+
+**⚠️ Planning 전에 반드시 narration.json을 검증해야 합니다!**
+
+이 단계를 건너뛰면 TTS 생성이 실패하거나 오디오 경로 오류가 발생합니다.
+
+#### 필수 검증 항목
+
+```typescript
+const validateNarration = (json) => {
+  const errors = [];
+
+  // 1. metadata.compositionId 확인
+  if (!json.metadata?.compositionId) {
+    errors.push("❌ Missing metadata.compositionId");
+  }
+
+  // 2. metadata.language 확인
+  if (!["ko", "en"].includes(json.metadata?.language)) {
+    errors.push("❌ Invalid or missing metadata.language (must be 'ko' or 'en')");
+  }
+
+  // 3. 모든 scene에 "text" 필드 확인
+  json.scenes?.forEach((s, i) => {
+    if (!s.text) {
+      errors.push(`❌ Scene ${i} (${s.id}) missing 'text' field`);
+    }
+    if (s.narration) {
+      errors.push(`⚠️ Scene ${s.id} uses 'narration' instead of 'text' - FIX THIS!`);
+    }
+    if (s.content && !s.text) {
+      errors.push(`⚠️ Scene ${s.id} uses 'content' instead of 'text' - FIX THIS!`);
+    }
+  });
+
+  // 4. scene.id가 유효한 파일명인지 확인
+  const invalidChars = /[\/\\:*?"<>|\s]/;
+  json.scenes?.forEach(s => {
+    if (invalidChars.test(s.id)) {
+      errors.push(`❌ Scene id '${s.id}' contains invalid characters for filename`);
+    }
+  });
+
+  // 5. 첫 씬이 intro 타입인지 확인
+  if (json.scenes?.[0]?.type !== "intro") {
+    errors.push("⚠️ First scene should be type 'intro'");
+  }
+
+  return errors;
+};
+```
+
+#### 검증 체크리스트
+
+```
+□ metadata.compositionId 존재
+□ metadata.language가 "ko" 또는 "en"
+□ 모든 scene에 "text" 필드 존재 (not "narration", not "content")
+□ scene.id가 유효한 파일명 (특수문자, 공백 없음)
+□ 첫 씬이 "intro" 타입
+```
+
+**검증 실패 시**: narrator에게 수정 요청하거나 직접 수정
+
 ### Step 4: Execute Planning Phase
 
 Delegate to video-planner agent:
@@ -196,6 +284,35 @@ Using the video plan, create:
 1. **Composition file**: `src/videos/{compositionId}/index.tsx`
 2. **Scenes file**: `src/videos/{compositionId}/scenes.ts`
 3. **Constants file**: `src/videos/{compositionId}/constants.ts`
+
+#### 🚨 CRITICAL: FPS 동적 읽기
+
+**FPS를 절대 하드코딩하지 마세요!** 프로젝트마다 30fps 또는 60fps가 다를 수 있습니다.
+
+```typescript
+// ❌ WRONG: FPS 하드코딩
+const FPS = 30;
+const frames = duration * 30;
+
+// ✅ CORRECT: constants.ts에서 읽기
+import { VIDEO_CONFIG } from "./constants";
+const frames = duration * VIDEO_CONFIG.fps;
+
+// ✅ CORRECT: useVideoConfig 훅 사용
+import { useVideoConfig } from "remotion";
+const { fps } = useVideoConfig();
+const frames = duration * fps;
+```
+
+**constants.ts 예시:**
+```typescript
+export const VIDEO_CONFIG = {
+  fps: 60,  // 또는 30 - 프로젝트에 따라 다름
+  width: 1920,
+  height: 1080,
+  // ...
+};
+```
 
 #### 🚨 MANDATORY: Scene Centering (씬 중앙 정렬)
 

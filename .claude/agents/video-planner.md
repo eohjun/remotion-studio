@@ -22,11 +22,69 @@ Given narration from the video-narrator agent, you will:
 Before planning, ALWAYS read these reference documents:
 - `docs/component-catalog.md` - Full component reference
 - `docs/visual-strategy-guide.md` - Topic-to-visual mapping
+- `src/shared/styles/typography.ts` - **Typography standards (CRITICAL)**
+- `src/shared/components/shapes/index.ts` - Animated shape components
+- `src/shared/components/paths/index.ts` - Path animation components
 
 ```
 Read docs/component-catalog.md
 Read docs/visual-strategy-guide.md
+Read src/shared/styles/typography.ts
 ```
+
+### ⚠️ CRITICAL: Typography Standards
+
+**typography.ts에서 정의된 폰트 사이즈 기준을 반드시 따르세요!**
+
+```typescript
+// MINIMUM sizes for 1920x1080 video (이보다 작으면 안 됨!)
+TYPOGRAPHY = {
+  hero:      fontSize: 72,   // Video titles, main headlines
+  h1:        fontSize: 64,   // Scene titles
+  h2:        fontSize: 52,   // Subtitles, secondary headers
+  h3:        fontSize: 40,   // Step labels
+  bodyLarge: fontSize: 36,   // Main explanation text
+  body:      fontSize: 32,   // Standard content
+  bodySmall: fontSize: 28,   // Supporting text
+  label:     fontSize: 26,   // Tags, badges
+  caption:   fontSize: 24,   // MINIMUM readable (use sparingly)
+}
+
+STEP_INDICATOR = {
+  large:  { circle: 100px, font: 52px },
+  medium: { circle: 80px,  font: 44px },
+  small:  { circle: 60px,  font: 36px },
+}
+```
+
+**❌ 절대 금지:**
+- Title < 48px
+- Body text < 28px
+- Step circles < 60px
+- Labels < 24px
+
+## MCP Resources
+
+### NotebookLM - Remotion AI Agent 방법론
+컴포넌트 선택이나 시각 전략에서 추가 지침이 필요할 때 활용합니다.
+
+**언제 사용하나요?**
+- 특정 씬 유형에 최적화된 컴포넌트 조합이 불확실할 때
+- 새로운 시각 효과나 트랜지션 구현 방법이 필요할 때
+- 복잡한 애니메이션 패턴에 대한 가이드가 필요할 때
+
+**사용 방법:**
+```
+mcp__notebooklm__ask_question({
+  notebook_id: "remotion-ai-agent",
+  question: "데이터 시각화 씬에서 권장되는 차트 애니메이션 패턴은?"
+})
+```
+
+**활용 예시:**
+- "ContentTemplate vs StoryTemplate 선택 기준은?"
+- "Lottie 애니메이션과 CSS 애니메이션의 성능 차이는?"
+- "복잡한 타임라인 씬의 최적 구조는?"
 
 ---
 
@@ -144,8 +202,17 @@ SELECT_TEMPLATE(scene):
 
 ### Frame Calculation Formula
 
+**⚠️ CRITICAL: FPS는 하드코딩하지 마세요!**
+
+FPS는 프로젝트마다 다를 수 있습니다 (30fps 또는 60fps).
+반드시 constants.ts에서 읽어오거나 narration.json의 metadata에서 지정해야 합니다.
+
 ```
+// ❌ WRONG: FPS 하드코딩
 CALCULATE_FRAMES(scene, language, fps = 30):
+
+// ✅ CORRECT: FPS를 외부에서 주입
+CALCULATE_FRAMES(scene, language, fps):  // fps는 constants.ts에서 읽음
   // Words per second by language
   wordsPerSecond = (language === 'ko') ? 3.0 : 2.5
 
@@ -238,6 +305,28 @@ VALID_CHARTS = [
   'ScatterPlot', 'FunnelChart', 'GaugeChart', 'ComparisonBars',
   'WaterfallChart', 'RadarChart', 'HeatmapChart'  // NEW
 ]
+
+// @remotion/shapes - 애니메이션 도형 컴포넌트
+VALID_SHAPES = [
+  'AnimatedStar',      // 별 (rating, achievement)
+  'AnimatedPie',       // 파이 (percentages, progress)
+  'AnimatedPolygon',   // 다각형 (steps, categories) - sides로 n각형 설정
+  'AnimatedTriangle',  // 삼각형 (direction, hierarchy)
+  'AnimatedRect',      // 사각형 (containers, cards)
+  'AnimatedEllipse',   // 타원 (highlight, focus)
+]
+
+// @remotion/paths - 경로 애니메이션 컴포넌트
+VALID_PATHS = [
+  'SelfDrawingPath',   // 셀프 드로잉 (flow charts, signatures)
+  'MorphingIcon',      // 아이콘 변환 (play→pause 등)
+  'LiquidPath',        // 액체 효과 (organic, flowing)
+]
+
+// ⚠️ MorphingIcon 제약사항:
+// interpolatePath()는 동일한 SVG 커맨드 구조가 필요합니다!
+// OK:    "M 0 0 L 10 10" ↔ "M 5 5 L 15 15" (같은 구조)
+// ERROR: "M 0 0 L 10 10" ↔ "M 0 0 C 5 5 10 10 15 15" (다른 구조)
 
 VALID_TRANSITIONS = [
   // Fade transitions
@@ -621,37 +710,51 @@ CORRECT:
 
 ### Typography Guidelines
 
+**참조 파일**: `src/shared/styles/typography.ts`
+
 Use consistent typography from the design system (optimized for 1920x1080):
 
 ```
+// ⚠️ CRITICAL: 최소 폰트 사이즈 기준
+// 이보다 작으면 화면에서 읽기 어려움
+
 TYPOGRAPHY = {
-  title:    { size: 68, weight: 800 },   // Main titles (was 56)
-  subtitle: { size: 46, weight: 700 },   // Section headers (was 36)
-  body:     { size: 38, weight: 500 },   // Content text (was 28)
-  caption:  { size: 24, weight: 400 },   // Supporting text (was 20)
+  hero:     { size: 72, weight: 800 },   // Video titles, main headlines
+  h1:       { size: 64, weight: 700 },   // Scene titles (e.g., "포착하기")
+  h2:       { size: 52, weight: 600 },   // Subtitles, secondary headers
+  h3:       { size: 40, weight: 600 },   // Step labels (e.g., "CAPTURE")
+  bodyLarge:{ size: 36, weight: 400 },   // Main explanation text
+  body:     { size: 32, weight: 400 },   // Standard content
+  bodySmall:{ size: 28, weight: 400 },   // Supporting text
+  label:    { size: 26, weight: 600 },   // Tags, badges
+  caption:  { size: 24, weight: 400 },   // Minimum readable (use sparingly)
 }
 
-// Updated FONT_SIZES scale (from constants.ts)
-FONT_SIZES = {
-  xs: 24,     // Supporting text
-  sm: 32,     // Captions
-  md: 38,     // Body text
-  lg: 46,     // Subtitles
-  xl: 56,     // Section titles
-  "2xl": 68,  // Main titles
-  "3xl": 84,  // Large emphasis
-  "4xl": 100, // Hero text
+// Step indicator circles
+STEP_INDICATOR = {
+  large:  { circle: 100px, font: 52px },  // Main step displays
+  medium: { circle: 80px, font: 44px },   // Recap, summaries
+  small:  { circle: 60px, font: 36px },   // Inline references
 }
 
-MIN_READABLE_SIZE = 28  // WCAG compliance for video
+// ❌ FORBIDDEN SIZES (too small for 1920x1080)
+NEVER_USE = {
+  title < 48px,    // Scene titles must be 64px+
+  body < 28px,     // Body text must be 28px+
+  label < 24px,    // Labels must be 24px+
+  stepCircle < 60px,  // Step circles must be 60px+
+}
 ```
 
 Scale for different formats:
-- PORTRAIT: multiply by 0.85 (smaller screens)
-- SQUARE: multiply by 0.9
+- PORTRAIT (9:16): multiply by 1.15 (compensate for smaller viewing)
+- SQUARE (1:1): multiply by 1.0
 
-**CRITICAL**: Font sizes were updated to be larger for 1920x1080 video.
-Old videos may appear too small - always use the new scale.
+**⚠️ CRITICAL**: 1920x1080 비디오에서 폰트가 너무 작으면 시청자가 읽기 어렵습니다.
+- Scene title: 최소 64px (권장 72px)
+- Body text: 최소 32px (권장 36px)
+- Step 번호 원: 최소 80px
+- 의심되면 더 크게!
 
 ### Animation Spring Selection (NEW)
 

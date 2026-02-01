@@ -28,6 +28,8 @@
 | Transitions | 29 | `@shared/transitions` |
 | Animated Shapes | 6 | `@shared/components/shapes` |
 | Path Animations | 3 | `@shared/components/paths` |
+| **Visual Metaphors** | **4** | `@shared/components/metaphors` |
+| **3D Components** | **5+** | `@shared/components/three` |
 | Hooks | 2 | `@shared/hooks` |
 | Config | 4 | `@shared/config` |
 | Utils | 4 | `@shared/utils` |
@@ -1894,6 +1896,224 @@ import {
 
 ---
 
+## Visual Metaphor Components
+
+Abstract concept visualizations for philosophical and mindfulness content.
+
+### BreathingCircle
+**Purpose**: Animated expanding/contracting circle mimicking breathing rhythm
+
+**Import**: `@shared/components/metaphors`
+
+**Props**:
+```typescript
+{
+  size?: number;                  // Base size in pixels (default: 400)
+  color?: string;                 // Primary color
+  colorSecondary?: string;        // Secondary color for gradient
+  cycleDuration?: number;         // Breath cycle in frames (default: 120)
+  rings?: number;                 // Number of concentric rings (default: 3)
+  opacity?: number;               // Overall opacity
+  position?: 'center' | 'left' | 'right';
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Meditation/mindfulness content
+- Intro scenes for philosophical videos
+- Visual representation of breathing exercises
+- Calm, centered visual anchors
+
+**Example**:
+```tsx
+<BreathingCircle
+  size={500}
+  cycleDuration={90}
+  rings={4}
+  color="rgba(102, 126, 234, 0.4)"
+/>
+```
+
+---
+
+### LayeredMind
+**Purpose**: Stacked layers representing metacognition and decentering
+
+**Import**: `@shared/components/metaphors`
+
+**Props**:
+```typescript
+{
+  layers?: LayerConfig[];         // Layer configs (default: 3 layers)
+  separationDelay?: number;       // Delay before separation starts
+  separated?: boolean;            // Whether layers separate
+  separationDistance?: number;    // Separation distance in px
+  layerWidth?: number;            // Layer width (default: 400)
+  layerHeight?: number;           // Layer height (default: 80)
+  position?: 'center' | 'left' | 'right';
+  style?: React.CSSProperties;
+}
+
+interface LayerConfig {
+  label: string;
+  color: string;
+  icon?: string;
+}
+```
+
+**When to Use**:
+- Metacognition visualizations
+- "Observer self" concepts
+- Consciousness layer diagrams
+- Decentering demonstrations
+
+**Example**:
+```tsx
+<LayeredMind
+  layers={[
+    { label: "Experience", color: "rgba(102, 126, 234, 0.8)", icon: "💭" },
+    { label: "Awareness", color: "rgba(118, 75, 162, 0.8)", icon: "👁️" },
+    { label: "Meta-Awareness", color: "rgba(236, 72, 153, 0.8)", icon: "🔍" },
+  ]}
+  separated={true}
+  separationDistance={100}
+/>
+```
+
+---
+
+### BracketAnimation
+**Purpose**: Animated brackets for emphasis and containment
+
+**Import**: `@shared/components/metaphors`
+
+**When to Use**:
+- Highlighting key concepts
+- Visual emphasis around text
+- Philosophical "bracketing" concept
+
+---
+
+### FlowingWaves
+**Purpose**: Animated wave patterns for flow and movement
+
+**Import**: `@shared/components/metaphors`
+
+**When to Use**:
+- Flow states
+- Water/ocean metaphors
+- Continuous movement visualization
+- Background ambient motion
+
+---
+
+## 3D Components (@remotion/three)
+
+Three.js-based 3D visualization components.
+
+### ThreeCanvas
+**Purpose**: Canvas wrapper for 3D content
+
+**Import**: `@shared/components/three`
+
+**Props**:
+```typescript
+{
+  cameraPosition?: [number, number, number];  // Camera position
+  cameraFov?: number;                         // Field of view
+  ambientLightIntensity?: number;             // Ambient light
+  directionalLightIntensity?: number;         // Directional light
+  directionalLightPosition?: [number, number, number];
+  backgroundColor?: string;
+  children: React.ReactNode;                  // 3D elements
+}
+```
+
+**Example**:
+```tsx
+<ThreeCanvas cameraPosition={[0, 0, 5]}>
+  <DeviceMockup device="phone" />
+  <Text3D text="Hello" position={[0, 2, 0]} />
+</ThreeCanvas>
+```
+
+---
+
+### Text3D
+**Purpose**: 3D text rendering
+
+**Import**: `@shared/components/three`
+
+**Props**:
+```typescript
+{
+  text: string;
+  position?: [number, number, number];
+  color?: string;
+  fontSize?: number;
+  depth?: number;
+  bevelEnabled?: boolean;
+}
+```
+
+**When to Use**:
+- Hero text with depth
+- Logo animations
+- 3D title cards
+
+---
+
+### DeviceMockup
+**Purpose**: 3D device mockups (phone, tablet, laptop)
+
+**Import**: `@shared/components/three`
+
+**Props**:
+```typescript
+{
+  device: 'phone' | 'tablet' | 'laptop';
+  screenContent?: React.ReactNode;
+  rotation?: [number, number, number];
+  position?: [number, number, number];
+  scale?: number;
+}
+```
+
+**Preset Components**:
+- `PhoneMockup` - iPhone-style mockup
+- `TabletMockup` - iPad-style mockup
+- `LaptopMockup` - MacBook-style mockup
+
+**When to Use**:
+- App demonstrations
+- Product showcases
+- Tech tutorials
+- UI/UX content
+
+---
+
+### Lazy-Loading 3D Components
+
+For performance optimization, lazy-loaded versions are available:
+
+```typescript
+import {
+  LazyThreeCanvas,
+  LazyText3D,
+  LazyDeviceMockup,
+  DelayedThreeCanvas,
+  preloadThreeComponents,
+} from "@shared/components/three";
+```
+
+**When to Use**:
+- When 3D content isn't immediately visible
+- To reduce initial bundle size
+- For better render performance
+
+---
+
 ## Optimized Video (NEW - Remotion 4.0+)
 
 ### OptimizedVideo
@@ -3012,6 +3232,37 @@ import { ThemeProvider, useTheme, THEMES } from "@shared/components/ThemeProvide
 
 // Quality Presets (NEW)
 import { QUALITY_PRESETS, applyQualityPreset } from "@shared/config/qualityPresets";
+
+// Visual Metaphor Components (NEW)
+import {
+  BreathingCircle,      // Meditation breathing animation
+  BracketAnimation,     // Emphasis brackets
+  LayeredMind,          // Metacognition layers
+  FlowingWaves,         // Wave patterns
+} from "@shared/components/metaphors";
+
+// 3D Components (using @remotion/three)
+import {
+  ThreeCanvas,          // 3D canvas wrapper
+  Text3D,               // 3D text
+  FloatingText3D,       // Floating 3D text
+  DeviceMockup,         // Device mockups
+  PhoneMockup,          // iPhone mockup
+  TabletMockup,         // iPad mockup
+  LaptopMockup,         // MacBook mockup
+  // Lazy-loaded versions
+  LazyThreeCanvas,
+  LazyDeviceMockup,
+  preloadThreeComponents,
+} from "@shared/components/three";
+
+// Typography Standards (NEW)
+import {
+  TYPOGRAPHY,           // Font size standards
+  STEP_INDICATOR,       // Step circle sizes
+  TEXT_SPACING,         // Spacing recommendations
+  TEXT_STYLES,          // Quick reference styles
+} from "@shared/styles/typography";
 ```
 
 ---
