@@ -17,7 +17,7 @@ Config.setColorSpace("bt709");
 
 // 하드웨어 가속 (가능한 경우 사용)
 // macOS에서 VideoToolbox, Windows에서 NVENC 등 활용
-// Config.setHardwareAcceleration("if-possible");
+Config.setHardwareAcceleration("if-possible");
 
 // 고품질 렌더링 예시:
 // npx remotion render SelfHelpCritiqueV2 out/video.mp4 --codec h264 --crf 18 --color-space bt709

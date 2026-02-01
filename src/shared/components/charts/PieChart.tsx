@@ -1,5 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import { makePie } from "@remotion/shapes";
 import { COLORS, FONT_FAMILY, FONT_SIZES, SPRING_CONFIGS } from "../constants";
 
 export interface PieChartDataItem {
@@ -139,39 +140,54 @@ export const PieChart: React.FC<PieChartProps> = ({
     };
   };
 
-  // Create arc path
+  // Create arc path using @remotion/shapes makePie
   const createArcPath = (
     startAngle: number,
     endAngle: number,
     outerR: number,
     innerR: number
   ) => {
-    const start = polarToCartesian(startAngle, outerR);
-    const end = polarToCartesian(endAngle, outerR);
-    const innerStart = polarToCartesian(endAngle, innerR);
-    const innerEnd = polarToCartesian(startAngle, innerR);
+    // Calculate progress (0-1) from angle difference
+    const angleDiff = endAngle - startAngle;
+    const arcProgress = angleDiff / 360;
 
-    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+    // Convert start angle to rotation in radians (-90 degrees = top position)
+    const rotationRadians = ((startAngle + 90) * Math.PI) / 180;
 
-    if (innerR === 0) {
-      // Pie slice (no hole)
+    // For donut charts with inner radius
+    if (innerR > 0) {
+      // Use manual path for donut slices (makePie doesn't support inner radius directly)
+      const start = polarToCartesian(startAngle, outerR);
+      const end = polarToCartesian(endAngle, outerR);
+      const innerStart = polarToCartesian(endAngle, innerR);
+      const innerEnd = polarToCartesian(startAngle, innerR);
+      const largeArc = angleDiff > 180 ? 1 : 0;
+
       return [
-        `M ${center} ${center}`,
-        `L ${start.x} ${start.y}`,
+        `M ${start.x} ${start.y}`,
         `A ${outerR} ${outerR} 0 ${largeArc} 1 ${end.x} ${end.y}`,
+        `L ${innerStart.x} ${innerStart.y}`,
+        `A ${innerR} ${innerR} 0 ${largeArc} 0 ${innerEnd.x} ${innerEnd.y}`,
         "Z",
       ].join(" ");
     }
 
-    // Donut slice
-    return [
-      `M ${start.x} ${start.y}`,
-      `A ${outerR} ${outerR} 0 ${largeArc} 1 ${end.x} ${end.y}`,
-      `L ${innerStart.x} ${innerStart.y}`,
-      `A ${innerR} ${innerR} 0 ${largeArc} 0 ${innerEnd.x} ${innerEnd.y}`,
-      "Z",
-    ].join(" ");
+    // Use makePie for pie slices (no inner radius)
+    const pieData = makePie({
+      radius: outerR,
+      progress: arcProgress,
+      closePath: true,
+      counterClockwise: false,
+      rotation: rotationRadians,
+    });
+
+    // Transform the path to center it properly in our SVG viewBox
+    // makePie generates paths centered at (0, 0), we need to translate to (center, center)
+    return pieData.path;
   };
+
+  // Whether we're using makePie (for pie) or manual paths (for donut)
+  const usesMakePie = actualInnerRadius === 0;
 
   // Label line offset (used for future outside-on-chart labels)
   // const labelOffset = labelPosition === "outside" ? 30 : 0;
@@ -204,8 +220,13 @@ export const PieChart: React.FC<PieChartProps> = ({
           const offsetX = Math.cos(offsetAngle) * highlightOffset * sliceProgress;
           const offsetY = Math.sin(offsetAngle) * highlightOffset * sliceProgress;
 
+          // For makePie paths, we need to translate to center since paths are at origin
+          const baseTransform = usesMakePie
+            ? `translate(${center + offsetX}, ${center + offsetY})`
+            : `translate(${offsetX}, ${offsetY})`;
+
           return (
-            <g key={i} transform={`translate(${offsetX}, ${offsetY})`}>
+            <g key={i} transform={baseTransform}>
               <path
                 d={createArcPath(
                   slice.startAngle,
@@ -224,20 +245,26 @@ export const PieChart: React.FC<PieChartProps> = ({
                 }}
               />
               {/* Inside labels */}
-              {showLabels && labelPosition === "inside" && slice.endAngle - slice.startAngle > 20 && (
-                <text
-                  x={polarToCartesian(slice.midAngle, (outerRadius + actualInnerRadius) / 2).x}
-                  y={polarToCartesian(slice.midAngle, (outerRadius + actualInnerRadius) / 2).y}
-                  fill={COLORS.white}
-                  fontSize={FONT_SIZES.xs - 2}
-                  fontFamily={FONT_FAMILY.body}
-                  fontWeight={600}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >
-                  {showValues ? `${slice.percentage}%` : slice.label}
-                </text>
-              )}
+              {showLabels && labelPosition === "inside" && slice.endAngle - slice.startAngle > 20 && (() => {
+                const labelPos = polarToCartesian(slice.midAngle, (outerRadius + actualInnerRadius) / 2);
+                // Adjust for makePie coordinate system (origin-centered)
+                const labelX = usesMakePie ? labelPos.x - center : labelPos.x;
+                const labelY = usesMakePie ? labelPos.y - center : labelPos.y;
+                return (
+                  <text
+                    x={labelX}
+                    y={labelY}
+                    fill={COLORS.white}
+                    fontSize={FONT_SIZES.xs - 2}
+                    fontFamily={FONT_FAMILY.body}
+                    fontWeight={600}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                  >
+                    {showValues ? `${slice.percentage}%` : slice.label}
+                  </text>
+                );
+              })()}
             </g>
           );
         })}

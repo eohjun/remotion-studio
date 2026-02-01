@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { Triangle, Polygon, Circle, Rect } from "@remotion/shapes";
 import { FloatingShapesProps, ShapeData, ShapeType } from "./types";
 
 /**
@@ -39,26 +40,51 @@ function generateShapes(
 }
 
 /**
- * SVG path for triangle shape
+ * Render shape using @remotion/shapes
  */
-const getTrianglePath = (size: number): string => {
-  const h = (size * Math.sqrt(3)) / 2;
-  return `M ${size / 2} 0 L ${size} ${h} L 0 ${h} Z`;
-};
+const renderShape = (shape: ShapeData): React.ReactNode => {
+  const halfSize = shape.size / 2;
 
-/**
- * SVG path for hexagon shape
- */
-const getHexagonPath = (size: number): string => {
-  const r = size / 2;
-  const points: string[] = [];
-  for (let i = 0; i < 6; i++) {
-    const angle = (Math.PI / 3) * i - Math.PI / 2;
-    const x = r + r * Math.cos(angle);
-    const y = r + r * Math.sin(angle);
-    points.push(`${x},${y}`);
+  switch (shape.type) {
+    case "circle":
+      return (
+        <Circle
+          radius={halfSize}
+          fill={shape.color}
+        />
+      );
+
+    case "square":
+      return (
+        <Rect
+          width={shape.size}
+          height={shape.size}
+          fill={shape.color}
+          cornerRadius={shape.size * 0.1}
+        />
+      );
+
+    case "triangle":
+      return (
+        <Triangle
+          length={shape.size}
+          direction="up"
+          fill={shape.color}
+        />
+      );
+
+    case "hexagon":
+      return (
+        <Polygon
+          points={6}
+          radius={halfSize}
+          fill={shape.color}
+        />
+      );
+
+    default:
+      return null;
   }
-  return `M ${points.join(" L ")} Z`;
 };
 
 /**
@@ -89,60 +115,25 @@ const Shape: React.FC<{
   // Rotation
   const rotation = rotate ? adjustedFrame * shape.rotationSpeed : 0;
 
-  const baseStyle: React.CSSProperties = {
-    position: "absolute",
-    left: `calc(${shape.x}% + ${driftOffset}px)`,
-    top: `calc(${shape.y}% + ${floatOffset}px)`,
-    width: shape.size,
-    height: shape.size,
-    transform: `rotate(${rotation}deg)`,
-    opacity: opacity,
-    pointerEvents: "none",
-  };
-
-  switch (shape.type) {
-    case "circle":
-      return (
-        <div
-          style={{
-            ...baseStyle,
-            background: shape.color,
-            borderRadius: "50%",
-          }}
-        />
-      );
-
-    case "square":
-      return (
-        <div
-          style={{
-            ...baseStyle,
-            background: shape.color,
-            borderRadius: shape.size * 0.1,
-          }}
-        />
-      );
-
-    case "triangle":
-      return (
-        <svg
-          style={baseStyle}
-          viewBox={`0 0 ${shape.size} ${(shape.size * Math.sqrt(3)) / 2}`}
-        >
-          <path d={getTrianglePath(shape.size)} fill={shape.color} />
-        </svg>
-      );
-
-    case "hexagon":
-      return (
-        <svg style={baseStyle} viewBox={`0 0 ${shape.size} ${shape.size}`}>
-          <path d={getHexagonPath(shape.size)} fill={shape.color} />
-        </svg>
-      );
-
-    default:
-      return null;
-  }
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: `calc(${shape.x}% + ${driftOffset}px)`,
+        top: `calc(${shape.y}% + ${floatOffset}px)`,
+        width: shape.size,
+        height: shape.type === "triangle" ? (shape.size * Math.sqrt(3)) / 2 : shape.size,
+        transform: `rotate(${rotation}deg)`,
+        opacity: opacity,
+        pointerEvents: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {renderShape(shape)}
+    </div>
+  );
 };
 
 /**
@@ -151,6 +142,8 @@ const Shape: React.FC<{
  * Creates an animated background with various geometric shapes
  * that float and optionally rotate. Uses seeded randomization
  * for consistent results across renders.
+ *
+ * Now powered by @remotion/shapes for optimized SVG rendering.
  */
 export const FloatingShapes: React.FC<FloatingShapesProps> = ({
   shapeCount = 10,

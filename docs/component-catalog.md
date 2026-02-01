@@ -1,8 +1,8 @@
 # Component Catalog
 
 **Remotion Studio Component Library Reference**
-**Last Updated**: 2026-01-30
-**Total Components**: 87+ (including 29 transition presets)
+**Last Updated**: 2026-02-01
+**Total Components**: 100+ (including 29 transition presets, 6 animated shapes, 3 path animations)
 
 ---
 
@@ -26,6 +26,8 @@
 | Audio | 3+ | `@shared/audio` |
 | Icons | 2 | `@shared/components/icons` |
 | Transitions | 29 | `@shared/transitions` |
+| Animated Shapes | 6 | `@shared/components/shapes` |
+| Path Animations | 3 | `@shared/components/paths` |
 | Hooks | 2 | `@shared/hooks` |
 | Config | 4 | `@shared/config` |
 | Utils | 4 | `@shared/utils` |
@@ -1500,6 +1502,452 @@ const audioData = await getAudioData(audioSrc);
 
 ---
 
+## Animated Shapes (NEW - @remotion/shapes)
+
+Wrapper components around `@remotion/shapes` with built-in entry animations, rotation, and effects.
+
+### AnimatedStar
+**Purpose**: Animated star shape with entry and rotation animations
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size in pixels (default: 100)
+  fill?: string;              // Fill color
+  stroke?: string;            // Stroke color
+  strokeWidth?: number;       // Stroke width
+  delay?: number;             // Animation delay in frames
+  animate?: boolean;          // Enable animations (default: true)
+  points?: number;            // Number of star points (default: 5)
+  innerRadius?: number;       // Inner radius ratio (default: 0.5)
+  rotationSpeed?: number;     // Rotation speed (degrees per frame)
+  pulse?: boolean;            // Enable pulsing animation
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Ratings and scores
+- Achievement indicators
+- Decorative elements
+- Emphasis moments
+
+**Example**:
+```tsx
+<AnimatedStar size={120} points={5} fill="#FFD700" pulse rotationSpeed={0.5} />
+```
+
+---
+
+### AnimatedPie
+**Purpose**: Animated pie/arc shape with progress animation
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size in pixels (default: 100)
+  fill?: string;              // Fill color
+  progress?: number;          // Progress 0-1 (default: 1)
+  startAngle?: number;        // Start angle in degrees (default: 0)
+  animateProgress?: boolean;  // Animate progress value
+  clockwise?: boolean;        // Direction (default: true)
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Progress indicators
+- Partial circles
+- Loading states
+- Chart building blocks
+
+**Example**:
+```tsx
+<AnimatedPie size={80} progress={0.75} animateProgress startAngle={-90} />
+```
+
+---
+
+### AnimatedPolygon
+**Purpose**: Animated regular polygon (triangle, hexagon, etc.)
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size in pixels (default: 100)
+  sides?: number;             // Number of sides (default: 6 for hexagon)
+  fill?: string;              // Fill color
+  cornerRadius?: number;      // Rounded corners
+  rotationSpeed?: number;     // Rotation animation
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Geometric backgrounds
+- Icon backgrounds
+- Badge shapes
+- Tech aesthetics
+
+**Example**:
+```tsx
+<AnimatedPolygon sides={6} size={100} cornerRadius={5} rotationSpeed={0.3} />
+```
+
+---
+
+### AnimatedTriangle
+**Purpose**: Animated directional triangle
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size in pixels (default: 100)
+  direction?: 'up' | 'down' | 'left' | 'right';  // Point direction
+  fill?: string;              // Fill color
+  cornerRadius?: number;      // Rounded corners
+  rotationSpeed?: number;     // Rotation animation
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Direction indicators
+- Play buttons
+- Navigation cues
+- Arrow elements
+
+**Example**:
+```tsx
+<AnimatedTriangle direction="right" size={60} fill="#00C2FF" />
+```
+
+---
+
+### AnimatedRect
+**Purpose**: Animated rectangle/square
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size for square (default: 100)
+  width?: number;             // Explicit width
+  height?: number;            // Explicit height
+  fill?: string;              // Fill color
+  cornerRadius?: number;      // Rounded corners
+  rotationSpeed?: number;     // Rotation animation
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Card backgrounds
+- Button shapes
+- Frame elements
+- Layout components
+
+---
+
+### AnimatedEllipse
+**Purpose**: Animated ellipse/circle with optional pulsing
+
+**Import**: `@shared/components/shapes`
+
+**Props**:
+```typescript
+{
+  size?: number;              // Size for circle (default: 100)
+  rx?: number;                // X radius for ellipse
+  ry?: number;                // Y radius for ellipse
+  fill?: string;              // Fill color
+  pulse?: boolean;            // Enable pulsing animation
+  rotationSpeed?: number;     // Rotation (for ellipses)
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Circles and ovals
+- Spotlight effects
+- Avatar backgrounds
+- Decorative elements
+
+---
+
+### Raw Shape Components
+
+Direct re-exports from `@remotion/shapes` for custom implementations:
+
+```typescript
+import {
+  Circle,
+  Ellipse,
+  Pie,
+  Polygon,
+  Rect,
+  Star,
+  Triangle,
+  // Utility functions for path generation
+  makeCircle,
+  makeEllipse,
+  makePie,
+  makePolygon,
+  makeRect,
+  makeStar,
+  makeTriangle,
+} from "@shared/components/shapes";
+```
+
+---
+
+## Path Animations (NEW - @remotion/paths)
+
+Advanced SVG path manipulation and animation components.
+
+### SelfDrawingPath
+**Purpose**: Path that draws itself progressively (pen drawing effect)
+
+**Import**: `@shared/components/paths`
+
+**Props**:
+```typescript
+{
+  path: string;               // SVG path data (d attribute)
+  stroke?: string;            // Stroke color
+  strokeWidth?: number;       // Stroke width (default: 3)
+  fill?: string;              // Fill color (default: "none")
+  width?: number;             // SVG width (default: 200)
+  height?: number;            // SVG height (default: 200)
+  drawDuration?: number;      // Duration in frames (default: 60)
+  drawEasing?: 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+  reverse?: boolean;          // Draw in reverse (undraw)
+  strokeLinecap?: 'butt' | 'round' | 'square';
+  strokeLinejoin?: 'miter' | 'round' | 'bevel';
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Signature animations
+- Diagram reveals
+- Handwriting effects
+- Line art animations
+
+**Example**:
+```tsx
+<SelfDrawingPath
+  path="M10 80 Q 95 10 180 80 T 350 80"
+  stroke="#667eea"
+  strokeWidth={4}
+  drawDuration={90}
+  drawEasing="ease-out"
+/>
+```
+
+---
+
+### MorphingIcon
+**Purpose**: Smooth morphing between two SVG paths
+
+**Import**: `@shared/components/paths`
+
+**Props**:
+```typescript
+{
+  fromPath: string;           // Starting SVG path
+  toPath: string;             // Ending SVG path
+  progress?: number;          // Manual progress 0-1
+  morphDuration?: number;     // Animation duration (default: 30)
+  fill?: string;              // Fill color
+  stroke?: string;            // Stroke color
+  strokeWidth?: number;       // Stroke width
+  width?: number;             // SVG width (default: 24)
+  height?: number;            // SVG height (default: 24)
+  animate?: boolean;          // Enable auto animation
+  delay?: number;             // Animation delay
+  // Convenience props
+  fromIcon?: IconName;        // Use predefined icon
+  toIcon?: IconName;          // Use predefined icon
+  style?: React.CSSProperties;
+}
+```
+
+**Predefined Icons**:
+```typescript
+ICON_PATHS = {
+  play, pause, stop, checkmark, cross, heart,
+  star, menu, close, arrowRight, arrowLeft
+}
+```
+
+**When to Use**:
+- Icon state transitions (play → pause)
+- Menu animations (hamburger → X)
+- Success/error states (check ↔ cross)
+- Interactive UI elements
+
+**Example**:
+```tsx
+// Using predefined icons
+<MorphingIcon fromIcon="play" toIcon="pause" morphDuration={20} />
+
+// Using custom paths
+<MorphingIcon
+  fromPath="M8 5v14l11-7z"
+  toPath="M6 19h4V5H6v14zm8-14v14h4V5h-4z"
+/>
+```
+
+**Preset Transitions**:
+```tsx
+import { IconTransitions } from "@shared/components/paths";
+
+<IconTransitions.PlayPause morphDuration={25} />
+<IconTransitions.MenuClose morphDuration={20} />
+<IconTransitions.CheckCross morphDuration={30} />
+```
+
+---
+
+### LiquidPath
+**Purpose**: Path with liquid/wave distortion effect
+
+**Import**: `@shared/components/paths`
+
+**Props**:
+```typescript
+{
+  path: string;               // SVG path data
+  stroke?: string;            // Stroke color
+  strokeWidth?: number;       // Stroke width (default: 3)
+  fill?: string;              // Fill color (default: "none")
+  width?: number;             // SVG width (default: 200)
+  height?: number;            // SVG height (default: 200)
+  waveCount?: number;         // Number of waves (default: 2)
+  amplitude?: number;         // Wave amplitude (default: 5)
+  speed?: number;             // Animation speed (default: 1)
+  direction?: 'horizontal' | 'vertical' | 'both';
+  delay?: number;             // Animation delay
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Water/liquid effects
+- Organic animations
+- Ambient background elements
+- Sound wave visualizations
+
+**Example**:
+```tsx
+<LiquidPath
+  path="M0 50 L 200 50"
+  stroke="#00C2FF"
+  waveCount={3}
+  amplitude={15}
+  direction="vertical"
+/>
+```
+
+---
+
+### Path Utilities
+
+Re-exported from `@remotion/paths` for custom implementations:
+
+```typescript
+import {
+  // Path manipulation
+  evolvePath,           // Progressive path drawing
+  interpolatePath,      // Path morphing
+  warpPath,             // Path distortion
+  // Path info
+  getLength,            // Get path length
+  getPointAtLength,     // Point at distance
+  getTangentAtLength,   // Tangent angle
+  getSubpaths,          // Split compound paths
+  // Path construction
+  extendViewBox,        // Expand viewBox
+  resetPath,            // Move path to origin
+  scalePath,            // Scale path
+  translatePath,        // Move path
+  // Bounding box
+  getBoundingBox,       // Get path bounds
+} from "@shared/components/paths";
+```
+
+---
+
+## Optimized Video (NEW - Remotion 4.0+)
+
+### OptimizedVideo
+**Purpose**: Best-practice video component using OffthreadVideo
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+// Extends all OffthreadVideo props
+{
+  src: string;                // Video source URL
+  volume?: number;            // Volume 0-1
+  startFrom?: number;         // Start from frame
+  endAt?: number;             // End at frame
+  playbackRate?: number;      // Playback speed
+  muted?: boolean;            // Mute audio
+  // ... all other OffthreadVideo props
+}
+```
+
+**Why Use This**:
+- Uses `OffthreadVideo` which is 281% faster than deprecated `Video`
+- Extracts frames via FFmpeg C API outside the browser
+- Better memory management for multiple video layers
+- Consistent frame-perfect output
+
+**Example**:
+```tsx
+import { staticFile } from "remotion";
+import { OptimizedVideo } from "@shared/components/media";
+
+<OptimizedVideo
+  src={staticFile("video.mp4")}
+  volume={0.5}
+  startFrom={30}
+/>
+```
+
+---
+
+### MemorySafeVideo
+**Purpose**: Alias for OptimizedVideo with semantic naming
+
+**Import**: `@shared/components/media`
+
+Use when working with many video layers or long videos where memory efficiency is important.
+
+```tsx
+<MemorySafeVideo src={staticFile("long-video.mp4")} />
+```
+
+---
+
 ## Card Components
 
 ### CardFlip
@@ -2486,6 +2934,38 @@ import {
   ReactionGif,          // Circular meme-style reaction
   BannerGif,            // Full-width banner GIF
 } from "@shared/components/media";
+
+// Optimized Video (Remotion 4.0+ best practice)
+import {
+  OptimizedVideo,       // Uses OffthreadVideo (281% faster)
+  MemorySafeVideo,      // Alias for memory-constrained scenarios
+} from "@shared/components/media";
+
+// Animated Shapes (using @remotion/shapes)
+import {
+  AnimatedStar,         // Star with entry/rotation animations
+  AnimatedPie,          // Pie/arc with progress animation
+  AnimatedPolygon,      // Regular polygon (hexagon, etc.)
+  AnimatedTriangle,     // Directional triangle
+  AnimatedRect,         // Rectangle/square
+  AnimatedEllipse,      // Ellipse/circle with pulse
+  // Raw shapes for custom use
+  Circle, Ellipse, Pie, Polygon, Rect, Star, Triangle,
+  makeCircle, makeEllipse, makePie, makePolygon, makeRect, makeStar, makeTriangle,
+} from "@shared/components/shapes";
+
+// Path Animations (using @remotion/paths)
+import {
+  SelfDrawingPath,      // Pen-drawing effect
+  MorphingIcon,         // Path morphing (play→pause)
+  LiquidPath,           // Wave distortion effect
+  IconTransitions,      // Preset icon transitions
+  ICON_PATHS,           // Predefined icon paths
+  // Utilities for custom paths
+  evolvePath, interpolatePath, warpPath,
+  getLength, getPointAtLength, getTangentAtLength,
+  scalePath, translatePath, getBoundingBox,
+} from "@shared/components/paths";
 
 // Charts (including new)
 import {
