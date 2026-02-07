@@ -1,0 +1,43 @@
+{
+  "compositionId": "AIAgents",
+  "generatedAt": "2026-02-07T17:15:45.600Z",
+  "model": "fal-ai/flux/schnell",
+  "type": "img",
+  "assets": [
+    {
+      "sceneId": "hook",
+      "status": "success",
+      "file": "hook-bg.jpg"
+    },
+    {
+      "sceneId": "what_are",
+      "status": "success",
+      "file": "what_are-bg.jpg"
+    },
+    {
+      "sceneId": "how_work",
+      "status": "success",
+      "file": "how_work-bg.jpg"
+    },
+    {
+      "sceneId": "examples",
+      "status": "success",
+      "file": "examples-bg.jpg"
+    },
+    {
+      "sceneId": "multi_agent",
+      "status": "success",
+      "file": "multi_agent-bg.jpg"
+    },
+    {
+      "sceneId": "risks",
+      "status": "success",
+      "file": "risks-bg.jpg"
+    },
+    {
+      "sceneId": "outro",
+      "status": "success",
+      "file": "outro-bg.jpg"
+    }
+  ]
+}

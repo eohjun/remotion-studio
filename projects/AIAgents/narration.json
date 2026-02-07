@@ -1,0 +1,225 @@
+{
+  "metadata": {
+    "compositionId": "AIAgents",
+    "title": "The Rise of AI Agents — Your New Digital Coworkers",
+    "language": "en",
+    "voice": "onyx",
+    "targetDuration": 240,
+    "tone": "narrative-educational"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "What If Your Next Coworker Wasn't Human?",
+      "text": "What if your next coworker wasn't human? Not a chatbot that answers questions. Not an assistant that waits for commands. But an autonomous digital colleague that plans its own work, makes decisions, and gets things done, all on its own. This isn't science fiction. In 2026, AI agents are already transforming how we work.",
+      "visual_description": "Futuristic dark office space with holographic AI interface floating in air, glowing cyan and purple wireframe humanoid silhouette at a desk, digital data streams flowing around, cinematic lighting, 8k",
+      "duration": 25,
+      "visualPanels": [
+        {
+          "text": "What if your next coworker wasn't human?",
+          "startPercent": 0,
+          "endPercent": 15
+        },
+        {
+          "text": "Not a chatbot. Not an assistant.",
+          "startPercent": 17,
+          "endPercent": 35
+        },
+        {
+          "text": "An autonomous digital colleague.",
+          "startPercent": 37,
+          "endPercent": 60
+        },
+        {
+          "text": "In 2026, AI agents are transforming work.",
+          "startPercent": 62,
+          "endPercent": 100
+        }
+      ]
+    },
+    {
+      "id": "what_are",
+      "title": "What Exactly Is an AI Agent?",
+      "text": "So what exactly is an AI agent? Think of it this way. Traditional AI is like a calculator. You give it input, it gives you output. An AI agent is more like an employee. It perceives its environment, reasons about what needs to be done, takes action, and learns from the results. This is called the perception-reasoning-action loop. These agents don't just generate text. They can browse the web, write code, manage databases, send emails, and coordinate with other AI agents, all autonomously.",
+      "visual_description": "Split screen comparison, left side showing simple calculator interface in cold blue, right side showing a glowing neural network brain with interconnected nodes in warm cyan and purple, digital particles flowing between nodes, cinematic, 8k",
+      "duration": 35,
+      "visualPanels": [
+        {
+          "text": "Traditional AI is like a calculator.",
+          "startPercent": 0,
+          "endPercent": 20
+        },
+        {
+          "text": "An AI agent is more like an employee.",
+          "startPercent": 22,
+          "endPercent": 40
+        },
+        {
+          "text": "Perceive → Reason → Act → Learn",
+          "startPercent": 42,
+          "endPercent": 65
+        },
+        {
+          "text": "Browse, code, email — all autonomously.",
+          "startPercent": 67,
+          "endPercent": 100
+        }
+      ]
+    },
+    {
+      "id": "how_work",
+      "title": "How AI Agents Work Under the Hood",
+      "text": "Under the hood, AI agents have four key components. First, a perception module, their eyes and ears. It processes data from APIs, documents, and user inputs. Second, a reasoning engine, their brain. Large language models analyze context and plan multi-step actions. Third, memory, both short-term for current tasks, and long-term for learning from past experiences. And fourth, tools, the ability to interact with the real world. Browse websites. Query databases. Execute code. It's this combination of perception, reasoning, memory, and tools that makes them truly autonomous.",
+      "visual_description": "Technical blueprint style diagram on dark blue background, four glowing interconnected modules labeled with icons, circuit board patterns, holographic UI elements, data flow arrows in cyan, cinematic, 8k",
+      "duration": 40,
+      "visualPanels": [
+        {
+          "text": "Perception — eyes and ears",
+          "startPercent": 0,
+          "endPercent": 22
+        },
+        {
+          "text": "Reasoning — the brain",
+          "startPercent": 24,
+          "endPercent": 47
+        },
+        {
+          "text": "Memory — short-term and long-term",
+          "startPercent": 49,
+          "endPercent": 72
+        },
+        {
+          "text": "Tools — interact with the real world",
+          "startPercent": 74,
+          "endPercent": 100
+        }
+      ]
+    },
+    {
+      "id": "examples",
+      "title": "Real-World Impact Right Now",
+      "text": "And this isn't theoretical. It's happening right now. AMD partnered with Kore AI to deploy HR agents that reduced inquiry resolution time by eighty percent, with seventy percent employee satisfaction in just ninety days. John Deere's See and Spray system uses agentic AI to distinguish crops from weeds, saving seventy percent on chemicals. Banks implementing agentic AI for compliance workflows are seeing productivity gains of two hundred to two thousand percent. And in healthcare, AI agents are updating patient records, optimizing scheduling, and predicting bed occupancy in real time. According to a 2025 survey, seventy-two percent of medium and large enterprises are already using agentic AI.",
+      "visual_description": "Dark infographic dashboard showing multiple industry panels with glowing statistics and company logos, tech industry data visualization, holographic charts, neon cyan and green accents on dark navy, cinematic, 8k",
+      "duration": 50,
+      "visualPanels": [
+        {
+          "text": "AMD: 80% faster HR resolution",
+          "startPercent": 7,
+          "endPercent": 21,
+          "startFrame": 93,
+          "endFrame": 280
+        },
+        {
+          "text": "John Deere: 70% chemical savings",
+          "startPercent": 30,
+          "endPercent": 41,
+          "startFrame": 404,
+          "endFrame": 551
+        },
+        {
+          "text": "Banking: 200–2,000% productivity gains",
+          "startPercent": 46,
+          "endPercent": 66
+        },
+        {
+          "text": "72% of enterprises already using AI agents",
+          "startPercent": 89,
+          "endPercent": 94,
+          "startFrame": 1176,
+          "endFrame": 1246
+        }
+      ]
+    },
+    {
+      "id": "multi_agent",
+      "title": "The Multi-Agent Future",
+      "text": "But here's where it gets really interesting. The future isn't a single super-agent. It's teams of specialized agents working together. A research agent gathers data. An analysis agent finds patterns. A writing agent creates reports. An orchestrator coordinates them all. Inquiries about multi-agent systems have surged fourteen hundred forty-five percent since early 2024. Gartner predicts forty percent of enterprise applications will embed AI agents by the end of 2026, up from less than five percent just a year ago. The AI agents market is projected to reach nearly eleven billion dollars in 2026 alone.",
+      "visual_description": "Network of interconnected glowing AI agent nodes in different colors forming a constellation pattern, data flowing between nodes like neural pathways, dark space background with purple nebula, orchestrator node in center glowing brighter, cinematic, 8k",
+      "duration": 40,
+      "visualPanels": [
+        {
+          "text": "Teams of specialized agents working together.",
+          "startPercent": 78,
+          "endPercent": 94,
+          "startFrame": 916,
+          "endFrame": 1108
+        },
+        {
+          "text": "1,445% surge in multi-agent inquiries",
+          "startPercent": 59,
+          "endPercent": 78,
+          "startFrame": 690,
+          "endFrame": 916
+        },
+        {
+          "text": "40% of enterprise apps by end of 2026",
+          "startPercent": 78,
+          "endPercent": 94,
+          "startFrame": 916,
+          "endFrame": 1109
+        },
+        {
+          "text": "$11B market in 2026",
+          "startPercent": 59,
+          "endPercent": 75,
+          "startFrame": 690,
+          "endFrame": 886
+        }
+      ]
+    },
+    {
+      "id": "risks",
+      "title": "Challenges Ahead",
+      "text": "But it's not all smooth sailing. Gartner warns that over forty percent of agentic AI projects will fail by 2027, because legacy systems simply can't support modern AI demands. Security is another major concern. When agents can act autonomously, they need the same identity management and security protocols as human employees. Trust, governance, and explainability aren't optional. They're essential.",
+      "visual_description": "Dark moody scene with warning hexagonal icons glowing in amber and red, cracked digital shield, broken circuit patterns, alert symbols, dramatic lighting with deep shadows, cinematic, 8k",
+      "duration": 30,
+      "visualPanels": [
+        {
+          "text": "40%+ of agentic AI projects may fail by 2027",
+          "startPercent": 21,
+          "endPercent": 45,
+          "startFrame": 161,
+          "endFrame": 346
+        },
+        {
+          "text": "Security: agents need human-level protocols",
+          "startPercent": 21,
+          "endPercent": 44,
+          "startFrame": 161,
+          "endFrame": 334
+        },
+        {
+          "text": "Trust, governance, explainability are essential.",
+          "startPercent": 21,
+          "endPercent": 44,
+          "startFrame": 161,
+          "endFrame": 334
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "The Future Is Already Here",
+      "text": "The question isn't whether AI agents are coming. They're already here. The real question is, how will you work alongside them? The future of work isn't human versus AI. It's human with AI. And that future is already unfolding.",
+      "visual_description": "Human hand and AI holographic hand reaching toward each other against a backdrop of flowing digital particles, warm golden and cyan light merging at the center, inspirational and hopeful mood, cinematic, 8k",
+      "duration": 20,
+      "visualPanels": [
+        {
+          "text": "They're already here.",
+          "startPercent": 0,
+          "endPercent": 35
+        },
+        {
+          "text": "Human with AI.",
+          "startPercent": 40,
+          "endPercent": 70
+        },
+        {
+          "text": "The future is already unfolding.",
+          "startPercent": 75,
+          "endPercent": 100
+        }
+      ]
+    }
+  ]
+}

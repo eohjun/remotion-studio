@@ -1,0 +1,36 @@
+{
+  "title": "The Rise of AI Agents — Your New Digital Coworkers (2026)",
+  "description": "AI agents are no longer science fiction. In 2026, autonomous digital coworkers are transforming every industry — from HR to agriculture to banking. Learn how they work, real-world examples, and what the multi-agent future looks like.",
+  "language": "en",
+  "category": "Science & Technology",
+  "tags": [
+    "AI agents",
+    "agentic AI",
+    "artificial intelligence 2026",
+    "multi-agent systems",
+    "AI coworkers",
+    "autonomous AI",
+    "enterprise AI",
+    "AI trends 2026",
+    "future of work",
+    "digital coworkers",
+    "AI automation",
+    "Gartner AI predictions",
+    "AI agents explained",
+    "agentic AI architecture",
+    "AI agent examples"
+  ],
+  "chapters": [
+    { "time": "0:00", "title": "What If Your Next Coworker Wasn't Human?" },
+    { "time": "0:21", "title": "What Is an AI Agent?" },
+    { "time": "0:52", "title": "How AI Agents Work" },
+    { "time": "1:28", "title": "Real-World Impact" },
+    { "time": "2:13", "title": "The Multi-Agent Future" },
+    { "time": "2:53", "title": "Challenges Ahead" },
+    { "time": "3:19", "title": "The Future Is Already Here" }
+  ],
+  "visibility": "public",
+  "madeForKids": false,
+  "defaultAudioLanguage": "en",
+  "thumbnailText": "AI Agents Are Here"
+}

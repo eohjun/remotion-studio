@@ -1,0 +1,294 @@
+{
+  "compositionId": "AIAgents",
+  "generatedAt": "2026-02-07T17:11:14.502Z",
+  "fps": 60,
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 20.28,
+      "durationFrames": 1217,
+      "panels": [
+        {
+          "text": "What if your next coworker wasn't human?",
+          "startPercent": 0,
+          "endPercent": 15,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Not a chatbot. Not an assistant.",
+          "startPercent": 17,
+          "endPercent": 35,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "An autonomous digital colleague.",
+          "startPercent": 37,
+          "endPercent": 60,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "In 2026, AI agents are transforming work.",
+          "startPercent": 62,
+          "endPercent": 100,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        }
+      ]
+    },
+    {
+      "id": "what_are",
+      "duration": 30.264,
+      "durationFrames": 1816,
+      "panels": [
+        {
+          "text": "Traditional AI is like a calculator.",
+          "startPercent": 0,
+          "endPercent": 20,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "An AI agent is more like an employee.",
+          "startPercent": 22,
+          "endPercent": 40,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Perceive → Reason → Act → Learn",
+          "startPercent": 42,
+          "endPercent": 65,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Browse, code, email — all autonomously.",
+          "startPercent": 67,
+          "endPercent": 100,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        }
+      ]
+    },
+    {
+      "id": "how_work",
+      "duration": 35.088,
+      "durationFrames": 2106,
+      "panels": [
+        {
+          "text": "Perception — eyes and ears",
+          "startPercent": 0,
+          "endPercent": 22,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Reasoning — the brain",
+          "startPercent": 24,
+          "endPercent": 47,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Memory — short-term and long-term",
+          "startPercent": 49,
+          "endPercent": 72,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Tools — interact with the real world",
+          "startPercent": 74,
+          "endPercent": 100,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        }
+      ]
+    },
+    {
+      "id": "examples",
+      "duration": 44.256,
+      "durationFrames": 2656,
+      "panels": [
+        {
+          "text": "AMD: 80% faster HR resolution",
+          "startSeconds": 3.0999999046325684,
+          "endSeconds": 9.319999694824219,
+          "startFrame": 93,
+          "endFrame": 280,
+          "startPercent": 7,
+          "endPercent": 21,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "John Deere: 70% chemical savings",
+          "startSeconds": 13.460000038146973,
+          "endSeconds": 18.360000610351562,
+          "startFrame": 404,
+          "endFrame": 551,
+          "startPercent": 30,
+          "endPercent": 41,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "Banking: 200–2,000% productivity gains",
+          "startPercent": 46,
+          "endPercent": 66,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "72% of enterprises already using AI agents",
+          "startSeconds": 39.20000076293945,
+          "endSeconds": 41.52000045776367,
+          "startFrame": 1176,
+          "endFrame": 1246,
+          "startPercent": 89,
+          "endPercent": 94,
+          "confidence": 0.7,
+          "matchType": "words"
+        }
+      ]
+    },
+    {
+      "id": "multi_agent",
+      "duration": 39.288,
+      "durationFrames": 2358,
+      "panels": [
+        {
+          "text": "Teams of specialized agents working together.",
+          "startSeconds": 30.540000915527344,
+          "endSeconds": 36.91999816894531,
+          "startFrame": 916,
+          "endFrame": 1108,
+          "startPercent": 78,
+          "endPercent": 94,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "1,445% surge in multi-agent inquiries",
+          "startSeconds": 23,
+          "endSeconds": 30.540000915527344,
+          "startFrame": 690,
+          "endFrame": 916,
+          "startPercent": 59,
+          "endPercent": 78,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "40% of enterprise apps by end of 2026",
+          "startSeconds": 30.540000915527344,
+          "endSeconds": 36.959999084472656,
+          "startFrame": 916,
+          "endFrame": 1109,
+          "startPercent": 78,
+          "endPercent": 94,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "$11B market in 2026",
+          "startSeconds": 23,
+          "endSeconds": 29.520000457763672,
+          "startFrame": 690,
+          "endFrame": 886,
+          "startPercent": 59,
+          "endPercent": 75,
+          "confidence": 0.7,
+          "matchType": "words"
+        }
+      ]
+    },
+    {
+      "id": "risks",
+      "duration": 25.512,
+      "durationFrames": 1531,
+      "panels": [
+        {
+          "text": "40%+ of agentic AI projects may fail by 2027",
+          "startSeconds": 5.380000114440918,
+          "endSeconds": 11.539999961853027,
+          "startFrame": 161,
+          "endFrame": 346,
+          "startPercent": 21,
+          "endPercent": 45,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "Security: agents need human-level protocols",
+          "startSeconds": 5.380000114440918,
+          "endSeconds": 11.140000343322754,
+          "startFrame": 161,
+          "endFrame": 334,
+          "startPercent": 21,
+          "endPercent": 44,
+          "confidence": 0.7,
+          "matchType": "words"
+        },
+        {
+          "text": "Trust, governance, explainability are essential.",
+          "startSeconds": 5.380000114440918,
+          "endSeconds": 11.140000343322754,
+          "startFrame": 161,
+          "endFrame": 334,
+          "startPercent": 21,
+          "endPercent": 44,
+          "confidence": 0.7,
+          "matchType": "words"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "duration": 13.968,
+      "durationFrames": 839,
+      "panels": [
+        {
+          "text": "They're already here.",
+          "startPercent": 0,
+          "endPercent": 35,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "Human with AI.",
+          "startPercent": 40,
+          "endPercent": 70,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        },
+        {
+          "text": "The future is already unfolding.",
+          "startPercent": 75,
+          "endPercent": 100,
+          "confidence": 0,
+          "matchType": "none",
+          "warning": "타임스탬프 매칭 실패 - 수동 확인 필요"
+        }
+      ]
+    }
+  ]
+}

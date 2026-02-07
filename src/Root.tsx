@@ -51,6 +51,30 @@ import {
   FPS as FPS_PT,
 } from "./videos/PomodoroTechnique/constants";
 import {
+  IdeaToReality,
+  ideaToRealitySchema,
+} from "./videos/IdeaToReality";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_ITR,
+  FPS as FPS_ITR,
+} from "./videos/IdeaToReality/constants";
+import {
+  LucidDream,
+  LucidDreamSchema,
+} from "./videos/LucidDream";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_LD,
+  FPS as FPS_LD,
+} from "./videos/LucidDream/constants";
+import {
+  AIAgents,
+  AIAgentsSchema,
+} from "./videos/AIAgents";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_AA,
+  FPS as FPS_AA,
+} from "./videos/AIAgents/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -183,6 +207,40 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={PomodoroTechniqueSchema}
+        defaultProps={{}}
+      />
+      <Composition
+        id="IdeaToReality"
+        component={IdeaToReality}
+        durationInFrames={TOTAL_DURATION_ITR}
+        fps={FPS_ITR}
+        width={1920}
+        height={1080}
+        schema={ideaToRealitySchema}
+        defaultProps={{
+          showDebugInfo: false,
+        }}
+      />
+
+      <Composition
+        id="LucidDream"
+        component={LucidDream}
+        durationInFrames={TOTAL_DURATION_LD}
+        fps={FPS_LD}
+        width={1920}
+        height={1080}
+        schema={LucidDreamSchema}
+        defaultProps={{}}
+      />
+
+      <Composition
+        id="AIAgents"
+        component={AIAgents}
+        durationInFrames={TOTAL_DURATION_AA}
+        fps={FPS_AA}
+        width={1920}
+        height={1080}
+        schema={AIAgentsSchema}
         defaultProps={{}}
       />
 

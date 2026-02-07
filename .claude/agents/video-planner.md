@@ -481,6 +481,18 @@ EFFECT_SELECTION_RULES:
 
 // NEW: Background Selection Rules
 BACKGROUND_SELECTION_RULES:
+  // 🚨 HIGHEST PRIORITY — AI-generated backgrounds (fal.ai)
+  // 이 규칙은 다른 모든 배경 규칙보다 우선합니다!
+  IF narration.scenes[].visual_description EXISTS:
+    OVERRIDE: true  // 다른 배경 규칙 무시, AI 배경이 최우선
+    PRIMARY: Img (staticFile) + dark overlay (opacity: 0.5-0.7) + gradient fallback
+    PATTERN: SceneBackground / DreamBackground / TechBackground
+    PREREQUISITE: 🚨 run `node scripts/generate-ai-assets.mjs {compositionId}` BEFORE implementation
+    OVERLAY: linear-gradient with overlayOpacity (텍스트 많은 씬: 0.65-0.7, 비주얼 중심: 0.4-0.5)
+    FALLBACK: AnimatedGradient renders behind AI image (always visible if image fails)
+    REFERENCE: LucidDream/index.tsx (DreamBackground), AIAgents/index.tsx (TechBackground)
+
+  // 아래 규칙들은 visual_description이 없을 때만 적용됩니다.
   IF contentType === 'technical':
     PRIMARY: GridPattern (type: 'dots' or 'lines')
     FALLBACK: ParticleField (particleCount: 15, sparse)
@@ -495,14 +507,6 @@ BACKGROUND_SELECTION_RULES:
 
   IF globalStyle === 'modern' OR globalStyle === 'minimal':
     PRIMARY: GridPattern (type: 'hexagons', opacity: 0.2)
-
-  // AI-generated backgrounds (fal.ai)
-  IF narration.scenes[].visual_description EXISTS:
-    PRIMARY: AIImage + dark overlay (opacity: 0.5-0.7) + AnimatedGradient fallback
-    PATTERN: DreamBackground (reference: LucidDream/index.tsx)
-    PREREQUISITE: run `node scripts/generate-ai-assets.mjs {compositionId}` before implementation
-    OVERLAY: Semi-transparent gradient on top of AI image for text readability
-    FALLBACK: AnimatedGradient if AI image fails to load
 
 VALIDATE_PLAN(plan):
   FOR each scene IN plan.scenes:

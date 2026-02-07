@@ -255,10 +255,13 @@ const validateNarration = (json) => {
     errors.push("⚠️ First scene should be type 'intro'");
   }
 
-  // 6. visual_description 존재 여부 확인 (경고만, 에러 아님)
-  const hasVisualDesc = json.scenes?.some(s => s.visual_description);
+  // 6. visual_description 존재 여부 확인
+  const scenesWithDesc = json.scenes?.filter(s => s.visual_description) || [];
+  const hasVisualDesc = scenesWithDesc.length > 0;
   if (!hasVisualDesc) {
-    errors.push("ℹ️ No visual_description in any scene - AI background images will not be generated. Consider adding visual_description for richer visuals.");
+    errors.push("⚠️ No visual_description in any scene — AI background images will NOT be generated. Add visual_description for richer visuals.");
+  } else {
+    errors.push(`✅ ${scenesWithDesc.length}/${json.scenes?.length} scenes have visual_description → Step 4.5 AI asset generation REQUIRED`);
   }
 
   return errors;
@@ -294,14 +297,15 @@ Requirements:
 
 Save output to: `projects/{compositionId}/video-plan.json`
 
-### Step 4.5: Generate AI Assets (If visual_description exists)
+### Step 4.5: 🚨 MANDATORY — Generate AI Assets
 
-**narration.json에 `visual_description` 필드가 있는 씬이 하나라도 있으면 실행합니다.**
+**narration.json에 `visual_description` 필드가 있는 씬이 하나라도 있으면 반드시 실행합니다.**
+**⚠️ 이 단계를 건너뛰면 Step 5에서 AI 배경 대신 단색 배경을 쓰게 됩니다. 절대 건너뛰지 마세요!**
 
 **전제조건**: `.env`에 `FAL_KEY` 설정 필요
 
 ```bash
-# 기본 실행 (visual_description이 있는 모든 씬)
+# 🚨 반드시 실행 — TTS 생성 전에 AI 배경 이미지 먼저!
 node scripts/generate-ai-assets.mjs {compositionId}
 
 # 드라이런 (API 호출 없이 프롬프트만 확인)
@@ -315,26 +319,13 @@ node scripts/generate-ai-assets.mjs {compositionId} --type video
 ```
 
 **출력 경로**: `public/videos/{compositionId}/ai-assets/`
-- `{sceneId}.jpg` - 각 씬의 AI 생성 배경 이미지
-- `{sceneId}.mp4` - 비디오 타입 선택 시
+- `{sceneId}-bg.jpg` - 각 씬의 AI 생성 배경 이미지
+- `manifest.json` - 생성된 에셋 목록
 
-**구현 패턴 (DreamBackground)**:
-```tsx
-// AIImage를 배경으로 사용하는 패턴 (LucidDream/index.tsx 참조)
-import { AIImage } from "@shared/components/media";
-
-const DreamBackground: React.FC<{ sceneId: string }> = ({ sceneId }) => (
-  <AbsoluteFill>
-    <AIImage
-      src={`/videos/${compositionId}/ai-assets/${sceneId}.jpg`}
-      fallbackColor="#1a1a2e"
-    />
-    {/* 텍스트 가독성을 위한 오버레이 */}
-    <AbsoluteFill style={{
-      background: "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)"
-    }} />
-  </AbsoluteFill>
-);
+**✅ 검증**: 실행 후 반드시 확인:
+```bash
+ls public/videos/{compositionId}/ai-assets/  # 파일 존재 확인
+cat public/videos/{compositionId}/ai-assets/manifest.json  # 매니페스트 확인
 ```
 
 **⚠️ visual_description이 없는 씬은 건너뜁니다.**
@@ -346,6 +337,51 @@ Using the video plan, create:
 1. **Composition file**: `src/videos/{compositionId}/index.tsx`
 2. **Scenes file**: `src/videos/{compositionId}/scenes.ts`
 3. **Constants file**: `src/videos/{compositionId}/constants.ts`
+
+#### 🚨 CRITICAL: AI 배경 사용 (AI Assets가 있을 때)
+
+**Step 4.5에서 AI 에셋을 생성했다면, 모든 씬에서 반드시 AI 배경 컴포넌트를 사용해야 합니다!**
+단색 배경이나 그라데이션만 사용하면 안 됩니다.
+
+```tsx
+// ❌ WRONG: AI 에셋이 있는데 단색/그라데이션 배경 사용
+const Background = () => (
+  <AbsoluteFill style={{ background: "radial-gradient(...)" }} />
+);
+
+// ✅ CORRECT: AI 배경 + 그라데이션 폴백 + 오버레이
+import { Img, staticFile } from "remotion";
+
+const SceneBackground: React.FC<{
+  sceneId: string;
+  overlayOpacity?: number;
+}> = ({ sceneId, overlayOpacity = 0.6 }) => (
+  <AbsoluteFill>
+    {/* 그라데이션 폴백 (이미지 로드 전/실패 시) */}
+    <AbsoluteFill style={{ background: `radial-gradient(...)` }} />
+    {/* AI 생성 이미지 */}
+    <AbsoluteFill>
+      <Img
+        src={staticFile(`${AI_ASSETS_BASE}/${sceneId}-bg.jpg`)}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        onError={undefined}
+      />
+    </AbsoluteFill>
+    {/* 텍스트 가독성을 위한 다크 오버레이 */}
+    <AbsoluteFill style={{
+      background: `linear-gradient(180deg, rgba(0,0,0,${overlayOpacity}) 0%, rgba(0,0,0,${overlayOpacity + 0.15}) 100%)`
+    }} />
+  </AbsoluteFill>
+);
+```
+
+**체크리스트:**
+```
+□ constants.ts에 AI_ASSETS_BASE 경로 정의
+□ 공통 배경 컴포넌트 정의 (SceneBackground 또는 DreamBackground/TechBackground)
+□ 모든 씬에서 AI 배경 컴포넌트 사용 (sceneId 매핑)
+□ overlayOpacity 조절 (텍스트 많은 씬: 0.65-0.7, 비주얼 중심: 0.4-0.5)
+```
 
 #### 🚨 CRITICAL: FPS 동적 읽기
 

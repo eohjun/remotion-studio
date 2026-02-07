@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-02-07T17:09:42.063Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/AIAgents/audio",
+  "compositionId": "AIAgents",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 20.28,
+      "durationFrames": 1217,
+      "text": "What if your next coworker wasn't human? Not a chatbot that answers questions. Not an assistant that..."
+    },
+    {
+      "id": "what_are",
+      "file": "what_are.mp3",
+      "durationSeconds": 30.264,
+      "durationFrames": 1816,
+      "text": "So what exactly is an AI agent? Think of it this way. Traditional AI is like a calculator. You give ..."
+    },
+    {
+      "id": "how_work",
+      "file": "how_work.mp3",
+      "durationSeconds": 35.088,
+      "durationFrames": 2106,
+      "text": "Under the hood, AI agents have four key components. First, a perception module, their eyes and ears...."
+    },
+    {
+      "id": "examples",
+      "file": "examples.mp3",
+      "durationSeconds": 44.256,
+      "durationFrames": 2656,
+      "text": "And this isn't theoretical. It's happening right now. AMD partnered with Kore AI to deploy HR agents..."
+    },
+    {
+      "id": "multi_agent",
+      "file": "multi_agent.mp3",
+      "durationSeconds": 39.288,
+      "durationFrames": 2358,
+      "text": "But here's where it gets really interesting. The future isn't a single super-agent. It's teams of sp..."
+    },
+    {
+      "id": "risks",
+      "file": "risks.mp3",
+      "durationSeconds": 25.512,
+      "durationFrames": 1531,
+      "text": "But it's not all smooth sailing. Gartner warns that over forty percent of agentic AI projects will f..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 13.968,
+      "durationFrames": 839,
+      "text": "The question isn't whether AI agents are coming. They're already here. The real question is, how wil..."
+    }
+  ]
+}
