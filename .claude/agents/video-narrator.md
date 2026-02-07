@@ -266,6 +266,7 @@ Generate a `narration.json` file with this structure:
       "text": "자이가르닉 효과. 왜 미완성된 일이 더 오래 기억될까요?",
       "duration": 6,
       "visualCue": "Title card with topic name",
+      "visual_description": "Abstract dark background with glowing neural network connections, deep purple and blue tones, cinematic, 8k",
       "notes": "제목을 크게 표시하며 주제 소개"
     },
     {
@@ -275,6 +276,7 @@ Generate a `narration.json` file with this structure:
       "text": "1920년대 비엔나의 한 카페. 한 웨이터가...",
       "duration": 15,
       "visualCue": "Vienna cafe scene",
+      "visual_description": "A dimly lit 1920s Viennese cafe interior, warm golden light from chandeliers, wooden tables with white tablecloths, elegant art deco decor, cinematic, 8k",
       "notes": "스토리로 시청자 관심 유도"
     }
   ],
@@ -282,6 +284,45 @@ Generate a `narration.json` file with this structure:
   "sceneCount": 8
 }
 ```
+
+### visual_description 필드 (AI 배경 이미지용)
+
+**`visual_description`은 fal.ai AI 이미지 생성의 프롬프트로 사용됩니다.**
+
+`generate-ai-assets.mjs` 스크립트가 이 필드를 읽어 각 씬의 배경 이미지를 자동 생성합니다.
+
+**`visualCue` vs `visual_description` 차이:**
+| 필드 | 용도 | 대상 | 예시 |
+|------|------|------|------|
+| `visualCue` | 일반 비주얼 방향 | 인간 (planner/producer) | "Vienna cafe scene" |
+| `visual_description` | AI 이미지 프롬프트 | fal.ai 모델 | "A dimly lit 1920s Viennese cafe interior, warm golden light..." |
+
+**작성 가이드:**
+1. **영어로 작성** - fal.ai 모델은 영어 프롬프트에 최적화됨
+2. **구체적 시각 묘사** - 색상, 구도, 조명, 분위기를 명시
+3. **품질 지시어** - 끝에 `"cinematic, 8k"` 포함
+4. **텍스트/글자 묘사 금지** - AI 이미지 모델은 텍스트 렌더링이 약함
+5. **사람 얼굴 최소화** - AI 생성 얼굴은 불쾌감 유발 가능
+
+**좋은 예시:**
+```json
+{
+  "visual_description": "Abstract visualization of a human brain with glowing synapses firing, deep blue and purple color palette, ethereal atmosphere, cinematic, 8k"
+}
+```
+
+**나쁜 예시:**
+```json
+{
+  "visual_description": "자이가르닉 효과 설명 이미지"
+}
+```
+→ 한국어, 추상적, 텍스트 묘사
+
+**visual_description이 필요 없는 경우:**
+- 텍스트/차트만 표시하는 씬 (data, comparison)
+- 기본 AnimatedGradient 배경이면 충분한 씬
+- 이 필드가 없는 씬은 기존 CSS 배경 사용
 
 ---
 

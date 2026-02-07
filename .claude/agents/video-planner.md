@@ -274,14 +274,17 @@ VALID_EFFECTS = [
   'ChromaticAberration',  // NEW: RGB channel separation (tech/retro)
   'GlitchEffect',         // NEW: Digital glitch (tech/dramatic)
   'ColorGrading',         // NEW: Color correction presets
-  'Bloom'                 // NEW: Glow effect for highlights
+  'Bloom',                // NEW: Glow effect for highlights
+  'OfficialLightLeak'     // @remotion/light-leaks WebGL (seed, hueShift, durationInFrames)
 ]
 
 VALID_TEXT_ANIMATIONS = [
   'TypewriterText', 'HighlightText', 'RevealText', 'GlitchText',
   'PoppingText', 'StaggerGroup', 'TextMorph',
   // Auto-sizing text components
-  'FitText', 'FitTitle', 'FitSubtitle', 'FitMultilineText'
+  'FitText', 'FitTitle', 'FitSubtitle', 'FitMultilineText',
+  // Word-level captions
+  'AnimatedCaption'  // @remotion/captions word-level animated subtitles
 ]
 
 // Vector animations (Lottie)
@@ -297,7 +300,10 @@ VALID_LOTTIE_ANIMATIONS = [
 VALID_MEDIA_COMPONENTS = [
   'GifPlayer',           // Core GIF player
   'ReactionGif',         // Circular meme-style reaction GIF
-  'BannerGif'            // Full-width banner GIF
+  'BannerGif',           // Full-width banner GIF
+  // AI-generated media (fal.ai)
+  'AIImage',             // fal.ai generated image (src, fallbackColor)
+  'AIVideo'              // fal.ai generated video (src, fallbackColor)
 ]
 
 VALID_CHARTS = [
@@ -439,6 +445,10 @@ EFFECT_SELECTION_RULES:
     CONSIDER effect: GlitchEffect (intensity: 'medium')
     CONSIDER effect: Bloom (threshold: 0.6)
     CONSIDER effect: ChromaticAberration (animated: true)
+    CONSIDER effect: OfficialLightLeak (seed: random, hueShift: theme-based)
+    // OfficialLightLeak uses WebGL (@remotion/light-leaks) - superior to CSS LightLeak
+    // Props: seed (number), hueShift (degrees), durationInFrames
+    // Best for: reveals, transitions, dreamy/ethereal scenes
 
   // Cinematic/Story content
   IF contentType === 'narrative' OR globalStyle === 'cinematic':
@@ -485,6 +495,14 @@ BACKGROUND_SELECTION_RULES:
 
   IF globalStyle === 'modern' OR globalStyle === 'minimal':
     PRIMARY: GridPattern (type: 'hexagons', opacity: 0.2)
+
+  // AI-generated backgrounds (fal.ai)
+  IF narration.scenes[].visual_description EXISTS:
+    PRIMARY: AIImage + dark overlay (opacity: 0.5-0.7) + AnimatedGradient fallback
+    PATTERN: DreamBackground (reference: LucidDream/index.tsx)
+    PREREQUISITE: run `node scripts/generate-ai-assets.mjs {compositionId}` before implementation
+    OVERLAY: Semi-transparent gradient on top of AI image for text readability
+    FALLBACK: AnimatedGradient if AI image fails to load
 
 VALIDATE_PLAN(plan):
   FOR each scene IN plan.scenes:
@@ -1061,6 +1079,7 @@ StoryTemplate의 `timed-sequence` 레이아웃을 사용할 때는:
 | Energy | `PoppingText` | Dynamic titles, Shorts intros |
 | Sequential | `StaggerGroup` | List reveals, bullet points, step-by-step |
 | Transform | `TextMorph` | A→B text changes, counters, dramatic shifts |
+| Word-level sync | `AnimatedCaption` | Word-by-word subtitle sync with timestamps |
 
 ### Auto-Sizing Text (NEW)
 | Purpose | Component | When to Use |
@@ -1148,6 +1167,7 @@ STAGGER_SELECTION_RULES:
 | Cinematic | NoiseTexture + AnimatedGradient | type: 'grain', opacity: 0.03 |
 | Futuristic | GridPattern | type: 'hexagons', animated: true |
 | Minimal | GridPattern | type: 'lines', opacity: 0.2 |
+| AI-generated | AIImage + overlay | fal.ai (requires visual_description in narration) |
 
 ### Effects by Purpose
 | Purpose | Component | Configuration |
@@ -1155,6 +1175,7 @@ STAGGER_SELECTION_RULES:
 | Cinematic depth | Vignette | intensity: 0.5 |
 | Film look | FilmGrain | amount: 0.03 |
 | Warm moments | LightLeak | type: 'gradient' |
+| Dreamy/Ethereal | OfficialLightLeak | seed: number, hueShift: degrees (WebGL) |
 | Overall mood | ColorGrading | preset: by tone |
 | Tech aesthetic | ChromaticAberration | intensity: 0.15, subtle |
 | Dramatic moment | GlitchEffect | intensity: 'medium' |

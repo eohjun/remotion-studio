@@ -78,6 +78,17 @@ Source Material (PDF, Docx, URL, Topic)
       │
       ▼
 ┌─────────────────────────────────┐
+│  Phase 3.7: AI ASSET GENERATION │
+│  Script: generate-ai-assets.mjs │
+│  Input: narration.json          │
+│       (visual_description field)│
+│  Output: public/videos/{id}/    │
+│          ai-assets/*.jpg        │
+│  (visual_description 있을 때만) │
+└─────────────────────────────────┘
+      │
+      ▼
+┌─────────────────────────────────┐
 │  Phase 4: IMPLEMENTATION        │
 │  You (video-producer)           │
 │  Output: React components       │
@@ -244,6 +255,12 @@ const validateNarration = (json) => {
     errors.push("⚠️ First scene should be type 'intro'");
   }
 
+  // 6. visual_description 존재 여부 확인 (경고만, 에러 아님)
+  const hasVisualDesc = json.scenes?.some(s => s.visual_description);
+  if (!hasVisualDesc) {
+    errors.push("ℹ️ No visual_description in any scene - AI background images will not be generated. Consider adding visual_description for richer visuals.");
+  }
+
   return errors;
 };
 ```
@@ -276,6 +293,51 @@ Requirements:
 ```
 
 Save output to: `projects/{compositionId}/video-plan.json`
+
+### Step 4.5: Generate AI Assets (If visual_description exists)
+
+**narration.json에 `visual_description` 필드가 있는 씬이 하나라도 있으면 실행합니다.**
+
+**전제조건**: `.env`에 `FAL_KEY` 설정 필요
+
+```bash
+# 기본 실행 (visual_description이 있는 모든 씬)
+node scripts/generate-ai-assets.mjs {compositionId}
+
+# 드라이런 (API 호출 없이 프롬프트만 확인)
+node scripts/generate-ai-assets.mjs {compositionId} --dry-run
+
+# 특정 씬만 생성
+node scripts/generate-ai-assets.mjs {compositionId} --scenes hook,discovery
+
+# 비디오 타입으로 생성 (이미지 대신)
+node scripts/generate-ai-assets.mjs {compositionId} --type video
+```
+
+**출력 경로**: `public/videos/{compositionId}/ai-assets/`
+- `{sceneId}.jpg` - 각 씬의 AI 생성 배경 이미지
+- `{sceneId}.mp4` - 비디오 타입 선택 시
+
+**구현 패턴 (DreamBackground)**:
+```tsx
+// AIImage를 배경으로 사용하는 패턴 (LucidDream/index.tsx 참조)
+import { AIImage } from "@shared/components/media";
+
+const DreamBackground: React.FC<{ sceneId: string }> = ({ sceneId }) => (
+  <AbsoluteFill>
+    <AIImage
+      src={`/videos/${compositionId}/ai-assets/${sceneId}.jpg`}
+      fallbackColor="#1a1a2e"
+    />
+    {/* 텍스트 가독성을 위한 오버레이 */}
+    <AbsoluteFill style={{
+      background: "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)"
+    }} />
+  </AbsoluteFill>
+);
+```
+
+**⚠️ visual_description이 없는 씬은 건너뜁니다.**
 
 ### Step 5: Implement Video Composition
 

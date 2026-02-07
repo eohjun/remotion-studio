@@ -173,6 +173,54 @@ const panels = visualPanels.scenes.find(s => s.id === "hook")?.panels || [];
 
 **Audio cleanup**: `node scripts/cleanup-audio.mjs` - 미사용 오디오 파일 감지/삭제
 
+### AI Asset Generation (fal.ai)
+
+**환경 설정**: `.env`에 `FAL_KEY` 필요
+```bash
+FAL_KEY=your-fal-ai-api-key
+```
+
+**사용법:**
+```bash
+# AI 배경 이미지 생성 (narration.json의 visual_description 사용)
+node scripts/generate-ai-assets.mjs {compositionId}
+
+# 드라이런 (API 호출 없이 프롬프트만 확인)
+node scripts/generate-ai-assets.mjs {compositionId} --dry-run
+
+# 특정 씬만 생성
+node scripts/generate-ai-assets.mjs {compositionId} --scenes hook,discovery
+
+# 비디오 타입으로 생성
+node scripts/generate-ai-assets.mjs {compositionId} --type video
+```
+
+**전제 조건**: `projects/{compositionId}/narration.json`의 씬에 `visual_description` 필드 필요
+- `visual_description`: 영어로 작성된 구체적 이미지 묘사 (fal.ai 프롬프트)
+- `visualCue`와 별개 - `visualCue`는 인간용, `visual_description`은 AI 모델용
+
+**출력 경로**: `public/videos/{compositionId}/ai-assets/`
+- `{sceneId}.jpg` - 이미지 (기본)
+- `{sceneId}.mp4` - 비디오 (`--type video` 사용 시)
+
+**기본 모델**: fal.ai flux/schnell (빠른 이미지 생성)
+
+**컴포넌트 사용:**
+- `AIImage` (`@shared/components/media`) - AI 이미지 표시 + fallback
+- `AIVideo` (`@shared/components/media`) - AI 비디오 표시 + fallback
+- `OfficialLightLeak` (`@shared/components/effects`) - @remotion/light-leaks WebGL 효과
+
+**DreamBackground 패턴** (LucidDream 참조):
+```tsx
+<AbsoluteFill>
+  <AIImage src={`/videos/${id}/ai-assets/${sceneId}.jpg`} fallbackColor="#1a1a2e" />
+  <AbsoluteFill style={{
+    background: "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)"
+  }} />
+  {/* Scene content on top */}
+</AbsoluteFill>
+```
+
 ### Video Management Scripts
 
 ```bash

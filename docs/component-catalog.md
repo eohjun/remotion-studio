@@ -12,10 +12,12 @@
 |----------|-----------|-------------|
 | Scene Templates | 15 | `@shared/templates/scenes` |
 | Backgrounds | 5 | `@shared/components/backgrounds` |
-| Effects | 10 | `@shared/components/effects` |
+| Effects | 11 | `@shared/components/effects` |
 | Text Animations | 7 | `@shared/templates/animations` |
+| Captions | 1 | `@shared/components/captions` |
 | Auto-Sizing Text | 4 | `@shared/components/text` |
 | Vector Animations (Lottie) | 5 | `@shared/components/animations` |
+| AI Media | 2 | `@shared/components/media` |
 | GIF Playback | 3 | `@shared/components/media` |
 | Audio Visualization | 1 | `@shared/components/waveforms` |
 | Diagrams | 1 | `@shared/components/diagrams` |
@@ -876,6 +878,42 @@ interface DialogueEntry {
 
 ---
 
+### OfficialLightLeak
+**Purpose**: WebGL-based light leak effect using `@remotion/light-leaks`
+
+**Import**: `@shared/components/effects`
+
+**Props**:
+```typescript
+{
+  seed: number;              // Random seed for unique pattern
+  hueShift?: number;         // Color rotation in degrees (0-360)
+  durationInFrames: number;  // Animation duration
+}
+```
+
+**When to Use**:
+- Scene transitions and reveals
+- Dreamy or ethereal atmospheres
+- Cinematic warmth and visual interest
+- Prefer over CSS `LightLeak` for higher quality
+
+**Avoid When**:
+- Technical/data-heavy scenes
+- Clean minimal design
+- Performance-critical renders (WebGL overhead)
+
+**Example**:
+```tsx
+import { OfficialLightLeak } from "@shared/components/effects";
+
+<OfficialLightLeak seed={42} hueShift={120} durationInFrames={150} />
+```
+
+**Note**: WebGL-based, significantly higher quality than CSS `LightLeak`. Each `seed` produces a unique pattern.
+
+---
+
 ## Text Animations
 
 ### TypewriterText
@@ -1464,6 +1502,131 @@ Components for rendering GIF animations synchronized with video frames using `@r
 **Features**: 1920px width, cover fit, fade-in
 
 **Best For**: Scene dividers, ambient backgrounds, full-width visuals
+
+---
+
+## AI Media (fal.ai)
+
+### AIImage
+**Purpose**: Display AI-generated images from fal.ai with graceful fallback
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+{
+  src: string;              // Path to AI-generated image (e.g., "/videos/{id}/ai-assets/{scene}.jpg")
+  fallbackColor?: string;   // Background color when image fails to load (default: "#1a1a2e")
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Scene backgrounds from `visual_description` in narration.json
+- Dreamy/atmospheric scenes requiring unique imagery
+- DreamBackground pattern (AIImage + overlay)
+
+**Prerequisite**: Run `node scripts/generate-ai-assets.mjs {compositionId}` to generate images
+
+**Example**:
+```tsx
+import { AIImage } from "@shared/components/media";
+
+// Basic usage
+<AIImage
+  src={`/videos/${compositionId}/ai-assets/hook.jpg`}
+  fallbackColor="#1a1a2e"
+/>
+
+// DreamBackground pattern (with overlay for text readability)
+<AbsoluteFill>
+  <AIImage src={`/videos/${compositionId}/ai-assets/${sceneId}.jpg`} fallbackColor="#1a1a2e" />
+  <AbsoluteFill style={{
+    background: "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%)"
+  }} />
+</AbsoluteFill>
+```
+
+---
+
+### AIVideo
+**Purpose**: Display AI-generated video from fal.ai with graceful fallback
+
+**Import**: `@shared/components/media`
+
+**Props**:
+```typescript
+{
+  src: string;              // Path to AI-generated video (e.g., "/videos/{id}/ai-assets/{scene}.mp4")
+  fallbackColor?: string;   // Background color when video fails to load
+  style?: React.CSSProperties;
+}
+```
+
+**When to Use**:
+- Animated scene backgrounds
+- Short cinematic loops
+
+**Prerequisite**: Run `node scripts/generate-ai-assets.mjs {compositionId} --type video`
+
+**Example**:
+```tsx
+import { AIVideo } from "@shared/components/media";
+
+<AIVideo
+  src={`/videos/${compositionId}/ai-assets/hook.mp4`}
+  fallbackColor="#1a1a2e"
+/>
+```
+
+---
+
+## Captions
+
+### AnimatedCaption
+**Purpose**: Word-level animated subtitles using `@remotion/captions`
+
+**Import**: `@shared/components/captions`
+
+**Props**:
+```typescript
+{
+  timestamps: {
+    scenes: Array<{
+      id: string;
+      words: Array<{
+        word: string;
+        start: number;       // Start time in seconds
+        end: number;         // End time in seconds
+        startFrame: number;
+        endFrame: number;
+      }>;
+    }>;
+  };
+  sceneId: string;           // Which scene's words to render
+  style?: React.CSSProperties;
+}
+```
+
+**Caption Type** (`@remotion/captions`):
+```typescript
+{ text: string; startMs: number; endMs: number; timestampMs: number; confidence: number }
+```
+
+**When to Use**:
+- Karaoke-style word highlighting
+- Accessibility captions synced with audio
+- Shorts/TikTok-style word-by-word subtitles
+
+**Data Source**: Whisper timestamps at `public/videos/{id}/audio/timestamps.json`
+
+**Example**:
+```tsx
+import { AnimatedCaption } from "@shared/components/captions";
+import timestamps from "../../../public/videos/{compositionId}/audio/timestamps.json";
+
+<AnimatedCaption timestamps={timestamps} sceneId="hook" />
+```
 
 ---
 
