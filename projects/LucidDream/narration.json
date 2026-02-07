@@ -1,0 +1,433 @@
+{
+  "metadata": {
+    "compositionId": "LucidDream",
+    "title": "루시드 드림 - 자각몽의 과학",
+    "language": "ko",
+    "voice": "nova",
+    "targetDuration": 330,
+    "tone": "narrative-educational"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "꿈 속에서 깨어나다",
+      "text": "매일 밤, 당신은 또 다른 세계로 들어갑니다. 하늘을 날고, 낯선 도시를 걸으며, 불가능한 일들을 경험하죠. 하지만 대부분은 그것이 꿈이라는 걸 모릅니다. 만약 꿈 속에서 이것이 꿈이라는 걸 깨달을 수 있다면 어떨까요? 이것이 바로 루시드 드림, 자각몽입니다.",
+      "visual_description": "Surreal dreamscape, floating islands, bioluminescent flora, purple aurora, silhouette of person standing on cliff edge, cinematic lighting, 8k",
+      "duration": 22,
+      "visualPanels": [
+        {
+          "text": "매일 밤 당신은 또 다른 세계로 들어갑니다.",
+          "startPercent": 0,
+          "endPercent": 18,
+          "startFrame": 0,
+          "endFrame": 104
+        },
+        {
+          "text": "하늘을 날고 낯선 도시를 걸으며 불가능한 일들을 경험하죠.",
+          "startPercent": 20,
+          "endPercent": 40,
+          "startFrame": 118,
+          "endFrame": 233
+        },
+        {
+          "text": "하지만 대부분은 그것이 꿈이라는 걸 모릅니다.",
+          "startPercent": 45,
+          "endPercent": 59,
+          "startFrame": 262,
+          "endFrame": 347
+        },
+        {
+          "text": "만약 꿈 속에서 이것이 꿈이라는 걸 깨달을 수 있다면 어떨까요?",
+          "startPercent": 65,
+          "endPercent": 84,
+          "startFrame": 378,
+          "endFrame": 488
+        },
+        {
+          "text": "이것이 바로 루시드 드림, 자강몽입니다.",
+          "startPercent": 85,
+          "endPercent": 99,
+          "startFrame": 496,
+          "endFrame": 576
+        }
+      ]
+    },
+    {
+      "id": "what_is",
+      "title": "자각몽이란",
+      "text": "자각몽이란, 꿈을 꾸는 동안 자신이 꿈속에 있다는 것을 인식하는 상태입니다. 단순히 아는 것을 넘어, 꿈의 내용을 의식적으로 조종할 수도 있습니다. 놀랍게도 전체 인구의 약 55퍼센트가 일생에 한 번 이상 자각몽을 경험한 적이 있다고 보고합니다. 자각몽은 주로 렘수면 단계에서 발생합니다. 렘수면은 뇌가 깨어있을 때와 거의 비슷한 수준으로 활성화되는 특별한 수면 단계입니다.",
+      "visual_description": "Human brain cross-section with glowing neural pathways in blue and purple, REM sleep visualization with eye movement trails, dark navy background, cinematic",
+      "duration": 50,
+      "visualPanels": [
+        {
+          "text": "자각몽이란 꿈을 꾸는 동안 자신이 꿈속에 있다는 것을 인식하는 상태입니다.",
+          "startPercent": 0,
+          "endPercent": 19,
+          "startFrame": 0,
+          "endFrame": 172
+        },
+        {
+          "text": "단순히 아는 것을 넘어 꿈의 내용을 의식적으로 조종할 수도 있습니다.",
+          "startPercent": 22,
+          "endPercent": 38,
+          "startFrame": 198,
+          "endFrame": 337
+        },
+        {
+          "text": "놀랍게도 전체 인구의 약 55%가 일생에 한 번 이상 자각몽을 경험한 적이 있다고 보고합니다.",
+          "startPercent": 43,
+          "endPercent": 65,
+          "startFrame": 377,
+          "endFrame": 572
+        },
+        {
+          "text": "자각몽은 주로 렘수면 단계에서 발생합니다.",
+          "startPercent": 69,
+          "endPercent": 78,
+          "startFrame": 608,
+          "endFrame": 689
+        },
+        {
+          "text": "렘수면은 뇌가 깨어있을 때와 거의 비슷한 수준으로 활성화되는 특별한 수면 단계입니다.",
+          "startPercent": 78,
+          "endPercent": 99,
+          "startFrame": 689,
+          "endFrame": 876
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "뇌과학",
+      "text": "1975년, 영국의 심리학자 키스 허른은 렘수면 중 안구 운동을 이용해 자각몽을 세계 최초로 과학적으로 입증했습니다. 이후 스탠포드의 스티븐 라버지 박사가 이 연구를 확장했죠. 자각몽 상태에서 뇌는 놀라운 변화를 보입니다. 전전두엽 피질의 활동이 급격히 증가합니다. 이 영역은 자기 인식과 비판적 사고를 담당합니다. 일반적인 꿈에서는 이 부분이 비활성화되어 있어서, 아무리 비현실적인 상황도 의심 없이 받아들이게 됩니다. 자각몽은 잠든 뇌에서 의식의 스위치가 켜지는 순간입니다.",
+      "visual_description": "Brain with highlighted prefrontal cortex glowing in golden light, fMRI scan data overlay, neural threads connecting brain regions, scientific visualization, cinematic",
+      "duration": 60,
+      "visualPanels": [
+        {
+          "text": "1975년 영국의 심리학자 키스 허르는 렘 수면 중 안구 운동을 이용해 자각몽을 세계 최초로 과학적으로 입증했습니다.",
+          "startPercent": 0,
+          "endPercent": 26,
+          "startFrame": 0,
+          "endFrame": 295
+        },
+        {
+          "text": "이후 스탠포드의 스티븐 라버지 박사가 이 연구를 확장했죠. 자각몽 상태에서 뇌는 놀라운 변화를 보입니다.",
+          "startPercent": 28,
+          "endPercent": 48,
+          "startFrame": 313,
+          "endFrame": 545
+        },
+        {
+          "text": "전전두엽 피질의 활동이 급격히 증가합니다. 이 영역은 자기인식과 비판적 사고를 담당합니다.",
+          "startPercent": 49,
+          "endPercent": 66,
+          "startFrame": 555,
+          "endFrame": 746
+        },
+        {
+          "text": "일반적인 꿈에서는 이 부분이 비활성화되어 있어서 아무리 비현실적인 상황도 의심 없이 받아들이게 됩니다.",
+          "startPercent": 67,
+          "endPercent": 88,
+          "startFrame": 764,
+          "endFrame": 993
+        },
+        {
+          "text": "자각몽은 잠든 뇌에서 의식의 스위치가 켜지는 순간입니다.",
+          "startPercent": 89,
+          "endPercent": 99,
+          "startFrame": 1009,
+          "endFrame": 1124
+        }
+      ]
+    },
+    {
+      "id": "techniques",
+      "title": "유도 기법",
+      "text": "자각몽을 경험하려면 세 가지 대표적인 기법이 있습니다. 첫째, 현실 점검법. 낮 동안 주기적으로 자신에게 물어보세요. 지금 내가 꿈을 꾸고 있는 건 아닐까? 손가락을 세거나, 시계를 두 번 확인하세요. 꿈에서는 이런 것들이 불안정합니다. 이 습관이 꿈속으로 전이됩니다. 둘째, 마일드 기법. 잠들기 직전, 다음 꿈에서 꿈을 인식하겠다고 반복해서 의도합니다. 라버지 박사가 개발한 이 방법은 연구에서 가장 효과적인 기법 중 하나로 입증되었습니다. 셋째, 와일드 기법. 깨어있는 의식을 유지하면서 직접 꿈 상태로 진입하는 고급 방법입니다. 숙련자들이 주로 사용하며, 수면 마비를 경험할 수 있어 주의가 필요합니다.",
+      "visual_description": "Person meditating in cosmic void surrounded by three glowing energy fields representing hand reality check moon intention and eye awareness, purple indigo palette, cinematic",
+      "duration": 80,
+      "visualPanels": [
+        {
+          "text": "자강몽을 경험하려면 세 가지 대표적인 기법이 있습니다.",
+          "startPercent": 0,
+          "endPercent": 8,
+          "startFrame": 0,
+          "endFrame": 104
+        },
+        {
+          "text": "첫째, 현실 점검법.",
+          "startPercent": 9,
+          "endPercent": 13,
+          "startFrame": 127,
+          "endFrame": 174
+        },
+        {
+          "text": "낮 동안 주기적으로 자신에게 물어보세요.",
+          "startPercent": 14,
+          "endPercent": 18,
+          "startFrame": 191,
+          "endFrame": 254
+        },
+        {
+          "text": "지금 내가 꿈을 꾸고 있는 건 아닐까?",
+          "startPercent": 20,
+          "endPercent": 24,
+          "startFrame": 272,
+          "endFrame": 330
+        },
+        {
+          "text": "손가락을 세거나 시계를 두 번 확인하세요.",
+          "startPercent": 25,
+          "endPercent": 30,
+          "startFrame": 344,
+          "endFrame": 414
+        },
+        {
+          "text": "꿈에서는 이런 것들이 불안정합니다.",
+          "startPercent": 31,
+          "endPercent": 35,
+          "startFrame": 434,
+          "endFrame": 489
+        },
+        {
+          "text": "이 습관이 꿈속으로 전이됩니다.",
+          "startPercent": 36,
+          "endPercent": 40,
+          "startFrame": 501,
+          "endFrame": 560
+        },
+        {
+          "text": "둘째, 마일드 기법.",
+          "startPercent": 42,
+          "endPercent": 46,
+          "startFrame": 587,
+          "endFrame": 634
+        },
+        {
+          "text": "잠들기 직전 다음 꿈에서 꿈을 인식하겠다고 반복해서 의도합니다.",
+          "startPercent": 47,
+          "endPercent": 57,
+          "startFrame": 659,
+          "endFrame": 797
+        },
+        {
+          "text": "라버지 박사가 개발한 이 방법은",
+          "startPercent": 57,
+          "endPercent": 62,
+          "startFrame": 797,
+          "endFrame": 860
+        },
+        {
+          "text": "연구에서 가장 효과적인 기법 중 하나로 입증되었습니다.",
+          "startPercent": 62,
+          "endPercent": 70,
+          "startFrame": 860,
+          "endFrame": 970
+        },
+        {
+          "text": "셋째, 와일드 기법.",
+          "startPercent": 73,
+          "endPercent": 76,
+          "startFrame": 1015,
+          "endFrame": 1052
+        },
+        {
+          "text": "깨어있는 의식을 유지하면서",
+          "startPercent": 77,
+          "endPercent": 80,
+          "startFrame": 1072,
+          "endFrame": 1114
+        },
+        {
+          "text": "직접 꿈 상태로 진입하는 고급 방법입니다.",
+          "startPercent": 80,
+          "endPercent": 87,
+          "startFrame": 1114,
+          "endFrame": 1210
+        },
+        {
+          "text": "숙련자들이 주로 사용하며",
+          "startPercent": 89,
+          "endPercent": 93,
+          "startFrame": 1236,
+          "endFrame": 1290
+        },
+        {
+          "text": "수면마비를 경험할 수 있어 주의가 필요합니다.",
+          "startPercent": 93,
+          "endPercent": 100,
+          "startFrame": 1290,
+          "endFrame": 1383
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "title": "효과",
+      "text": "자각몽은 단순한 재미를 넘어 실질적인 효과가 있습니다. 첫째, 반복되는 악몽을 치료하는 데 효과적입니다. 자각몽 훈련을 받은 환자들은 악몽의 빈도가 크게 감소했습니다. 둘째, 창의성이 폭발합니다. 살바도르 달리와 메리 셸리 같은 예술가들은 꿈에서 영감을 얻었습니다. 자각몽에서는 의식적으로 창의적 문제를 탐구할 수 있죠. 셋째, 심리적 회복력이 강화됩니다. 꿈속에서 두려움에 직면하고 극복하는 경험은, 깨어있는 삶에서의 자신감으로 이어집니다.",
+      "visual_description": "Person breaking free from dark shadows ascending into starry sky, golden light emanating from figure, butterflies made of light, triumphant pose, cinematic",
+      "duration": 50,
+      "visualPanels": [
+        {
+          "text": "자각몽은 단순한 재미를 넘어 실질적인 효과가 있습니다.",
+          "startPercent": 0,
+          "endPercent": 11,
+          "startFrame": 0,
+          "endFrame": 118
+        },
+        {
+          "text": "첫째, 반복되는 악몽을 치료하는데 효과적입니다.",
+          "startPercent": 14,
+          "endPercent": 23,
+          "startFrame": 147,
+          "endFrame": 238
+        },
+        {
+          "text": "자각몽 훈련을 받은 환자들은 악몽의 빈도가 크게 감소했습니다.",
+          "startPercent": 25,
+          "endPercent": 36,
+          "startFrame": 259,
+          "endFrame": 368
+        },
+        {
+          "text": "둘째, 창의성이 폭발합니다.",
+          "startPercent": 38,
+          "endPercent": 42,
+          "startFrame": 393,
+          "endFrame": 439
+        },
+        {
+          "text": "살바도르 달리와 메리 쉘리 같은 예술가들은 꿈에서 영감을 얻었습니다.",
+          "startPercent": 45,
+          "endPercent": 57,
+          "startFrame": 463,
+          "endFrame": 589
+        },
+        {
+          "text": "자각몽에선 의식적으로 창의적 문제를 탐구할 수 있죠.",
+          "startPercent": 60,
+          "endPercent": 69,
+          "startFrame": 622,
+          "endFrame": 717
+        },
+        {
+          "text": "셋째, 심리적 회복력이 강화됩니다.",
+          "startPercent": 74,
+          "endPercent": 80,
+          "startFrame": 763,
+          "endFrame": 822
+        },
+        {
+          "text": "꿈속에서 두려움에 직면하고 극복하는 경험은 깨어있는 삶에서의 자신감으로 이어집니다.",
+          "startPercent": 80,
+          "endPercent": 99,
+          "startFrame": 822,
+          "endFrame": 1027
+        }
+      ]
+    },
+    {
+      "id": "risks",
+      "title": "주의사항",
+      "text": "그러나 자각몽에도 주의할 점이 있습니다. 수면 마비를 경험할 수 있습니다. 몸은 깨어났지만 움직일 수 없는 상태로, 일시적이지만 불안감을 줄 수 있습니다. 또한 거짓 각성이라는 현상이 있습니다. 꿈에서 깼다고 생각했지만 실제로는 또 다른 꿈인 상태입니다. 가장 중요한 것은, 자각몽에 집착하여 수면의 질을 떨어뜨리지 않는 것입니다. 충분한 휴식이 우선입니다.",
+      "visual_description": "Dark corridor with infinite doorways creating recursive loop effect, balanced scale floating in shadows, moody atmospheric lighting, cinematic",
+      "duration": 40,
+      "visualPanels": [
+        {
+          "text": "그러나 자각몽에도 주의할 점이 있습니다.",
+          "startPercent": 0,
+          "endPercent": 12,
+          "startFrame": 0,
+          "endFrame": 98
+        },
+        {
+          "text": "수면마비를 경험할 수 있습니다.",
+          "startPercent": 15,
+          "endPercent": 20,
+          "startFrame": 124,
+          "endFrame": 167
+        },
+        {
+          "text": "몸은 깨어났지만 움직일 수 없는 상태로",
+          "startPercent": 23,
+          "endPercent": 32,
+          "startFrame": 190,
+          "endFrame": 265
+        },
+        {
+          "text": "일시적이지만 불안감을 줄 수 있습니다.",
+          "startPercent": 34,
+          "endPercent": 43,
+          "startFrame": 277,
+          "endFrame": 349
+        },
+        {
+          "text": "또한 거짓 각성이라는 현상이 있습니다.",
+          "startPercent": 45,
+          "endPercent": 54,
+          "startFrame": 372,
+          "endFrame": 439
+        },
+        {
+          "text": "꿈에서 깼다고 생각했지만 실제로는 또 다른 꿈인 상태입니다.",
+          "startPercent": 57,
+          "endPercent": 69,
+          "startFrame": 466,
+          "endFrame": 563
+        },
+        {
+          "text": "가장 중요한 것은 자각몽에 집착하여 수면의 질을 떨어뜨리지 않는 것입니다.",
+          "startPercent": 73,
+          "endPercent": 88,
+          "startFrame": 595,
+          "endFrame": 723
+        },
+        {
+          "text": "충분한 휴식이 우선입니다.",
+          "startPercent": 92,
+          "endPercent": 97,
+          "startFrame": 757,
+          "endFrame": 795
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "오늘 밤의 초대",
+      "text": "오늘 밤 잠들기 전, 한 번만 자신에게 물어보세요. 지금 내가 꿈을 꾸고 있는 건 아닐까? 어쩌면 오늘 밤, 당신은 꿈 속에서 깨어나게 될지도 모릅니다. 자각몽의 문은 항상 열려 있습니다.",
+      "visual_description": "Ornate ancient doorway opening to reveal starry sky with nebula, golden light spilling through, stepping stones leading into cosmos, invitation atmosphere, cinematic",
+      "duration": 28,
+      "visualPanels": [
+        {
+          "text": "오늘 밤 들기 전 한 번만 자신에게 물어보세요.",
+          "startPercent": 0,
+          "endPercent": 27,
+          "startFrame": 0,
+          "endFrame": 109
+        },
+        {
+          "text": "지금 내가 꿈을 꾸고 있는 건 아닐까?",
+          "startPercent": 31,
+          "endPercent": 43,
+          "startFrame": 125,
+          "endFrame": 176
+        },
+        {
+          "text": "어쩌면 오늘 밤 당신은 꿈속에서 깨어나게 될지도 모릅니다.",
+          "startPercent": 49,
+          "endPercent": 73,
+          "startFrame": 201,
+          "endFrame": 300
+        },
+        {
+          "text": "자각몽의 문은 항상 열려 있습니다.",
+          "startPercent": 78,
+          "endPercent": 96,
+          "startFrame": 318,
+          "endFrame": 391
+        }
+      ]
+    }
+  ],
+  "totalDuration": 330
+}

@@ -29,6 +29,7 @@ import { COLORS, GRADIENTS } from "../../components/constants";
 import { EffectsStack } from "../../components/effects/EffectsStack";
 import type { EffectsConfig } from "../../components/effects";
 import { SceneTransition } from "../../components/SceneTransition";
+import { AnimatedCaption, type CaptionStyle, type CaptionPosition } from "../../components/captions";
 import type { BaseSceneProps } from "./types";
 
 // ============================================================================
@@ -91,6 +92,20 @@ export interface SceneBaseProps extends BaseSceneProps {
   entryAnimation?: SceneEntryAnimation;
   /** Entry animation duration in frames */
   entryDuration?: number;
+
+  // Captions
+  /** Enable animated captions */
+  captionEnabled?: boolean;
+  /** Caption animation style */
+  captionStyle?: CaptionStyle;
+  /** Caption vertical position */
+  captionPosition?: CaptionPosition;
+  /** Composition ID for caption timestamps */
+  captionCompositionId?: string;
+  /** Scene ID for caption timestamps */
+  captionSceneId?: string;
+  /** Pre-loaded timestamps data */
+  captionTimestamps?: Record<string, unknown>;
 
   // Additional options
   /** Additional class name */
@@ -307,6 +322,13 @@ export const SceneBase: React.FC<SceneBaseProps> = ({
   // Entry Animation
   entryAnimation = "none",
   entryDuration = 20,
+  // Captions
+  captionEnabled = false,
+  captionStyle = "tiktok",
+  captionPosition = "bottom",
+  captionCompositionId,
+  captionSceneId,
+  captionTimestamps,
   // Transitions
   durationInFrames,
   useTransition = false,
@@ -373,6 +395,18 @@ export const SceneBase: React.FC<SceneBaseProps> = ({
           children
         )}
       </AbsoluteFill>
+
+      {/* Caption overlay layer */}
+      {captionEnabled && captionCompositionId && captionSceneId && (
+        <AnimatedCaption
+          compositionId={captionCompositionId}
+          sceneId={captionSceneId}
+          style={captionStyle}
+          position={captionPosition}
+          timestamps={captionTimestamps as never}
+          enabled={captionEnabled}
+        />
+      )}
     </AbsoluteFill>
   );
 

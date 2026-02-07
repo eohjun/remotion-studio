@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-02-07T15:39:24.863Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/LucidDream/audio",
+  "compositionId": "LucidDream",
+  "scenes": [
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 19.44,
+      "durationFrames": 1167,
+      "text": "매일 밤, 당신은 또 다른 세계로 들어갑니다. 하늘을 날고, 낯선 도시를 걸으며, 불가능한 일들을 경험하죠. 하지만 대부분은 그것이 꿈이라는 걸 모릅니다. 만약 꿈 속에서 이것이 ..."
+    },
+    {
+      "id": "what_is",
+      "file": "what_is.mp3",
+      "durationSeconds": 29.376,
+      "durationFrames": 1763,
+      "text": "자각몽이란, 꿈을 꾸는 동안 자신이 꿈속에 있다는 것을 인식하는 상태입니다. 단순히 아는 것을 넘어, 꿈의 내용을 의식적으로 조종할 수도 있습니다. 놀랍게도 전체 인구의 약 55퍼..."
+    },
+    {
+      "id": "science",
+      "file": "science.mp3",
+      "durationSeconds": 37.824,
+      "durationFrames": 2270,
+      "text": "1975년, 영국의 심리학자 키스 허른은 렘수면 중 안구 운동을 이용해 자각몽을 세계 최초로 과학적으로 입증했습니다. 이후 스탠포드의 스티븐 라버지 박사가 이 연구를 확장했죠. 자..."
+    },
+    {
+      "id": "techniques",
+      "file": "techniques.mp3",
+      "durationSeconds": 46.296,
+      "durationFrames": 2778,
+      "text": "자각몽을 경험하려면 세 가지 대표적인 기법이 있습니다. 첫째, 현실 점검법. 낮 동안 주기적으로 자신에게 물어보세요. 지금 내가 꿈을 꾸고 있는 건 아닐까? 손가락을 세거나, 시계..."
+    },
+    {
+      "id": "benefits",
+      "file": "benefits.mp3",
+      "durationSeconds": 34.464,
+      "durationFrames": 2068,
+      "text": "자각몽은 단순한 재미를 넘어 실질적인 효과가 있습니다. 첫째, 반복되는 악몽을 치료하는 데 효과적입니다. 자각몽 훈련을 받은 환자들은 악몽의 빈도가 크게 감소했습니다. 둘째, 창의..."
+    },
+    {
+      "id": "risks",
+      "file": "risks.mp3",
+      "durationSeconds": 27.288,
+      "durationFrames": 1638,
+      "text": "그러나 자각몽에도 주의할 점이 있습니다. 수면 마비를 경험할 수 있습니다. 몸은 깨어났지만 움직일 수 없는 상태로, 일시적이지만 불안감을 줄 수 있습니다. 또한 거짓 각성이라는 현..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 13.632,
+      "durationFrames": 818,
+      "text": "오늘 밤 잠들기 전, 한 번만 자신에게 물어보세요. 지금 내가 꿈을 꾸고 있는 건 아닐까? 어쩌면 오늘 밤, 당신은 꿈 속에서 깨어나게 될지도 모릅니다. 자각몽의 문은 항상 열려 ..."
+    }
+  ]
+}

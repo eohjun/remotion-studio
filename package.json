@@ -14,10 +14,13 @@
   "repository": {},
   "license": "UNLICENSED",
   "dependencies": {
+    "@fal-ai/client": "^1.9.0",
     "@remotion/animation-utils": "4.0.419",
+    "@remotion/captions": "^4.0.419",
     "@remotion/cli": "4.0.419",
     "@remotion/gif": "^4.0.419",
     "@remotion/layout-utils": "^4.0.419",
+    "@remotion/light-leaks": "^4.0.419",
     "@remotion/lottie": "^4.0.419",
     "@remotion/motion-blur": "4.0.419",
     "@remotion/noise": "4.0.419",

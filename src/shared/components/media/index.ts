@@ -4,6 +4,7 @@
  * GIF and video media playback utilities.
  * - GIF playback using @remotion/gif
  * - Optimized video playback with environment-aware component selection
+ * - AI-generated image and video components
  */
 
 export { GifPlayer, ReactionGif, BannerGif } from "./GifPlayer";
@@ -14,3 +15,9 @@ export {
   MemorySafeVideo,
 } from "./OptimizedVideo";
 export type { OptimizedVideoProps } from "./OptimizedVideo";
+
+export { AIImage } from "./AIImage";
+export type { AIImageProps } from "./AIImage";
+
+export { AIVideo } from "./AIVideo";
+export type { AIVideoProps } from "./AIVideo";

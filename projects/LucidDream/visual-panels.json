@@ -1,0 +1,617 @@
+{
+  "compositionId": "LucidDream",
+  "generatedAt": "2026-02-07T15:40:53.252Z",
+  "fps": 60,
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 19.44,
+      "durationFrames": 1167,
+      "panels": [
+        {
+          "text": "매일 밤 당신은 또 다른 세계로 들어갑니다.",
+          "startSeconds": 0,
+          "endSeconds": 3.4800000190734863,
+          "startFrame": 0,
+          "endFrame": 104,
+          "startPercent": 0,
+          "endPercent": 18,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "하늘을 날고 낯선 도시를 걸으며 불가능한 일들을 경험하죠.",
+          "startSeconds": 3.9200000762939453,
+          "endSeconds": 7.78000020980835,
+          "startFrame": 118,
+          "endFrame": 233,
+          "startPercent": 20,
+          "endPercent": 40,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "하지만 대부분은 그것이 꿈이라는 걸 모릅니다.",
+          "startSeconds": 8.739999771118164,
+          "endSeconds": 11.5600004196167,
+          "startFrame": 262,
+          "endFrame": 347,
+          "startPercent": 45,
+          "endPercent": 59,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "만약 꿈 속에서 이것이 꿈이라는 걸 깨달을 수 있다면 어떨까요?",
+          "startSeconds": 12.600000381469727,
+          "endSeconds": 16.260000228881836,
+          "startFrame": 378,
+          "endFrame": 488,
+          "startPercent": 65,
+          "endPercent": 84,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "이것이 바로 루시드 드림, 자강몽입니다.",
+          "startSeconds": 16.540000915527344,
+          "endSeconds": 19.200000762939453,
+          "startFrame": 496,
+          "endFrame": 576,
+          "startPercent": 85,
+          "endPercent": 99,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "what_is",
+      "duration": 29.376,
+      "durationFrames": 1763,
+      "panels": [
+        {
+          "text": "자각몽이란 꿈을 꾸는 동안 자신이 꿈속에 있다는 것을 인식하는 상태입니다.",
+          "startSeconds": 0,
+          "endSeconds": 5.71999979019165,
+          "startFrame": 0,
+          "endFrame": 172,
+          "startPercent": 0,
+          "endPercent": 19,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "단순히 아는 것을 넘어 꿈의 내용을 의식적으로 조종할 수도 있습니다.",
+          "startSeconds": 6.599999904632568,
+          "endSeconds": 11.220000267028809,
+          "startFrame": 198,
+          "endFrame": 337,
+          "startPercent": 22,
+          "endPercent": 38,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "놀랍게도 전체 인구의 약 55%가 일생에 한 번 이상 자각몽을 경험한 적이 있다고 보고합니다.",
+          "startSeconds": 12.5600004196167,
+          "endSeconds": 19.079999923706055,
+          "startFrame": 377,
+          "endFrame": 572,
+          "startPercent": 43,
+          "endPercent": 65,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "자각몽은 주로 렘수면 단계에서 발생합니다.",
+          "startSeconds": 20.280000686645508,
+          "endSeconds": 22.979999542236328,
+          "startFrame": 608,
+          "endFrame": 689,
+          "startPercent": 69,
+          "endPercent": 78,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "렘수면은 뇌가 깨어있을 때와 거의 비슷한 수준으로 활성화되는 특별한 수면 단계입니다.",
+          "startSeconds": 22.979999542236328,
+          "endSeconds": 29.200000762939453,
+          "startFrame": 689,
+          "endFrame": 876,
+          "startPercent": 78,
+          "endPercent": 99,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "duration": 37.824,
+      "durationFrames": 2270,
+      "panels": [
+        {
+          "text": "1975년 영국의 심리학자 키스 허르는 렘 수면 중 안구 운동을 이용해 자각몽을 세계 최초로 과학적으로 입증했습니다.",
+          "startSeconds": 0,
+          "endSeconds": 9.819999694824219,
+          "startFrame": 0,
+          "endFrame": 295,
+          "startPercent": 0,
+          "endPercent": 26,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "이후 스탠포드의 스티븐 라버지 박사가 이 연구를 확장했죠. 자각몽 상태에서 뇌는 놀라운 변화를 보입니다.",
+          "startSeconds": 10.420000076293945,
+          "endSeconds": 18.15999984741211,
+          "startFrame": 313,
+          "endFrame": 545,
+          "startPercent": 28,
+          "endPercent": 48,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "전전두엽 피질의 활동이 급격히 증가합니다. 이 영역은 자기인식과 비판적 사고를 담당합니다.",
+          "startSeconds": 18.5,
+          "endSeconds": 24.8799991607666,
+          "startFrame": 555,
+          "endFrame": 746,
+          "startPercent": 49,
+          "endPercent": 66,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "일반적인 꿈에서는 이 부분이 비활성화되어 있어서 아무리 비현실적인 상황도 의심 없이 받아들이게 됩니다.",
+          "startSeconds": 25.479999542236328,
+          "endSeconds": 33.099998474121094,
+          "startFrame": 764,
+          "endFrame": 993,
+          "startPercent": 67,
+          "endPercent": 88,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "자각몽은 잠든 뇌에서 의식의 스위치가 켜지는 순간입니다.",
+          "startSeconds": 33.619998931884766,
+          "endSeconds": 37.459999084472656,
+          "startFrame": 1009,
+          "endFrame": 1124,
+          "startPercent": 89,
+          "endPercent": 99,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "techniques",
+      "duration": 46.296,
+      "durationFrames": 2778,
+      "panels": [
+        {
+          "text": "자강몽을 경험하려면 세 가지 대표적인 기법이 있습니다.",
+          "startSeconds": 0,
+          "endSeconds": 3.4800000190734863,
+          "startFrame": 0,
+          "endFrame": 104,
+          "startPercent": 0,
+          "endPercent": 8,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "첫째, 현실 점검법.",
+          "startSeconds": 4.21999979019165,
+          "endSeconds": 5.800000190734863,
+          "startFrame": 127,
+          "endFrame": 174,
+          "startPercent": 9,
+          "endPercent": 13,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "낮 동안 주기적으로 자신에게 물어보세요.",
+          "startSeconds": 6.360000133514404,
+          "endSeconds": 8.479999542236328,
+          "startFrame": 191,
+          "endFrame": 254,
+          "startPercent": 14,
+          "endPercent": 18,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "지금 내가 꿈을 꾸고 있는 건 아닐까?",
+          "startSeconds": 9.079999923706055,
+          "endSeconds": 11,
+          "startFrame": 272,
+          "endFrame": 330,
+          "startPercent": 20,
+          "endPercent": 24,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "손가락을 세거나 시계를 두 번 확인하세요.",
+          "startSeconds": 11.460000038146973,
+          "endSeconds": 13.800000190734863,
+          "startFrame": 344,
+          "endFrame": 414,
+          "startPercent": 25,
+          "endPercent": 30,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "꿈에서는 이런 것들이 불안정합니다.",
+          "startSeconds": 14.460000038146973,
+          "endSeconds": 16.299999237060547,
+          "startFrame": 434,
+          "endFrame": 489,
+          "startPercent": 31,
+          "endPercent": 35,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "이 습관이 꿈속으로 전이됩니다.",
+          "startSeconds": 16.700000762939453,
+          "endSeconds": 18.65999984741211,
+          "startFrame": 501,
+          "endFrame": 560,
+          "startPercent": 36,
+          "endPercent": 40,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "둘째, 마일드 기법.",
+          "startSeconds": 19.579999923706055,
+          "endSeconds": 21.139999389648438,
+          "startFrame": 587,
+          "endFrame": 634,
+          "startPercent": 42,
+          "endPercent": 46,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "잠들기 직전 다음 꿈에서 꿈을 인식하겠다고 반복해서 의도합니다.",
+          "startSeconds": 21.959999084472656,
+          "endSeconds": 26.559999465942383,
+          "startFrame": 659,
+          "endFrame": 797,
+          "startPercent": 47,
+          "endPercent": 57,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "라버지 박사가 개발한 이 방법은",
+          "startSeconds": 26.559999465942383,
+          "endSeconds": 28.65999984741211,
+          "startFrame": 797,
+          "endFrame": 860,
+          "startPercent": 57,
+          "endPercent": 62,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "연구에서 가장 효과적인 기법 중 하나로 입증되었습니다.",
+          "startSeconds": 28.65999984741211,
+          "endSeconds": 32.34000015258789,
+          "startFrame": 860,
+          "endFrame": 970,
+          "startPercent": 62,
+          "endPercent": 70,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "셋째, 와일드 기법.",
+          "startSeconds": 33.84000015258789,
+          "endSeconds": 35.08000183105469,
+          "startFrame": 1015,
+          "endFrame": 1052,
+          "startPercent": 73,
+          "endPercent": 76,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "깨어있는 의식을 유지하면서",
+          "startSeconds": 35.720001220703125,
+          "endSeconds": 37.13999938964844,
+          "startFrame": 1072,
+          "endFrame": 1114,
+          "startPercent": 77,
+          "endPercent": 80,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "직접 꿈 상태로 진입하는 고급 방법입니다.",
+          "startSeconds": 37.13999938964844,
+          "endSeconds": 40.31999969482422,
+          "startFrame": 1114,
+          "endFrame": 1210,
+          "startPercent": 80,
+          "endPercent": 87,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "숙련자들이 주로 사용하며",
+          "startSeconds": 41.20000076293945,
+          "endSeconds": 43,
+          "startFrame": 1236,
+          "endFrame": 1290,
+          "startPercent": 89,
+          "endPercent": 93,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "수면마비를 경험할 수 있어 주의가 필요합니다.",
+          "startSeconds": 43,
+          "endSeconds": 46.099998474121094,
+          "startFrame": 1290,
+          "endFrame": 1383,
+          "startPercent": 93,
+          "endPercent": 100,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "duration": 34.464,
+      "durationFrames": 2068,
+      "panels": [
+        {
+          "text": "자각몽은 단순한 재미를 넘어 실질적인 효과가 있습니다.",
+          "startSeconds": 0,
+          "endSeconds": 3.940000057220459,
+          "startFrame": 0,
+          "endFrame": 118,
+          "startPercent": 0,
+          "endPercent": 11,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "첫째, 반복되는 악몽을 치료하는데 효과적입니다.",
+          "startSeconds": 4.900000095367432,
+          "endSeconds": 7.940000057220459,
+          "startFrame": 147,
+          "endFrame": 238,
+          "startPercent": 14,
+          "endPercent": 23,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "자각몽 훈련을 받은 환자들은 악몽의 빈도가 크게 감소했습니다.",
+          "startSeconds": 8.640000343322754,
+          "endSeconds": 12.260000228881836,
+          "startFrame": 259,
+          "endFrame": 368,
+          "startPercent": 25,
+          "endPercent": 36,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "둘째, 창의성이 폭발합니다.",
+          "startSeconds": 13.100000381469727,
+          "endSeconds": 14.640000343322754,
+          "startFrame": 393,
+          "endFrame": 439,
+          "startPercent": 38,
+          "endPercent": 42,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "살바도르 달리와 메리 쉘리 같은 예술가들은 꿈에서 영감을 얻었습니다.",
+          "startSeconds": 15.4399995803833,
+          "endSeconds": 19.639999389648438,
+          "startFrame": 463,
+          "endFrame": 589,
+          "startPercent": 45,
+          "endPercent": 57,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "자각몽에선 의식적으로 창의적 문제를 탐구할 수 있죠.",
+          "startSeconds": 20.719999313354492,
+          "endSeconds": 23.899999618530273,
+          "startFrame": 622,
+          "endFrame": 717,
+          "startPercent": 60,
+          "endPercent": 69,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "셋째, 심리적 회복력이 강화됩니다.",
+          "startSeconds": 25.440000534057617,
+          "endSeconds": 27.399999618530273,
+          "startFrame": 763,
+          "endFrame": 822,
+          "startPercent": 74,
+          "endPercent": 80,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "꿈속에서 두려움에 직면하고 극복하는 경험은 깨어있는 삶에서의 자신감으로 이어집니다.",
+          "startSeconds": 27.399999618530273,
+          "endSeconds": 34.2400016784668,
+          "startFrame": 822,
+          "endFrame": 1027,
+          "startPercent": 80,
+          "endPercent": 99,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "risks",
+      "duration": 27.288,
+      "durationFrames": 1638,
+      "panels": [
+        {
+          "text": "그러나 자각몽에도 주의할 점이 있습니다.",
+          "startSeconds": 0,
+          "endSeconds": 3.259999990463257,
+          "startFrame": 0,
+          "endFrame": 98,
+          "startPercent": 0,
+          "endPercent": 12,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "수면마비를 경험할 수 있습니다.",
+          "startSeconds": 4.119999885559082,
+          "endSeconds": 5.579999923706055,
+          "startFrame": 124,
+          "endFrame": 167,
+          "startPercent": 15,
+          "endPercent": 20,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "몸은 깨어났지만 움직일 수 없는 상태로",
+          "startSeconds": 6.320000171661377,
+          "endSeconds": 8.84000015258789,
+          "startFrame": 190,
+          "endFrame": 265,
+          "startPercent": 23,
+          "endPercent": 32,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "일시적이지만 불안감을 줄 수 있습니다.",
+          "startSeconds": 9.239999771118164,
+          "endSeconds": 11.619999885559082,
+          "startFrame": 277,
+          "endFrame": 349,
+          "startPercent": 34,
+          "endPercent": 43,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "또한 거짓 각성이라는 현상이 있습니다.",
+          "startSeconds": 12.399999618530273,
+          "endSeconds": 14.619999885559082,
+          "startFrame": 372,
+          "endFrame": 439,
+          "startPercent": 45,
+          "endPercent": 54,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "꿈에서 깼다고 생각했지만 실제로는 또 다른 꿈인 상태입니다.",
+          "startSeconds": 15.539999961853027,
+          "endSeconds": 18.760000228881836,
+          "startFrame": 466,
+          "endFrame": 563,
+          "startPercent": 57,
+          "endPercent": 69,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "가장 중요한 것은 자각몽에 집착하여 수면의 질을 떨어뜨리지 않는 것입니다.",
+          "startSeconds": 19.84000015258789,
+          "endSeconds": 24.100000381469727,
+          "startFrame": 595,
+          "endFrame": 723,
+          "startPercent": 73,
+          "endPercent": 88,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "충분한 휴식이 우선입니다.",
+          "startSeconds": 25.239999771118164,
+          "endSeconds": 26.5,
+          "startFrame": 757,
+          "endFrame": 795,
+          "startPercent": 92,
+          "endPercent": 97,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "duration": 13.632,
+      "durationFrames": 818,
+      "panels": [
+        {
+          "text": "오늘 밤 들기 전 한 번만 자신에게 물어보세요.",
+          "startSeconds": 0,
+          "endSeconds": 3.619999885559082,
+          "startFrame": 0,
+          "endFrame": 109,
+          "startPercent": 0,
+          "endPercent": 27,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "지금 내가 꿈을 꾸고 있는 건 아닐까?",
+          "startSeconds": 4.159999847412109,
+          "endSeconds": 5.880000114440918,
+          "startFrame": 125,
+          "endFrame": 176,
+          "startPercent": 31,
+          "endPercent": 43,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "어쩌면 오늘 밤 당신은 꿈속에서 깨어나게 될지도 모릅니다.",
+          "startSeconds": 6.699999809265137,
+          "endSeconds": 10,
+          "startFrame": 201,
+          "endFrame": 300,
+          "startPercent": 49,
+          "endPercent": 73,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "자각몽의 문은 항상 열려 있습니다.",
+          "startSeconds": 10.600000381469727,
+          "endSeconds": 13.039999961853027,
+          "startFrame": 318,
+          "endFrame": 391,
+          "startPercent": 78,
+          "endPercent": 96,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    }
+  ]
+}

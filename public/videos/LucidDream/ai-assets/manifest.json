@@ -1,0 +1,43 @@
+{
+  "compositionId": "LucidDream",
+  "generatedAt": "2026-02-07T15:48:33.510Z",
+  "model": "fal-ai/flux/schnell",
+  "type": "img",
+  "assets": [
+    {
+      "sceneId": "hook",
+      "status": "success",
+      "file": "hook-bg.jpg"
+    },
+    {
+      "sceneId": "what_is",
+      "status": "success",
+      "file": "what_is-bg.jpg"
+    },
+    {
+      "sceneId": "science",
+      "status": "success",
+      "file": "science-bg.jpg"
+    },
+    {
+      "sceneId": "techniques",
+      "status": "success",
+      "file": "techniques-bg.jpg"
+    },
+    {
+      "sceneId": "benefits",
+      "status": "success",
+      "file": "benefits-bg.jpg"
+    },
+    {
+      "sceneId": "risks",
+      "status": "success",
+      "file": "risks-bg.jpg"
+    },
+    {
+      "sceneId": "outro",
+      "status": "success",
+      "file": "outro-bg.jpg"
+    }
+  ]
+}

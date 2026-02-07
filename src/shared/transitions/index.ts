@@ -67,3 +67,11 @@ export type { MorphProps } from "./custom/morph";
 export type { GlitchProps } from "./custom/glitch";
 export type { BlindsProps } from "./custom/blinds";
 export type { RippleProps } from "./custom/ripple";
+
+// Overlay transition presets (@remotion/light-leaks)
+export {
+  OVERLAY_PRESETS,
+  getOverlayPreset,
+  createLightLeakOverlay,
+} from "./overlayPresets";
+export type { OverlayPresetName, OverlayPresetConfig } from "./overlayPresets";

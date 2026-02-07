@@ -130,6 +130,36 @@ export const SceneSchema = z.discriminatedUnion("type", [
 ]);
 
 // =============================================================================
+// CAPTION SCHEMA
+// =============================================================================
+
+/** Caption style options */
+export const CaptionStyleSchema = z.enum(["tiktok", "subtitle", "karaoke"]);
+
+/** Caption position options */
+export const CaptionPositionSchema = z.enum(["bottom", "center", "top"]);
+
+/** Caption configuration for a composition */
+export const CaptionConfigSchema = z.object({
+  /** Enable captions */
+  enabled: z.boolean().default(false),
+  /** Caption animation style */
+  style: CaptionStyleSchema.default("tiktok"),
+  /** Vertical position */
+  position: CaptionPositionSchema.default("bottom"),
+  /** Font size in pixels */
+  fontSize: z.number().default(64),
+  /** Font color */
+  color: z.string().default("rgba(255, 255, 255, 0.8)"),
+  /** Highlight color for active word */
+  highlightColor: z.string().default("#FFD700"),
+  /** Background color for caption box */
+  backgroundColor: z.string().default("rgba(0, 0, 0, 0.6)"),
+  /** Max word grouping threshold in ms */
+  combineTokensWithinMilliseconds: z.number().default(1200),
+});
+
+// =============================================================================
 // COMPOSITION SCHEMA
 // =============================================================================
 
@@ -152,6 +182,8 @@ export const CompositionConfigSchema = z.object({
   transitionDuration: z.number().default(15),
   /** Buffer frames between scenes */
   sceneBuffer: z.number().default(15),
+  /** Caption configuration */
+  captions: CaptionConfigSchema.optional(),
 });
 
 // =============================================================================
@@ -167,4 +199,7 @@ export type ComparisonScene = z.infer<typeof ComparisonSceneSchema>;
 export type QuoteScene = z.infer<typeof QuoteSceneSchema>;
 export type OutroScene = z.infer<typeof OutroSceneSchema>;
 export type Scene = z.infer<typeof SceneSchema>;
+export type CaptionStyleType = z.infer<typeof CaptionStyleSchema>;
+export type CaptionPositionType = z.infer<typeof CaptionPositionSchema>;
+export type CaptionConfig = z.infer<typeof CaptionConfigSchema>;
 export type CompositionConfig = z.infer<typeof CompositionConfigSchema>;

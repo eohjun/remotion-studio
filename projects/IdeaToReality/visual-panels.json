@@ -1,0 +1,246 @@
+{
+  "compositionId": "IdeaToReality",
+  "generatedAt": "2026-02-01T09:44:43.659Z",
+  "fps": 60,
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 8.064,
+      "durationFrames": 484,
+      "panels": [
+        {
+          "text": "우리 머릿속에는 매일 수십 개의 아이디어가 떠오릅니다.",
+          "startSeconds": 0,
+          "endSeconds": 4.420000076293945,
+          "startFrame": 0,
+          "endFrame": 133,
+          "startPercent": 0,
+          "endPercent": 55,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "하지만 그 중 실제로 현실이 되는 건 극소수에 불과하죠.",
+          "startSeconds": 5.039999961853027,
+          "endSeconds": 7.880000114440918,
+          "startFrame": 151,
+          "endFrame": 236,
+          "startPercent": 62,
+          "endPercent": 98,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "duration": 8.856,
+      "durationFrames": 532,
+      "panels": [
+        {
+          "text": "왜 그럴까요? 대부분의 아이디어는 구체화 과정 없이 그냥 사라져버리기 때문입니다.",
+          "startSeconds": 0,
+          "endSeconds": 5.940000057220459,
+          "startFrame": 0,
+          "endFrame": 178,
+          "startPercent": 0,
+          "endPercent": 67,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "머릿속에만 맴돌다가 잊혀지는 거죠.",
+          "startSeconds": 6.199999809265137,
+          "endSeconds": 8.680000305175781,
+          "startFrame": 186,
+          "endFrame": 260,
+          "startPercent": 70,
+          "endPercent": 98,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "solution_intro",
+      "duration": 5.304,
+      "durationFrames": 319,
+      "panels": [
+        {
+          "text": "오늘은 아이디어를 현실로 만드는 4단계 프레임워크를 소개합니다.",
+          "startSeconds": 0,
+          "endSeconds": 5.139999866485596,
+          "startFrame": 0,
+          "endFrame": 154,
+          "startPercent": 0,
+          "endPercent": 97,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "step1_capture",
+      "duration": 11.592,
+      "durationFrames": 696,
+      "panels": [
+        {
+          "text": "첫 번째, 포착하기. 아이디어가 떠오르는 순간 바로 기록하세요.",
+          "startSeconds": 0,
+          "endSeconds": 4.980000019073486,
+          "startFrame": 0,
+          "endFrame": 149,
+          "startPercent": 0,
+          "endPercent": 43,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "메모 앱이든 음성 녹음이든 종이든 상관없습니다.",
+          "startSeconds": 5.300000190734863,
+          "endSeconds": 8,
+          "startFrame": 159,
+          "endFrame": 240,
+          "startPercent": 46,
+          "endPercent": 69,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "3분 안에 기록하지 않으면 70%는 잊혀집니다.",
+          "startSeconds": 8.779999732971191,
+          "endSeconds": 11.420000076293945,
+          "startFrame": 263,
+          "endFrame": 343,
+          "startPercent": 76,
+          "endPercent": 99,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "step2_clarify",
+      "duration": 9.936,
+      "durationFrames": 597,
+      "panels": [
+        {
+          "text": "두번째, 명확화하기. 포착한 아이디어를 질문으로 구체화하세요.",
+          "startSeconds": 0,
+          "endSeconds": 4.739999771118164,
+          "startFrame": 0,
+          "endFrame": 142,
+          "startPercent": 0,
+          "endPercent": 48,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "이게 해결하려는 문제가 뭐지? 누구를 위한 거지? 왜 지금 해야 하지?",
+          "startSeconds": 5.380000114440918,
+          "endSeconds": 9.65999984741211,
+          "startFrame": 161,
+          "endFrame": 290,
+          "startPercent": 54,
+          "endPercent": 97,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "step3_prototype",
+      "duration": 11.592,
+      "durationFrames": 696,
+      "panels": [
+        {
+          "text": "세 번째, 프로토타입. 완벽하지 않아도 됩니다. 가장 간단한 형태로 만들어 보세요.",
+          "startSeconds": 0,
+          "endSeconds": 6.440000057220459,
+          "startFrame": 0,
+          "endFrame": 193,
+          "startPercent": 0,
+          "endPercent": 56,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "아이디어는 머릿속에 있을 때보다 눈에 보일 때 훨씬 빠르게 발전합니다.",
+          "startSeconds": 7.5,
+          "endSeconds": 11.300000190734863,
+          "startFrame": 225,
+          "endFrame": 339,
+          "startPercent": 65,
+          "endPercent": 97,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "step4_iterate",
+      "duration": 9.144,
+      "durationFrames": 549,
+      "panels": [
+        {
+          "text": "네 번째, 반복하기. 피드백을 받고 수정하고 다시 시도하세요.",
+          "startSeconds": 0,
+          "endSeconds": 4.619999885559082,
+          "startFrame": 0,
+          "endFrame": 139,
+          "startPercent": 0,
+          "endPercent": 51,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        },
+        {
+          "text": "한 번에 완성되는 아이디어는 없습니다. 반복이 곧 완성입니다.",
+          "startSeconds": 5.360000133514404,
+          "endSeconds": 8.899999618530273,
+          "startFrame": 161,
+          "endFrame": 267,
+          "startPercent": 59,
+          "endPercent": 97,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "recap",
+      "duration": 8.088,
+      "durationFrames": 486,
+      "panels": [
+        {
+          "text": "정리하면 포착, 명확화, 프로토타입, 반복 이 4단계를 거치면 막연했던 아이디어가 구체적인 현실이 됩니다.",
+          "startSeconds": 0,
+          "endSeconds": 7.71999979019165,
+          "startFrame": 0,
+          "endFrame": 232,
+          "startPercent": 0,
+          "endPercent": 95,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "duration": 5.808,
+      "durationFrames": 349,
+      "panels": [
+        {
+          "text": "오늘 떠오른 아이디어가 있다면 지금 바로 첫 번째 단계부터 시작해 보세요.",
+          "startSeconds": 0,
+          "endSeconds": 5.519999980926514,
+          "startFrame": 0,
+          "endFrame": 166,
+          "startPercent": 0,
+          "endPercent": 95,
+          "confidence": 1,
+          "matchType": "auto-segment"
+        }
+      ]
+    }
+  ]
+}
