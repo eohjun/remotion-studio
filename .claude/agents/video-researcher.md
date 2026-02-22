@@ -1,6 +1,6 @@
 ---
 name: video-researcher
-description: "Video content researcher that analyzes source materials and conducts additional research to enrich video content. Use when preparing source material for video production."
+description: "OPTIONAL - Video content researcher that analyzes source materials and conducts additional research to enrich video content. Use only when topic research is needed before narration writing."
 tools: Read, Glob, Grep, WebSearch, WebFetch
 model: sonnet
 ---

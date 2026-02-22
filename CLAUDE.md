@@ -245,9 +245,22 @@ node scripts/delete-video.mjs SelfHelpCritiqueEN --confirm
 
 **After deletion**: Manually remove import and `<Composition>` entry from `src/Root.tsx`
 
-## Video Production Agent System
+## Video Production System
 
-This project includes a multi-agent pipeline for automated video production.
+영상 제작은 **video-pipeline 스킬** + **3개 에이전트**로 구성됩니다.
+
+### video-pipeline 스킬 (`.claude/skills/video-pipeline/`)
+
+영상 제작 파이프라인의 전체 흐름을 관리하는 오케스트레이터 스킬.
+8단계 파이프라인, 스크립트 레퍼런스, 구현 규칙, 나레이션 스키마, 템플릿 선택 가이드를 포함.
+
+### Agents (`.claude/agents/`)
+
+| Agent | Purpose | Trigger |
+|-------|---------|---------|
+| **video-researcher** | (선택) 주제 리서치, 팩트체크, 소스 보강 | "Research this topic for a video" |
+| **video-narrator** | 나레이션 스크립트 작성 (narration.json) | "Write narration from this research" |
+| **video-producer** | 마스터 오케스트레이터 — 전체 파이프라인 조율 | "Create a video from this source" |
 
 ### ⚠️ Custom Agent 호출 방법 (중요)
 
@@ -257,32 +270,15 @@ This project includes a multi-agent pipeline for automated video production.
 ```
 "video-researcher 에이전트를 사용해서 이 주제를 조사해줘"
 "Use the video-narrator agent to write narration from this research"
-"video-planner 에이전트로 시각 계획을 세워줘"
-```
-
-**잘못된 호출 (실패함):**
-```
-Task tool의 subagent_type에 "video-researcher" 지정 → Agent type not found 에러
 ```
 
 Task tool은 built-in 타입만 지원합니다 (Bash, Explore, Plan, general-purpose 등).
 커스텀 에이전트는 명시적 요청이나 자동 위임으로 동작합니다.
 
-### Agents (`.claude/agents/`)
-
-| Agent | Purpose | Trigger |
-|-------|---------|---------|
-| **video-ingestor** | PDF, DOCX, URL을 Markdown으로 변환 | "Ingest this PDF for video" |
-| **video-researcher** | Analyzes source, conducts web research, enriches content | "Research this topic for a video" |
-| **video-narrator** | Creates structured narration scripts with storytelling principles | "Write narration from this research" |
-| **video-planner** | Selects optimal templates, components, effects | "Plan visuals for this narration" |
-| **video-producer** | Master orchestrator that chains all agents | "Create a video from this source" |
-| **video-publisher** | Metadata 생성 및 YouTube 업로드 | "Publish this video" |
-
 ### Quick Start
 
 ```bash
-# Create video from any source (delegates to all agents):
+# Create video from any source:
 "Create a video from note 202601150123"
 "Create a video about the psychology of habit formation"
 "Create a video from this article: https://..."
@@ -291,27 +287,25 @@ Task tool은 built-in 타입만 지원합니다 (Bash, Explore, Plan, general-pu
 ### Pipeline Flow
 
 ```
-Source (PDF/DOCX/URL/Topic)
+Source (Topic/Note/URL)
         ↓
-video-ingestor → source.md (optional, for non-text sources)
-        ↓
-video-researcher → research-report.md
+video-researcher → research-report.md (선택)
         ↓
 video-narrator → narration.json
         ↓
-video-planner → video-plan.json
+generate-ai-assets.mjs → ai-assets/*.jpg (visual_description 있을 때)
         ↓
-video-producer → Remotion composition
+video-producer → Remotion composition (src/videos/{id}/)
         ↓
-generate-tts.mjs → Audio files + 자동 검증 + constants.ts 자동 동기화
+generate-tts.mjs → Audio + 자동 검증 + constants.ts 동기화 + 타임스탬프
         ↓
-npm run dev → 완성본 테스트 가능
+npm run dev → 완성본 테스트 (오디오 포함)
         ↓
 User Review (수정 요청 시 반복)
         ↓
-npx remotion render → video.mp4
+render-quality.mjs → video.mp4
         ↓
-video-publisher → YouTube upload (optional)
+generate-youtube-assets.mjs → metadata.json + description.txt (렌더링 직후 자동)
 ```
 
 **중요**: TTS 생성 전에 사용자 확인을 요청하지 않습니다.
@@ -321,4 +315,4 @@ video-publisher → YouTube upload (optional)
 
 - `docs/component-catalog.md` - Component reference (50+ components)
 - `docs/visual-strategy-guide.md` - Topic-to-visual mapping
-- `projects/templates/video-plan.md` - Manual planning template
+- `.claude/skills/video-pipeline/` - Pipeline skill with implementation rules, narration schema, template guide

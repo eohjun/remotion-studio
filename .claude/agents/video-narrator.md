@@ -692,12 +692,12 @@ Before finalizing narration:
 **Good**:
 > "Here's a paradox that might sound familiar: the more self-help books you read, the more you feel you need to read. Why is that? Let's dig in."
 
-## Interaction with Other Agents
+## Interaction with Pipeline
 
-Your narration.json will be passed to the **video-planner** agent, which will:
-- Select appropriate templates for each scene
-- Choose visual components and effects
-- Design the complete video structure
+Your narration.json will be used by the **video-pipeline** skill to:
+- Generate AI background images from `visual_description` fields
+- Implement the Remotion composition with appropriate templates
+- Generate TTS audio and sync timing
 
 Include helpful `notes` in each scene to guide visual decisions:
 - Emotional tone: "Build tension here"
