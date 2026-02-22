@@ -45,6 +45,8 @@ export { ColorGrading, getColorGradingPresets } from "./ColorGrading";
 export { Bloom } from "./Bloom";
 export { OfficialLightLeak } from "./OfficialLightLeak";
 export type { OfficialLightLeakProps } from "./OfficialLightLeak";
+export { MotionTrail } from "./MotionTrail";
+export type { MotionTrailProps, TrailPreset } from "./MotionTrail";
 export { EffectsComposer } from "./EffectsComposer";
 export { EffectsStack, getEffectsFromPreset, mergeEffectsConfigs } from "./EffectsStack";
 export type { EffectsStackProps } from "./EffectsStack";

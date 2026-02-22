@@ -38,9 +38,28 @@ export interface GeneratedAsset {
   /** Original prompt used */
   prompt: string;
   /** Asset type */
-  type: "image" | "video";
+  type: "image" | "video" | "music";
   /** Generation metadata */
   metadata?: Record<string, unknown>;
+}
+
+export interface MusicGenerationOptions {
+  /** Music style (e.g., "ambient", "cinematic", "electronic") */
+  style?: string;
+  /** Whether to generate instrumental only (no vocals) */
+  instrumental?: boolean;
+  /** Duration in seconds */
+  durationSeconds?: number;
+  /** Model to use (e.g., "suno_v4", "suno_v4.5") */
+  model?: string;
+}
+
+export interface AIMusicProvider {
+  /** Generate a music track from a text prompt */
+  generateMusic(
+    prompt: string,
+    opts?: MusicGenerationOptions
+  ): Promise<GeneratedAsset>;
 }
 
 export interface AIAssetProvider {
