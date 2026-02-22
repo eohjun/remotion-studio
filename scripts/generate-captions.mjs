@@ -37,8 +37,6 @@ const wordsPerCaption = wordsArgIndex !== -1 && args[wordsArgIndex + 1]
   ? parseInt(args[wordsArgIndex + 1], 10)
   : 7;
 
-const fps = 60; // Default FPS for frame calculations
-
 if (!narrationFile) {
   console.error("Usage: node scripts/generate-captions.mjs -f <narration.json>");
   console.error("Options:");
@@ -65,6 +63,20 @@ if (!compositionId) {
   console.error("Error: narration.json must have metadata.compositionId");
   process.exit(1);
 }
+
+// FPS: constants.ts에서 읽기 (없으면 기본 60)
+function getFpsFromConstants(id) {
+  const DEFAULT_FPS = 60;
+  const constantsPath = path.join(projectRoot, "src", "videos", id, "constants.ts");
+  if (!fs.existsSync(constantsPath)) return DEFAULT_FPS;
+  try {
+    const content = fs.readFileSync(constantsPath, "utf-8");
+    const match = content.match(/export\s+const\s+FPS\s*=\s*(\d+)/);
+    if (match) return parseInt(match[1], 10);
+  } catch { /* ignore */ }
+  return DEFAULT_FPS;
+}
+const fps = getFpsFromConstants(compositionId);
 
 // Try to find audio metadata for accurate timing
 const audioMetadataPath = path.join(
@@ -252,10 +264,12 @@ function generateCaptions() {
   console.log(`   Scenes: ${scenes.length}`);
   console.log(`   Max words per caption: ${wordsPerCaption}\n`);
 
+  const DEFAULT_SCENE_DURATION = 5;
+
   for (const scene of scenes) {
     // Get scene duration from audio metadata if available
-    let duration = scene.duration || 5;
-    if (audioMetadata) {
+    let duration = scene.duration || DEFAULT_SCENE_DURATION;
+    if (audioMetadata?.scenes && Array.isArray(audioMetadata.scenes)) {
       const audioScene = audioMetadata.scenes.find((s) => s.id === scene.id);
       if (audioScene && audioScene.durationSeconds) {
         duration = audioScene.durationSeconds;

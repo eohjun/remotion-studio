@@ -76,11 +76,6 @@ const fps = fpsArgIndex !== -1 && args[fpsArgIndex + 1]
   ? parseInt(args[fpsArgIndex + 1], 10)
   : 60; // 기본 60fps (이 프로젝트의 표준)
 
-// snake_case를 camelCase로 변환
-function toCamelCase(str) {
-  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-}
-
 // 메타데이터 로드
 const metadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"));
 console.log(`📄 메타데이터 로드: ${metadataPath}`);
@@ -113,8 +108,7 @@ function generateSceneFrames() {
     const totalFrames = audioFrames + bufferFrames;
     const audioSeconds = scene.durationSeconds?.toFixed(1) || "?";
 
-    // snake_case → camelCase 변환 (audio-metadata.json → constants.ts 호환)
-    const sceneId = toCamelCase(scene.id);
+    const sceneId = scene.id;
     const padding = " ".repeat(Math.max(1, 20 - sceneId.length));
     lines.push(`  ${sceneId}: ${totalFrames},${padding}// ${audioFrames} + ${bufferFrames} (${audioSeconds}s audio)`);
   }
@@ -138,7 +132,7 @@ function generateScenes() {
     const bufferSeconds = bufferFrames / fps;
     const totalDuration = Math.ceil(audioSeconds + bufferSeconds);
 
-    const sceneId = toCamelCase(scene.id);
+    const sceneId = scene.id;
     const padding = " ".repeat(Math.max(1, 20 - sceneId.length));
     lines.push(`  ${sceneId}: { start: ${currentStart}, duration: ${totalDuration} },${padding}// ${audioSeconds.toFixed(2)}s audio`);
 
@@ -153,8 +147,7 @@ function generateScenes() {
 // SCENE_START_FRAMES 생성
 // ============================================
 function generateSceneStartFrames() {
-  // snake_case → camelCase 변환
-  const sceneIds = metadata.scenes.map(s => toCamelCase(s.id));
+  const sceneIds = metadata.scenes.map(s => s.id);
   const lines = [];
   lines.push("export const SCENE_START_FRAMES = {");
 
@@ -293,7 +286,7 @@ for (const scene of metadata.scenes) {
   const audioFrames = scene.durationFrames || Math.ceil((scene.durationSeconds || 0) * fps);
   const sceneTotal = audioFrames + bufferFrames;
   const audioSeconds = scene.durationSeconds?.toFixed(1) || "?";
-  const sceneId = toCamelCase(scene.id);
+  const sceneId = scene.id;
 
   totalAudioFrames += audioFrames;
   totalFrames += sceneTotal;

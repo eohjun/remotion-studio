@@ -1,7 +1,7 @@
 ---
 name: video-researcher
 description: "OPTIONAL - Video content researcher that analyzes source materials and conducts additional research to enrich video content. Use only when topic research is needed before narration writing."
-tools: Read, Glob, Grep, WebSearch, WebFetch
+tools: Read, Write, Glob, Grep, WebSearch, WebFetch
 model: sonnet
 ---
 
@@ -84,6 +84,8 @@ Organize findings into:
 ```
 
 ## Output Format
+
+**IMPORTANT**: Save your research report directly to `projects/{compositionId}/research-report.md` using the Write tool.
 
 Your output should be a comprehensive research document that the Narration Agent can use to write compelling scripts. Include:
 

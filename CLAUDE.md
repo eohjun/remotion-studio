@@ -107,13 +107,13 @@ type: permanent
 **기본 사용법:**
 ```bash
 # TTS 생성 (자동: 검증 + 동기화 + 타임스탬프 추출)
-node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json
 
 # 특정 씬만 재생성
-node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json --scene hook,discovery
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json --scene hook,discovery
 
 # ElevenLabs 사용
-node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json --elevenlabs
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json --elevenlabs
 ```
 
 **자동화 파이프라인 (generate-tts.mjs 실행 시):**
@@ -165,7 +165,7 @@ const panels = visualPanels.scenes.find(s => s.id === "hook")?.panels || [];
 **⚠️ 중요 규칙:**
 - `[pause:X]` 마커는 **문서화 전용** (TTS에 전송 안 됨)
 - 버퍼는 **5프레임** (0.17초) - 과도하면 공백 누적
-- snake_case (audio) → camelCase (constants) 자동 변환
+- constants.ts 씬 키는 narration.json의 원본 scene ID를 그대로 사용 (변환 없음)
 
 **Audio file structure**: `public/videos/{compositionId}/audio/`
 - audio-metadata.json: 씬별 길이 정보

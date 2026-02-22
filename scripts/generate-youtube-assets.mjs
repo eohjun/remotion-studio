@@ -101,18 +101,20 @@ if (fs.existsSync(researchPath)) {
   console.log(`📄 research-report.md 로드`);
 }
 
-// constants.ts에서 SCENE_START_FRAMES 파싱
+// constants.ts에서 씬 타이밍 파싱
 let sceneFrames = null;
 let fps = 60;
 const constantsPath = path.join(srcDir, "constants.ts");
 if (fs.existsSync(constantsPath)) {
   const constantsContent = fs.readFileSync(constantsPath, "utf-8");
 
-  // FPS 추출
-  const fpsMatch = constantsContent.match(/fps:\s*(\d+)/);
-  if (fpsMatch) fps = parseInt(fpsMatch[1]);
+  // FPS 추출 (export const FPS = 60 또는 fps: 60)
+  const fpsMatchExport = constantsContent.match(/export\s+const\s+FPS\s*=\s*(\d+)/);
+  const fpsMatchObj = constantsContent.match(/fps:\s*(\d+)/);
+  if (fpsMatchExport) fps = parseInt(fpsMatchExport[1]);
+  else if (fpsMatchObj) fps = parseInt(fpsMatchObj[1]);
 
-  // SCENE_START_FRAMES 추출
+  // 패턴 1: SCENE_START_FRAMES = { hook: 0, science: 1260 }
   const startFramesMatch = constantsContent.match(
     /SCENE_START_FRAMES\s*=\s*\{([^}]+)\}/s
   );
@@ -122,7 +124,25 @@ if (fs.existsSync(constantsPath)) {
     for (const entry of entries) {
       sceneFrames[entry[1]] = parseInt(entry[2]);
     }
-    console.log(`📄 constants.ts 로드: ${Object.keys(sceneFrames).length}개 씬 프레임`);
+    console.log(`📄 constants.ts 로드 (SCENE_START_FRAMES): ${Object.keys(sceneFrames).length}개 씬`);
+  }
+
+  // 패턴 2: SCENES = { hook: { start: 0, duration: 21 }, ... }
+  if (!sceneFrames) {
+    const scenesMatch = constantsContent.match(
+      /SCENES\s*=\s*\{([\s\S]*?)\}\s*as\s+const/
+    );
+    if (scenesMatch) {
+      sceneFrames = {};
+      const sceneEntries = scenesMatch[1].matchAll(
+        /(\w+):\s*\{\s*start:\s*(\d+)/g
+      );
+      for (const entry of sceneEntries) {
+        // start is in seconds, convert to frames
+        sceneFrames[entry[1]] = parseInt(entry[2]) * fps;
+      }
+      console.log(`📄 constants.ts 로드 (SCENES): ${Object.keys(sceneFrames).length}개 씬`);
+    }
   }
 }
 
@@ -148,14 +168,14 @@ function generateChapters() {
   const chapters = [];
 
   if (narration?.scenes && sceneFrames) {
-    // constants.ts의 프레임 정보 사용
-    const sceneKeys = Object.keys(sceneFrames);
+    // constants.ts의 프레임 정보 사용 (scene ID로 매칭)
     const narrationScenes = narration.scenes;
 
     for (let i = 0; i < narrationScenes.length; i++) {
       const scene = narrationScenes[i];
-      const sceneKey = sceneKeys[i];
-      const startFrame = sceneFrames[sceneKey] || 0;
+      // scene.id를 snake_case→camelCase로 변환하여 sceneFrames에서 찾기
+      const camelId = scene.id.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+      const startFrame = sceneFrames[scene.id] ?? sceneFrames[camelId] ?? 0;
       const seconds = startFrame / fps;
 
       chapters.push({
@@ -284,7 +304,7 @@ function generateDescription(chapters, metadata) {
 
   // 챕터
   if (chapters.length >= 3) {
-    lines.push("⏱️ 챕터:");
+    lines.push(language === "ko" ? "⏱️ 챕터:" : "⏱️ Chapters:");
     for (const chapter of chapters) {
       lines.push(`${chapter.time} ${chapter.title}`);
     }

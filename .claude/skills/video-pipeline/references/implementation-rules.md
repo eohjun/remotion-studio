@@ -196,6 +196,48 @@ Safe Area 높이 960px 기준:
 | 헤더 텍스트 | 32px | 38-48px |
 | 내용 텍스트 | 30px | 34-42px |
 
+## BGM 재생 패턴
+
+BGM 파일이 있을 때 (`public/videos/{id}/ai-assets/bgm.mp3` 존재), 메인 컴포지션에 반드시 추가:
+
+```tsx
+import { Html5Audio, Loop, staticFile } from "remotion";
+
+// 메인 컴포지션 최상위에 배치
+export const MyVideo: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      {/* BGM - 전체 영상에 깔림 (Loop로 반복) */}
+      <Loop durationInFrames={TOTAL_DURATION}>
+        <Html5Audio
+          src={staticFile(`${AI_ASSETS_BASE}/bgm.mp3`)}
+          volume={0.2}
+        />
+      </Loop>
+      {/* 씬 컴포지션 */}
+      <TransitionComposition scenes={scenes} ... />
+    </AbsoluteFill>
+  );
+};
+```
+
+- **볼륨**: 0.15-0.25 (나레이션 방해 않는 수준, 기본 0.2)
+- **Loop**: `<Loop durationInFrames={TOTAL_DURATION}>` 래퍼 사용 (Remotion 4에서 `Audio`는 deprecated)
+- **위치**: `<TransitionComposition>` 또는 씬 시퀀스 바깥, 최상위
+- BGM 없으면 `<Loop>` + `<Html5Audio>` 태그 자체를 생략 (에러 방지)
+- **`Audio` 사용 금지**: Remotion 4에서 deprecated. 반드시 `Html5Audio` 사용
+
+### BGM 존재 여부 확인
+
+```tsx
+import { staticFile } from "remotion";
+
+const BGM_PATH = `videos/${COMPOSITION_ID}/ai-assets/bgm.mp3`;
+
+// constants.ts에 BGM 경로 정의
+export const HAS_BGM = true; // AI 에셋 생성 시 결정
+```
+
 ## Composition 등록 패턴
 
 ```tsx

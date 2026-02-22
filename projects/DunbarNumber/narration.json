@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "compositionId": "DunbarNumber",
+    "title": "던바의 수 - 인간관계의 한계",
+    "language": "ko",
+    "voice": "nova",
+    "targetDuration": 150,
+    "tone": "narrative-educational"
+  },
+  "music_description": "Ambient electronic, warm pads, gentle piano, introspective mood, 120bpm, cinematic background music for documentary about human relationships and psychology",
+  "scenes": [
+    {
+      "id": "hook",
+      "title": "150명의 한계",
+      "text": "당신의 휴대폰에는 몇 명의 연락처가 저장되어 있나요? 아마 수백 명, 어쩌면 천 명이 넘을 수도 있습니다. 하지만 정말 힘든 순간, 전화를 걸 수 있는 사람은 몇 명인가요? 우리의 뇌에는 의미 있는 관계를 유지할 수 있는 한계가 있습니다. 그 숫자는 바로, 150입니다.",
+      "visual_description": "Smartphone screen showing hundreds of contacts scrolling fast, transitioning to a single glowing number 150 in center, dark moody background with soft blue light, cinematic 8k",
+      "duration": 25,
+      "visualPanels": [
+        {
+          "text": "당신의 휴대폰에는 몇 명의 연락처가 저장되어 있나요?",
+          "startPercent": 0,
+          "endPercent": 17,
+          "startFrame": 0,
+          "endFrame": 202
+        },
+        {
+          "text": "아마 수백 명, 어쩌면 천명이 넘을 수도 있습니다.",
+          "startPercent": 20,
+          "endPercent": 33,
+          "startFrame": 238,
+          "endFrame": 402
+        },
+        {
+          "text": "하지만 정말 힘든 순간, 전화를 걸 수 있는 사람은 몇 명인가요?",
+          "startPercent": 38,
+          "endPercent": 60,
+          "startFrame": 455,
+          "endFrame": 719
+        },
+        {
+          "text": "우리의 뇌에는 의미 있는 관계를 유지할 수 있는 한계가 있습니다.",
+          "startPercent": 66,
+          "endPercent": 83,
+          "startFrame": 797,
+          "endFrame": 1007
+        },
+        {
+          "text": "그 숫자는 바로 150입니다.",
+          "startPercent": 88,
+          "endPercent": 99,
+          "startFrame": 1056,
+          "endFrame": 1193
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "던바의 발견",
+      "text": "1990년대, 영국의 인류학자 로빈 던바는 흥미로운 연구를 시작했습니다. 그는 영장류의 뇌 크기, 특히 대뇌신피질의 크기와 사회적 집단 규모 사이에 강한 상관관계가 있다는 것을 발견했습니다. 이 공식을 인간의 뇌에 적용했을 때 나온 숫자가 바로 150이었습니다. 수렵 채집 사회의 부족 규모, 로마 군단의 기본 단위, 심지어 현대 기업의 효율적인 조직 규모까지, 모두 이 숫자 근처에 모입니다.",
+      "visual_description": "Scientific illustration of primate brain comparison, neocortex highlighted in glowing purple, data visualization showing brain size vs group size correlation graph, dark academic background, cinematic",
+      "duration": 35,
+      "visualPanels": [
+        {
+          "text": "1990년대, 영국의 인류학자 로빈 던반은 흥미로운 연구를 시작했습니다.",
+          "startPercent": 0,
+          "endPercent": 19,
+          "startFrame": 0,
+          "endFrame": 359
+        },
+        {
+          "text": "그는 영장류의 뇌 크기, 특히 대뇌심피질의 크기와 사회적 집단 규모 사이의 강한 상관관계가 있다는 것을 발견했습니다.",
+          "startPercent": 22,
+          "endPercent": 48,
+          "startFrame": 400,
+          "endFrame": 883
+        },
+        {
+          "text": "이 공식을 인간의 뇌에 적용했을 때 나온 숫자가 바로 150이었습니다.",
+          "startPercent": 51,
+          "endPercent": 64,
+          "startFrame": 936,
+          "endFrame": 1188
+        },
+        {
+          "text": "수렵 채집 사회의 부족 규모, 로마 군단의 기본 단위, 심지어 현대기업의 효율적인 조직 규모까지 모두 이 숫자 근처에 모입니다.",
+          "startPercent": 68,
+          "endPercent": 99,
+          "startFrame": 1250,
+          "endFrame": 1828
+        }
+      ]
+    },
+    {
+      "id": "layers",
+      "title": "사회적 계층",
+      "text": "던바의 수는 단순히 150이라는 하나의 숫자가 아닙니다. 그 안에는 정교한 동심원 구조가 숨어 있습니다. 가장 안쪽에는 5명, 당신이 깊은 밤 위로가 필요할 때 전화할 수 있는 사람들입니다. 그다음 15명은 가까운 친구, 슬픔을 나눌 수 있는 관계입니다. 50명은 정기적으로 만나는 사회적 관계, 그리고 150명이 의미 있는 관계의 최대치입니다. 각 층은 약 세 배씩 늘어나며, 관계의 깊이는 반비례합니다.",
+      "visual_description": "Concentric circles glowing in space, innermost circle bright gold with 5, next ring amber with 15, then indigo with 50, outermost ring soft purple with 150, particles connecting nodes, dark cosmic background, cinematic",
+      "duration": 35,
+      "visualPanels": [
+        {
+          "text": "덤바의 수는 단순히 150이라는 하나의 숫자가 아닙니다.",
+          "startPercent": 0,
+          "endPercent": 14,
+          "startFrame": 0,
+          "endFrame": 272
+        },
+        {
+          "text": "그 안에는 정교한 동심원 구조가 숨어 있습니다.",
+          "startPercent": 16,
+          "endPercent": 24,
+          "startFrame": 298,
+          "endFrame": 464
+        },
+        {
+          "text": "가장 안쪽에는 5명, 당신이 깊은 밤 위로가 필요할 때 전화할 수 있는 사람들입니다.",
+          "startPercent": 27,
+          "endPercent": 44,
+          "startFrame": 522,
+          "endFrame": 836
+        },
+        {
+          "text": "그 다음 15명은 가까운 친구, 슬픔을 나눌 수 있는 관계입니다.",
+          "startPercent": 46,
+          "endPercent": 58,
+          "startFrame": 876,
+          "endFrame": 1105
+        },
+        {
+          "text": "50명은 정기적으로 만나는 사회적 관계, 그리고 150명이 의미 있는 관계의 최대치입니다.",
+          "startPercent": 61,
+          "endPercent": 82,
+          "startFrame": 1168,
+          "endFrame": 1560
+        },
+        {
+          "text": "각 층은 약 3배씩 늘어나며 관계의 겨우 깊은 바닷가입니다.",
+          "startPercent": 82,
+          "endPercent": 100,
+          "startFrame": 1560,
+          "endFrame": 1900
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "title": "디지털 시대의 역설",
+      "text": "소셜 미디어 시대, 우리는 수천 명과 연결되어 있다고 믿습니다. 팔로워 천 명, 친구 오백 명. 하지만 연구 결과는 냉정합니다. 페이스북 친구가 아무리 많아도, 실제로 의미 있는 상호작용을 하는 사람은 여전히 150명을 넘지 못합니다. 기술은 연결의 양을 늘렸지만, 관계의 질까지 바꾸지는 못한 것입니다. 우리의 뇌는 여전히 석기 시대의 사회적 프로세서로 작동하고 있습니다.",
+      "visual_description": "Split screen comparison, left side glowing social media icons and follower counts, right side warm intimate face-to-face conversation between two people, contrast between digital cold blue and warm amber tones, cinematic",
+      "duration": 30,
+      "visualPanels": [
+        {
+          "text": "소셜미디어 시대, 우리는 수천명과 연결되어 있다고 믿습니다.",
+          "startPercent": 0,
+          "endPercent": 15,
+          "startFrame": 0,
+          "endFrame": 256
+        },
+        {
+          "text": "팔로워 천명, 친구 오백명.",
+          "startPercent": 18,
+          "endPercent": 26,
+          "startFrame": 317,
+          "endFrame": 440
+        },
+        {
+          "text": "하지만 연구 결과는 냉정합니다.",
+          "startPercent": 30,
+          "endPercent": 35,
+          "startFrame": 509,
+          "endFrame": 602
+        },
+        {
+          "text": "페이스북 친구가 아무리 많아도 실제로 의미 있는 상호작용을 하는 사람은",
+          "startPercent": 38,
+          "endPercent": 54,
+          "startFrame": 660,
+          "endFrame": 937
+        },
+        {
+          "text": "여전히 150명을 넘지 못합니다.",
+          "startPercent": 54,
+          "endPercent": 64,
+          "startFrame": 937,
+          "endFrame": 1099
+        },
+        {
+          "text": "기술은 연결의 양을 늘렸지만 관계의 질까지 바꾸지는 못한 것입니다.",
+          "startPercent": 65,
+          "endPercent": 81,
+          "startFrame": 1115,
+          "endFrame": 1396
+        },
+        {
+          "text": "우리의 뇌는 여전히 석기 시대의 사회적 프로세서로 작동하고 있습니다.",
+          "startPercent": 81,
+          "endPercent": 99,
+          "startFrame": 1396,
+          "endFrame": 1703
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "title": "진짜 관계에 투자하라",
+      "text": "당신의 150명은 누구인가요? 더 중요하게, 당신의 5명은 누구인가요? 오늘, 그 사람들에게 연락해 보세요. 진짜 관계는 숫자가 아니라, 깊이입니다.",
+      "visual_description": "Warm golden light illuminating a small group of silhouettes standing together on a hilltop at sunset, intimate and hopeful atmosphere, lens flare, cinematic 8k",
+      "duration": 15,
+      "visualPanels": [
+        {
+          "text": "당신의 150명은 누구인가요?",
+          "startPercent": 0,
+          "endPercent": 20,
+          "startFrame": 0,
+          "endFrame": 134
+        },
+        {
+          "text": "더 중요하게 당신의 5명은 누구인가요?",
+          "startPercent": 27,
+          "endPercent": 45,
+          "startFrame": 184,
+          "endFrame": 307
+        },
+        {
+          "text": "오늘 그 사람들에게 연락해 보세요.",
+          "startPercent": 52,
+          "endPercent": 72,
+          "startFrame": 356,
+          "endFrame": 493
+        },
+        {
+          "text": "진짜 관계는 숫자가 아니라 깊이입니다.",
+          "startPercent": 80,
+          "endPercent": 98,
+          "startFrame": 548,
+          "endFrame": 673
+        }
+      ]
+    }
+  ]
+}

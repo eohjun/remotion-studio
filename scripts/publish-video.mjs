@@ -104,7 +104,7 @@ function generateChapters(narration) {
       time: formatTimestamp(currentTime),
       title: scene.title || scene.id
     });
-    currentTime += scene.duration || 10;
+    currentTime += scene.duration || 5;
   }
 
   return chapters;
@@ -214,15 +214,23 @@ if (fs.existsSync(metadataPath)) {
   console.log(`📋 Metadata: Loaded existing`);
 } else {
   metadata = generateMetadata(narration);
-  fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
-  console.log(`📋 Metadata: Generated → ${metadataPath}`);
+  if (!dryRun) {
+    fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+    console.log(`📋 Metadata: Generated → ${metadataPath}`);
+  } else {
+    console.log(`📋 Metadata: Generated (dry-run, not saved)`);
+  }
 }
 
 // 5. Generate description.txt if missing
 if (!fs.existsSync(descriptionPath)) {
   const description = generateDescription(metadata, narration, language);
-  fs.writeFileSync(descriptionPath, description);
-  console.log(`📝 Description: Generated → ${descriptionPath}`);
+  if (!dryRun) {
+    fs.writeFileSync(descriptionPath, description);
+    console.log(`📝 Description: Generated → ${descriptionPath}`);
+  } else {
+    console.log(`📝 Description: Generated (dry-run, not saved)`);
+  }
 } else {
   console.log(`📝 Description: Already exists`);
 }

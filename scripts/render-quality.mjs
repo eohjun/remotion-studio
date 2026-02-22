@@ -21,7 +21,7 @@
  *   node scripts/render-quality.mjs --list
  */
 
-import { execSync, spawn } from "child_process";
+import { spawn } from "child_process";
 import { existsSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";

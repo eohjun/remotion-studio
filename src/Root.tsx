@@ -75,6 +75,22 @@ import {
   FPS as FPS_AA,
 } from "./videos/AIAgents/constants";
 import {
+  DunbarNumber,
+  DunbarNumberSchema,
+} from "./videos/DunbarNumber";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_DN,
+  FPS as FPS_DN,
+} from "./videos/DunbarNumber/constants";
+import {
+  IKEAEffect,
+  IKEAEffectSchema,
+} from "./videos/IKEAEffect";
+import {
+  TOTAL_DURATION as TOTAL_DURATION_IE,
+  FPS as FPS_IE,
+} from "./videos/IKEAEffect/constants";
+import {
   VisualEffectsDemo,
   visualEffectsDemoSchema,
   DEMO_DURATION,
@@ -241,6 +257,28 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         schema={AIAgentsSchema}
+        defaultProps={{}}
+      />
+
+      <Composition
+        id="DunbarNumber"
+        component={DunbarNumber}
+        durationInFrames={TOTAL_DURATION_DN}
+        fps={FPS_DN}
+        width={1920}
+        height={1080}
+        schema={DunbarNumberSchema}
+        defaultProps={{}}
+      />
+
+      <Composition
+        id="IKEAEffect"
+        component={IKEAEffect}
+        durationInFrames={TOTAL_DURATION_IE}
+        fps={FPS_IE}
+        width={1920}
+        height={1080}
+        schema={IKEAEffectSchema}
         defaultProps={{}}
       />
 

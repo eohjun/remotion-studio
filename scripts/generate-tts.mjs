@@ -33,7 +33,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { execSync } from "child_process";
+import { execSync, execFileSync } from "child_process";
 import dotenv from "dotenv";
 
 // 경로 설정
@@ -259,7 +259,8 @@ async function generateWithOpenAI(text, outputPath, lang) {
   }
 
   const voiceConfig = VOICE_CONFIGS[lang] || VOICE_CONFIGS.en;
-  const voice = narration.openai?.voice || voiceConfig.openai;
+  const openaiConfig = narration.metadata?.openai || narration.openai;
+  const voice = openaiConfig?.voice || voiceConfig.openai;
 
   const response = await fetch("https://api.openai.com/v1/audio/speech", {
     method: "POST",
@@ -268,7 +269,7 @@ async function generateWithOpenAI(text, outputPath, lang) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: narration.openai?.model || "tts-1-hd",
+      model: openaiConfig?.model || "tts-1-hd",
       input: text,
       voice: voice,
       response_format: "mp3",
@@ -294,8 +295,9 @@ async function generateWithElevenLabs(text, outputPath, lang) {
   }
 
   const voiceConfig = VOICE_CONFIGS[lang] || VOICE_CONFIGS.en;
-  const voiceId = narration.elevenlabs?.voiceId || voiceConfig.elevenlabs;
-  const modelId = narration.elevenlabs?.modelId || voiceConfig.model;
+  const elevenlabsConfig = narration.metadata?.elevenlabs || narration.elevenlabs;
+  const voiceId = elevenlabsConfig?.voiceId || voiceConfig.elevenlabs;
+  const modelId = elevenlabsConfig?.modelId || voiceConfig.model;
 
   const response = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
@@ -309,8 +311,8 @@ async function generateWithElevenLabs(text, outputPath, lang) {
         text: text,
         model_id: modelId,
         voice_settings: {
-          stability: narration.elevenlabs?.stability || 0.5,
-          similarity_boost: narration.elevenlabs?.similarityBoost || 0.75,
+          stability: elevenlabsConfig?.stability || 0.5,
+          similarity_boost: elevenlabsConfig?.similarityBoost || 0.75,
         },
       }),
     }
@@ -330,10 +332,12 @@ async function generateWithElevenLabs(text, outputPath, lang) {
 // ============================================
 function getAudioDuration(filePath) {
   try {
-    const result = execSync(
-      `ffprobe -i "${filePath}" -show_entries format=duration -v quiet -of csv="p=0"`,
-      { encoding: "utf-8" }
-    );
+    const result = execFileSync("ffprobe", [
+      "-i", filePath,
+      "-show_entries", "format=duration",
+      "-v", "quiet",
+      "-of", "csv=p=0",
+    ], { encoding: "utf-8" });
     return parseFloat(result.trim());
   } catch (error) {
     console.error(`⚠️ 오디오 길이 측정 실패: ${filePath}`);
@@ -591,7 +595,10 @@ async function main() {
 
   // 번역된 내용 저장 (참조용)
   if (doTranslate && translatedScenes.length > 0) {
-    const translatedPath = path.join(__dirname, `narration_${targetLang}.json`);
+    const translatedDir = compositionId
+      ? path.join(projectRoot, "projects", compositionId)
+      : path.dirname(narrationPath);
+    const translatedPath = path.join(translatedDir, `narration_${targetLang}.json`);
     const translatedNarration = {
       ...narration,
       language: targetLang,

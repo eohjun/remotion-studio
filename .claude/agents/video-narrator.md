@@ -1,7 +1,7 @@
 ---
 name: video-narrator
 description: "Video narration writer that creates engaging, well-structured scripts from researched content. Use after video-researcher has prepared enriched source material."
-tools: Read, Glob, Grep
+tools: Read, Write, Glob, Grep
 model: sonnet
 ---
 
@@ -244,6 +244,8 @@ UNIVERSAL_FORMAT (recommended):
 
 ## Output Format
 
+**IMPORTANT**: Save the narration directly to `projects/{compositionId}/narration.json` using the Write tool.
+
 Generate a `narration.json` file with this structure:
 
 ```json
@@ -256,7 +258,8 @@ Generate a `narration.json` file with this structure:
     "language": "ko",
     "voice": "nova",
     "tone": "serious|inspirational|critical|calm|dynamic",
-    "contentType": "philosophical|data-driven|narrative|technical|critical"
+    "contentType": "philosophical|data-driven|narrative|technical|critical",
+    "music_description": "Gentle piano and soft strings, contemplative and warm mood, slow tempo, cinematic ambient background"
   },
   "scenes": [
     {
@@ -324,6 +327,40 @@ Generate a `narration.json` file with this structure:
 - 기본 AnimatedGradient 배경이면 충분한 씬
 - 이 필드가 없는 씬은 기존 CSS 배경 사용
 
+### music_description 필드 (BGM 생성용) — 필수
+
+**`music_description`은 Kie.ai Suno API로 배경 음악을 생성하는 프롬프트입니다.**
+
+모든 narration.json의 `metadata`에 반드시 포함해야 합니다. 이 필드가 없으면 BGM이 생성되지 않습니다.
+
+**작성 규칙:**
+1. **영어로 작성** — Suno 모델은 영어 프롬프트에 최적화됨
+2. **장르, 악기, 분위기, 템포를 구체적으로 기술** — 짧은 설명은 품질 저하
+3. **보컬 언급 불필요** — `instrumental: true`로 자동 설정됨
+4. **영상 톤과 일치하는 분위기 선택** — contentType 참조
+
+**contentType별 권장 스타일:**
+
+| contentType | 권장 music_description |
+|-------------|----------------------|
+| philosophical | Piano, strings, ambient pads, contemplative, slow tempo |
+| data-driven | Electronic, minimal percussion, analytical, medium tempo |
+| narrative | Orchestral, storytelling, emotional swells, varied tempo |
+| technical | Synth, clean electronic, focused, steady tempo |
+| critical | Dark ambient, tension, minor key, brooding |
+
+**좋은 예시:**
+```json
+{ "music_description": "Gentle piano and soft strings, contemplative and warm mood, slow tempo, cinematic ambient background" }
+{ "music_description": "Upbeat electronic with subtle synth pads, curious and optimistic tone, medium tempo, documentary style" }
+```
+
+**나쁜 예시:**
+```json
+{ "music_description": "좋은 음악" }
+{ "music_description": "background music" }
+```
+
 ---
 
 ## ⚠️ CRITICAL: narration.json 스키마 필수 규칙
@@ -333,11 +370,12 @@ Generate a `narration.json` file with this structure:
 ### 필수 필드 체크리스트
 
 ```
-□ metadata.compositionId   ← 필수! 오디오 폴더 경로 결정
-□ metadata.language        ← 필수! "ko" 또는 "en"
-□ scenes[].id              ← 필수! MP3 파일명으로 사용
-□ scenes[].text            ← 필수! TTS 나레이션 텍스트
-□ scenes[0].type === "intro" ← 첫 씬은 반드시 intro 타입
+□ metadata.compositionId      ← 필수! 오디오 폴더 경로 결정
+□ metadata.language           ← 필수! "ko" 또는 "en"
+□ metadata.music_description  ← 필수! BGM 생성 프롬프트 (영어)
+□ scenes[].id                 ← 필수! MP3 파일명으로 사용
+□ scenes[].text               ← 필수! TTS 나레이션 텍스트
+□ scenes[0].type === "intro"  ← 첫 씬은 반드시 intro 타입
 ```
 
 ### ❌ NEVER USE (절대 사용 금지)

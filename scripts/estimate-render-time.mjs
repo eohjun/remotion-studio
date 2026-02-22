@@ -41,18 +41,18 @@ if (!compositionId) {
 // ============================================
 
 const COMPLEXITY_WEIGHTS = {
-  // Base weights per element type
+  // Base weights per element type (keys must match analyzeSourceFiles return keys)
   scene: 1.0,
-  particle: 2.5,
+  particles: 2.5,
   "3d": 4.0,
   audio: 0.5,
   filmGrain: 0.8,
   lightLeak: 0.6,
   vignette: 0.3,
   animatedGradient: 0.5,
-  chart: 0.7,
-  transition: 0.4,
-  textAnimation: 0.3,
+  charts: 0.7,
+  transitions: 0.4,
+  textAnimations: 0.3,
 
   // Resolution multipliers
   resolution: {
@@ -99,7 +99,7 @@ function analyzeNarration(compositionId) {
     sceneCount: narration.scenes?.length || 0,
     totalDuration:
       narration.scenes?.reduce((sum, s) => sum + (s.duration || 5), 0) || 0,
-    fps: narration.metadata?.fps || 60,
+    fps: narration.metadata?.fps || parseInt(process.env.VIDEO_FPS || "60", 10),
     format: narration.metadata?.format || "standard",
   };
 }

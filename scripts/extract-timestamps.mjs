@@ -55,7 +55,7 @@ const metadataPath = path.join(audioDir, "audio-metadata.json");
 
 if (!fs.existsSync(metadataPath)) {
   console.error(`❌ audio-metadata.json을 찾을 수 없습니다: ${metadataPath}`);
-  console.error(`   먼저 TTS를 생성하세요: node scripts/generate-tts.mjs -f ../projects/${compositionId}/narration.json`);
+  console.error(`   먼저 TTS를 생성하세요: node scripts/generate-tts.mjs -f projects/${compositionId}/narration.json`);
   process.exit(1);
 }
 
@@ -137,16 +137,28 @@ async function extractTimestamps(audioPath, language = "ko") {
 // 메인 실행
 // ============================================
 async function main() {
+  // Load existing timestamps to preserve unfiltered scenes
+  const timestampsPath = path.join(audioDir, "timestamps.json");
+  let existingScenes = [];
+  if (sceneFilter && fs.existsSync(timestampsPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(timestampsPath, "utf-8"));
+      existingScenes = (existing.scenes || []).filter(
+        (s) => !sceneFilter.includes(s.id)
+      );
+    } catch {}
+  }
+
   const timestamps = {
     compositionId,
     generatedAt: new Date().toISOString(),
     fps: PROJECT_FPS,
-    scenes: [],
+    scenes: [...existingScenes],
   };
 
   for (const scene of metadata.scenes) {
     if (sceneFilter && !sceneFilter.includes(scene.id)) {
-      console.log(`⏭️  [${scene.id}] 스킵`);
+      console.log(`⏭️  [${scene.id}] 스킵 (기존 유지)`);
       continue;
     }
 
@@ -170,15 +182,15 @@ async function main() {
           text: seg.text.trim(),
           start: seg.start,
           end: seg.end,
-          startFrame: Math.round(seg.start * 30),
-          endFrame: Math.round(seg.end * 30),
+          startFrame: Math.round(seg.start * PROJECT_FPS),
+          endFrame: Math.round(seg.end * PROJECT_FPS),
         })) || [],
         words: result.words?.map(word => ({
           word: word.word,
           start: word.start,
           end: word.end,
-          startFrame: Math.round(word.start * 30),
-          endFrame: Math.round(word.end * 30),
+          startFrame: Math.round(word.start * PROJECT_FPS),
+          endFrame: Math.round(word.end * PROJECT_FPS),
         })) || [],
       };
 
@@ -202,9 +214,9 @@ async function main() {
   }
 
   // 타임스탬프 저장
-  const timestampsPath = path.join(audioDir, "timestamps.json");
-  fs.writeFileSync(timestampsPath, JSON.stringify(timestamps, null, 2));
-  console.log(`📊 타임스탬프 저장: ${timestampsPath}`);
+  const outputPath = path.join(audioDir, "timestamps.json");
+  fs.writeFileSync(outputPath, JSON.stringify(timestamps, null, 2));
+  console.log(`📊 타임스탬프 저장: ${outputPath}`);
 
   // 요약 출력
   console.log("\n📊 추출 완료 요약:");

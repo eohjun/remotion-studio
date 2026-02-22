@@ -106,26 +106,6 @@ function getContrastRatio(color1, color2) {
 // Pattern Detection
 // ============================================
 
-// Regex patterns for style detection
-const PATTERNS = {
-  // Font size patterns
-  fontSize: /fontSize\s*[:=]\s*(\d+)/g,
-  fontSizePixel: /fontSize\s*[:=]\s*['"]?(\d+)(?:px)?['"]?/g,
-  fontSizeInterpolate: /interpolate[^)]*\[\s*(\d+)\s*,\s*(\d+)\s*\]/g,
-
-  // Font weight patterns
-  fontWeight: /fontWeight\s*[:=]\s*['"]?(\d+|bold|normal|lighter|bolder)['"]?/g,
-
-  // Color patterns (hex)
-  hexColor: /#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})\b/g,
-
-  // RGB/RGBA patterns
-  rgbaColor: /rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g,
-
-  // Color property patterns
-  colorProperty: /(color|backgroundColor|background|borderColor|fill|stroke)\s*[:=]\s*['"]?(#[a-fA-F0-9]{6}|#[a-fA-F0-9]{3})['"]?/g,
-};
-
 // ============================================
 // Lint Rules
 // ============================================
@@ -374,7 +354,7 @@ async function lintPath(targetPath) {
     files: files.length,
     errors: issues.length,
     warnings: warnings.length,
-    fixes: fixes.length,
+    fixCount: fixes.length,
     passed: issues.length === 0 && (!strictMode || warnings.length === 0),
     issues,
     warnings,

@@ -186,6 +186,11 @@ function validateDurations(narration) {
   const audioMetadata = JSON.parse(fs.readFileSync(paths.audioMetadata, "utf-8"));
   const tolerance = strictMode ? 0.03 : 0.05; // 3% strict, 5% normal
 
+  if (!audioMetadata.scenes || !Array.isArray(audioMetadata.scenes)) {
+    addWarning("duration", "audio-metadata.json has no scenes array");
+    return;
+  }
+
   let totalNarrationDuration = 0;
   let totalAudioDuration = 0;
 

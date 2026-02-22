@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-02-22T14:42:46.577Z",
+  "provider": "OpenAI",
+  "language": "ko",
+  "outputDir": "/home/eohjun/projects/remotion-studio/public/videos/IKEAEffect/audio",
+  "compositionId": "IKEAEffect",
+  "scenes": [
+    {
+      "id": "intro",
+      "file": "intro.mp3",
+      "durationSeconds": 3.408,
+      "durationFrames": 205,
+      "text": "이케아 효과. 내가 만든 것이 왜 더 소중한가."
+    },
+    {
+      "id": "hook",
+      "file": "hook.mp3",
+      "durationSeconds": 22.992,
+      "durationFrames": 1380,
+      "text": "이케아 서랍장을 직접 조립해 본 적 있나요? 네 시간 걸렸고, 설명서는 다섯 번 다시 봤고, 나사 두 개가 남아서 식은땀을 흘렸죠. 그런데 완성된 순간, 이상한 일이 벌어집니다. ..."
+    },
+    {
+      "id": "betty_crocker",
+      "file": "betty_crocker.mp3",
+      "durationSeconds": 27.768,
+      "durationFrames": 1667,
+      "text": "1950년대, 미국의 베티 크로커 회사는 획기적인 케이크 믹스를 출시했습니다. 물만 부으면 되는, 완벽한 제품이었죠. 그런데 판매가 처참했습니다. 주부들이 이 제품을 외면한 겁니다..."
+    },
+    {
+      "id": "experiment",
+      "file": "experiment.mp3",
+      "durationSeconds": 30.504,
+      "durationFrames": 1831,
+      "text": "2012년, 하버드 대학의 노튼, 모크논, 아리엘리 교수팀이 이 현상에 이름을 붙였습니다. 이케아 효과. 실험은 간단했습니다. 한 그룹은 이케아 상자를 직접 조립했고, 다른 그룹은..."
+    },
+    {
+      "id": "origami",
+      "file": "origami.mp3",
+      "durationSeconds": 29.472,
+      "durationFrames": 1769,
+      "text": "더 놀라운 실험도 있었습니다. 연구팀은 참가자들에게 직접 종이로 학을 접게 했습니다. 그리고 만든 사람과 그냥 보기만 한 사람, 두 그룹에게 같은 종이학의 가치를 매기게 했습니다...."
+    },
+    {
+      "id": "why_it_works",
+      "file": "why_it_works.mp3",
+      "durationSeconds": 29.904,
+      "durationFrames": 1795,
+      "text": "심리학자들은 세 가지 이유를 꼽습니다. 첫째, 노력 정당화입니다. 힘들게 한 일은 가치 있어야 한다는 뇌의 자기 방어 논리죠. 둘째, 소유 효과입니다. 내 것은 더 소중하게 느껴지..."
+    },
+    {
+      "id": "real_world",
+      "file": "real_world.mp3",
+      "durationSeconds": 26.928,
+      "durationFrames": 1616,
+      "text": "기업들은 이미 이 효과를 전략으로 쓰고 있습니다. 나이키 바이 유는 고객이 직접 운동화 색상과 소재를 선택하도록 합니다. 레고 MOC는 팬들이 직접 설계한 조립 세트를 공식 제품으..."
+    },
+    {
+      "id": "dark_side",
+      "file": "dark_side.mp3",
+      "durationSeconds": 30.432,
+      "durationFrames": 1826,
+      "text": "하지만 이케아 효과에는 어두운 면이 있습니다. 내가 투자한 것에 과도한 가치를 부여하다 보면, 매몰 비용의 함정에 빠집니다. 실패한 사업, 망가진 관계, 형편없는 아이디어. 여기에..."
+    },
+    {
+      "id": "takeaway",
+      "file": "takeaway.mp3",
+      "durationSeconds": 26.568,
+      "durationFrames": 1595,
+      "text": "이케아 효과를 알면, 두 가지를 할 수 있습니다. 첫째, 의도적으로 활용하세요. 무언가에 애착을 갖고 싶다면, 직접 만들어보세요. 목표를 직접 설계하고, 과정에 참여하는 사람이 결..."
+    },
+    {
+      "id": "outro",
+      "file": "outro.mp3",
+      "durationSeconds": 13.512,
+      "durationFrames": 811,
+      "text": "당신이 직접 만든 것 중에, 객관적으로는 별것 아니지만 유독 소중하게 느껴지는 것이 있나요? 그것이 바로 이케아 효과입니다. 그리고 그 감정은 당신이 만든 가장 진짜 작품입니다."
+    }
+  ]
+}

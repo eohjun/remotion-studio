@@ -170,11 +170,8 @@ function findTimestampForPanel(panelText, segments, words) {
     for (let i = 0; i < words.length; i++) {
       const word = words[i].word.replace(/[^\w가-힣]/g, "").toLowerCase();
       if (word.includes(firstWord) || firstWord.includes(word)) {
-        // 연속된 단어들의 끝 찾기
-        let endIndex = i;
-        for (let j = i; j < Math.min(i + panelWords.length + 5, words.length); j++) {
-          endIndex = j;
-        }
+        // 패널 텍스트 길이에 맞는 끝 인덱스 계산
+        const endIndex = Math.min(i + panelWords.length - 1, words.length - 1);
 
         return {
           start: words[i].start,
@@ -233,19 +230,38 @@ function generateVisualPanels(sceneNarration, sceneTimestamps) {
     }
   } else {
     // visualPanels가 없으면 세그먼트를 기반으로 자동 생성
+    // 원본 나레이션 텍스트에서 매칭하여 Whisper STT 오류 보정
     console.log(`   ℹ️ visualPanels 없음 - 세그먼트 기반 자동 생성`);
 
+    // 원본 텍스트를 문장 단위로 분리
+    const originalText = sceneNarration.text || "";
+    const originalSentences = originalText
+      .split(/(?<=[.!?。！？])\s*/)
+      .filter(s => s.trim().length > 0);
+
     for (const segment of sceneTimestamps.segments || []) {
+      // Whisper 세그먼트를 원본 문장에 매칭 시도
+      let bestMatch = null;
+      let bestScore = 0;
+
+      for (const sentence of originalSentences) {
+        const score = similarity(segment.text, sentence);
+        if (score > bestScore && score > 0.4) {
+          bestScore = score;
+          bestMatch = sentence;
+        }
+      }
+
       panels.push({
-        text: segment.text,
+        text: bestMatch && bestScore > 0.4 ? bestMatch : segment.text,
         startSeconds: segment.start,
         endSeconds: segment.end,
         startFrame: segment.startFrame,
         endFrame: segment.endFrame,
-        startPercent: Math.round((segment.start / sceneTimestamps.duration) * 100),
-        endPercent: Math.round((segment.end / sceneTimestamps.duration) * 100),
-        confidence: 1.0,
-        matchType: "auto-segment",
+        startPercent: sceneTimestamps.duration > 0 ? Math.round((segment.start / sceneTimestamps.duration) * 100) : 0,
+        endPercent: sceneTimestamps.duration > 0 ? Math.round((segment.end / sceneTimestamps.duration) * 100) : 100,
+        confidence: bestMatch ? bestScore : 1.0,
+        matchType: bestMatch ? "auto-segment-matched" : "auto-segment",
       });
     }
   }

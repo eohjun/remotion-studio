@@ -1,0 +1,473 @@
+{
+  "metadata": {
+    "compositionId": "IKEAEffect",
+    "title": "이케아 효과 - 내가 만든 것이 왜 더 소중한가",
+    "description": "직접 만든 것에 과도한 가치를 부여하는 인지 편향, 이케아 효과의 심리학",
+    "targetDuration": 160,
+    "language": "ko",
+    "voice": "nova",
+    "tone": "curious",
+    "contentType": "narrative",
+    "music_description": "Warm acoustic guitar and light piano, curious and playful mood with gentle wonder, medium tempo, documentary storytelling style, soft ambient pads"
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "타이틀",
+      "text": "이케아 효과. 내가 만든 것이 왜 더 소중한가.",
+      "duration": 6,
+      "visualCue": "Title card with IKEA-blue and flat-pack assembly aesthetic",
+      "visual_description": "Minimalist flat-pack furniture assembly instruction sheet with scattered Allen keys and wooden parts on a clean white surface, soft warm light, aerial view, cinematic, 8k",
+      "notes": "간결하게 제목 제시. 질문형으로 호기심 자극",
+      "visualPanels": [
+        {
+          "text": "이케아 효과 내가 만든 것이 왜 더 소중한",
+          "startPercent": 0,
+          "endPercent": 99,
+          "startFrame": 0,
+          "endFrame": 203
+        }
+      ]
+    },
+    {
+      "id": "hook",
+      "type": "hook",
+      "title": "조립의 기적",
+      "text": "이케아 서랍장을 직접 조립해 본 적 있나요? 네 시간 걸렸고, 설명서는 다섯 번 다시 봤고, 나사 두 개가 남아서 식은땀을 흘렸죠. 그런데 완성된 순간, 이상한 일이 벌어집니다. 그 서랍장이 세상에서 제일 멋진 가구처럼 느껴지는 겁니다. 객관적으로 보면 그냥 평범한 서랍장인데도요. 이게 과연 착각일까요?",
+      "duration": 18,
+      "visualCue": "Person assembling furniture, feeling of pride upon completion",
+      "visual_description": "Person sitting on floor surrounded by flat-pack furniture pieces and instruction manual, allen wrench in hand, warm apartment lighting, sense of focused effort, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "이케아 서랍장을 직접 조립해 본 적 있나요?",
+          "startPercent": 0,
+          "endPercent": 12,
+          "startFrame": 0,
+          "endFrame": 160
+        },
+        {
+          "text": "네 시간 걸렸고, 설명서는 다섯 번 다시 봤고,\n나사 두 개가 남아서 식은땀을 흘렸죠.",
+          "startPercent": 15,
+          "endPercent": 31,
+          "startFrame": 210,
+          "endFrame": 430
+        },
+        {
+          "text": "그런데 완성된 순간, 이상한 일이 벌어집니다.",
+          "startPercent": 45,
+          "endPercent": 60,
+          "startFrame": 619,
+          "endFrame": 822
+        },
+        {
+          "text": "그 서랍장이 세상에서 제일 멋진 가구처럼 느껴지는 겁니다.",
+          "startPercent": 60,
+          "endPercent": 80,
+          "startFrame": 822,
+          "endFrame": 1109
+        },
+        {
+          "text": "이게 과연 착각일까요?",
+          "startPercent": 94,
+          "endPercent": 99,
+          "startFrame": 1297,
+          "endFrame": 1368
+        }
+      ],
+      "notes": "시청자의 공감 경험에서 시작. 마지막 질문으로 전환"
+    },
+    {
+      "id": "betty_crocker",
+      "type": "story",
+      "title": "케이크 가루의 비밀",
+      "text": "1950년대, 미국의 베티 크로커 회사는 획기적인 케이크 믹스를 출시했습니다. 물만 부으면 되는, 완벽한 제품이었죠. 그런데 판매가 처참했습니다. 주부들이 이 제품을 외면한 겁니다. 마케터들은 고민했습니다. 너무 쉬운 게 문제라고. 그래서 레시피를 바꿨습니다. 달걀을 직접 넣는 단계를 추가한 것입니다. 단 하나의 재료만 추가했을 뿐인데, 판매가 폭발적으로 늘었습니다.",
+      "duration": 22,
+      "visualCue": "1950s American kitchen, Betty Crocker cake mix box, egg cracking action",
+      "visual_description": "Vintage 1950s American kitchen with pastel yellow walls, a cheerful housewife cracking an egg into a mixing bowl with a retro cake mix box on the counter, warm nostalgic lighting, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "1950년대, 미국의 베티 크로커 회사는 획기적인 케이크 믹스를 출시했습니다.",
+          "startPercent": 0,
+          "endPercent": 22,
+          "startFrame": 0,
+          "endFrame": 364
+        },
+        {
+          "text": "물만 부으면 되는, 완벽한 제품이었죠. 그런데 판매가 처참했습니다.",
+          "startPercent": 23,
+          "endPercent": 33,
+          "startFrame": 385,
+          "endFrame": 553
+        },
+        {
+          "text": "그래서 달걀을 직접 넣는 단계를 추가했습니다.",
+          "startPercent": 67,
+          "endPercent": 88,
+          "startFrame": 1123,
+          "endFrame": 1470
+        },
+        {
+          "text": "단 하나의 재료만 추가했을 뿐인데, 판매가 폭발적으로 늘었습니다.",
+          "startPercent": 86,
+          "endPercent": 99,
+          "startFrame": 1440,
+          "endFrame": 1655
+        }
+      ],
+      "notes": "스토리텔링으로 흥미 유발. 달걀 추가의 역설이 핵심"
+    },
+    {
+      "id": "experiment",
+      "type": "data",
+      "title": "하버드의 실험",
+      "text": "2012년, 하버드 대학의 노튼, 모크논, 아리엘리 교수팀이 이 현상에 이름을 붙였습니다. 이케아 효과. 실험은 간단했습니다. 한 그룹은 이케아 상자를 직접 조립했고, 다른 그룹은 완성된 제품을 받았습니다. 이후 자신이 만든 제품에 얼마를 낼 의향이 있는지 물었습니다. 직접 조립한 그룹은 완성품 그룹보다 무려 63퍼센트를 더 지불하려 했습니다. 78센트 대 48센트. 같은 물건인데도요.",
+      "duration": 22,
+      "visualCue": "Harvard study visualization, price comparison bar chart $0.78 vs $0.48",
+      "visual_description": "Split screen laboratory setting, one side showing person assembling flat-pack box, other side showing pre-assembled box, clean scientific white background with data visualization overlay, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "2012년, 하버드 대학 연구팀이 이 현상에 이름을 붙였습니다.",
+          "startPercent": 0,
+          "endPercent": 29,
+          "startFrame": 0,
+          "endFrame": 538
+        },
+        {
+          "text": "이케아 효과.",
+          "startPercent": 22,
+          "endPercent": 26,
+          "startFrame": 409,
+          "endFrame": 481
+        },
+        {
+          "text": "직접 조립한 그룹은 완성품 그룹보다\n63퍼센트를 더 지불하려 했습니다.",
+          "startPercent": 68,
+          "endPercent": 85,
+          "startFrame": 1244,
+          "endFrame": 1550
+        },
+        {
+          "text": "78센트 대 48센트. 같은 물건인데도요.",
+          "startPercent": 85,
+          "endPercent": 99,
+          "startFrame": 1550,
+          "endFrame": 1807
+        }
+      ],
+      "notes": "숫자를 또렷이 강조. 63% 프리미엄이 핵심 데이터"
+    },
+    {
+      "id": "origami",
+      "type": "content",
+      "title": "종이접기 실험",
+      "text": "더 놀라운 실험도 있었습니다. 연구팀은 참가자들에게 직접 종이로 학을 접게 했습니다. 그리고 만든 사람과 그냥 보기만 한 사람, 두 그룹에게 같은 종이학의 가치를 매기게 했습니다. 결과는 충격적이었습니다. 만든 사람은 23센트를 불렀고, 본 사람은 고작 5센트를 제시했습니다. 무려 다섯 배 차이. 객관적으로 보면 그냥 구겨진 종이지만, 노력이 들어가는 순간 그것은 예술이 됩니다.",
+      "duration": 20,
+      "visualCue": "Hands folding origami crane, price gap visualization 5x difference",
+      "visual_description": "Close-up of hands carefully folding white origami paper into a crane shape, soft studio lighting, bokeh background, the completed crane glowing softly, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "연구팀은 참가자들에게 직접 종이로 학을 접게 했습니다.",
+          "startPercent": 8,
+          "endPercent": 21,
+          "startFrame": 138,
+          "endFrame": 378
+        },
+        {
+          "text": "만든 사람은 23센트, 본 사람은 고작 5센트.",
+          "startPercent": 26,
+          "endPercent": 44,
+          "startFrame": 454,
+          "endFrame": 785
+        },
+        {
+          "text": "무려 다섯 배 차이.",
+          "startPercent": 73,
+          "endPercent": 92,
+          "startFrame": 1292,
+          "endFrame": 1624
+        },
+        {
+          "text": "노력이 들어가는 순간 그것은 예술이 됩니다.",
+          "startPercent": 88,
+          "endPercent": 99,
+          "startFrame": 1560,
+          "endFrame": 1752
+        }
+      ],
+      "notes": "5배 차이를 극적으로 표현. 마지막 문장은 감성적 클라이맥스"
+    },
+    {
+      "id": "why_it_works",
+      "type": "content",
+      "title": "왜 이런 일이 일어날까",
+      "text": "심리학자들은 세 가지 이유를 꼽습니다. 첫째, 노력 정당화입니다. 힘들게 한 일은 가치 있어야 한다는 뇌의 자기 방어 논리죠. 둘째, 소유 효과입니다. 내 것은 더 소중하게 느껴지는 본능입니다. 셋째, 자기 효능감입니다. 뭔가를 만들어냈다는 성취감이 그 물건에 전이됩니다. 단, 중요한 조건이 하나 있습니다. 반드시 완성해야 한다는 것입니다. 레고를 완성하지 않고 분해하면 이케아 효과는 사라집니다.",
+      "duration": 22,
+      "visualCue": "Three psychological mechanism icons, Lego destroyed showing no effect",
+      "visual_description": "Abstract psychological diagram showing three interconnected glowing orbs representing effort justification, ownership, and self-efficacy connected by neural pathways, dark blue purple background, cinematic, 8k",
+      "notes": "3가지 메커니즘을 간결하게. 조건 제시로 다음 섹션 연결",
+      "visualPanels": [
+        {
+          "text": "심리학자들은 세 가지 이유를 꼽습니다.",
+          "startPercent": 0,
+          "endPercent": 8,
+          "startFrame": 0,
+          "endFrame": 138
+        },
+        {
+          "text": "첫째, 노력 정당화입니다.",
+          "startPercent": 10,
+          "endPercent": 14,
+          "startFrame": 173,
+          "endFrame": 254
+        },
+        {
+          "text": "힘들게 한 일은 가치 있어야 한다는 뇌의 자기 방어 논리죠.",
+          "startPercent": 16,
+          "endPercent": 27,
+          "startFrame": 292,
+          "endFrame": 488
+        },
+        {
+          "text": "둘째, 소유 효과입니다.",
+          "startPercent": 30,
+          "endPercent": 34,
+          "startFrame": 532,
+          "endFrame": 611
+        },
+        {
+          "text": "내 것은 더 소중하게 느껴지는 본능입니다.",
+          "startPercent": 37,
+          "endPercent": 45,
+          "startFrame": 656,
+          "endFrame": 809
+        },
+        {
+          "text": "셋째, 자기 효능감입니다.",
+          "startPercent": 48,
+          "endPercent": 53,
+          "startFrame": 859,
+          "endFrame": 943
+        },
+        {
+          "text": "뭔가를 만들어냈다는 성취감이 그 물건에 전이됩니다.",
+          "startPercent": 55,
+          "endPercent": 65,
+          "startFrame": 980,
+          "endFrame": 1163
+        },
+        {
+          "text": "단, 중요한 조건이 하나 있습니다.",
+          "startPercent": 68,
+          "endPercent": 74,
+          "startFrame": 1220,
+          "endFrame": 1326
+        },
+        {
+          "text": "반드시 완성해야 한다는 것입니다.",
+          "startPercent": 76,
+          "endPercent": 83,
+          "startFrame": 1369,
+          "endFrame": 1481
+        },
+        {
+          "text": "레고를 완성하지 않고 분해하면",
+          "startPercent": 86,
+          "endPercent": 93,
+          "startFrame": 1542,
+          "endFrame": 1664
+        },
+        {
+          "text": "이케아 효과는 사라집니다.",
+          "startPercent": 93,
+          "endPercent": 98,
+          "startFrame": 1664,
+          "endFrame": 1757
+        }
+      ]
+    },
+    {
+      "id": "real_world",
+      "type": "content",
+      "title": "세상을 바꾼 심리",
+      "text": "기업들은 이미 이 효과를 전략으로 쓰고 있습니다. 나이키 바이 유는 고객이 직접 운동화 색상과 소재를 선택하도록 합니다. 레고 MOC는 팬들이 직접 설계한 조립 세트를 공식 제품으로 만들어줍니다. 밀키트 산업은 요리 과정을 고객에게 넘겨 애착을 만들어냅니다. 한국의 DIY 시장은 7조 원에서 18조 원으로, 불과 십 년 만에 두 배 이상 성장했습니다.",
+      "duration": 20,
+      "visualCue": "Nike By You customizer, LEGO MOC fan design, meal kit unboxing, Korean DIY market chart",
+      "visual_description": "Vibrant collage of customization culture, colorful sneaker design table, LEGO bricks in creative arrangement, fresh meal kit ingredients laid out neatly, warm creative studio atmosphere, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "기업들은 이미 이 효과를 전략으로 쓰고 있습니다.",
+          "startPercent": 0,
+          "endPercent": 11,
+          "startFrame": 0,
+          "endFrame": 184
+        },
+        {
+          "text": "나이키 바이 유, 레고 MOC, 밀키트.",
+          "startPercent": 3,
+          "endPercent": 26,
+          "startFrame": 54,
+          "endFrame": 426
+        },
+        {
+          "text": "고객에게 만드는 과정을 넘겨\n애착을 만들어냅니다.",
+          "startPercent": 64,
+          "endPercent": 92,
+          "startFrame": 1026,
+          "endFrame": 1487
+        },
+        {
+          "text": "한국의 DIY 시장은 7조에서 18조 원으로\n불과 십 년 만에 두 배 이상 성장했습니다.",
+          "startPercent": 76,
+          "endPercent": 99,
+          "startFrame": 1230,
+          "endFrame": 1595
+        }
+      ],
+      "notes": "구체적 브랜드와 수치로 신뢰감 확보. 한국 데이터로 친근함 더하기"
+    },
+    {
+      "id": "dark_side",
+      "type": "content",
+      "title": "함정: 매몰 비용",
+      "text": "하지만 이케아 효과에는 어두운 면이 있습니다. 내가 투자한 것에 과도한 가치를 부여하다 보면, 매몰 비용의 함정에 빠집니다. 실패한 사업, 망가진 관계, 형편없는 아이디어. 여기에 이미 많은 노력을 쏟았다는 이유만으로 계속 붙들고 있는 경우가 있습니다. 또한 아이에게는 작동하지 않고, 금융 투자에도 효과가 없다는 연구 결과도 있습니다. 직접 만들었다는 느낌이 없을 때는 이 효과 자체가 사라집니다.",
+      "duration": 20,
+      "visualCue": "Sunk cost metaphor, sinking investment, failed project still running",
+      "visual_description": "Dark moody scene of a person staring at a crumbling structure they built, shadows emphasizing doubt, weight of investment visualized as chains of light, somber cinematic atmosphere, 8k",
+      "visualPanels": [
+        {
+          "text": "하지만 이케아 효과에는 어두운 면이 있습니다.",
+          "startPercent": 0,
+          "endPercent": 10,
+          "startFrame": 0,
+          "endFrame": 180
+        },
+        {
+          "text": "내가 투자한 것에 과도한 가치를 부여하다 보면\n매몰 비용의 함정에 빠집니다.",
+          "startPercent": 13,
+          "endPercent": 31,
+          "startFrame": 238,
+          "endFrame": 574
+        },
+        {
+          "text": "실패한 사업, 망가진 관계, 형편없는 아이디어를\n노력을 쏟았다는 이유만으로 붙들고 있는 것입니다.",
+          "startPercent": 33,
+          "endPercent": 62,
+          "startFrame": 596,
+          "endFrame": 1130
+        },
+        {
+          "text": "직접 만들었다는 느낌이 없을 때 이 효과는 사라집니다.",
+          "startPercent": 83,
+          "endPercent": 99,
+          "startFrame": 1518,
+          "endFrame": 1807
+        }
+      ],
+      "notes": "어두운 면을 솔직하게 제시. 균형 잡힌 시각 제공"
+    },
+    {
+      "id": "takeaway",
+      "type": "conclusion",
+      "title": "현명하게 활용하기",
+      "text": "이케아 효과를 알면, 두 가지를 할 수 있습니다. 첫째, 의도적으로 활용하세요. 무언가에 애착을 갖고 싶다면, 직접 만들어보세요. 목표를 직접 설계하고, 과정에 참여하는 사람이 결과에도 헌신합니다. 둘째, 경계하세요. 내가 만들었다는 이유만으로 나쁜 선택을 고수하고 있는 건 아닌지, 가끔 멈춰 물어봐야 합니다. 노력은 가치를 만들지만, 때로는 판단도 흐립니다.",
+      "duration": 20,
+      "visualCue": "Balance scale between creation and judgment, practical toolkit",
+      "visual_description": "Balanced golden scale floating in warm amber light, one side holding a handcrafted object, other side holding a clear crystal representing objective judgment, harmonious atmosphere, cinematic, 8k",
+      "notes": "실용적 행동 지침 2가지. 긍정과 경계의 균형",
+      "visualPanels": [
+        {
+          "text": "이케아 효과를 알면 두 가지를 할 수 있습니다.",
+          "startPercent": 0,
+          "endPercent": 11,
+          "startFrame": 0,
+          "endFrame": 176
+        },
+        {
+          "text": "첫째, 의도적으로 활용하세요.",
+          "startPercent": 13,
+          "endPercent": 19,
+          "startFrame": 210,
+          "endFrame": 300
+        },
+        {
+          "text": "무언가에 애착을 갖고 싶다면 직접 만들어보세요.",
+          "startPercent": 21,
+          "endPercent": 33,
+          "startFrame": 341,
+          "endFrame": 518
+        },
+        {
+          "text": "목표를 직접 설계하고, 과정에 참여하는 사람이 결과에도 헌신합니다.",
+          "startPercent": 36,
+          "endPercent": 53,
+          "startFrame": 572,
+          "endFrame": 839
+        },
+        {
+          "text": "둘째, 경계하세요.",
+          "startPercent": 56,
+          "endPercent": 60,
+          "startFrame": 890,
+          "endFrame": 960
+        },
+        {
+          "text": "내가 만들었다는 이유만으로 나쁜 선택을 고수하고 있는 건 아닌지",
+          "startPercent": 63,
+          "endPercent": 78,
+          "startFrame": 997,
+          "endFrame": 1242
+        },
+        {
+          "text": "가끔 멈춰 물어봐야 합니다.",
+          "startPercent": 78,
+          "endPercent": 84,
+          "startFrame": 1242,
+          "endFrame": 1342
+        },
+        {
+          "text": "노력은 가치를 만들지만 때로는 판단도 흐립니다.",
+          "startPercent": 87,
+          "endPercent": 99,
+          "startFrame": 1391,
+          "endFrame": 1572
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "title": "마무리",
+      "text": "당신이 직접 만든 것 중에, 객관적으로는 별것 아니지만 유독 소중하게 느껴지는 것이 있나요? 그것이 바로 이케아 효과입니다. 그리고 그 감정은 당신이 만든 가장 진짜 작품입니다.",
+      "duration": 14,
+      "visualCue": "Final reflection shot, completed handmade object glowing",
+      "visual_description": "Close-up of weathered hands holding a small hand-crafted wooden object, warm golden hour light, shallow depth of field, dust particles floating, emotional and intimate, cinematic, 8k",
+      "visualPanels": [
+        {
+          "text": "당신이 직접 만든 것 중에\n유독 소중하게 느껴지는 것이 있나요?",
+          "startPercent": 0,
+          "endPercent": 50,
+          "startFrame": 0,
+          "endFrame": 402
+        },
+        {
+          "text": "그것이 바로 이케아 효과입니다.",
+          "startPercent": 49,
+          "endPercent": 65,
+          "startFrame": 394,
+          "endFrame": 529
+        },
+        {
+          "text": "그리고 그 감정은 당신이 만든 가장 진짜 작품입니다.",
+          "startPercent": 72,
+          "endPercent": 98,
+          "startFrame": 587,
+          "endFrame": 796
+        }
+      ],
+      "notes": "질문으로 반성 유도. 마지막 문장은 감성적 반전으로 기억에 남게"
+    }
+  ],
+  "totalDuration": 164,
+  "sceneCount": 10
+}

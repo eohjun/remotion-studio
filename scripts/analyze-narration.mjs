@@ -57,7 +57,7 @@ const narration = JSON.parse(fs.readFileSync(narrationPath, "utf-8"));
 // Analysis Constants
 // ============================================
 
-// Hook strength indicators
+// Hook strength indicators (English + Korean)
 const HOOK_PATTERNS = {
   strong: [
     /^you(?:'re| are)/i,
@@ -68,6 +68,15 @@ const HOOK_PATTERNS = {
     /^never /i,
     /^the (?:real|hidden|surprising)/i,
     /\?$/,
+    // Korean
+    /^당신[은이]/,
+    /^만약/,
+    /^상상해/,
+    /^절대/,
+    /^비밀/,
+    /^진짜/,
+    /^놀라운/,
+    /^혹시/,
   ],
   moderate: [
     /^did you know/i,
@@ -75,55 +84,41 @@ const HOOK_PATTERNS = {
     /^most people/i,
     /^the problem/i,
     /^here's why/i,
+    // Korean
+    /^알고 계셨/,
+    /^대부분의 사람/,
+    /^문제는/,
+    /^사실은/,
+    /^그런데/,
   ],
-  weak: [/^today/i, /^in this/i, /^let me/i, /^we're going to/i],
+  weak: [
+    /^today/i, /^in this/i, /^let me/i, /^we're going to/i,
+    // Korean
+    /^오늘은/,
+    /^이번에는/,
+    /^지금부터/,
+  ],
 };
 
-// Emotional words for variety scoring
+// Emotional words for variety scoring (English + Korean)
 const EMOTIONAL_WORDS = {
   positive: [
-    "amazing",
-    "powerful",
-    "incredible",
-    "love",
-    "beautiful",
-    "success",
-    "win",
-    "breakthrough",
-    "freedom",
-    "joy",
+    "amazing", "powerful", "incredible", "love", "beautiful",
+    "success", "win", "breakthrough", "freedom", "joy",
+    "놀라운", "강력한", "아름다운", "성공", "자유", "기쁨", "행복", "희망",
   ],
   negative: [
-    "fear",
-    "anxiety",
-    "stress",
-    "pain",
-    "struggle",
-    "fail",
-    "problem",
-    "crisis",
-    "danger",
-    "risk",
+    "fear", "anxiety", "stress", "pain", "struggle",
+    "fail", "problem", "crisis", "danger", "risk",
+    "두려움", "불안", "스트레스", "고통", "실패", "문제", "위기", "위험",
   ],
   urgent: [
-    "now",
-    "immediately",
-    "urgent",
-    "critical",
-    "must",
-    "need",
-    "today",
-    "stop",
+    "now", "immediately", "urgent", "critical", "must", "need", "today", "stop",
+    "지금", "즉시", "반드시", "꼭", "당장", "긴급",
   ],
   curious: [
-    "secret",
-    "hidden",
-    "surprising",
-    "unexpected",
-    "discover",
-    "reveal",
-    "truth",
-    "mystery",
+    "secret", "hidden", "surprising", "unexpected", "discover", "reveal", "truth", "mystery",
+    "비밀", "숨겨진", "놀라운", "발견", "진실", "미스터리", "알려지지",
   ],
 };
 
@@ -682,8 +677,9 @@ if (outputJson) {
 
 // Update file if requested
 if (updateFile) {
-  narration.qualityMetrics = analysis.qualityMetrics;
-  narration.qualityMetrics.analyzedAt = analysis.analyzedAt;
+  if (!narration.metadata) narration.metadata = {};
+  narration.metadata.qualityMetrics = analysis.qualityMetrics;
+  narration.metadata.qualityMetrics.analyzedAt = analysis.analyzedAt;
   fs.writeFileSync(narrationPath, JSON.stringify(narration, null, 2));
-  console.log(`\n✅ Updated ${narrationPath} with quality metrics`);
+  console.log(`\n✅ Updated ${narrationPath} with quality metrics (metadata.qualityMetrics)`);
 }

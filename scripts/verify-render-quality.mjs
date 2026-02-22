@@ -18,7 +18,7 @@
  *   --strict          Fail on any quality deviation
  */
 
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
 import { existsSync } from "fs";
 import { basename, extname } from "path";
 
@@ -88,8 +88,13 @@ const QUALITY_PRESETS = {
  */
 function getVideoMetadata(filePath) {
   try {
-    const command = `ffprobe -v quiet -print_format json -show_format -show_streams "${filePath}"`;
-    const output = execSync(command, { encoding: "utf-8" });
+    const output = execFileSync("ffprobe", [
+      "-v", "quiet",
+      "-print_format", "json",
+      "-show_format",
+      "-show_streams",
+      filePath,
+    ], { encoding: "utf-8" });
     return JSON.parse(output);
   } catch (error) {
     throw new Error(`Failed to extract metadata: ${error.message}`);

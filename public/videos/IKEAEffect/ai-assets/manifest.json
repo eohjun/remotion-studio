@@ -1,0 +1,15 @@
+{
+  "compositionId": "IKEAEffect",
+  "generatedAt": "2026-02-22T15:11:40.364Z",
+  "provider": "fal",
+  "model": "fal-ai/flux/schnell",
+  "type": "img",
+  "music": true,
+  "assets": [
+    {
+      "type": "music",
+      "status": "success",
+      "file": "bgm.mp3"
+    }
+  ]
+}

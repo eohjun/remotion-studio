@@ -9,13 +9,13 @@ TTS 오디오 생성 (자동: 검증 + 동기화 + 타임스탬프 추출)
 
 ```bash
 # 기본 사용법
-node scripts/generate-tts.mjs -f ../projects/{id}/narration.json
+node scripts/generate-tts.mjs -f projects/{id}/narration.json
 
 # ElevenLabs (고품질)
-node scripts/generate-tts.mjs -f ../projects/{id}/narration.json --elevenlabs
+node scripts/generate-tts.mjs -f projects/{id}/narration.json --elevenlabs
 
 # 특정 씬만 재생성
-node scripts/generate-tts.mjs -f ../projects/{id}/narration.json --scene hook,discovery
+node scripts/generate-tts.mjs -f projects/{id}/narration.json --scene hook,discovery
 
 # 옵션 비활성화
 --no-sync        # constants.ts 동기화 건너뛰기

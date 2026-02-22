@@ -154,7 +154,7 @@ Root.tsx에 `<Composition>` 등록.
 **사용자 확인 없이 바로 실행:**
 
 ```bash
-node scripts/generate-tts.mjs -f ../projects/{compositionId}/narration.json
+node scripts/generate-tts.mjs -f projects/{compositionId}/narration.json
 ```
 
 자동 실행: 품질 검증 + constants.ts SCENE_FRAMES 동기화 + Whisper 타임스탬프.

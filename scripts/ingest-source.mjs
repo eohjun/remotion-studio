@@ -1,9 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
-import pdf from 'pdf-parse';
-import mammoth from 'mammoth';
-import * as cheerio from 'cheerio';
 
 const args = process.argv.slice(2);
 const input = args[0];
@@ -11,7 +7,8 @@ const outputFlagIndex = args.indexOf('--output');
 const outputPath = outputFlagIndex !== -1 ? args[outputFlagIndex + 1] : 'ingested-source.md';
 
 if (!input) {
-    console.error('Please provide an input file or URL.');
+    console.error('Usage: node scripts/ingest-source.mjs <input> [--output <path>]');
+    console.error('  Input: URL, .pdf, .docx, .md, or .txt file');
     process.exit(1);
 }
 
@@ -22,54 +19,57 @@ async function ingest() {
         if (input.startsWith('http')) {
             console.log(`Fetching URL: ${input}`);
             const response = await fetch(input);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
             const html = await response.text();
+            const cheerio = await import('cheerio');
             const $ = cheerio.load(html);
 
-            // Remove scripts, styles, and other non-content elements
             $('script').remove();
             $('style').remove();
             $('nav').remove();
             $('footer').remove();
             $('header').remove();
 
-            // Extract main content - simplistic approach, can be improved
-            text = $('body').text().replace(/\s+/g, ' ').trim();
+            text = $('body').text().trim();
             text = `Source URL: ${input}\n\n${text}`;
         } else if (input.endsWith('.pdf')) {
             console.log(`Reading PDF: ${input}`);
+            const pdf = (await import('pdf-parse')).default;
             const dataBuffer = fs.readFileSync(input);
             const data = await pdf(dataBuffer);
             text = data.text;
         } else if (input.endsWith('.docx')) {
             console.log(`Reading DOCX: ${input}`);
+            const mammoth = (await import('mammoth')).default;
             const result = await mammoth.extractRawText({ path: input });
             text = result.value;
         } else if (input.endsWith('.md') || input.endsWith('.txt')) {
             console.log(`Reading Text file: ${input}`);
             text = fs.readFileSync(input, 'utf-8');
         } else {
-            console.error('Unsupported file format.');
+            console.error('Unsupported file format. Supported: .pdf, .docx, .md, .txt, or URL');
             process.exit(1);
         }
 
-        // Basic Markdown cleanup
         const markdown = cleanTextToMarkdown(text);
 
+        const outputDir = path.dirname(outputPath);
+        if (outputDir && !fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+
         fs.writeFileSync(outputPath, markdown);
-        console.log(`Successfully saved content to ${outputPath}`);
+        console.log(`✅ Saved to ${outputPath} (${markdown.length} chars)`);
 
     } catch (error) {
-        console.error('Error ingesting source:', error);
+        console.error('❌ Error ingesting source:', error.message);
         process.exit(1);
     }
 }
 
 function cleanTextToMarkdown(text) {
-    // Simple cleanup to ensure it's readable
-    // 1. Normalize whitespace (mostly done above for URL)
-    // 2. Try to preserve some paragraph structure if possible
-    // For now, comprehensive cleanup is left to the LLM agent, this script just extracts.
-
     return text
         .split('\n')
         .map(line => line.trim())

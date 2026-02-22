@@ -38,27 +38,38 @@ Source → Research → Narration → AI Assets → Composition → TTS → Revi
   - `scene.id`가 유효한 파일명
   - 첫 씬 `type: "intro"`
 
-### Step 3: AI 에셋 생성
+### Step 3: AI 에셋 생성 (이미지 + BGM)
 - **조건**: narration.json에 `visual_description` 필드가 있는 씬이 1개 이상
-- **명령어**: `node scripts/generate-ai-assets.mjs {id}`
-- **산출물**: `public/videos/{id}/ai-assets/*.jpg`
-- **건너뛰기**: `visual_description`이 없는 경우
+- **이미지**: `node scripts/generate-ai-assets.mjs {id}`
+- **BGM**: `node scripts/generate-ai-assets.mjs {id} --music`
+- **산출물**: `public/videos/{id}/ai-assets/*.jpg` + `bgm.mp3`
+- **건너뛰기**: `visual_description`이 없는 경우 (이미지만 건너뜀, BGM은 항상 생성)
 
 ```bash
+# 이미지 + BGM 한 번에 생성
+node scripts/generate-ai-assets.mjs {id} --music
+
+# 이미지만 (BGM 없이)
+node scripts/generate-ai-assets.mjs {id}
+
+# BGM만 생성
+node scripts/generate-ai-assets.mjs {id} --music --scene _none_
+
+# Kie.ai 비디오 배경 (정적 이미지 대신 움직이는 배경)
+node scripts/generate-ai-assets.mjs {id} --provider kie --type video
+
 # 드라이런 (프롬프트 확인)
-node scripts/generate-ai-assets.mjs {id} --dry-run
-
-# 특정 씬만
-node scripts/generate-ai-assets.mjs {id} --scenes hook,discovery
-
-# 비디오 타입
-node scripts/generate-ai-assets.mjs {id} --type video
+node scripts/generate-ai-assets.mjs {id} --music --dry-run
 ```
+
+**BGM 프롬프트 우선순위**: narration.json `metadata.music_description` → `metadata.music_style` → 자동 생성
+**Provider 선택**: 이미지=fal.ai(기본), 비디오=Kie.ai, BGM=Kie.ai(Suno)
 
 ### Step 4: 컴포지션 구현
 - **산출물**: `src/videos/{id}/index.tsx`, `scenes.ts`, `constants.ts`
 - **필수 규칙**: → See references/implementation-rules.md
   - AI 에셋 있으면 모든 씬에서 AI 배경 사용
+  - **BGM 있으면 메인 컴포지션에 `<Loop>` + `<Html5Audio>` 추가** (볼륨 0.15-0.25)
   - FPS 하드코딩 금지 (`useVideoConfig()` 또는 `VIDEO_CONFIG.fps`)
   - 모든 씬 중앙 정렬 (flexbox center)
   - 화면 70-90% 활용
@@ -68,16 +79,16 @@ node scripts/generate-ai-assets.mjs {id} --type video
 
 ### Step 5: TTS + 타임스탬프
 - **사용자 확인 없이 바로 실행**
-- **명령어**: `node scripts/generate-tts.mjs -f ../projects/{id}/narration.json`
+- **명령어**: `node scripts/generate-tts.mjs -f projects/{id}/narration.json`
 - **자동 실행**: 품질 검증 + constants.ts 동기화 + Whisper 타임스탬프
 - **산출물**: `public/videos/{id}/audio/*.mp3`, `timestamps.json`
 
 ```bash
 # ElevenLabs (고품질)
-node scripts/generate-tts.mjs -f ../projects/{id}/narration.json --elevenlabs
+node scripts/generate-tts.mjs -f projects/{id}/narration.json --elevenlabs
 
 # 특정 씬만 재생성
-node scripts/generate-tts.mjs -f ../projects/{id}/narration.json --scene hook,discovery
+node scripts/generate-tts.mjs -f projects/{id}/narration.json --scene hook,discovery
 ```
 
 **TTS 후 필수 작업**: 하드코딩된 패널 타이밍 → `visual-panels.json` 실제값으로 교체
@@ -113,8 +124,8 @@ npx remotion render {id} out/video.mp4
 
 | Script | 용도 | 입력 | 출력 |
 |--------|------|------|------|
-| `generate-ai-assets.mjs {id}` | AI 배경 이미지 | narration.json | ai-assets/*.jpg |
-| `generate-tts.mjs -f ../projects/{id}/narration.json` | TTS 오디오 | narration.json | audio/*.mp3 |
+| `generate-ai-assets.mjs {id} --music` | AI 배경 이미지 + BGM | narration.json | ai-assets/*.jpg + bgm.mp3 |
+| `generate-tts.mjs -f projects/{id}/narration.json` | TTS 오디오 | narration.json | audio/*.mp3 |
 | `generate-visual-panels.mjs {id}` | 비주얼 패널 타이밍 | timestamps.json | visual-panels.json |
 | `validate-composition.mjs {id}` | 컴포지션 검증 | src/videos/{id}/ | 검증 결과 |
 | `analyze-narration.mjs -f projects/{id}/narration.json` | 나레이션 품질 | narration.json | 품질 점수 |
@@ -132,10 +143,11 @@ npx remotion render {id} out/video.mp4
 
 1. **끊기지 않게 연속 실행**: 각 단계 완료 후 다음 단계를 사용자에게 묻지 말고 바로 진행
 2. **AI assets BEFORE implementation**: `visual_description` 있으면 반드시 Step 3 → Step 4 순서
-3. **TTS 전 사용자 확인 불필요**: 오디오 포함 완성본으로 제공해야 검토 가능
-4. **YouTube 에셋은 렌더링 직후 자동**: `generate-youtube-assets.mjs` 즉시 실행
-5. **FPS 하드코딩 금지**: `useVideoConfig()` 또는 `VIDEO_CONFIG.fps` 사용
-6. **버퍼는 5프레임**: 씬 duration = 오디오 프레임 + 5프레임 (최대)
+3. **BGM 항상 생성**: Step 3에서 `--music` 플래그 포함. 모든 영상에 배경 음악 필수
+4. **TTS 전 사용자 확인 불필요**: 오디오 포함 완성본으로 제공해야 검토 가능
+5. **YouTube 에셋은 렌더링 직후 자동**: `generate-youtube-assets.mjs` 즉시 실행
+6. **FPS 하드코딩 금지**: `useVideoConfig()` 또는 `VIDEO_CONFIG.fps` 사용
+7. **버퍼는 5프레임**: 씬 duration = 오디오 프레임 + 5프레임 (최대)
 
 ## Project Structure
 
@@ -156,7 +168,8 @@ public/videos/{id}/
 │   └── timestamps.json
 └── ai-assets/              # Step 3
     ├── intro-bg.jpg
-    └── hook-bg.jpg
+    ├── hook-bg.jpg
+    └── bgm.mp3              # Kie.ai Suno BGM
 
 src/videos/{id}/
 ├── index.tsx               # Step 4

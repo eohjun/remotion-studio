@@ -14,7 +14,8 @@
     "language": "ko",
     "voice": "nova",
     "tone": "serious|inspirational|critical|calm|dynamic",
-    "contentType": "philosophical|data-driven|narrative|technical|critical"
+    "contentType": "philosophical|data-driven|narrative|technical|critical",
+    "music_description": "Gentle piano and strings, contemplative mood, cinematic ambient"
   },
   "scenes": [
     {
@@ -36,11 +37,12 @@
 ## 필수 필드 체크리스트
 
 ```
-□ metadata.compositionId   ← 오디오 폴더 경로 결정
-□ metadata.language        ← "ko" 또는 "en"
-□ scenes[].id              ← MP3 파일명으로 사용
-□ scenes[].text            ← TTS 나레이션 텍스트
-□ scenes[0].type === "intro" ← 첫 씬은 반드시 intro
+□ metadata.compositionId      ← 오디오 폴더 경로 결정
+□ metadata.language           ← "ko" 또는 "en"
+□ metadata.music_description  ← BGM 생성 프롬프트 (Kie.ai Suno)
+□ scenes[].id                 ← MP3 파일명으로 사용
+□ scenes[].text               ← TTS 나레이션 텍스트
+□ scenes[0].type === "intro"  ← 첫 씬은 반드시 intro
 ```
 
 ## 금지 필드명
@@ -112,6 +114,36 @@ fal.ai AI 이미지 생성 프롬프트로 사용됨.
 - `visual_description`: AI 모델용 프롬프트 (영어, 구체적)
 
 불필요한 경우: 텍스트/차트만 표시하는 씬, 기본 배경이면 충분한 씬
+
+## music_description (BGM 생성)
+
+Kie.ai Suno API로 배경 음악 생성 시 사용되는 프롬프트. `metadata` 레벨에 작성.
+
+**규칙:**
+1. 영어로 작성 (Suno 모델 최적화)
+2. 장르, 악기, 분위기, 템포를 구체적으로 기술
+3. `instrumental: true`로 자동 설정되므로 보컬 언급 불필요
+4. 영상 톤과 일치하는 분위기 선택
+
+```json
+// ✅ 좋은 예시
+{ "music_description": "Gentle piano and soft strings, contemplative and warm mood, slow tempo, cinematic ambient background" }
+{ "music_description": "Upbeat electronic with subtle synth pads, curious and optimistic tone, medium tempo, documentary style" }
+
+// ❌ 나쁜 예시
+{ "music_description": "좋은 음악" }
+{ "music_description": "background music" }
+```
+
+**톤별 권장 스타일:**
+
+| contentType | 권장 music_description |
+|-------------|----------------------|
+| philosophical | Piano, strings, ambient pads, contemplative, slow |
+| data-driven | Electronic, minimal percussion, analytical, medium |
+| narrative | Orchestral, storytelling, emotional swells, varied |
+| technical | Synth, clean electronic, focused, steady tempo |
+| critical | Dark ambient, tension, minor key, brooding |
 
 ## visualPanels (오디오-비주얼 동기화)
 
